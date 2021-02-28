@@ -9,15 +9,15 @@ const AppNavbar = () => {
   <Navbar className="color-nav" variant="dark">
     <Navbar.Brand href="#home">
             <Container fluid className='logo-image d-flex justify-content-left'>
-                <img src = {logo} width="80%" height="80%" alt="Logo"></img>
+                <img src = {logo} width="65%" height="65%" alt="Logo"></img>
             </Container>
     </Navbar.Brand>
-    <Container fluid className='d-flex justify-content-end'>
+    <Container fluid className='d-flex justify-content-right'>
     <Nav className="navButtons">
       <Nav.Link href="#dashboard" className='myBtn text-center metal linear' style={{ color: 'black', textDecoration: 'none' }}>Dashboard</Nav.Link>
-      <Nav.Link href="#forum" className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Forum</Nav.Link>
-      <Nav.Link href="#search-artists" className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Search Artists</Nav.Link>
-      <Nav.Link href="#login-register"className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Login/Register</Nav.Link>
+      <Nav.Link href="#forum" className='myBtn text-center metal linear' style={{ color: 'black', textDecoration: 'none' }}>Forum</Nav.Link>
+      <Nav.Link href="#search-artists" className='myBtn text-center metal linear' style={{ color: 'black', textDecoration: 'none' }}>Search_Artists</Nav.Link>
+      <Nav.Link href="#login-register"className='myBtn text-center metal linear' style={{ color: 'black', textDecoration: 'none' }}>Login/Register</Nav.Link>
     </Nav>
     </Container>
     
