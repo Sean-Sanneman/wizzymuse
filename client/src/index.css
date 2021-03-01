@@ -33,3 +33,24 @@ code {
   margin: 5% 1%;
 
 }
+
+
+/* Main panels */
+.grid {
+  max-width: 95%;
+}
+
+.leftPanel {
+  border: solid;
+}
+
+.midPanel {
+  border: solid;
+  margin: 0 1%;
+}
+
+.rightPanel {
+  border: solid;
+}
+
+/* Main panels styles end */
