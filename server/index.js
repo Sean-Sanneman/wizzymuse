@@ -1,13 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const testRouter = require('./routes/test-route');
-
+const artistsRouter = require('./routes/artists');
 const app = express();
 
 // MIDDLEWARE
 app.use(express.json()); // this allows us to access req.body
 // attach routers
 app.use('/api/test', testRouter);
+app.use('/api/artists', artistsRouter);
 app.get('/', (req, res) => {
   try {
     res.send('Add "/api/test" for the test route');
