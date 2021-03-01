@@ -24,9 +24,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try{
         const selectedArtist = await db.query('SELECT * FROM artists WHERE id = $1;', [req.params.id]);
-        console.log(selectedArtist.rows);
-        console.log(selectedArtist.rows === []);
-        if (selectedArtist.rows !== []){
+        if (selectedArtist.rows[0]){
             res.json({
                 message: 'The selected artist was successfully retrieved.', 
                 artist: selectedArtist.rows[0],
