@@ -4,11 +4,14 @@ import AddArtist from './AddArtist';
 
 const ArtistsPage = () => {
   return (
-    <div className="my-4 toolbar">
-      <h3 className="font-weight-light text-white-50 my-3">Artists Data:</h3>
-      <AddArtist />
-      {/* <ArtistsList /> */}
-    </div>
+    <>
+      <h1 className="font-weight-light text-center my-3">Backend Playground</h1>
+      <div className="my-4 toolbar">
+        <h3 className="font-weight-light text-white-50 my-3">Artists Data:</h3>
+        <AddArtist />
+        {/* <ArtistsList /> */}
+      </div>
+    </>
   );
 };
 

@@ -48,10 +48,9 @@ const AddArtist = () => {
         instagram,
         soundcloud,
       };
-      console.log(body)
+
       const { data } = await ArtistFinder.post('/', body);
-      console.log('data', data);
-      // addArtist(data.recipe);
+      // addArtist(data.artist);
     } catch (err) {
       console.log(err);
     }
