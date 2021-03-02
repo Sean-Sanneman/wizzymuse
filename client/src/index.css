@@ -34,13 +34,10 @@ code {
 }
 
 .glow-on-hover {
-  /* width: 220px;
-  height: 50px; */
   border: none;
   outline: none;
   color: #fff;
   background: seashell;
-  /* box-shadow: inset 0 0 12px #000000; */
   cursor: pointer;
   position: relative;
   z-index: 0;
