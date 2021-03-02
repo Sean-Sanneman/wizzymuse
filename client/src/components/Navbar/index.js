@@ -14,10 +14,10 @@ const AppNavbar = () => {
     </Navbar.Brand>
     <Container fluid className='d-flex justify-content-right'>
     <Nav className="navButtons">
-      <Nav.Link href="#dashboard" className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Dashboard</Nav.Link>
-      <Nav.Link href="#forum" className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Forum</Nav.Link>
-      <Nav.Link href="#search-artists" className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Search Artists</Nav.Link>
-      <Nav.Link href="#login-register"className='myBtn text-center' style={{ color: 'black', textDecoration: 'none' }}>Login/Register</Nav.Link>
+      <Nav.Link href="#dashboard" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Dashboard</Nav.Link>
+      <Nav.Link href="#forum" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Forum</Nav.Link>
+      <Nav.Link href="#search-artists" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Search Artists</Nav.Link>
+      <Nav.Link href="#login-register"className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Login/Register</Nav.Link>
     </Nav>
     </Container>
     
