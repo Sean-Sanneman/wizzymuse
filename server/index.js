@@ -1,20 +1,17 @@
 require('dotenv').config();
 const express = require('express');
-const testRouter = require('./routes/test-route');
+const cors = require('cors');
 const artistsRouter = require('./routes/artists');
+
 const app = express();
 
 // MIDDLEWARE
+app.use(cors()); // this allows http requests to servers with different domain names (we are going back and forth between localhost:3000 and localhost:5000 for our http requests)
 app.use(express.json()); // this allows us to access req.body
 // attach routers
-app.use('/api/test', testRouter);
 app.use('/api/artists', artistsRouter);
 app.get('/', (req, res) => {
-  try {
-    res.send('Add "/api/test" for the test route');
-  } catch (err) {
-    console.log(err.message);
-  }
+  res.send("WELCOME TO WIZZYMUSE' SERVER SIDE!");
 });
 
 const PORT = process.env.PORT || 5000;

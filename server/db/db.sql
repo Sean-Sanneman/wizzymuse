@@ -25,27 +25,6 @@ CREATE TABLE artists (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO artists (
-    first_name, 
-    last_name, 
-    email,
-    username,
-    password,
-    dob,
-    phone,
-    avatar,
-    city,
-    state,
-    country,
-    bio,
-    band,
-    website,
-    youtube,
-    twitter,
-    facebook,
-    linkedin,
-    instagram,
-    soundcloud
-) VALUES ('sean', 'cone', 'seanisyourdj@gmail.com', 'seanc0ne', 'ilyatroisstylos', '06/28/93',
+INSERT INTO artists (first_name, last_name, email, username, password, dob, phone, avatar, city, state, country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, soundcloud) VALUES ('sean', 'cone', 'seanisyourdj@gmail.com', 'seanc0ne', 'ilyatroisstylos', '06/28/93',
 '720-985-6588','facebook.com', 'Burbank', 'CA', 'USA', '', '', 'soundcloud.com/seanisyourdj',
 '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'soundcloud.com/seanisyourdj');
