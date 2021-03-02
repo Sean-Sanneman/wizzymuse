@@ -5,10 +5,6 @@ import {Container,Row,Col} from 'react-bootstrap';
 function Main() {
   return (
     <>
-    
-      <h1 id="main">About</h1>
-    
-
       <Container fluid className="grid">
       <Row className="mainGrid">
         <Col className="leftPanel">1 of 3</Col>
@@ -17,8 +13,7 @@ function Main() {
         </Col>
         <Col className="rightPanel">3 of 3</Col>
       </Row>
-      </Container>
-    
+      </Container>    
       </>
   );
 }

@@ -35,10 +35,30 @@ code {
 }
 
 
+/* Toolbar */
+.toolbar {
+  background-color: #202020;
+  max-width: 96%;
+  margin: 1%;
+  border-radius: 8px;
+  padding: 1%;
+}
+
+.toolBtns {
+  margin: auto;
+}
+
+.btn {
+  min-width: 10em;
+}
+
+/* Toolbar styles end */
+
 /* Main panels */
 .grid {
-  max-width: 95%;
+  max-width: 96%;
   color: #ffffff;
+  margin: 1% 0;
 }
 
 .leftPanel {
