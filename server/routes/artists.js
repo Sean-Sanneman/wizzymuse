@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const toCamelCase = require('../utils/to-camel-case')
 const db = require('../db');
 
 // @route   GET api/artists
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
     const artists = await db.query('SELECT * FROM artists;');
     res.json({
       message: 'The artists were successfully retrieved.',
-      artists: artists.rows,
+      artists: toCamelCase(artists.rows),
     });
   } catch (err) {
     console.log(err);
@@ -29,7 +30,7 @@ router.get('/:id', async (req, res) => {
     if (selectedArtist.rows[0]) {
       res.json({
         message: 'The selected artist was successfully retrieved.',
-        artist: selectedArtist.rows[0],
+        artist: toCamelCase(selectedArtist.rows)[0],
       });
     } else {
       res.json({
@@ -49,8 +50,8 @@ router.post('/', async (req, res) => {
     const newArtist = await db.query(
       'INSERT INTO artists (first_name, last_name, email, username, password, dob, phone, avatar, city, state, country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *;',
       [
-        req.body.first_name,
-        req.body.last_name,
+        req.body.firstName,
+        req.body.lastName,
         req.body.email,
         req.body.username,
         req.body.password,
@@ -73,7 +74,7 @@ router.post('/', async (req, res) => {
     );
     res.json({
       message: 'A new artist was created.',
-      artist: newArtist.rows[0],
+      artist: toCamelCase(newArtist.rows)[0],
     });
   } catch (err) {
     console.log(err);
@@ -113,7 +114,7 @@ router.put('/:id', async (req, res) => {
     );
     res.json({
       message: 'The artist has been updated.',
-      artist: updatedArtist.rows[0],
+      artist: toCamelCase(updatedArtist.rows)[0],
     });
   } catch (err) {
     console.log(err);
@@ -131,7 +132,7 @@ router.delete('/:id', async (req, res) => {
     );
     res.json({
       message: 'The selected artist was successfully deleted.',
-      artist: deletedArtist.rows[0],
+      artist: toCamelCase(deletedArtist.rows)[0],
     });
   } catch (err) {
     console.log(err);
