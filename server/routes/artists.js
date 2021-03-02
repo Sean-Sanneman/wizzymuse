@@ -89,8 +89,8 @@ router.put('/:id', async (req, res) => {
     const updatedArtist = await db.query(
       'UPDATE artists SET first_name = $1, last_name = $2, email = $3, username = $4, password = $5, dob = $6, phone = $7, avatar = $8, city = $9, state = $10, country = $11, bio = $12, band = $13, website = $14, youtube = $15, twitter = $16, facebook = $17, linkedin = $18, instagram = $19, soundcloud = $20 WHERE id = $21 RETURNING *;',
       [
-        req.body.first_name,
-        req.body.last_name,
+        req.body.firstName,
+        req.body.lastName,
         req.body.email,
         req.body.username,
         req.body.password,
@@ -112,10 +112,16 @@ router.put('/:id', async (req, res) => {
         req.params.id,
       ]
     );
-    res.json({
-      message: 'The artist has been updated.',
-      artist: toCamelCase(updatedArtist.rows)[0],
-    });
+    if (updatedArtist.rows[0]) {
+      res.json({
+        message: 'The artist was successfully updated.',
+        artist: toCamelCase(updatedArtist.rows)[0],
+      });
+    } else {
+      res.json({
+        message: 'The artist does not exist.',
+      });
+    }
   } catch (err) {
     console.log(err);
   }
@@ -130,10 +136,16 @@ router.delete('/:id', async (req, res) => {
       'DELETE FROM artists WHERE id = $1 RETURNING *;',
       [req.params.id]
     );
-    res.json({
-      message: 'The selected artist was successfully deleted.',
-      artist: toCamelCase(deletedArtist.rows)[0],
-    });
+    if (deletedArtists.rows[0]) {
+      res.json({
+        message: 'The selected artist was successfully deleted.',
+        artist: toCamelCase(deletedArtist.rows)[0],
+      });
+    } else {
+      res.json({
+        message: 'The artists does not exist.',
+      });
+    }
   } catch (err) {
     console.log(err);
   }
