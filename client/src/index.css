@@ -38,19 +38,26 @@ code {
 /* Main panels */
 .grid {
   max-width: 95%;
+  color: #ffffff;
 }
 
 .leftPanel {
-  border: solid;
+  border-radius: 8px;
+  background-color: #202020;
 }
 
 .midPanel {
-  border: solid;
+  border-radius: 8px;
+  background-color: #202020;
   margin: 0 1%;
 }
 
 .rightPanel {
-  border: solid;
+  border-radius: 8px;
+  background-color: #202020;
 }
 
+.leftPanel .midPanel .rightPanel {
+  
+}
 /* Main panels styles end */
