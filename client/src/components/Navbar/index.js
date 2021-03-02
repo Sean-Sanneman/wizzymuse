@@ -6,7 +6,7 @@ const AppNavbar = () => {
 
   return (
   <>
-  <Navbar className="color-nav" variant="dark">
+  <Navbar className="color-nav" variant="dark" sticky="top">
     <Navbar.Brand href="#home">
             <Container fluid className='logo-image d-flex justify-content-left'>
                 <img src = {logo} width="65%" height="65%" alt="Logo"></img>
