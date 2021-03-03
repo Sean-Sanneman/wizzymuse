@@ -45,12 +45,7 @@ router.get('/', async (req, res) => {
         artists.country, artists.bio, artists.band, artists.website, 
         artists.youtube, artists.twitter, artists.facebook, artists.linkedin, 
         artists.instagram, artists.soundcloud, 
-        artists.created_at, instruments.instrument_name, genres.genre_name, 
-        instrument_assignments.proficiency FROM artists INNER JOIN users ON (users.id = artists.user_id) 
-        LEFT JOIN instrument_assignments ON (artists.id = instrument_assignments.artist_id)
-        LEFT JOIN genre_assignments ON (artists.id = genre_assignments.artist_id)
-        LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
-        LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);`
+        artists.created_at FROM artists INNER JOIN users ON (users.id = artists.user_id);`
     );
     res.status(200).json({
       message: 'The artists were successfully retrieved.',
@@ -126,7 +121,7 @@ router.post('/', checkToken, checkArtistInput, async (req, res) => {
          soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
           $15, $16, $17) RETURNING *;`,
       [
-        req.body.id,
+        req.user.id,
         req.body.firstName,
         req.body.lastName,
         req.body.dob,
@@ -142,16 +137,28 @@ router.post('/', checkToken, checkArtistInput, async (req, res) => {
         req.body.facebook,
         req.body.linkedin,
         req.body.instagram,
-        req.body.soundcloud
+        req.body.soundcloud,
       ]
     );
-    const newInstrumentAssignmentData = await db.query(`INSERT INTO instrument_assignments 
+    // save the instrument assignments to the database
+    const newInstrumentAssignmentsList = [];
+    for (let i = 0; i < req.body.instrumentIds.length; i++) {
+      const newInstrumentAssignmentData = await db.query(
+        `INSERT INTO instrument_assignments 
       (artist_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
-    [newArtistData.rows[0].id, req.body.instrumentId, req.body.proficiency]);
+        [
+          newArtistData.rows[0].id,
+          req.body.instrumentIds[i],
+          req.body.proficiencies[i],
+        ]
+      );
+      newInstrumentAssignmentsList.push(newInstrumentAssignmentData.rows[0]);
+    }
+    // send response back to client
     res.status(200).json({
       message: 'A new artist profile was created.',
       // results: newArtistData.rows.length,
-      inst_assignment: toCamelCase(newInstrumentAssignmentData.rows)[0],
+      instrumentAssignmentsList: toCamelCase(newInstrumentAssignmentsList),
       artist: toCamelCase(newArtistData.rows)[0],
     });
   } catch (err) {
@@ -229,4 +236,4 @@ router.delete('/', checkToken, async (req, res) => {
 
 module.exports = router;
 
-//  
+//
