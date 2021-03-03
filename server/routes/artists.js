@@ -39,7 +39,18 @@ router.get('/me', checkToken, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const artistsData = await db.query(
-      'SELECT users.email, users.username, users.avatar, artists.id, artists.first_name, artists.last_name, artists.dob, artists.phone, artists.city, artists.state, artists.country, artists.bio, artists.band, artists.website, artists.youtube, artists.twitter, artists.facebook, artists.linkedin, artists.instagram, artists.soundcloud, artists.created_at FROM artists INNER JOIN users ON (users.id = artists.user_id);'
+      `SELECT users.email, users.username, users.avatar, 
+        artists.id, artists.first_name, artists.last_name, 
+        artists.dob, artists.phone, artists.city, artists.state, 
+        artists.country, artists.bio, artists.band, artists.website, 
+        artists.youtube, artists.twitter, artists.facebook, artists.linkedin, 
+        artists.instagram, artists.soundcloud, 
+        artists.created_at, instruments.instrument_name, genres.genre_name, 
+        instrument_assignments.proficiency FROM artists INNER JOIN users ON (users.id = artists.user_id) 
+        LEFT JOIN instrument_assignments ON (artists.id = instrument_assignments.artist_id)
+        LEFT JOIN genre_assignments ON (artists.id = genre_assignments.artist_id)
+        LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
+        LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);`
     );
     res.status(200).json({
       message: 'The artists were successfully retrieved.',
@@ -59,9 +70,19 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const selectedArtistData = await db.query(
-      'SELECT users.email, users.username, users.avatar, artists.id, artists.first_name, artists.last_name, artists.dob, artists.phone, artists.city, artists.state, artists.country, artists.bio, artists.band, artists.website, artists.youtube, artists.twitter, artists.facebook, artists.linkedin, artists.instagram, artists.soundcloud, artists.created_at FROM artists LEFT JOIN users ON (users.id = artists.user_id) WHERE artists.id = $1;',
+      `SELECT users.email, users.username, users.avatar, artists.id, artists.first_name, 
+      artists.last_name, artists.dob, artists.phone, artists.city, artists.state, artists.country, 
+      artists.bio, artists.band, artists.website, artists.youtube, artists.twitter, artists.facebook, 
+      artists.linkedin, artists.instagram, artists.soundcloud, artists.created_at, 
+      instruments.instrument_name, genres.genre_name, instrument_assignments.proficiency 
+      FROM artists LEFT JOIN users ON (users.id = artists.user_id)
+      LEFT JOIN instrument_assignments ON (artists.id = instrument_assignments.artist_id)
+      LEFT JOIN genre_assignments ON (artists.id = genre_assignments.artist_id)
+      LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
+      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE artists.id = $1;`,
       [req.params.id]
     );
+    console.log(selectedArtistData.rows);
     if (!selectedArtistData.rows[0]) {
       return res.status(400).json({
         message: 'The selected artist does not exist.',
@@ -71,7 +92,7 @@ router.get('/:id', async (req, res) => {
     res.status(200).json({
       message: 'The selected artist was successfully retrieved.',
       results: selectedArtistData.rows.length,
-      artist: toCamelCase(selectedArtistData.rows)[0],
+      artist: toCamelCase(selectedArtistData.rows),
     });
   } catch (err) {
     console.error(err.message);
@@ -100,9 +121,12 @@ router.post('/', checkToken, checkArtistInput, async (req, res) => {
 
     // save the artist profile to the database
     const newArtistData = await db.query(
-      'INSERT INTO artists (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *;',
+      `INSERT INTO artists (user_id, first_name, last_name, dob, phone, city, state,
+         country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, 
+         soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
+          $15, $16, $17) RETURNING *;`,
       [
-        req.user.id,
+        req.body.id,
         req.body.firstName,
         req.body.lastName,
         req.body.dob,
@@ -118,12 +142,16 @@ router.post('/', checkToken, checkArtistInput, async (req, res) => {
         req.body.facebook,
         req.body.linkedin,
         req.body.instagram,
-        req.body.soundcloud,
+        req.body.soundcloud
       ]
     );
+    const newInstrumentAssignmentData = await db.query(`INSERT INTO instrument_assignments 
+      (artist_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
+    [newArtistData.rows[0].id, req.body.instrumentId, req.body.proficiency]);
     res.status(200).json({
       message: 'A new artist profile was created.',
-      results: newArtistData.rows.length,
+      // results: newArtistData.rows.length,
+      inst_assignment: toCamelCase(newInstrumentAssignmentData.rows)[0],
       artist: toCamelCase(newArtistData.rows)[0],
     });
   } catch (err) {
@@ -200,3 +228,5 @@ router.delete('/', checkToken, async (req, res) => {
 });
 
 module.exports = router;
+
+//  
