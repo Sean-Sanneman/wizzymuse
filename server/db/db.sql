@@ -52,10 +52,28 @@ CREATE TABLE instrument_assignments (
 INSERT INTO instruments (instrument_name) VALUES ('Trumpet');
 INSERT INTO instrument_assignments (artist_id, instrument_id, proficiency) VALUES(1,1,4);
 
+CREATE TABLE genres (
+    id SERIAL PRIMARY KEY,
+    genre_name VARCHAR NOT NULL
+);
+
+CREATE TABLE genre_assignments (
+    id SERIAL PRIMARY KEY,
+    artist_id INTEGER NOT NULL REFERENCES artists(id) ON DELETE CASCADE,
+    genre_id INTEGER NOT NULL REFERENCES genres(id) ON DELETE CASCADE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO genres (genre_name) VALUES ('Dubstep');
+INSERT INTO genre_assignments (artist_id, genre_id) VALUES(1,1);
 
 SELECT artists.first_name, instruments.instrument_name FROM instrument_assignments
 LEFT JOIN artists ON (artists.id = instrument_assignments.artist_id)
 LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id);
+
+SELECT artists.first_name, genres.genre_name FROM genre_assignments
+LEFT JOIN artists ON (artists.id = genre_assignments.artist_id)
+LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);
 
 -- SELECT artists.first_name, instruments.instrument_name FROM instrument_assignments, artists, instruments
 -- WHERE artists.id = instrument_assignments.artist_id AND instruments.id = instrument_assignments.instrument_id
