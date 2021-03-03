@@ -142,6 +142,11 @@ code {
   border: solid;
   border-color: #000000;
   background-image: linear-gradient(to right, #202020, #343434);
+  box-shadow: inset -5px -5px 5px #252525;
+}
+
+.mainPic {
+  padding: 1% 0;
 }
 /* Main panels styles end */
 
