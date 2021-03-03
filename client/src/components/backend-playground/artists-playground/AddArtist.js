@@ -4,10 +4,6 @@ import ArtistFinder from '../../../apis/ArtistFinder';
 const AddArtist = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [dob, setDob] = useState('');
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
@@ -29,10 +25,6 @@ const AddArtist = () => {
       const body = {
         firstName,
         lastName,
-        avatar,
-        email,
-        username,
-        password,
         dob,
         phone,
         city,
@@ -82,15 +74,7 @@ const AddArtist = () => {
               </div>
             </div>
             <div className="form-row">
-              <div className="col-8">
-                <input
-                  type="text"
-                  className="form-control my-1"
-                  placeholder="Avatar"
-                  value={avatar}
-                  onChange={(e) => setAvatar(e.target.value)}
-                />
-              </div>
+              <div className="col-8"></div>
               <div className="col-4">
                 <input
                   type="text"
@@ -102,15 +86,7 @@ const AddArtist = () => {
               </div>
             </div>
             <div className="form-row">
-              <div className="col-8">
-                <input
-                  type="text"
-                  className="form-control my-1"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+              <div className="col-8"></div>
               <div className="col-4">
                 <input
                   type="text"
@@ -122,24 +98,8 @@ const AddArtist = () => {
               </div>
             </div>
             <div className="form-row">
-              <div className="col-6">
-                <input
-                  type="text"
-                  className="form-control my-1"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div className="col-6">
-                <input
-                  type="text"
-                  className="form-control my-1"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+              <div className="col-6"></div>
+              <div className="col-6"></div>
             </div>
             <div className="form-row">
               <div className="col-4">

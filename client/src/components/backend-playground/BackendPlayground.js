@@ -7,6 +7,11 @@ const BackendPlayground = () => {
       <h1 className="font-weight-light text-center my-3">Backend Playground</h1>
       <div className="container">
         <div className="pt-3 d-flex justify-content-around">
+          <Link to="/pg/auth">
+            <button type="button" className="btn btn-outline-light">
+              Register/Login
+            </button>
+          </Link>
           <Link to="/pg/artists">
             <button type="button" className="btn btn-outline-light">
               Artists
