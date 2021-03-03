@@ -6,6 +6,7 @@ const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const artistsRouter = require('./routes/artists');
 const instrumentsRouter = require('./routes/instruments');
+const genresRouter = require('./routes/genres');
 
 const app = express(); // Create the Express application
 
@@ -18,6 +19,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/artists', artistsRouter);
 app.use('/api/instruments', instrumentsRouter);
+app.use('/api/genres', genresRouter);
 app.get('/', (req, res) => {
   res.send("WELCOME TO WIZZYMUSE' SERVER SIDE!");
 });
