@@ -1,11 +1,12 @@
 import React from 'react';
+import BackendPlayground from '../BackendPlayground';
 import AddInstrument from './AddInstrument';
 // import InstrumentsList from './InstrumentsList';
 
 const InstrumentsPage = () => {
   return (
-    <>
-      <h1 className="font-weight-light text-center my-3">Backend Playground</h1>
+    <div className="container-fluid justify-content-center">
+      <BackendPlayground />
       <div className="my-4 toolbar">
         <h3 className="font-weight-light text-white-50 my-3">
           Instruments Data:
@@ -13,7 +14,7 @@ const InstrumentsPage = () => {
         <AddInstrument />
         {/* <InstrumentsList /> */}
       </div>
-    </>
+    </div>
   );
 };
 
