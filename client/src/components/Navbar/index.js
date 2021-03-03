@@ -14,16 +14,16 @@ const AppNavbar = () => {
     </Navbar.Brand>
     <Container fluid className='d-flex justify-content-right'>
     <Nav className="navButtons">
-      <Nav.Link href="#dashboard" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Dashboard</Nav.Link>
-      <Nav.Link href="#forum" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Forum</Nav.Link>
-      <Nav.Link href="#search-artists" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Search Artists</Nav.Link>
-      <Nav.Link href="#login-register"className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>Login/Register</Nav.Link>
+      <Nav.Link href="#dashboard" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>DASHBOARD</Nav.Link>
+      <Nav.Link href="#forum" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>FORUM</Nav.Link>
+      <Nav.Link href="#search-artists" className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>SEARCH ARTISTS</Nav.Link>
+      <Nav.Link href="#login-register"className='myBtn text-center glow-on-hover' style={{ color: 'black', textDecoration: 'none' }}>LOGIN/REGISTER</Nav.Link>
     </Nav>
     </Container>
     
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-info">Search</Button>
+      <Button variant="outline-info">SEARCH</Button>
     </Form>
   </Navbar>
   </>
