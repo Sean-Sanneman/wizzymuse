@@ -4,7 +4,7 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 const Toolbar = () => {
     return (
     <>
-    <Container fluid className="d-flex justify-content-center toolbar">
+    <Container fluid className="d-flex justify-content-center toolbar allPanels">
         <Row style={{ height: "3em" }} className="align-content-center">
             <Col className="toolBtns">
             <Button variant="outline-primary btn mr-3">New Project</Button>{' '}

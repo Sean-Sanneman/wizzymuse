@@ -96,7 +96,7 @@ code {
 
 /* Toolbar */
 .toolbar {
-  background-color: #202020;
+  background-image: linear-gradient(to right, #202020, #343434);
   max-width: 97%;
   margin: 1%;
   border-radius: 8px;
@@ -123,22 +123,22 @@ code {
 
 .leftPanel {
   border-radius: 8px;
-  background-color: #202020;
 }
 
 .midPanel {
   border-radius: 8px;
-  background-color: #202020;
   margin: 0 1%;
 }
 
 .rightPanel {
   border-radius: 8px;
-  background-color: #202020;
+  
 }
 
-.leftPanel .midPanel .rightPanel {
-  
+.allPanels {
+  border: solid;
+  border-color: #000000;
+  background-image: linear-gradient(to right, #202020, #343434);
 }
 /* Main panels styles end */
 
