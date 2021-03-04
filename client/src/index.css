@@ -127,6 +127,20 @@ code {
   border-radius: 8px;
 }
 
+.leftLED {
+  background-color: #000000;
+  height: 84%;
+}
+
+.LED-text {
+  padding-top: 12%;
+  color: greenyellow;
+}
+
+.babyYoda {
+  padding: 8%;
+}
+
 .midPanel {
   border-radius: 8px;
   margin: 0 1%;
