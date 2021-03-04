@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../../actions/auth';
 
-const Register = ({ register, isAuthenticated }) => {
-  const [username, setUsername] = useState('');
+const Login = ({ login, isAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    register({ username, email, password });
+    login({ email, password });
   };
 
   if (isAuthenticated) {
@@ -21,15 +20,6 @@ const Register = ({ register, isAuthenticated }) => {
 
   return (
     <form>
-      <div className="form-group">
-        <input
-          type="text"
-          className="form-control my-1"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
       <div className="form-group">
         <input
           type="text"
@@ -52,15 +42,15 @@ const Register = ({ register, isAuthenticated }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button className="btn btn-primary my-1" onClick={handleRegister}>
+      <button className="btn btn-primary my-1" onClick={handleLogin}>
         Register
       </button>
     </form>
   );
 };
 
-Register.propTypes = {
-  register: PropTypes.func.isRequired,
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -68,5 +58,5 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { login })(Login);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use

@@ -1,7 +1,7 @@
 import React from 'react';
 import BackendPlayground from '../BackendPlayground';
 import Register from './Register';
-// import Login from './Login';
+import Login from './Login';
 
 const AuthPage = () => {
   return (
@@ -15,6 +15,7 @@ const AuthPage = () => {
           </div>
           <div className="col-6">
             <h3 className="font-weight-light text-white-50 my-3">LOGIN:</h3>
+            <Login />
           </div>
         </div>
       </div>
