@@ -39,7 +39,17 @@ router.get('/me', checkToken, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const artistsData = await db.query(
-      'SELECT users.email, users.username, users.avatar, artists.id, artists.first_name, artists.last_name, artists.dob, artists.phone, artists.city, artists.state, artists.country, artists.bio, artists.band, artists.website, artists.youtube, artists.twitter, artists.facebook, artists.linkedin, artists.instagram, artists.soundcloud, artists.created_at FROM artists INNER JOIN users ON (users.id = artists.user_id);'
+      `SELECT users.email, users.username, users.avatar, artists.id, artists.first_name, artists.last_name, 
+          artists.dob, artists.phone, artists.city, artists.state, artists.country, artists.bio, artists.band, 
+          artists.website, artists.youtube, artists.twitter, artists.facebook, artists.linkedin, artists.instagram, 
+          artists.soundcloud, artists.created_at, instruments.instrument_name, instrument_assignments.proficiency, genres.genre_name 
+       FROM artists 
+       INNER JOIN users ON (users.id = artists.user_id)
+       LEFT JOIN instrument_assignments ON (artists.id = instrument_assignments.artist_id)
+       LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
+       LEFT JOIN genre_assignments ON (artists.id = genre_assignments.artist_id)
+       LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);; 
+       ;`
     );
     res.status(200).json({
       message: 'The artists were successfully retrieved.',
