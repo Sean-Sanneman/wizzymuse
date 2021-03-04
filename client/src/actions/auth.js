@@ -42,9 +42,9 @@ export const login = ({ email, password }) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post('/api/users/register', body, config);
+    const res = await axios.post('/api/auth/login', body, config);
     dispatch({
-      type: REGISTER_SUCCESS,
+      type: LOGIN_SUCCESS,
       payload: res.data, // we get the token back
     });
     // dispatch(loadUser()); // we immediately load the user
@@ -52,7 +52,7 @@ export const login = ({ email, password }) => async (dispatch) => {
     const errors = err.response.data.errors; // get the array of errors
     // @TODO: if there are errors we'll want to dispatch an alert for each of them
     dispatch({
-      type: REGISTER_FAIL, // we don't need a payload
+      type: LOGIN_FAIL, // we don't need a payload
     });
   }
 };

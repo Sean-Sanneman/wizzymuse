@@ -15,7 +15,6 @@ const Register = ({ register, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    console.log('isAuthenticated?', isAuthenticated);
     return <Redirect to="/" />;
   }
 
