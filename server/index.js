@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
-const artistsRouter = require('./routes/artists');
+const profilesRouter = require('./routes/profiles');
 const instrumentsRouter = require('./routes/instruments');
 const genresRouter = require('./routes/genres');
 
@@ -17,7 +17,7 @@ app.use(express.json()); // this allows us to access req.body
 // MIDDLEWARE - Routes
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/artists', artistsRouter);
+app.use('/api/profiles', profilesRouter);
 app.use('/api/instruments', instrumentsRouter);
 app.use('/api/genres', genresRouter);
 app.get('/', (req, res) => {

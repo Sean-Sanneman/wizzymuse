@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../../actions/auth';
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, auth: { isAuthenticated } }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/pg/dashboard" />;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
     login({ email, password });
   };
-
-  if (isAuthenticated) {
-    console.log('isAuthenticated?', isAuthenticated);
-    return <Redirect to="/" />;
-  }
 
   return (
     <form>
@@ -24,7 +24,7 @@ const Login = ({ login, isAuthenticated }) => {
         <input
           type="text"
           className="form-control my-1"
-          placeholder="Email"
+          placeholder="* Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -37,13 +37,13 @@ const Login = ({ login, isAuthenticated }) => {
         <input
           type="text"
           className="form-control my-1"
-          placeholder="Password"
+          placeholder="* Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <button className="btn btn-primary my-1" onClick={handleLogin}>
-        Register
+        Login
       </button>
     </form>
   );
@@ -51,11 +51,11 @@ const Login = ({ login, isAuthenticated }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth, // we're pulling all the state that is in the auth reducer
 });
 
 export default connect(mapStateToProps, { login })(Login);

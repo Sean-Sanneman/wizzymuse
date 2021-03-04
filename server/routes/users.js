@@ -66,12 +66,12 @@ router.post('/register', checkUserInput, async (req, res) => {
 
 // @route   GET api/users
 // @desc    Get all users
-// @access  Private for admin purposes?
+// @access  Public
 // @TODO
 
 // @route   GET api/users/:id
-// @desc    Get one user
-// @access  Private for admin purposes?
+// @desc    Get one user by user ID
+// @access  Public
 // @TODO
 
 // @route   PUT api/users/:id

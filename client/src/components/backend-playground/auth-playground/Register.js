@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../../actions/auth';
 
-const Register = ({ register, isAuthenticated }) => {
+const Register = ({ register, auth: { isAuthenticated } }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,8 +14,9 @@ const Register = ({ register, isAuthenticated }) => {
     register({ username, email, password });
   };
 
+  // Redirect when registered
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to="/pg/dashboard" />;
   }
 
   return (
@@ -24,7 +25,7 @@ const Register = ({ register, isAuthenticated }) => {
         <input
           type="text"
           className="form-control my-1"
-          placeholder="Username"
+          placeholder="* Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -33,7 +34,7 @@ const Register = ({ register, isAuthenticated }) => {
         <input
           type="text"
           className="form-control my-1"
-          placeholder="Email"
+          placeholder="* Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -46,7 +47,7 @@ const Register = ({ register, isAuthenticated }) => {
         <input
           type="text"
           className="form-control my-1"
-          placeholder="Password"
+          placeholder="* Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -60,11 +61,11 @@ const Register = ({ register, isAuthenticated }) => {
 
 Register.propTypes = {
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth, // we're pulling all the state that is in the auth reducer
 });
 
 export default connect(mapStateToProps, { register })(Register);
