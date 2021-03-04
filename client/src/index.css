@@ -15,6 +15,7 @@ code {
 }
 
 /* Navbar styles */
+
 .color-nav {
   background-color: #000000;
 }
@@ -29,16 +30,75 @@ code {
   background-color: seashell;
   border-radius: 18px;
   box-shadow: inset 0 0 12px #000000;
-  /* width: 150px; */
-  min-width: 8em;
+  min-width: 10em;
   margin: 5% 2%;
+  font-size: small;
 
+}
+
+.glow-on-hover {
+  border: none;
+  outline: none;
+  color: #fff;
+  background: seashell;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: seashell;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: seashell;
+  box-shadow: inset 0 0 12px #000000;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }
 
 
 /* Toolbar */
 .toolbar {
-  background-color: #202020;
+  background-image: linear-gradient(to right, #202020, #343434);
   max-width: 97%;
   margin: 1%;
   border-radius: 8px;
@@ -65,22 +125,41 @@ code {
 
 .leftPanel {
   border-radius: 8px;
-  background-color: #202020;
+}
+
+.leftLED {
+  background-color: #000000;
+  height: 84%;
+}
+
+.LED-text {
+  padding-top: 12%;
+  color: greenyellow;
+}
+
+.babyYoda {
+  padding: 8%;
 }
 
 .midPanel {
   border-radius: 8px;
-  background-color: #202020;
   margin: 0 1%;
 }
 
 .rightPanel {
   border-radius: 8px;
-  background-color: #202020;
+  
 }
 
-.leftPanel .midPanel .rightPanel {
-  
+.allPanels {
+  border: solid;
+  border-color: #000000;
+  background-image: linear-gradient(to right, #202020, #343434);
+  box-shadow: inset -5px -5px 5px #252525;
+}
+
+.mainPic {
+  padding: 1% 0;
 }
 /* Main panels styles end */
 
