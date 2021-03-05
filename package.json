@@ -23,8 +23,6 @@
   },
   "homepage": "https://github.com/Sean-Sanneman/wizzymuse#readme",
   "dependencies": {
-    "bootstrap": "^4.6.0",
-    "concurrently": "^5.3.0",
-    "react-bootstrap": "^1.5.0"
+    "concurrently": "^5.3.0"
   }
 }
