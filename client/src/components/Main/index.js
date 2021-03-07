@@ -1,4 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import { ApolloProvider } from '@apollo/react-hooks';
+// import ApolloClient from 'apollo-boost';
+
 import coverImage from "../../assets/cover/cover-image-studio3.jpg";
 import {Container,Row,Col} from 'react-bootstrap';
 import babyYoda from "../../assets/cover/baby-yoda.jpeg";
@@ -17,8 +21,7 @@ function Main() {
               Instruments played: Guitar, Pan Flute
               </Col>
             </Row>
-          </Container>
-        
+          </Container> 
         </Col>
         <Col xs={8} className="midPanel allPanels">2 of 3 (wider)
         <img src={coverImage} className="mainPic" style={{ width: "100%" }} alt="cover" />
@@ -28,6 +31,6 @@ function Main() {
       </Container>    
       </>
   );
-}
+};
 
 export default Main;

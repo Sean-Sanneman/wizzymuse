@@ -1,5 +1,6 @@
-import React,{useEffect,useState} from 'react';
+import React, {useEffect,useState} from 'react';
 import logo from "../../assets/cover/wizzymuse-logo.png";
+import { Link,Redirect } from 'react-router-dom';
 import {Navbar,Nav,Container,Button,Form,FormControl,Modal} from 'react-bootstrap';
 
 const AppNavbar = () => {
@@ -9,6 +10,13 @@ const AppNavbar = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
+  const handleRedirect = () => {
+    console.log("show something")
+    return (
+      <Redirect to="/pg" />
+    )
+  }
   // modal code
 
   return (
@@ -49,8 +57,10 @@ const AppNavbar = () => {
           <Button variant="dark" className="m-0" type="submit">
             SIGN IN
           </Button>
-          <Button variant="dark" className="m-3" type="submit">
+          <Button variant="dark" className="m-3" type="submit" onClick={handleRedirect}>
+            {/* need to do onClick code to trigger redirect (import from React) */}
             NEW USER
+            {/* need to do onClick code to trigger redirect (import from React) */}
           </Button>
         </Form>
         {/* Form inputs end */}
@@ -60,10 +70,6 @@ const AppNavbar = () => {
         </Modal.Footer>
       </Modal>
       {/* modal code ends */}
-
-
-      
-              
 
     </Nav>
     </Container>
