@@ -27,11 +27,8 @@ const Login = ({ login, auth: { isAuthenticated } }) => {
           placeholder="* Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
-        <small className="form-text text-white">
-          This site uses Gravatar so if you want a profile image, use a Gravatar
-          email
-        </small>
       </div>
       <div className="form-group">
         <input
@@ -40,6 +37,7 @@ const Login = ({ login, auth: { isAuthenticated } }) => {
           placeholder="* Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </div>
       <button className="btn btn-primary my-1" onClick={handleLogin}>
