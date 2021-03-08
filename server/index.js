@@ -1,12 +1,25 @@
-require('dotenv').config();
+require('dotenv').config(); // access variables set in the .env file via `process.env.VARIABLE_NAME` syntax
 const express = require('express');
-const artistsRouter = require('./routes/artists');
-const app = express();
+const cors = require('cors');
 
-// MIDDLEWARE
+const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
+const profilesRouter = require('./routes/profiles');
+const instrumentsRouter = require('./routes/instruments');
+const genresRouter = require('./routes/genres');
+
+const app = express(); // Create the Express application
+
+// MIDDLEWARE - General
+app.use(cors()); // this allows http requests to servers with different domain names (we are going back and forth between localhost:3000 and localhost:5000 for our http requests)
 app.use(express.json()); // this allows us to access req.body
-// attach routers
-app.use('/api/artists', artistsRouter);
+
+// MIDDLEWARE - Routes
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/profiles', profilesRouter);
+app.use('/api/instruments', instrumentsRouter);
+app.use('/api/genres', genresRouter);
 app.get('/', (req, res) => {
   res.send("WELCOME TO WIZZYMUSE' SERVER SIDE!");
 });
