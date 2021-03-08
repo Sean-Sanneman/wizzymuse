@@ -14,6 +14,7 @@ INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmai
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
+    is_musician BOOLEAN,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     first_name VARCHAR NOT NULL,
     last_name VARCHAR,
@@ -34,7 +35,7 @@ CREATE TABLE profiles (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, soundcloud) VALUES (1, 'sean', 'cone', '06/28/93', '720-985-6588','Burbank', 'CA', 'USA', '', '', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'soundcloud.com/seanisyourdj');
+INSERT INTO profiles (user_id, is_musician, first_name, last_name, dob, phone, city, state, country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, soundcloud) VALUES (1, '1','sean', 'cone', '06/28/93', '720-985-6588','Burbank', 'CA', 'USA', '', '', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'soundcloud.com/seanisyourdj');
 
 CREATE TABLE instruments (
     id SERIAL PRIMARY KEY,
@@ -74,6 +75,11 @@ LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
 SELECT profiles.first_name, genres.genre_name FROM genre_assignments
 LEFT JOIN profiles ON (profiles.id = genre_assignments.profile_id)
 LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);
+
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    
+)
 
 -- SELECT profiles.first_name, instruments.instrument_name FROM instrument_assignments, profiles, instruments
 -- WHERE profiles.id = instrument_assignments.profile_id AND instruments.id = instrument_assignments.instrument_id
