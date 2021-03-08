@@ -1,5 +1,4 @@
 
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -162,6 +161,24 @@ code {
   padding: 1% 0;
 }
 /* Main panels styles end */
+
+
+/* Modals start */
+.loginModal {
+  padding: 10% 0 0 22%;
+}
+
+.intModal {
+  padding: 6% 6%;
+}
+
+.allModals .modal-content {
+  background-image: url("assets/cover/bg-brushed-metal.jpg");
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px #000000;
+}
+
+/* Modals styles end */
 
 
 /* Footer */

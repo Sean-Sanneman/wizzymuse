@@ -6,6 +6,7 @@ import background from './assets/cover/bg-brushed-metal.jpg';
 import Nav from './components/Navbar';
 import Toolbar from './components/Toolbar';
 import Main from './components/Main';
+import Signup from './components/Signup';
 import Footer from './components/Footer';
 // import './App.css';
 
@@ -27,21 +28,21 @@ if (localStorage.token) {
 const App = () => {
   return (
     <Provider store={store}>
-      <div style={{ backgroundImage: `url(${background})` }}>
-        <Nav></Nav>
-        <Toolbar></Toolbar>
-        <main>
-          <Router>
+      <Router>
+        <div style={{ backgroundImage: `url(${background})` }}>
+          <Nav></Nav>
+          <Toolbar></Toolbar>
+          <main>
             <Switch>
               <Route exact path="/" component={Main} />
               <Route exact path="/pg" component={LandingPage} />
               <Route exact path="/pg/auth" component={AuthPage} />
               <PrivateRoute exact path="/pg/dashboard" component={Dashboard} />
             </Switch>
-          </Router>
-        </main>
-        <Footer />
-      </div>
+          </main>
+          <Footer />
+        </div>
+      </Router>
     </Provider>
   );
 };
