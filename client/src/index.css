@@ -181,6 +181,24 @@ code {
 /* Modals styles end */
 
 
+/* Signup */
+.signup {
+  border: solid;
+  border-radius: 8px;
+  margin: 4% 12% 6% 42%;
+  padding: 2% 12%;
+  background-color: lightgray;
+  box-shadow: 5px 5px 15px;
+}
+
+.location {
+  display: inline-block;
+  align-content: space-between;
+}
+
+/* Signup styles end */
+
+
 /* Footer */
 .page-footer {
   margin-top: 1%;

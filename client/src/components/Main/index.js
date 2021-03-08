@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import { ApolloProvider } from '@apollo/react-hooks';
-// import ApolloClient from 'apollo-boost';
 
 import coverImage from "../../assets/cover/cover-image-studio3.jpg";
 import {Container,Row,Col} from 'react-bootstrap';
 import babyYoda from "../../assets/cover/baby-yoda.jpeg";
+import Toolbar from "../Toolbar";
 
 function Main() {
   return (
     <>
+      <Toolbar></Toolbar>
       <Container fluid className="grid">
       <Row className="mainGrid">
         <Col className="leftPanel allPanels">1 of 3
