@@ -10,21 +10,31 @@ const toCamelCase = require('../utils/to-camel-case');
 // @desc    Get the current user's profile, if any, by user ID located in the token
 // @access  Private
 router.get('/me', checkToken, async (req, res) => {
+  console.log('req.user.id', req.user.id);
   try {
     const profileData = await db.query(
-      'SELECT * FROM profiles WHERE user_id = $1;',
+      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+      profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
+      profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
+      instruments.instrument_name, genres.genre_name, instrument_assignments.proficiency 
+      FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
+      LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
+      LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
+      LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
+      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.id = $1;`,
       [req.user.id]
     );
 
     if (!profileData.rows[0]) {
       return res
         .status(400)
-        .json({ message: 'There is no profile profile for this user' });
+        .json({ message: 'There is no profile for this user' });
     }
     res.status(200).json({
-      message: 'Your profile profile information was successfully retrieved.',
+      message: 'Your profile information was successfully retrieved.',
       results: profileData.rows.length,
-      currentprofile: toCamelCase(profileData.rows)[0],
+      currentprofile: toCamelCase(profileData.rows),
     });
   } catch (err) {
     console.error(err.message);
@@ -39,8 +49,7 @@ router.get('/me', checkToken, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const profilesData = await db.query(
-      `SELECT users.email, users.username, users.avatar, 
-        profiles.id, profiles.first_name, profiles.last_name, 
+      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.is_musician, profiles.first_name, profiles.last_name, 
         profiles.dob, profiles.phone, profiles.city, profiles.state, 
         profiles.country, profiles.bio, profiles.band, profiles.website, 
         profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
@@ -115,7 +124,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
     }
 
     // save the profile to the database
-    const newprofileData = await db.query(
+    const newProfileData = await db.query(
       `INSERT INTO profiles (user_id, is_musician, first_name, last_name, dob, phone, city, state,
          country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, 
          soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
@@ -148,7 +157,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
         `INSERT INTO instrument_assignments 
       (profile_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
         [
-          newprofileData.rows[0].id,
+          newProfileData.rows[0].id,
           req.body.instrumentIds[i],
           req.body.proficiencies[i],
         ]
@@ -161,16 +170,16 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
       const newGenreAssignmentData = await db.query(
         `INSERT INTO genre_assignments 
       (profile_id, genre_id) VALUES ($1, $2) RETURNING *;`,
-        [newprofileData.rows[0].id, req.body.genreIds[i]]
+        [newProfileData.rows[0].id, req.body.genreIds[i]]
       );
       newGenreAssignmentsList.push(newGenreAssignmentData.rows[0]);
     }
     // send response back to client
     res.status(200).json({
       message: 'A new profile was created.',
-      // results: newprofileData.rows.length,
+      // results: newProfileData.rows.length,
       instrumentAssignmentsList: toCamelCase(newInstrumentAssignmentsList),
-      profile: toCamelCase(newprofileData.rows)[0],
+      profile: toCamelCase(newProfileData.rows)[0],
     });
   } catch (err) {
     console.log(err);
@@ -182,8 +191,9 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 // @access  Private (only the logged in user can update his/her own profile)
 router.put('/', checkToken, checkProfileInput, async (req, res) => {
   try {
+    // update the profile to the database
     const updatedprofileData = await db.query(
-      'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, website = $10, youtube = $11, twitter = $12, facebook = $13, linkedin = $14, instagram = $15, soundcloud = $16 WHERE user_id = $17 RETURNING *;',
+      'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, website = $10, youtube = $11, twitter = $12, facebook = $13, linkedin = $14, instagram = $15, soundcloud = $16, is_musician = $17 WHERE user_id = $18 RETURNING *;',
       [
         req.body.firstName,
         req.body.lastName,
@@ -201,9 +211,11 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
         req.body.linkedin,
         req.body.instagram,
         req.body.soundcloud,
+        req.body.isMusician,
         req.user.id,
       ]
     );
+    // update the instrument assignments to the database
     if (!updatedprofileData.rows[0]) {
       return res.status(400).json({
         message: 'The profile does not exist.',
