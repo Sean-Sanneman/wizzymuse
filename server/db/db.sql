@@ -78,8 +78,31 @@ LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    
-)
+    title VARCHAR(500),
+    description VARCHAR(500)
+);
+
+INSERT INTO categories (title, description) VALUES ('Judy Collins Wannabes', 'They took it all from her!');
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    post_text VARCHAR(2000),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO posts (user_id, category_id, post_text) VALUES (1,4,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
+
+INSERT INTO comments (post_id, user_id) VALUES (5,1);
+
+
 
 -- SELECT profiles.first_name, instruments.instrument_name FROM instrument_assignments, profiles, instruments
 -- WHERE profiles.id = instrument_assignments.profile_id AND instruments.id = instrument_assignments.instrument_id
