@@ -31,7 +31,6 @@ const App = () => {
       <Router>
         <div style={{ backgroundImage: `url(${background})` }}>
           <Nav></Nav>
-          <Toolbar></Toolbar>
           <main>
             <Switch>
               <Route exact path="/" component={Main} />

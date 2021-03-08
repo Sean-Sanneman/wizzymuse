@@ -6,6 +6,7 @@ const Signup = () => {
 
     return (
         <>
+        <Col xs={6} className="signup">
         <form>
             <h3>Sign Up</h3>
 
@@ -25,18 +26,12 @@ const Signup = () => {
             </div>
 
             <div className="form-group">
-                <label>City</label>
-                <input type="text" className="form-control" placeholder="Enter city" />
-            </div>
-
-            <div className="form-group">
-                <label>State</label>
-                <input type="text" className="form-control" placeholder="Enter your state/region" />
-            </div>
-
-            <div className="form-group">
-                <label>Country</label>
-                <input type="text" className="form-control" placeholder="Enter country" />
+                <label>Location</label>
+                <div className="d-flex location">
+                <input type="text" className="form-control localeField" placeholder="City" />
+                <input type="text" className="form-control localeField" placeholder="State" />
+                <input type="text" className="form-control localeField" placeholder="Country" />
+                </div>
             </div>
 
             <div className="form-group">
@@ -49,9 +44,11 @@ const Signup = () => {
                 <input type="password" className="form-control" placeholder="Enter password" />
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block">Let's get started!</button>
+            <button type="submit" className="btn btn-primary btn-block p-3" style={{ width: "20%" }}>Let's get started!</button>
             <p className="forgot-password text-right">Already registered <a href="#">sign in?</a></p>
         </form>
+        </Col>
+        
 
         </>
     );
