@@ -116,12 +116,13 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 
     // save the profile to the database
     const newprofileData = await db.query(
-      `INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state,
+      `INSERT INTO profiles (user_id, is_musician, first_name, last_name, dob, phone, city, state,
          country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, 
          soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
-          $15, $16, $17) RETURNING *;`,
+          $15, $16, $17, $18) RETURNING *;`,
       [
         req.user.id,
+        req.body.isMusician,
         req.body.firstName,
         req.body.lastName,
         req.body.dob,
@@ -153,6 +154,16 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
         ]
       );
       newInstrumentAssignmentsList.push(newInstrumentAssignmentData.rows[0]);
+    }
+    // save the genre assignments to the database
+    const newGenreAssignmentsList = [];
+    for (let i = 0; i < req.body.genreIds.length; i++) {
+      const newGenreAssignmentData = await db.query(
+        `INSERT INTO genre_assignments 
+      (profile_id, genre_id) VALUES ($1, $2) RETURNING *;`,
+        [newprofileData.rows[0].id, req.body.genreIds[i]]
+      );
+      newGenreAssignmentsList.push(newGenreAssignmentData.rows[0]);
     }
     // send response back to client
     res.status(200).json({
