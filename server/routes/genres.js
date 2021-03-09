@@ -1,26 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const toCamelCase = require('../utils/to-camel-case')
+const toCamelCase = require('../utils/to-camel-case');
 const db = require('../db');
+const checkToken = require('../utils/check-token');
 
 // @route   GET api/genres
 // @desc    Get all genres
-// @access  Public or Private? (TO DO)
-router.get('/', async(req, res) => {
+// @access  Public
+router.get('/', async (req, res) => {
   try {
-    const genres = await db.query('SELECT * FROM genres;')
+    const genres = await db.query('SELECT * FROM genres;');
     res.json({
       message: 'The genres were retrieved.',
       genres: toCamelCase(genres.rows),
     });
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 });
 
 // @route   GET api/genres/:id
 // @desc    Get one genre
-// @access  Private (TO DO)
+// @access  Public
 router.get('/:id', async (req, res) => {
   try {
     const selectedGenre = await db.query(
@@ -44,14 +45,12 @@ router.get('/:id', async (req, res) => {
 
 // @route   POST api/genres
 // @desc    Create a new genre
-// @access  Private (TO DO)
-router.post('/', async (req, res) => {
+// @access  Private
+router.post('/', checkToken, async (req, res) => {
   try {
     const newGenre = await db.query(
       'INSERT INTO genres (genre_name) VALUES ($1) RETURNING *;',
-      [
-        req.body.genreName,
-      ]
+      [req.body.genreName]
     );
     res.json({
       message: 'A new genre was created.',
@@ -64,15 +63,12 @@ router.post('/', async (req, res) => {
 
 // @route   PUT api/genres/:id
 // @desc    Update a genre
-// @access  Private (TO DO)
-router.put('/:id', async(req, res) => {
+// @access  Private
+router.put('/:id', checkToken, async (req, res) => {
   try {
     const updatedGenre = await db.query(
       'UPDATE genres SET genre_name = $1 WHERE id = $2 RETURNING *;',
-      [
-        req.body.genreName,
-        req.params.id,
-      ]
+      [req.body.genreName, req.params.id]
     );
     if (updatedGenre.rows[0]) {
       res.json({
@@ -91,8 +87,8 @@ router.put('/:id', async(req, res) => {
 
 // @route   DELETE api/genres/:id
 // @desc    Delete a genre
-// @access  Private (TO DO)
-router.delete('/:id', async (req, res) => {
+// @access  Private
+router.delete('/:id', checkToken, async (req, res) => {
   try {
     const deletedGenre = await db.query(
       'DELETE FROM genres WHERE id = $1 RETURNING *;',
@@ -108,10 +104,9 @@ router.delete('/:id', async (req, res) => {
         message: 'The genre does not exist.',
       });
     }
-  }  catch (err) {
+  } catch (err) {
     console.log(err);
   }
 });
-
 
 module.exports = router;

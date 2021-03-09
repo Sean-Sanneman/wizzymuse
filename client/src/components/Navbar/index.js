@@ -67,7 +67,7 @@ const AppNavbar = () => {
               onHide={handleClose}
             >
               <Modal.Header closeButton>
-                <Modal.Title>Login To Get Your Muse On!</Modal.Title>
+                <Modal.Title className="logHeader">Login To Get Your Muse On!</Modal.Title>
               </Modal.Header>
 
               {/* Form inputs */}
