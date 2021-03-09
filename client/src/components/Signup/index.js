@@ -59,7 +59,7 @@ const Signup = () => {
                 <input type="password" className="form-control" placeholder="Enter password" />
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block p-3" style={{ width: "20%" }}>Let's get started!</button>
+            <button type="submit" className="btn btn-primary btn-block p-2" style={{ width: "20%" }}>Let's get started!</button>
             <p className="forgot-password text-right">Already registered <a href="#">sign in?</a></p>
         </form>
                 </Col>
