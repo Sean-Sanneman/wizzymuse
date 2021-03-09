@@ -10,7 +10,6 @@ const toCamelCase = require('../utils/to-camel-case');
 // @desc    Get the current user's profile, if any, by user ID located in the token
 // @access  Private
 router.get('/me', checkToken, async (req, res) => {
-  console.log('req.user.id', req.user.id);
   try {
     const profileData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
@@ -179,6 +178,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
       message: 'A new profile was created.',
       // results: newProfileData.rows.length,
       instrumentAssignmentsList: toCamelCase(newInstrumentAssignmentsList),
+      genreAssignmentsList: toCamelCase(newGenreAssignmentsList),
       profile: toCamelCase(newProfileData.rows)[0],
     });
   } catch (err) {
@@ -192,7 +192,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 router.put('/', checkToken, checkProfileInput, async (req, res) => {
   try {
     // update the profile to the database
-    const updatedprofileData = await db.query(
+    const updatedProfileData = await db.query(
       'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, website = $10, youtube = $11, twitter = $12, facebook = $13, linkedin = $14, instagram = $15, soundcloud = $16, is_musician = $17 WHERE user_id = $18 RETURNING *;',
       [
         req.body.firstName,
@@ -215,17 +215,57 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
         req.user.id,
       ]
     );
-    // update the instrument assignments to the database
-    if (!updatedprofileData.rows[0]) {
+
+    // verify that the user's profile exists
+    if (!updatedProfileData.rows[0]) {
       return res.status(400).json({
         message: 'The profile does not exist.',
-        results: updatedprofileData.rows.length,
+        results: updatedProfileData.rows.length,
       });
     }
+
+    // update the instrument assignments to the database
+    await db.query(
+      'DELETE FROM instrument_assignments WHERE profile_id = $1;',
+      [updatedProfileData.rows[0].id]
+    );
+    const updatedInstrumentAssignmentsList = [];
+    for (let i = 0; i < req.body.instrumentIds.length; i++) {
+      const updatedInstrumentAssignmentData = await db.query(
+        `INSERT INTO instrument_assignments 
+      (profile_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
+        [
+          updatedProfileData.rows[0].id,
+          req.body.instrumentIds[i],
+          req.body.proficiencies[i],
+        ]
+      );
+      updatedInstrumentAssignmentsList.push(
+        updatedInstrumentAssignmentData.rows[0]
+      );
+    }
+
+    // update the genre assignments to the database
+    await db.query('DELETE FROM genre_assignments WHERE profile_id = $1', [
+      updatedProfileData.rows[0].id,
+    ]);
+    const updatedGenreAssignmentsList = [];
+    for (let i = 0; i < req.body.genreIds.length; i++) {
+      const updatedGenreAssignmentData = await db.query(
+        `INSERT INTO genre_assignments 
+      (profile_id, genre_id) VALUES ($1, $2) RETURNING *;`,
+        [updatedProfileData.rows[0].id, req.body.genreIds[i]]
+      );
+      updatedGenreAssignmentsList.push(updatedGenreAssignmentData.rows[0]);
+    }
+
+    // send response back to client
     res.status(200).json({
       message: 'The profile was successfully updated.',
-      results: updatedprofileData.rows.length,
-      profile: toCamelCase(updatedprofileData.rows)[0],
+      // results: updatedProfileData.rows.length,
+      instrumentAssignmentsList: toCamelCase(updatedInstrumentAssignmentsList),
+      genreAssignmentsList: toCamelCase(updatedGenreAssignmentsList),
+      profile: toCamelCase(updatedProfileData.rows)[0],
     });
   } catch (err) {
     console.log(err);
