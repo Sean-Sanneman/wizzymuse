@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Stamp from "../../assets/images/Wizzymuse-stamp.png";
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col,Form} from 'react-bootstrap';
 
 const Signup = () => {
 
@@ -38,6 +38,9 @@ const Signup = () => {
             <div className="form-group">
                 <label>Email address</label>
                 <input type="email" className="form-control" placeholder="Enter email" />
+                <Form.Text>
+                    We will never share your email address with anyone.
+                </Form.Text>
             </div>
 
             <div className="form-group">
@@ -58,7 +61,7 @@ const Signup = () => {
                 <label>Password</label>
                 <input type="password" className="form-control" placeholder="Enter password" />
             </div>
-
+            <br></br>
             <button type="submit" className="btn btn-primary btn-block p-2" style={{ width: "20%" }}>Let's get started!</button>
             <p className="forgot-password text-right">Already registered <a href="#">sign in?</a></p>
         </form>

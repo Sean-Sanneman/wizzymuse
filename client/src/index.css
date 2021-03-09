@@ -168,6 +168,13 @@ code {
   padding: 10% 0 0 22%;
 }
 
+.logHeader {
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+}
+
 .intModal {
   padding: 6% 6%;
 }
