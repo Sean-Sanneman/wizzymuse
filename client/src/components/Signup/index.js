@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import coverImage from "../../assets/cover/cover-image-studio3.jpg";
+import Stamp from "../../assets/images/Wizzymuse-stamp.png";
 import {Container,Row,Col} from 'react-bootstrap';
 
 const Signup = () => {
 
     return (
         <>
-        <Col xs={6} className="signup">
-        <form>
+        <Container fluid className="signupGrid">
+            <Row>
+                <Col sm={5} style={{ textAlign: "center" }} className="">
+                <div className="welcome">
+                <h2>Welcome New Artist!</h2>
+
+                <Container fluid className="logo-image d-flex justify-content-center">
+                    <img src={Stamp} width="75%" height="75%" alt="Stamp"></img>
+                </Container>
+
+                <h3>Your online collaborators are waiting for you!</h3>
+                <h5>Enter your information on the right and let's make some noise!</h5>
+                </div>
+                </Col>
+
+                <Col sm={7} className="signup">
+                <form>
             <h3>Sign Up</h3>
 
             <div className="form-group">
@@ -47,8 +62,9 @@ const Signup = () => {
             <button type="submit" className="btn btn-primary btn-block p-3" style={{ width: "20%" }}>Let's get started!</button>
             <p className="forgot-password text-right">Already registered <a href="#">sign in?</a></p>
         </form>
-        </Col>
-        
+                </Col>
+            </Row>
+        </Container>
 
         </>
     );

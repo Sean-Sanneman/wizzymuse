@@ -10,6 +10,7 @@ function Main() {
   return (
     <>
       <Toolbar></Toolbar>
+      
       <Container fluid className="grid">
       <Row className="mainGrid">
         <Col className="leftPanel allPanels">1 of 3
