@@ -191,7 +191,7 @@ code {
 /* Signup */
 .signupGrid {
   max-width: 96%;
-  margin: 2%;
+  margin: 2% 2% 4% 2%;
 }
 
 .welcome {
