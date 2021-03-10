@@ -14,6 +14,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    console.log(username, email, password);
     register({ username, email, password });
   };
 
@@ -74,6 +75,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   placeholder="Enter email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
                 <Form.Text>
                   We will never share your email address with anyone.
