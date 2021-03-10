@@ -1,77 +1,161 @@
-import React, { useState, useEffect } from 'react';
-import Stamp from "../../assets/images/Wizzymuse-stamp.png";
-import {Container,Row,Col,Form, Nav} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import Stamp from '../../assets/images/Wizzymuse-stamp.png';
+import { Container, Row, Col, Form, Nav } from 'react-bootstrap';
+// imports for redux
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { register } from '../../actions/auth';
 
-const Signup = () => {
+const Signup = ({ register, auth: { isAuthenticated } }) => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    return (
-        <>
-        <Container fluid className="signupGrid">
-            <Row>
-                <Col sm={5} style={{ textAlign: "center" }} className="">
-                <div className="welcome">
-                <h2>Welcome New Artist!</h2>
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    register({ username, email, password });
+  };
 
-                <Container fluid className="logo-image d-flex justify-content-center">
-                    <img src={Stamp} width="75%" height="75%" alt="Stamp"></img>
-                </Container>
+  // Redirect when registered
+  if (isAuthenticated) {
+    return <Redirect to="/pg/dashboard" />;
+  }
 
-                <h3>Your online collaborators are waiting for you!</h3>
-                <h5>Enter your information on the right and let's make some noise!</h5>
-                </div>
-                </Col>
+  return (
+    <>
+      <Container fluid className="signupGrid">
+        <Row>
+          <Col sm={5} style={{ textAlign: 'center' }} className="">
+            <div className="welcome">
+              <h2>Welcome New Artist!</h2>
 
-                <Col sm={7} className="signup">
-                <form>
-            <h3>Sign Up</h3>
+              <Container
+                fluid
+                className="logo-image d-flex justify-content-center"
+              >
+                <img src={Stamp} width="75%" height="75%" alt="Stamp"></img>
+              </Container>
 
-            <div className="form-group">
+              <h3>Your online collaborators are waiting for you!</h3>
+              <h5>
+                Enter your information on the right and let's make some noise!
+              </h5>
+            </div>
+          </Col>
+
+          <Col sm={7} className="signup">
+            <form>
+              <h3>Sign Up</h3>
+
+              <div className="form-group">
                 <label>First name</label>
-                <input type="text" className="form-control" placeholder="First name" />
-            </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="First name"
+                />
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <label>Last name</label>
-                <input type="text" className="form-control" placeholder="Last name" />
-            </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Last name"
+                />
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <label>Email address</label>
-                <input type="email" className="form-control" placeholder="Enter email" />
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 <Form.Text>
-                    We will never share your email address with anyone.
+                  We will never share your email address with anyone.
+                  <br />
+                  This site uses Gravatar so if you want a profile image, use a
+                  Gravatar email.
                 </Form.Text>
-            </div>
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <label>Location</label>
                 <div className="d-flex location">
-                <input type="text" className="form-control localeField" placeholder="City" />
-                <input type="text" className="form-control localeField" placeholder="State" />
-                <input type="text" className="form-control localeField" placeholder="Country" />
+                  <input
+                    type="text"
+                    className="form-control localeField"
+                    placeholder="City"
+                  />
+                  <input
+                    type="text"
+                    className="form-control localeField"
+                    placeholder="State"
+                  />
+                  <input
+                    type="text"
+                    className="form-control localeField"
+                    placeholder="Country"
+                  />
                 </div>
-            </div>
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <label>Username</label>
-                <input type="text" className="form-control" placeholder="Username" />
-            </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <label>Password</label>
-                <input type="password" className="form-control" placeholder="Enter password" />
-            </div>
-            <br></br>
-            
-            <Nav.Link href="/" type="submit" href='/' className="btn btn-primary btn-block p-2" style={{ width: "20%" }}>Let's get started!</Nav.Link>
-            <p className="forgot-password text-right">Already registered <a href="#">sign in?</a></p>
-        </form>
-                </Col>
-            </Row>
-        </Container>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <br></br>
 
-        </>
-    );
+              <Nav.Link
+                href="/"
+                type="submit"
+                href="/"
+                className="btn btn-primary btn-block p-2"
+                style={{ width: '20%' }}
+                onClick={handleRegister}
+              >
+                Let's get started!
+              </Nav.Link>
+              <p className="forgot-password text-right">
+                Already registered <a href="#">sign in?</a>
+              </p>
+            </form>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 };
 
-export default Signup;
+Signup.propTypes = {
+  register: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth, // we're pulling all the state that is in the auth reducer
+});
+
+export default connect(mapStateToProps, { register })(Signup);
+// connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
