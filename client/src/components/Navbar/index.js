@@ -23,7 +23,7 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar className="color-nav" variant="dark" sticky="top">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <Container fluid className="logo-image d-flex justify-content-left">
             <img src={logo} width="75%" height="75%" alt="Logo"></img>
           </Container>
@@ -31,7 +31,7 @@ const AppNavbar = () => {
         <Container fluid className="d-flex justify-content-right">
           <Nav className="navButtons">
             <Nav.Link
-              href="#dashboard"
+              href="/"
               className="myBtn text-center glow-on-hover"
               style={{ color: 'black', textDecoration: 'none' }}
             >
@@ -67,7 +67,7 @@ const AppNavbar = () => {
               onHide={handleClose}
             >
               <Modal.Header closeButton>
-                <Modal.Title>Login To Get Your Muse On!</Modal.Title>
+                <Modal.Title className="logHeader">Login To Get Your Muse On!</Modal.Title>
               </Modal.Header>
 
               {/* Form inputs */}
@@ -88,7 +88,7 @@ const AppNavbar = () => {
                   SIGN IN
                 </Button>
                 <Link to="/signup">
-                  <Button variant="dark" className="m-3" type="submit">
+                  <Button variant="dark" onClick={handleClose} className="m-3" type="submit">
                     NEW USER
                   </Button>
                 </Link>
