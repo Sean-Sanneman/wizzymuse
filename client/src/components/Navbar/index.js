@@ -31,11 +31,11 @@ const AppNavbar = () => {
         <Container fluid className="d-flex justify-content-right">
           <Nav className="navButtons">
             <Nav.Link
-              href="/"
+              href="/artist"
               className="myBtn text-center glow-on-hover"
               style={{ color: 'black', textDecoration: 'none' }}
             >
-              DASHBOARD
+              ARTIST
             </Nav.Link>
             <Nav.Link
               href="#forum"

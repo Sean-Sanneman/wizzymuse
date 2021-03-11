@@ -6,7 +6,7 @@ import {Container,Row,Col} from 'react-bootstrap';
 import babyYoda from "../../assets/cover/baby-yoda.jpeg";
 import Toolbar from "../Toolbar";
 
-function Main() {
+function Artist() {
   return (
     <>
       <Toolbar></Toolbar>
@@ -34,4 +34,4 @@ function Main() {
   );
 };
 
-export default Main;
+export default Artist;

@@ -6,6 +6,7 @@ import background from './assets/cover/bg-brushed-metal.jpg';
 import Nav from './components/Navbar';
 import Toolbar from './components/Toolbar';
 import Main from './components/Main';
+import Artist from './components/Artist';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
 // import './App.css';
@@ -34,6 +35,7 @@ const App = () => {
           <main>
             <Switch>
               <Route exact path="/" component={Main} />
+              <Route exact path="/artist" component={Artist} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/pg" component={LandingPage} />
               <Route exact path="/pg/auth" component={AuthPage} />
