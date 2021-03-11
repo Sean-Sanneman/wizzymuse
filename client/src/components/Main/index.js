@@ -2,14 +2,22 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import coverImage from "../../assets/cover/cover-image-studio2.jpg";
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col,Button} from 'react-bootstrap';
 import babyYoda from "../../assets/cover/baby-yoda.jpeg";
-import Toolbar from "../Toolbar";
 
 function Main() {
   return (
     <>
-      <Toolbar></Toolbar>
+        <Container fluid className="d-flex justify-content-center toolbar allPanels">
+        <Row style={{ height: "3em" }} className="align-content-center">
+            <Col className="toolBtns">
+            <Button variant="outline-primary btn mr-3">NEW PROJECT</Button>{' '}
+            <Button variant="outline-success btn mr-3">OPEN PROJECT</Button>{' '}
+            <Button variant="outline-warning btn mr-3">BOUNCEDOWN(?)</Button>{' '}
+            <Button variant="outline-info btn mr-3">TOOLS(?)</Button>{' '}
+            </Col>
+        </Row>
+    </Container>
       
       <Container fluid className="grid">
       <Row className="mainGrid">

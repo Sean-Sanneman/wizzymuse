@@ -4,7 +4,6 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/cover/bg-brushed-metal.jpg';
 import Nav from './components/Navbar';
-import Toolbar from './components/Toolbar';
 import Main from './components/Main';
 import Artist from './components/Artist';
 import Signup from './components/Signup';
