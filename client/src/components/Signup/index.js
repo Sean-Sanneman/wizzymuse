@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Stamp from "../../assets/images/Wizzymuse-stamp.png";
-import {Container,Row,Col,Form, Nav} from 'react-bootstrap';
+import {Container,Row,Col,Form,Nav,Modal,Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
+
+    // modal code
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // modal code
 
     return (
         <>
@@ -64,7 +73,51 @@ const Signup = () => {
             <br></br>
             
             <Nav.Link href="/artist" type="submit" className="btn btn-primary btn-block p-2" style={{ width: "20%" }}>Let's get started!</Nav.Link>
-            <p className="forgot-password text-right">Already registered <a href="/">sign in?</a></p>
+
+            <p className="forgot-password text-right">Already registered?
+            <Nav.Link onClick={handleShow}>Sign In</Nav.Link>
+            </p>
+
+            {/* modal code */}
+            <Modal
+              className="loginModal allModals"
+              show={show}
+              onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title className="logHeader">Login To Get Your Muse On!</Modal.Title>
+              </Modal.Header>
+
+              {/* Form inputs */}
+              <Form className="intModal">
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Control type="email" placeholder="Username or email" />
+                  <Form.Text>
+                    We will never share your email address with anyone.
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Check type="checkbox" label="Remember me" />
+                </Form.Group>
+                <Button variant="dark" className="m-0" type="submit">
+                  SIGN IN
+                </Button>
+                <Link to="/signup">
+                  <Button variant="dark" onClick={handleClose} className="m-3" type="submit">
+                    NEW USER
+                  </Button>
+                </Link>
+              </Form>
+              {/* Form inputs end */}
+
+              <Modal.Footer>
+                <a href="#password-reset">Forgot your password?</a>
+              </Modal.Footer>
+            </Modal>
+            {/* modal code ends */}
+
         </form>
                 </Col>
             </Row>

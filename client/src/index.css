@@ -142,12 +142,12 @@ code {
 
 .midPanel {
   border-radius: 8px;
+  min-height: 650px;
   margin: 0 1%;
 }
 
 .rightPanel {
   border-radius: 8px;
-  
 }
 
 .allPanels {
