@@ -64,7 +64,7 @@ const Signup = () => {
             <br></br>
             
             <Nav.Link href="/artist" type="submit" className="btn btn-primary btn-block p-2" style={{ width: "20%" }}>Let's get started!</Nav.Link>
-            <p className="forgot-password text-right">Already registered <a href="#">sign in?</a></p>
+            <p className="forgot-password text-right">Already registered <a href="/">sign in?</a></p>
         </form>
                 </Col>
             </Row>
