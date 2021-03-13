@@ -31,7 +31,21 @@ const App = () => {
       <Router>
         <div style={{ backgroundImage: `url(${background})` }}>
           <Nav></Nav>
+
+          {/* Toolbar Container goes here, with Switch Routes within itself to control button changes.
+
+          In future.RAM, our Navbar was in a "components" folder, BUT the actual components (Diary, ZenQuotes, etc.) were in a separate "pages" folder.
+          Relationship here is different - Navbar and Toolbar and component pages are all in SAME "components" folder.
+          
+          The Toolbar should use same <Nav.Link as={Link} to='/profile (lowercase 'p')> syntax as the Navbar. Not "href="" (per future.RAM). */}
+
           <main>
+
+            {/* Landing page grid containers from the "Main" component file, left, middle, right, can go here, 
+            and then each container has individual Switch Routes inside of itself.
+            These Switch Routes are then controlled by either the Navbar or the Toolbar. */}
+
+
             <Switch>
               <Route exact path="/" component={Main} />
               <Route exact path="/artist" component={Artist} />

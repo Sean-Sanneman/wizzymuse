@@ -7,7 +7,8 @@ import babyYoda from "../../assets/cover/baby-yoda.jpeg";
 
 function Main() {
   return (
-    <>
+    <>  
+        {/* toolbar */}
         <Container fluid className="d-flex justify-content-center toolbar allPanels">
         <Row style={{ height: "3em" }} className="align-content-center">
             <Col className="toolBtns">
@@ -19,8 +20,11 @@ function Main() {
         </Row>
       </Container>
       
+      {/* This is the 3-panel grid that goes on all the regular pages */}
       <Container fluid className="grid">
       <Row className="mainGrid">
+
+        {/* left panel */}
         <Col className="leftPanel allPanels">1 of 3
 
           <Container fluid="sm" className="leftLED">
@@ -31,11 +35,18 @@ function Main() {
               </Col>
             </Row>
           </Container> 
+
         </Col>
+
+        {/* middle panel */}
         <Col xs={8} className="midPanel allPanels">2 of 3 (wider)
         <img src={coverImage} className="mainPic" style={{ width: "100%" }} alt="cover" />
         </Col>
-        <Col className="rightPanel allPanels">3 of 3</Col>
+
+        {/* right panel */}
+        <Col className="rightPanel allPanels">3 of 3
+        </Col>
+
       </Row>
       </Container>    
       </>
