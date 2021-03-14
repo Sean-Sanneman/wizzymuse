@@ -39,9 +39,10 @@ const App = () => {
           <Nav></Nav>
 
           <main>
-            <Switch>
-              <Route exact path="/signup" component={Signup} />
-            </Switch>
+
+              <Switch>
+                <Route exact path="/signup" component={Signup} />
+              </Switch>
 
             {/* Toolbar Container goes here, with Switch Routes within itself to control button changes.
 
@@ -95,17 +96,8 @@ const App = () => {
             </Row>
             </Container>
 
-
-
-            {/* <Switch>
-              <Route exact path="/" component={Main} />
-              <Route exact path="/artist" component={Artist} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/pg" component={LandingPage} />
-              <Route exact path="/pg/auth" component={AuthPage} />
-              <PrivateRoute exact path="/pg/dashboard" component={Dashboard} />
-            </Switch> */}
           </main>
+
           <Footer />
         </div>
       </Router>
