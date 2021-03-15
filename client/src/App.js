@@ -56,7 +56,12 @@ const App = () => {
             <Row style={{ height: "3em" }} className="align-content-center">
               <Col className="toolBtns">
                 <Switch>
+                  {/* artist toolbar routes */}
                   <Route exact path='/artist' component={ToolbarArtist} />
+                  <Route exact path='/profile' component={ToolbarArtist} />
+                  <Route exact path='/newproject' component={ToolbarArtist} />
+                  <Route exact path='/openproject' component={ToolbarArtist} />
+                  <Route exact path='/mixdown' component={ToolbarArtist} />
                 </Switch>
               </Col>
             </Row>

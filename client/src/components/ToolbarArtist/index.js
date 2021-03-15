@@ -6,10 +6,10 @@ const ToolbarArtist = () => {
 
     return (
         <>
-        <Button href="./artist/profile" variant="outline-success btn mr-3">PROFILE</Button>{' '}
-        <Button variant="outline-primary btn mr-3">NEW PROJECT</Button>{' '}
-        <Button variant="outline-info btn mr-3">OPEN PROJECT(?)</Button>{' '}
-        <Button variant="outline-warning btn mr-3">MIXDOWN</Button>{' '}
+        <Button href="/profile" variant="outline-success btn mr-3">PROFILE</Button>{' '}
+        <Button href="/newproject" variant="outline-primary btn mr-3">NEW PROJECT</Button>{' '}
+        <Button href="/openproject" variant="outline-info btn mr-3">OPEN PROJECT(?)</Button>{' '}
+        <Button href="/mixdown" variant="outline-warning btn mr-3">MIXDOWN</Button>{' '}
         </>
     );
 
