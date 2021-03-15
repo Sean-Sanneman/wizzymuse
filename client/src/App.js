@@ -6,8 +6,7 @@ import background from './assets/cover/bg-brushed-metal.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import Nav from './components/Navbar';
-import Main from './components/Main';
-import Artist from './components/Artist';
+import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
 
@@ -88,6 +87,8 @@ const App = () => {
               <Col xs={8} className="midPanel allPanels">2 of 3 (wider)
                 <Switch>
                   <Route exact path='/' component={Welcome} />
+                  <Route exact path='/artist' component={Profile} />
+                  <Route exact path='/profile' component={Profile} />
                 </Switch>
               </Col>
 

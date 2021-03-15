@@ -218,6 +218,20 @@ code {
 /* Signup styles end */
 
 
+/* Profile styles */
+.profilePanels {
+  background-image: linear-gradient(to right, gray, lightgray);
+  border-radius: 15px;
+  margin: 2%;
+}
+
+.myPeople {
+  background-color: #000000;
+  border-radius: 8px;
+}
+/* Profile styles ends */
+
+
 /* Footer */
 .page-footer {
   margin-top: 1%;
