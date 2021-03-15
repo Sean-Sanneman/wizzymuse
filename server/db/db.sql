@@ -88,7 +88,7 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
-    post_text VARCHAR(2000),
+    post_text VARCHAR,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -97,10 +97,12 @@ INSERT INTO posts (user_id, category_id, post_text) VALUES (1,4,'The Carpenters 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    comment_text VARCHAR
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO comments (post_id, user_id) VALUES (5,1);
+INSERT INTO comments (post_id, user_id, comment_text) VALUES (5,1, "hi baby poster kins");
 
 
 
