@@ -220,7 +220,8 @@ code {
 
 /* Profile styles */
 .profilePanels {
-  background-image: linear-gradient(to right, gray, lightgray);
+  background-image: linear-gradient(to right, rgb(187, 198, 210), lightgray);
+  color: #000000;
   border-radius: 15px;
   margin: 2%;
 }

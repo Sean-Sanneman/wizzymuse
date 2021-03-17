@@ -13,7 +13,7 @@ function Profile() {
                 <Container fluid>
                     <Row>
                         <Col>
-                            <Card style={{ width: '18rem', color:'#000000' }}>
+                            <Card style={{ width: '18rem', color:'#000000', backgroundColor: "transparent", border: "none" }}>
                             <img src={babyYoda} className="babyYoda" style={{ width: "100%" }} alt="Baby Yoda" />
                             <Card.Body>
                                 <Card.Title>Baby Yoda</Card.Title>
