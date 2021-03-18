@@ -48,7 +48,7 @@ function Profile() {
         </Container>
 
 
-<h3 style={{ margin: "15px", color: "seashell", textAlign: "center" }}>My Collaborators</h3>
+<h3 style={{ margin: "15px", color: "seashell", textAlign: "center" }}>My Artists Network</h3>
 
 <Carousel className="friendsCarousel">
   <Carousel.Item>
