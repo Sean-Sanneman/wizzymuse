@@ -229,9 +229,9 @@ code {
 
 
 /* Search Artist styles */
-.searchPanels {
-  width: 78%;
-  height: 30%;
+.resultCards {
+  width: 90%;
+  height: 12%;
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
   color: #000000;
   margin: 6% auto;
