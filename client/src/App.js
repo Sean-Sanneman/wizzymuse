@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 import LeftLED from './components/LeftLED';
 import ToolbarArtist from './components/ToolbarArtist';
+import ArtistResults from './components/ArtistResults';
 // import './App.css';
 
 // Redux
@@ -91,6 +92,7 @@ const App = () => {
                   <Route exact path='/' component={Welcome} />
                   <Route exact path='/artist' component={Profile} />
                   <Route exact path='/profile' component={Profile} />
+                  <Route exact path='/search' component={ArtistResults} />
                 </Switch>
               </Col>
 

@@ -45,7 +45,7 @@ const AppNavbar = () => {
               FORUM
             </Nav.Link>
             <Nav.Link
-              href="#search-artists"
+              href="/search"
               className="myBtn text-center glow-on-hover"
               style={{ color: 'black', textDecoration: 'none' }}
             >
