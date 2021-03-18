@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import babyYoda from "../../assets/cover/baby-yoda.jpeg";
 
 
@@ -10,7 +10,14 @@ const LeftLED = () => {
             <Row>
               <Col className="LED-text"><h6>Artist Name</h6>
               <img src={babyYoda} className="babyYoda" style={{ width: "100%" }} alt="Baby Yoda" />
-              Instruments played: Guitar, Pan Flute
+              Instruments played:
+
+              <ListGroup>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Kloo Horn</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Pan Flute</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Blissl</ListGroup.Item>
+                </ListGroup>
+
               </Col>
             </Row>
         </Container>

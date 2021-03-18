@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Carousel, ListGroup } from 'react-bootstrap';
 import babyYoda from "../../assets/cover/baby-yoda.jpeg";
 import avatar1 from "../../assets/images/stock-avatar-1.jpeg";
 import avatar2 from "../../assets/images/stock-avatar-2.jpeg";
@@ -14,7 +14,7 @@ function Profile() {
     <>
         <Container>
             <Row>
-                <Col className="profilePanels">1 of 3
+                <Col className="profilePanels">
                 
                 <Container fluid>
                     <Row>
@@ -36,13 +36,33 @@ function Profile() {
                 </Col>
 
                 <Col className="profilePanels">
-                    2 of 3
-                <p>Instruments</p>
+                <h4 style={{ padding: "3%" }}>Instruments</h4>
+
+                <ListGroup>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Kloo Horn</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Pan Flute</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Blissl</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                </ListGroup>
+
                 </Col>
 
                 <Col className="profilePanels">
-                    3 of 3
-                <p>Genres</p>
+                <h4 style={{ padding: "3%" }}>Genres</h4>
+
+                <ListGroup>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Shownar Lullaby</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Sparkle-bop</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Droid music</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Herglic rage-metal</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                </ListGroup>
+
                 </Col>
             </Row>
         </Container>

@@ -80,6 +80,8 @@ const App = () => {
               <Col className="leftPanel allPanels">1 of 3
                 <Switch>
                   <Route exact path='/' component={LeftLED} />
+                  <Route exact path='/artist' component={LeftLED} />
+                  <Route exact path='/profile' component={LeftLED} />
                 </Switch>
               </Col>
 
