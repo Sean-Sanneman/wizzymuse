@@ -228,6 +228,21 @@ code {
 /* Profile styles ends */
 
 
+/* Search Artist styles */
+.searchPanels {
+  width: 78%;
+  height: 30%;
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  margin: 6% auto;
+}
+
+.searchArtistTxt {
+  padding: auto;
+}
+/* Search Artist styles end */
+
+
 /* My Collaborators Carousel */
 .friendsCarousel {
   margin: 24px 100px 36px 100px;
