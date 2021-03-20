@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../../../actions/auth';
+import { login } from '../../../actions/authenticate';
 
 const Login = ({ login, auth: { isAuthenticated } }) => {
   const [email, setEmail] = useState('');

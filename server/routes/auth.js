@@ -62,7 +62,7 @@ router.post('/login', checkUserInput, async (req, res) => {
 
 // @route - GET api/auth
 // @desc - Load user with valid token
-// @access - Public
+// @access - Private
 router.get('/', checkToken, async (req, res) => {
   try {
     const userData = await db.query(

@@ -246,7 +246,7 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
     }
 
     // update the genre assignments to the database
-    await db.query('DELETE FROM genre_assignments WHERE profile_id = $1', [
+    await db.query('DELETE FROM genre_assignments WHERE profile_id = $1;', [
       updatedProfileData.rows[0].id,
     ]);
     const updatedGenreAssignmentsList = [];

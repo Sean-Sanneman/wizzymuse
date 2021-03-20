@@ -1,21 +1,38 @@
+// React imports
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Stamp from '../../assets/images/Wizzymuse-stamp.png';
-import { Container, Row, Col, Form, Nav } from 'react-bootstrap';
-// imports for redux
+
+// Redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
 
+// Styles and Images
+import Stamp from '../../assets/images/Wizzymuse-stamp.png';
+import { Container, Row, Col, Form, Nav } from 'react-bootstrap';
+
 const Signup = ({ register, auth: { isAuthenticated } }) => {
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log(username, email, password);
-    register({ username, email, password });
+    register({
+      firstName,
+      lastName,
+      email,
+      city,
+      state,
+      country,
+      username,
+      password,
+    });
   };
 
   // Redirect when registered
@@ -55,6 +72,8 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   type="text"
                   className="form-control"
                   placeholder="First name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
 
@@ -64,6 +83,8 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   type="text"
                   className="form-control"
                   placeholder="Last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
 
@@ -79,9 +100,6 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                 />
                 <Form.Text>
                   We will never share your email address with anyone.
-                  <br />
-                  This site uses Gravatar so if you want a profile image, use a
-                  Gravatar email.
                 </Form.Text>
               </div>
 
@@ -92,16 +110,22 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                     type="text"
                     className="form-control localeField"
                     placeholder="City"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                   />
                   <input
                     type="text"
                     className="form-control localeField"
                     placeholder="State"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
                   />
                   <input
                     type="text"
                     className="form-control localeField"
                     placeholder="Country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
                   />
                 </div>
               </div>

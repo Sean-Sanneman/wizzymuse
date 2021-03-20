@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Navbar from './Navbar';
 
 const LandingPage = ({ auth: { isAuthenticated } }) => {
   if (isAuthenticated) {
@@ -12,7 +11,6 @@ const LandingPage = ({ auth: { isAuthenticated } }) => {
   return (
     <>
       <h1 className="font-weight-light text-center my-3">Backend Playground</h1>
-      <Navbar />
       <div className="my-4 toolbar pt-4">
         <p className="font-weight-light text-white mx-4">
           This is a temporary playground for our back-end developers to test
