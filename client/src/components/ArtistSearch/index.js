@@ -74,11 +74,8 @@ const ArtistSearch = () => {
                 </Col>
             </Row>
 
-            
-
                 <Col style={{ textAlign: "center", marginTop: "24%" }} className="">
                 <div className="welcome">
-
                 <Container fluid className="logo-image d-flex justify-content-center">
                     <img src={Stamp} width="200" height="200" alt="Stamp"></img>
                 </Container>
@@ -88,7 +85,6 @@ const ArtistSearch = () => {
                 <h4>Your online collaborators await!</h4>
                 </div>
                 </Col>
-
                 
         </Container>
 
