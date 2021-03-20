@@ -39,13 +39,13 @@ function Profile() {
                 <h4 style={{ padding: "3%" }}>Instruments</h4>
 
                 <ListGroup>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Kloo Horn</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Pan Flute</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Blissl</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Kloo Horn</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Pan Flute</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Blissl</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
                 </ListGroup>
 
                 </Col>
@@ -54,13 +54,13 @@ function Profile() {
                 <h4 style={{ padding: "3%" }}>Genres</h4>
 
                 <ListGroup>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Shownar Lullaby</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Sparkle-bop</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Droid music</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>Herglic rage-metal</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Shownar Lullaby</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Sparkle-bop</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Droid music</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Herglic rage-metal</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
                 </ListGroup>
 
                 </Col>
