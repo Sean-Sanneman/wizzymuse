@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 
-// imports for Backend Playground - TO BE DELETED EVENTUALLY
+// imports for Backend Playground - TO BE DELETED EVENTUALLY no worries
 import LandingPage from './components/backend-playground/layout-playground/LandingPage';
 import AuthPage from './components/backend-playground/auth-playground/AuthPage';
 import Dashboard from './components/backend-playground/dashboard-playground/Dashboard';
