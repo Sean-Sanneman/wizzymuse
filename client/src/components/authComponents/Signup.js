@@ -37,7 +37,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
 
   // Redirect when registered
   if (isAuthenticated) {
-    return <Redirect to="/pg/dashboard" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

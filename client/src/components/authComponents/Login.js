@@ -13,16 +13,16 @@ const Login = ({ login, auth: { isAuthenticated }, closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault();
     login({ email, password });
     closeModal();
   };
-
-  // Redirect if logged in
-  if (isAuthenticated) {
-    return <Redirect to="/pg/dashboard" />;
-  }
 
   return (
     <>
