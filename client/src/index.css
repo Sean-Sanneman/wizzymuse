@@ -229,6 +229,19 @@ code {
 
 
 /* Search Artist styles */
+.searchPanel {
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  border-radius: 15px;
+  margin: 12%;
+  padding-bottom: 36%;
+}
+
+.searchBy {
+  padding-top: 6%;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+}
+
 .resultCards {
   width: 90%;
   height: 12%;
@@ -240,8 +253,6 @@ code {
 .searchArtistTxt {
   padding: auto;
 }
-
-
 /* Search Artist styles end */
 
 
