@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 import LeftLED from './components/LeftLED';
 import ToolbarArtist from './components/ToolbarArtist';
+import ArtistSearch from './components/ArtistSearch';
 import ArtistResults from './components/ArtistResults';
 // import './App.css';
 
@@ -83,6 +84,7 @@ const App = () => {
                   <Route exact path='/' component={LeftLED} />
                   <Route exact path='/artist' component={LeftLED} />
                   <Route exact path='/profile' component={LeftLED} />
+                  <Route exact path='/search' component={ArtistSearch} />
                 </Switch>
               </Col>
 
