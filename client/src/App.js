@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 import LeftLED from './components/LeftLED';
 import ToolbarArtist from './components/ToolbarArtist';
+import ToolbarSearch from './components/ToolbarSearch';
 import ArtistSearch from './components/ArtistSearch';
 import ArtistResults from './components/ArtistResults';
 // import './App.css';
@@ -57,12 +58,16 @@ const App = () => {
             <Row style={{ height: "3em" }} className="align-content-center">
               <Col className="toolBtns">
                 <Switch>
-                  {/* artist toolbar routes */}
+                  {/* artist Toolbar routes */}
                   <Route exact path='/artist' component={ToolbarArtist} />
                   <Route exact path='/profile' component={ToolbarArtist} />
                   <Route exact path='/newproject' component={ToolbarArtist} />
                   <Route exact path='/openproject' component={ToolbarArtist} />
                   <Route exact path='/mixdown' component={ToolbarArtist} />
+                  {/* search Toolbar routes */}
+                  <Route exact path='/newproject' component={ToolbarSearch} />
+                  <Route exact path='/openproject' component={ToolbarSearch} />
+                  <Route exact path='/search' component={ToolbarSearch} />
                 </Switch>
               </Col>
             </Row>
