@@ -24,7 +24,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const authLinks = (
     <Nav className="navButtons">
       <Nav.Link
-        href="/"
+        href="/dashboard"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
@@ -45,7 +45,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         SEARCH ARTISTS
       </Nav.Link>
       <Nav.Link
-        href="#logout"
+        href="/"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
         onClick={logout}

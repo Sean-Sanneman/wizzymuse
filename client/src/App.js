@@ -11,17 +11,13 @@ import setAuthToken from './utils/setAuthToken';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Nav from './components/layoutComponents/AppNavbar';
 import Landing from './components/pages/Landing';
+import Dashboard from './components/pages/Dashboard';
 import Signup from './components/authComponents/Signup';
 import Footer from './components/layoutComponents/Footer';
 
 // Styles and Images
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/cover/bg-brushed-metal.jpg';
-import { Container, Row } from 'react-bootstrap';
-
-// Backend Playground - TO BE DELETED EVENTUALLY
-import LandingPage from './components/backend-playground/layout-playground/LandingPage';
-import Dashboard from './components/backend-playground/dashboard-playground/Dashboard';
 
 // check localStorage for a token and set the global headers with it if there is one
 if (localStorage.token) {
@@ -38,8 +34,7 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/pg" component={LandingPage} />
-              <PrivateRoute exact path="/pg/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
           </main>
           <Footer />
