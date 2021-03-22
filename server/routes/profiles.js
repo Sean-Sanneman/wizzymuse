@@ -21,7 +21,7 @@ router.get('/me', checkToken, async (req, res) => {
       LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
       LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
       LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
-      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.id = $1;`,
+      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.user_id = $1;`,
       [req.user.id]
     );
 
@@ -33,7 +33,7 @@ router.get('/me', checkToken, async (req, res) => {
     res.status(200).json({
       message: 'Your profile information was successfully retrieved.',
       results: profileData.rows.length,
-      currentprofile: toCamelCase(profileData.rows),
+      profileInfo: toCamelCase(profileData.rows)[0],
     });
   } catch (err) {
     console.error(err.message);

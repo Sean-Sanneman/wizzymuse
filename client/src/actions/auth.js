@@ -90,7 +90,8 @@ export const login = ({ email, password }) => async (dispatch) => {
     });
     dispatch(loadUser()); // we immediately load the user
   } catch (err) {
-    const errors = err.response.data.errors; // get the array of errors
+    console.log(err);
+    // const errors = err.response.data.errors; // get the array of errors
     // @TODO: if there are errors we'll want to dispatch an alert for each of them
     dispatch({
       type: LOGIN_FAIL, // we don't need a payload

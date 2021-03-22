@@ -70,8 +70,8 @@ router.get('/', checkToken, async (req, res) => {
       [req.user.id]
     );
     res.status(200).json({
-      message: 'The user was successfully retrieved',
-      currentUser: toCamelCase(userData.rows)[0],
+      message: 'Your user info was successfully retrieved',
+      userInfo: toCamelCase(userData.rows)[0],
     });
   } catch (err) {
     console.log(err.message);

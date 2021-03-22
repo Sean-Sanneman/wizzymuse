@@ -9,7 +9,7 @@ import coverImage from '../../assets/cover/cover-image-studio3.jpg';
 import babyYoda from '../../assets/cover/baby-yoda.jpeg';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Landing = () => {
+const Dashboard = () => {
   return (
     <>
       <Toolbar />
@@ -49,4 +49,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Dashboard;

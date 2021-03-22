@@ -10,10 +10,13 @@ import setAuthToken from './utils/setAuthToken';
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
 import Nav from './components/layoutComponents/AppNavbar';
+import Footer from './components/layoutComponents/Footer';
+import Signup from './components/authComponents/Signup';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
-import Signup from './components/authComponents/Signup';
-import Footer from './components/layoutComponents/Footer';
+import ProfilePage from './components/pages/ProfilePage';
+import ProjectPage from './components/pages/ProjectPage';
+import MixdownPage from './components/pages/MixdownPage';
 
 // Styles and Images
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -35,6 +38,9 @@ const App = () => {
               <Route exact path="/" component={Landing} />
               <Route exact path="/signup" component={Signup} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/profile" component={ProfilePage} />
+              <PrivateRoute exact path="/project" component={ProjectPage} />
+              <PrivateRoute exact path="/mixdown" component={MixdownPage} />
             </Switch>
           </main>
           <Footer />

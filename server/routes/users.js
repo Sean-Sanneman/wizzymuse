@@ -36,7 +36,7 @@ router.post('/register', checkUserInput, async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
-    // grab the avatar
+    // grab the avatar or set default one
     const avatar = gravatar.url(email, {
       s: '200', // size of the avatar
       r: 'pg', // rating
