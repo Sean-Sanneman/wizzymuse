@@ -22,7 +22,7 @@ import MixdownPage from './components/pages/MixdownPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/cover/bg-brushed-metal.jpg';
 
-// check localStorage for a token and set the global headers with it if there is one
+// check localStorage for a token and set the global headers with it if there is one there
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
