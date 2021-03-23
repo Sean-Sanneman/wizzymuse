@@ -1,6 +1,5 @@
 -- CREATE DATABASE wizzymuse;
 
--- @TODO: validate password?
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR NOT NULL UNIQUE,
@@ -53,7 +52,7 @@ CREATE TABLE instrument_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO instrument_assignments (profile_id, instrument_id, proficiency) VALUES(1,1,4);
+INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
 
 CREATE TABLE genres (
     id SERIAL PRIMARY KEY,
@@ -71,14 +70,6 @@ CREATE TABLE genre_assignments (
 
 INSERT INTO genre_assignments (profile_id, genre_id) VALUES(1,1);
 
-SELECT profiles.first_name, instruments.instrument_name FROM instrument_assignments
-LEFT JOIN profiles ON (profiles.id = instrument_assignments.profile_id)
-LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id);
-
-SELECT profiles.first_name, genres.genre_name FROM genre_assignments
-LEFT JOIN profiles ON (profiles.id = genre_assignments.profile_id)
-LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);
-
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     title VARCHAR(500),
@@ -95,20 +86,14 @@ CREATE TABLE posts (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO posts (user_id, category_id, post_text) VALUES (1,4,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
+INSERT INTO posts (user_id, category_id, post_text) VALUES (1,1,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    comment_text VARCHAR
+    comment_text VARCHAR,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO comments (post_id, user_id, comment_text) VALUES (5,1, "hi baby poster kins");
-
-
-
--- SELECT profiles.first_name, instruments.instrument_name FROM instrument_assignments, profiles, instruments
--- WHERE profiles.id = instrument_assignments.profile_id AND instruments.id = instrument_assignments.instrument_id
--- ;
+INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');
