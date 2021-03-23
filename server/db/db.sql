@@ -44,13 +44,12 @@ CREATE TABLE instruments (
     instrument_name VARCHAR NOT NULL
 );
 
-INSERT INTO instruments (instrument_name) VALUES ('Trumpet', 'Accordion', 'Acoustic Guitar', 'Bagpipes', 'Banjo', 'Bass', 'Bassoon', 'Bongo', 'Cello', 'Clarinet', 'Clavichord', 'Computer/Software', 'Conga', 'Cowbell', 'Daxophone', 'Didgeridoo', 'Djembe', 'Double Bass', 'Drums', 'Dulcimer', 'Electric Guitar', 'Fiddle', 'Flute', 'Glockenspiel', 'Gong', 'Guitar', 'Hang Drum', 'Harmonica', 'Harmonium', 'Harp', 'Harpsichord', 'Hurdy Gurdy', 'Kalimba', 'Kazoo', 'Keyboard', 'Mandolin', 'Mbira', 'Mouth Harp', 'Oboe', 'Organ', 'Oud', 'Percussion', 'Piano', 'Piccolo', 'Recorder', 'Saxophone', 'Sitar', 'Software/Computer', 'Spoons', 'Steel Drums', 'Synthesizer', 'Tabla', 'Tambourine', 'Trombone', 'Trumpet', 'Theremin', 'Tongue Drum', 'Tuba', 'Turntables', 'Ukelele', 'Viola', 'Violin', 'Vocals', 'Volca', 'Xylophone', 'Zither', 'Autoharp', 'Marimba', 'Background Vocals', 'Toy Piano', 'Electric Piano', 'Timbales');
+INSERT INTO instruments (instrument_name) VALUES ('Trumpet'), ('Accordion'), ('Acoustic Guitar'), ('Bagpipes'), ('Banjo'), ('Bass'), ('Bassoon'), ('Bongo'), ('Cello'), ('Clarinet'), ('Clavichord'), ('Computer/Software'), ('Conga'), ('Cowbell'), ('Daxophone'), ('Didgeridoo'), ('Djembe'), ('Double Bass'), ('Drums'), ('Dulcimer'), ('Electric Guitar'), ('Fiddle'), ('Flute'), ('Glockenspiel'), ('Gong'), ('Guitar'), ('Hang Drum'), ('Harmonica'), ('Harmonium'), ('Harp'), ('Harpsichord'), ('Hurdy Gurdy'), ('Kalimba'), ('Kazoo'), ('Keyboard'), ('Mandolin'), ('Mbira'), ('Mouth Harp'), ('Oboe'), ('Organ'), ('Oud'), ('Percussion'), ('Piano'), ('Piccolo'), ('Recorder'), ('Saxophone'), ('Sitar'), ('Software/Computer'), ('Spoons'), ('Steel Drums'), ('Synthesizer'), ('Tabla'), ('Tambourine'), ('Trombone'), ('Trumpet'), ('Theremin'), ('Tongue Drum'), ('Tuba'), ('Turntables'), ('Ukelele'), ('Viola'), ('Violin'), ('Vocals'), ('Volca'), ('Xylophone'), ('Zither'), ('Autoharp'), ('Marimba'), ('Background Vocals'), ('Toy Piano'), ('Electric Piano'), ('Timbales');
 
 CREATE TABLE instrument_assignments (
     id SERIAL PRIMARY KEY,
     profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
     instrument_id INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
-    proficiency INTEGER CHECK(proficiency >= 1 AND proficiency <=5),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -61,7 +60,7 @@ CREATE TABLE genres (
     genre_name VARCHAR NOT NULL
 );
 
-INSERT INTO genres (genre_name) VALUES ('Dubstep', 'Alternative', 'Ambient', 'Blues', 'Bluegrass', 'Classical', 'Country', 'Disco', 'Dub', 'Dubstep', 'EDM', 'Electroclash', 'Electronic', 'Folk', 'Funk', 'Goth', 'Happy Hardcore', 'Heavy Metal', 'Hip Hop', 'House', 'Industrial', 'Indie Rock', 'Jazz', 'Latin', 'Metal', 'Motown', 'New Age', 'New Wave', 'Nu Disco', 'Nu Metal', 'Opera', 'Pop', 'Progressive', 'Psychedelic', 'Psytrance', 'Punk', 'R&B', 'Rap', 'Reggae', 'Rock', 'Rockabilly', 'Shoegaze', 'Soul', 'Soundtracks', 'Ska', 'Synthpop', 'Techno', 'Tejano', 'Trance', 'Trip Hop', 'World Music', 'Background Music', 'Italo Disco', 'Indie Disco', 'Hi-NRG', 'Glam');
+INSERT INTO genres (genre_name) VALUES ('Dubstep'), ('Alternative'), ('Ambient'), ('Blues'), ('Bluegrass'), ('Classical'), ('Country'), ('Disco'), ('Dub'), ('Dubstep'), ('EDM'), ('Electroclash'), ('Electronic'), ('Folk'), ('Funk'), ('Goth'), ('Happy Hardcore'), ('Heavy Metal'), ('Hip Hop'), ('House'), ('Industrial'), ('Indie Rock'), ('Jazz'), ('Latin'), ('Metal'), ('Motown'), ('New Age'), ('New Wave'), ('Nu Disco'), ('Nu Metal'), ('Opera'), ('Pop'), ('Progressive'), ('Psychedelic'), ('Psytrance'), ('Punk'), ('R&B'), ('Rap'), ('Reggae'), ('Rock'), ('Rockabilly'), ('Shoegaze'), ('Soul'), ('Soundtracks'), ('Ska'), ('Synthpop'), ('Techno'), ('Tejano'), ('Trance'), ('Trip Hop'), ('World Music'), ('Background Music'), ('Italo Disco'), ('Indie Disco'), ('Hi-NRG'), ('Glam');
 
 CREATE TABLE genre_assignments (
     id SERIAL PRIMARY KEY,
