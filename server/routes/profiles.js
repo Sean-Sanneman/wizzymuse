@@ -16,7 +16,7 @@ router.get('/me', checkToken, async (req, res) => {
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-      instruments.instrument_name, genres.genre_name, instrument_assignments.proficiency 
+      instruments.instrument_name, genres.genre_name 
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
       LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
       LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
@@ -77,7 +77,7 @@ router.get('/:id', async (req, res) => {
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-      instruments.instrument_name, genres.genre_name, instrument_assignments.proficiency 
+      instruments.instrument_name, genres.genre_name 
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
       LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
       LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
@@ -154,12 +154,8 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
     for (let i = 0; i < req.body.instrumentIds.length; i++) {
       const newInstrumentAssignmentData = await db.query(
         `INSERT INTO instrument_assignments 
-      (profile_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
-        [
-          newProfileData.rows[0].id,
-          req.body.instrumentIds[i],
-          req.body.proficiencies[i],
-        ]
+      (profile_id, instrument_id) VALUES ($1, $2) RETURNING *;`,
+        [newProfileData.rows[0].id, req.body.instrumentIds[i]]
       );
       newInstrumentAssignmentsList.push(newInstrumentAssignmentData.rows[0]);
     }
@@ -233,12 +229,8 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
     for (let i = 0; i < req.body.instrumentIds.length; i++) {
       const updatedInstrumentAssignmentData = await db.query(
         `INSERT INTO instrument_assignments 
-      (profile_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
-        [
-          updatedProfileData.rows[0].id,
-          req.body.instrumentIds[i],
-          req.body.proficiencies[i],
-        ]
+      (profile_id, instrument_id) VALUES ($1, $2) RETURNING *;`,
+        [updatedProfileData.rows[0].id, req.body.instrumentIds[i]]
       );
       updatedInstrumentAssignmentsList.push(
         updatedInstrumentAssignmentData.rows[0]

@@ -12,15 +12,7 @@ import Spinner from '../layoutComponents/Spinner';
 import ProfileLeft from '../profileComponents/ProfileLeft';
 
 // Styles and Images
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Carousel,
-  ListGroup,
-} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const ProfilePage = ({
   match,

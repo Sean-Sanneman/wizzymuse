@@ -16,7 +16,6 @@ const ProfileLeft = ({
   },
   auth,
 }) => {
-  console.log('profileInfo', profileInfo);
   return (
     <Card
       style={{

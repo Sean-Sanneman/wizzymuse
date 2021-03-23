@@ -11,9 +11,7 @@ import {
 // Get current user's profile
 export const getProfileMe = () => async (dispatch) => {
   try {
-    console.log('inside getProfileMe in actions');
     const res = await axios.get('/api/profiles/me');
-    console.log('res of getProfileMe in actions', res.data);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
