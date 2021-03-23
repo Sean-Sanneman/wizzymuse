@@ -155,6 +155,7 @@ code {
 
 .midPanel {
   border-radius: 8px;
+  min-height: 650px;
   margin: 0 1%;
 }
 
@@ -226,6 +227,37 @@ code {
 }
 
 /* Signup styles end */
+
+/* Profile styles */
+.profilePanels {
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  border-radius: 15px;
+  margin: 2%;
+}
+/* Profile styles ends */
+
+/* Search Artist styles */
+.resultCards {
+  width: 90%;
+  height: 12%;
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  margin: 6% auto;
+}
+
+.searchArtistTxt {
+  padding: auto;
+}
+/* Search Artist styles end */
+
+/* My Collaborators Carousel */
+.friendsCarousel {
+  margin: 24px 100px 36px 100px;
+  background-color: #000000;
+  border-radius: 15px;
+}
+/* My Collaborators Carousel styles ends */
 
 /* Footer */
 .page-footer {
