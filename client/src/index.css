@@ -228,7 +228,6 @@ code {
 
 /* Signup styles end */
 
-
 /* Profile styles */
 .profilePanels {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -238,21 +237,7 @@ code {
 }
 /* Profile styles ends */
 
-
 /* Search Artist styles */
-.searchPanel {
-  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
-  color: #000000;
-  border-radius: 15px;
-  margin: 12%;
-  padding-bottom: 36%;
-}
-
-.searchBy {
-  padding-top: 6%;
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
-}
-
 .resultCards {
   width: 90%;
   height: 12%;
@@ -266,7 +251,6 @@ code {
 }
 /* Search Artist styles end */
 
-
 /* My Collaborators Carousel */
 .friendsCarousel {
   margin: 24px 100px 36px 100px;
@@ -274,7 +258,6 @@ code {
   border-radius: 15px;
 }
 /* My Collaborators Carousel styles ends */
-
 
 /* Footer */
 .page-footer {

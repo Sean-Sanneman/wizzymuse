@@ -2,14 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Redux imports
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
 // Styles and Images
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-const Toolbar = ({ auth: { user } }) => {
+const Toolbar = () => {
   return (
     <>
       <Container
@@ -37,12 +33,4 @@ const Toolbar = ({ auth: { user } }) => {
   );
 };
 
-Toolbar.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(Toolbar);
+export default Toolbar;

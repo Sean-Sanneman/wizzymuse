@@ -9,18 +9,13 @@ import { getProfileById, getProfileMe } from '../../actions/profiles';
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
 import Spinner from '../layoutComponents/Spinner';
-import ProfileLeft from '../profileComponents/ProfileLeft';
+import ProfileGeneral from '../profileComponents/ProfileGeneral';
+import ProfileInstruments from '../profileComponents/ProfileInstruments';
+import ProfileGenres from '../profileComponents/ProfileGenres';
+import ProfileCarousel from '../profileComponents/ProfileCarousel';
 
 // Styles and Images
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Carousel,
-  ListGroup,
-} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const ProfilePage = ({
   match,
@@ -68,13 +63,20 @@ const ProfilePage = ({
                       <Container fluid>
                         <Row>
                           <Col>
-                            <ProfileLeft />
+                            <ProfileGeneral />
                           </Col>
                         </Row>
                       </Container>
                     </Col>
+                    <Col className="profilePanels">
+                      <ProfileInstruments />
+                    </Col>
+                    <Col className="profilePanels">
+                      <ProfileGenres />
+                    </Col>
                   </Row>
                 </Container>
+                <ProfileCarousel />
               </Col>
               <Col className="rightPanel allPanels"></Col>
             </Row>
