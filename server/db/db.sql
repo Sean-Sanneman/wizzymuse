@@ -14,7 +14,7 @@ INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmai
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    first_name VARCHAR NOT NULL,
+    first_name VARCHAR,
     last_name VARCHAR,
     dob DATE,
     phone VARCHAR,
