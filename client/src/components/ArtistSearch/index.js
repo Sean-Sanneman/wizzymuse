@@ -10,11 +10,11 @@ const ArtistSearch = () => {
         <Container fluid className="searchPanel">
             <Row>
                 <Col style={{ textAlign: "center" }}>
-                <h3 className="searchBy">Search by:</h3>
+                <h4 className="searchBy">Search by:</h4>
                 </Col>
             </Row>
             <Row>
-                <Col style={{ textAlign: "center", backgroundColor: "black", margin: "6%", padding: "6%", paddingTop: "14%", borderRadius: "8px" }}>
+                <Col style={{ textAlign: "center", backgroundColor: "black", margin: "6%", padding: "12% 2% 18% 2%", borderRadius: "8px" }}>
 
                 <div className="mb-4">
                     {['right'].map((direction) => (
@@ -23,7 +23,7 @@ const ArtistSearch = () => {
                             key={direction}
                             id={`dropdown-button-drop-${direction}`}
                             drop={direction}
-                            size="lg"
+                            size="md"
                             variant="info"
                             title={'INSTRUMENTS'}>
                             <Dropdown.Item eventKey="1">Action</Dropdown.Item>
@@ -41,7 +41,7 @@ const ArtistSearch = () => {
                             key={direction}
                             id={`dropdown-button-drop-${direction}`}
                             drop={direction}
-                            size="lg"
+                            size="md"
                             variant="info"
                             title={'GENRES'}>
                             <Dropdown.Item eventKey="1">Action</Dropdown.Item>
@@ -59,7 +59,7 @@ const ArtistSearch = () => {
                             key={direction}
                             id={`dropdown-button-drop-${direction}`}
                             drop={direction}
-                            size="lg"
+                            size="md"
                             variant="info"
                             title={'ARTIST NAME'}>
                             <Dropdown.Item eventKey="1">Action</Dropdown.Item>
@@ -74,15 +74,15 @@ const ArtistSearch = () => {
                 </Col>
             </Row>
 
-                <Col style={{ textAlign: "center", marginTop: "24%" }} className="">
-                <div className="welcome">
-                <Container fluid className="logo-image d-flex justify-content-center">
-                    <img src={Stamp} width="200" height="200" alt="Stamp"></img>
+                <Col style={{ textAlign: "center", marginTop: "24%" }}>
+                <div>
+                <Container fluid className="logo-image d-flex justify-content-center" style={{ padding: "0" }}>
+                    <img src={Stamp} width="140" height="140" alt="Stamp"></img>
                 </Container>
 
                 <br />
 
-                <h4>Your online collaborators await!</h4>
+                <h5>Your online collaborators await!</h5>
                 </div>
                 </Col>
                 

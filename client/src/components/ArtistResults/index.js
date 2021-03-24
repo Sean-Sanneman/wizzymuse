@@ -21,7 +21,7 @@ function ArtistResults() {
                 src={avatar1} className="" style={{ width: "100%", padding: "18px" }} alt="Stock Avatar 1"/>
             </Col>
             <Col>
-                <Card.Body className="searchArtistTxt">
+                <Card.Body className="searchArtistTxt" style={{ padding: "1%" }}>
                     <Card.Title>Avatar 1</Card.Title>
                         <Card.Text>
                             Some quick example text to build on the card title and make up the bulk of
@@ -40,8 +40,8 @@ function ArtistResults() {
                 src={avatar2} className="" style={{ width: "100%", padding: "18px" }} alt="Stock Avatar 2"/>
             </Col>
             <Col>
-                <Card.Body className="searchArtistTxt">
-                    <Card.Title>Avatar 1</Card.Title>
+                <Card.Body className="searchArtistTxt" style={{ padding: "1%" }}>
+                    <Card.Title>Avatar 2</Card.Title>
                         <Card.Text>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
@@ -59,8 +59,8 @@ function ArtistResults() {
                 src={avatar3} className="" style={{ width: "100%", padding: "18px" }} alt="Stock Avatar 3"/>
             </Col>
             <Col>
-                <Card.Body className="searchArtistTxt">
-                    <Card.Title>Avatar 1</Card.Title>
+                <Card.Body className="searchArtistTxt" style={{ padding: "1%" }}>
+                    <Card.Title>Avatar 3</Card.Title>
                         <Card.Text>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
@@ -78,8 +78,8 @@ function ArtistResults() {
                 src={avatar4} className="" style={{ width: "100%", padding: "18px" }} alt="Stock Avatar 4"/>
             </Col>
             <Col>
-                <Card.Body className="searchArtistTxt">
-                    <Card.Title>Avatar 1</Card.Title>
+                <Card.Body className="searchArtistTxt" style={{ padding: "1%" }}>
+                    <Card.Title>Avatar 4</Card.Title>
                         <Card.Text>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
