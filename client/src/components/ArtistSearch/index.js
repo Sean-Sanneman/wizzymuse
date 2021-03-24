@@ -14,7 +14,7 @@ const ArtistSearch = () => {
                 </Col>
             </Row>
             <Row>
-                <Col style={{ textAlign: "center", backgroundColor: "black", margin: "6%", padding: "12% 2% 18% 2%", borderRadius: "8px" }}>
+                <Col style={{ textAlign: "center", backgroundColor: "black", margin: "3%", padding: "12% 3% 18% 3%", borderRadius: "8px" }}>
 
                 <div className="mb-4">
                     {['right'].map((direction) => (
@@ -74,10 +74,11 @@ const ArtistSearch = () => {
                 </Col>
             </Row>
 
-                <Col style={{ textAlign: "center", marginTop: "24%" }}>
+            <Row style={{ textAlign: "center", marginTop: "24%" }}>
+                <Col>
                 <div>
                 <Container fluid className="logo-image d-flex justify-content-center" style={{ padding: "0" }}>
-                    <img src={Stamp} width="140" height="140" alt="Stamp"></img>
+                    <img src={Stamp} width="140px" height="140px" alt="Stamp"></img>
                 </Container>
 
                 <br />
@@ -85,6 +86,7 @@ const ArtistSearch = () => {
                 <h5>Your online collaborators await!</h5>
                 </div>
                 </Col>
+            </Row>
                 
         </Container>
 
