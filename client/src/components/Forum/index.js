@@ -6,7 +6,7 @@ import avatar3 from "../../assets/images/stock-avatar-3.jpeg";
 import avatar4 from "../../assets/images/stock-avatar-4.png";
 
 
-function ArtistResults() {
+function Forum () {
 
     return (
     <>
@@ -95,4 +95,4 @@ function ArtistResults() {
     );
 };
 
-export default ArtistResults;
+export default Forum;

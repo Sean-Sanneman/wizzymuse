@@ -89,28 +89,8 @@ const ArtistSearch = () => {
             </Row>
                 
         </Container>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </>
     );
-
 };
 
 export default ArtistSearch;

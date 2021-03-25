@@ -16,6 +16,8 @@ import ToolbarArtist from './components/ToolbarArtist';
 import ToolbarSearch from './components/ToolbarSearch';
 import ArtistSearch from './components/ArtistSearch';
 import ArtistResults from './components/ArtistResults';
+import ForumSearch from './components/ForumSearch';
+import Forum from './components/Forum';
 // import './App.css';
 
 // Redux
@@ -90,6 +92,7 @@ const App = () => {
                   <Route exact path='/artist' component={LeftLED} />
                   <Route exact path='/profile' component={LeftLED} />
                   <Route exact path='/search' component={ArtistSearch} />
+                  <Route exact path='/forum' component={ForumSearch} />
                 </Switch>
               </Col>
 
@@ -100,6 +103,7 @@ const App = () => {
                   <Route exact path='/artist' component={Profile} />
                   <Route exact path='/profile' component={Profile} />
                   <Route exact path='/search' component={ArtistResults} />
+                  <Route exact path='/forum' component={Forum} />
                 </Switch>
               </Col>
 
