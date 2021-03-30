@@ -4,7 +4,7 @@ import React from 'react';
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
 import ArtistList from '../searchComponents/ArtistList';
-import ArtistSearch from '../searchComponents/ArtistSearch';
+import ForumSearch from '../forumComponents/ForumSearch';
 import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -17,7 +17,7 @@ const SearchPage = () => {
           <Container fluid className="grid">
             <Row className="mainGrid">
               <Col className="leftPanel allPanels">
-                  <ArtistSearch/>
+                  <ForumSearch/>
               </Col>
               <Col xs={8} className="midPanel allPanels">
               <Container fluid="md">
