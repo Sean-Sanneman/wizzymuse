@@ -38,7 +38,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         FORUM
       </Nav.Link>
       <Nav.Link
-        href="#search-artists"
+        href="/search-artists"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
@@ -66,7 +66,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         FORUM
       </Nav.Link>
       <Nav.Link
-        href="#search-artists"
+        href="/search-artists"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
