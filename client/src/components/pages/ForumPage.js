@@ -10,7 +10,7 @@ import Spinner from '../layoutComponents/Spinner';
 import { Container, Row, Col } from 'react-bootstrap';
 
 
-const SearchPage = () => {
+const ForumPage = () => {
   return (
     <>
       <Toolbar />
@@ -30,4 +30,4 @@ const SearchPage = () => {
         </>
   );
 };
-export default SearchPage;
+export default ForumPage;
