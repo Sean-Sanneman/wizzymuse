@@ -8,7 +8,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Nav from './components/Navbar';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
-import Footer from './components/Footer';
+import Footer from './components/layoutComponents/Footer';
 
 import Welcome from './components/Welcome';
 import LeftLED from './components/LeftLED';
