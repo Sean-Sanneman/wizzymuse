@@ -27,8 +27,6 @@ function Forum () {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <p style={{ fontSize: "24px"  }}>&#128077;</p>
-                        <p style={{ fontSize: "24px" }}>&#128405;</p>
                         <Button variant="info">👍</Button>
                         <Button variant="info">✏️</Button>
                         <Button variant="info">❤️</Button>

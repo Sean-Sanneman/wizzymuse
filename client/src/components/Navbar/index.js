@@ -35,7 +35,7 @@ const AppNavbar = () => {
               className="myBtn text-center glow-on-hover"
               style={{ color: 'black', textDecoration: 'none' }}
             >
-              ARTIST
+              DASHBOARD
             </Nav.Link>
             <Nav.Link
               href="/forum"
