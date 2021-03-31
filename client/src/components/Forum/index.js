@@ -27,7 +27,12 @@ function Forum () {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Button variant="success">Collaborate</Button>
+                        <p style={{ fontSize: "24px"  }}>&#128077;</p>
+                        <p style={{ fontSize: "24px" }}>&#128405;</p>
+                        <Button variant="info">👍</Button>
+                        <Button variant="info">✏️</Button>
+                        <Button variant="info">❤️</Button>
+                        <Button variant="info">🖕</Button>
                 </Card.Body>
             </Col>
         </Row>
@@ -46,7 +51,8 @@ function Forum () {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Button variant="success">Collaborate</Button>
+                        <Button variant="info">Like</Button>
+                        <Button variant="info">Comment</Button>
                 </Card.Body>
             </Col>
         </Row>
@@ -65,7 +71,8 @@ function Forum () {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Button variant="success">Collaborate</Button>
+                        <Button variant="info">Like</Button>
+                        <Button variant="info">Comment</Button>
                 </Card.Body>
             </Col>
         </Row>
@@ -84,7 +91,8 @@ function Forum () {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Button variant="success">Collaborate</Button>
+                        <Button variant="info">Like</Button>
+                        <Button variant="info">Comment</Button>
                 </Card.Body>
             </Col>
         </Row>
