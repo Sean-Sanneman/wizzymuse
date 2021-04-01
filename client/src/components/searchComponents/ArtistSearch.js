@@ -54,6 +54,13 @@ const ArtistSearch = () => {
                     ))}
                 </div>
                 <div className="mb-4">
+                    <Button variant="outline-success">SUBMIT</Button>{' '}
+                </div>
+
+                <div>
+                    <h4 style={{ color: 'aqua' }}>OR...</h4>
+                </div>
+                <div className="mb-4">
                     {['right'].map((direction) => (
                         <DropdownButton
                             as={ButtonGroup}
