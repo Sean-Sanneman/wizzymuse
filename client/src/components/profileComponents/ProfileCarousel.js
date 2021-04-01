@@ -1,10 +1,6 @@
 // React imports
 import React from 'react';
 
-// Redux imports
-
-// Components
-
 // Styles and Images
 import { Carousel } from 'react-bootstrap';
 import avatar1 from '../../assets/images/stock-avatar-1.jpeg';
@@ -80,3 +76,4 @@ const ProfileCarousel = () => {
 };
 
 export default ProfileCarousel;
+
