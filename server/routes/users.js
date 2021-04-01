@@ -11,10 +11,19 @@ const checkUserInput = require('../utils/check-user-input');
 // @desc    Register a new user and return the token
 // @access  Public
 router.post('/register', checkUserInput, async (req, res) => {
-  const { email, username, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    city,
+    state,
+    country,
+    username,
+    password,
+  } = req.body;
   try {
     // check if user is already registered
-    const userData = await db.query('SELECT * FROM users WHERE email = $1', [
+    const userData = await db.query('SELECT * FROM users WHERE email = $1;', [
       email,
     ]);
     if (userData.rows[0]) {
@@ -27,17 +36,21 @@ router.post('/register', checkUserInput, async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
-    // grab the avatar
+    // grab the avatar or set default one
     const avatar = gravatar.url(email, {
       s: '200', // size of the avatar
       r: 'pg', // rating
       d: 'mm', // default icon
     });
 
-    // save the new user to the database
+    // save the new user to the database (part of the incoming data goes into the users table and part goes into the profiles table)
     const newUserData = await db.query(
-      'INSERT INTO users (email, username, password, avatar) VALUES ($1, $2, $3, $4) RETURNING *',
+      'INSERT INTO users (email, username, password, avatar) VALUES ($1, $2, $3, $4) RETURNING *;',
       [email, username, bcryptPassword, avatar]
+    );
+    await db.query(
+      'INSERT INTO profiles (user_id, first_name, last_name, city, state, country) VALUES ($1, $2, $3, $4, $5, $6)',
+      [newUserData.rows[0].id, firstName, lastName, city, state, country]
     );
 
     // return the token

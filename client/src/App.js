@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
+
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
 import Nav from './components/layoutComponents/AppNavbar';
@@ -17,9 +18,11 @@ import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
 import SearchPage from './components/pages/SearchPage';
 import ForumPage from './components/pages/ForumPage';
+
 // Styles and Images
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/cover/bg-brushed-metal.jpg';
+
 // check localStorage for a token and set the global headers with it if there is one there
 if (localStorage.token) {
   setAuthToken(localStorage.token);

@@ -1,11 +1,14 @@
 // React imports
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 // Styles and Images
 import { ListGroup, Button } from 'react-bootstrap';
+
 const ProfileInstruments = ({
   profiles: {
     profile: { profileInfo },
@@ -82,10 +85,13 @@ const ProfileInstruments = ({
     </>
   );
 };
+
 ProfileInstruments.propTypes = {
   profiles: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   profiles: state.profiles,
 });
+
 export default connect(mapStateToProps)(ProfileInstruments);

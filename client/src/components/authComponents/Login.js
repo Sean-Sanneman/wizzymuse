@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+
 // Redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+
 // Styles and Images
 import { Button, Form } from 'react-bootstrap';
+
 const Login = ({ login, auth: { isAuthenticated }, closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
   // Redirect if logged in
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
+
   const handleLogin = async (e) => {
     e.preventDefault();
     login({ email, password });
     closeModal();
   };
+
   return (
     <>
       <Form.Group controlId="formBasicEmail">
@@ -53,12 +60,16 @@ const Login = ({ login, auth: { isAuthenticated }, closeModal }) => {
     </>
   );
 };
+
 Login.propTypes = {
   login: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth, // we're pulling all the state that is in the auth reducer
 });
+
 export default connect(mapStateToProps, { login })(Login);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
+

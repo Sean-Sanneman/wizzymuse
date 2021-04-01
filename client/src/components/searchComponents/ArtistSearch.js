@@ -6,6 +6,7 @@ import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col, Button, Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
+
 const ArtistSearch = () => {
     return (
       <Container fluid className="searchPanel">

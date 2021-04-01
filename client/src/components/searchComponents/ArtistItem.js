@@ -6,6 +6,7 @@ import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import avatar1 from "../../assets/images/stock-avatar-1.jpeg";
+
 const ArtistItem = () => {
     return (
       <>

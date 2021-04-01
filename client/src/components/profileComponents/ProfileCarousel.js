@@ -1,13 +1,13 @@
 // React imports
 import React from 'react';
-// Redux imports
-// Components
+
 // Styles and Images
 import { Carousel } from 'react-bootstrap';
 import avatar1 from '../../assets/images/stock-avatar-1.jpeg';
 import avatar2 from '../../assets/images/stock-avatar-2.jpeg';
 import avatar3 from '../../assets/images/stock-avatar-3.jpeg';
 import avatar4 from '../../assets/images/stock-avatar-4.png';
+
 const ProfileCarousel = () => {
   return (
     <>
@@ -28,6 +28,7 @@ const ProfileCarousel = () => {
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </Carousel.Caption>
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -41,6 +42,7 @@ const ProfileCarousel = () => {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Carousel.Caption>
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -54,6 +56,7 @@ const ProfileCarousel = () => {
             <p>Praesent commodo cursus magna, vel scelerisque.</p>
           </Carousel.Caption>
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -71,4 +74,6 @@ const ProfileCarousel = () => {
     </>
   );
 };
+
 export default ProfileCarousel;
+

@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: 'Lato', Georgia, 'Times New Roman', Times, serif;
@@ -32,7 +31,6 @@ code {
   min-width: 10em;
   margin: 5% 2%;
   font-size: small;
-
 }
 
 .glow-on-hover {
@@ -48,10 +46,21 @@ code {
 
 .glow-on-hover:before {
   content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
   position: absolute;
   top: -2px;
-  left:-2px;
+  left: -2px;
   background-size: 400%;
   z-index: -1;
   filter: blur(5px);
@@ -59,7 +68,7 @@ code {
   height: calc(100% + 4px);
   animation: glowing 20s linear infinite;
   opacity: 0;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   border-radius: 10px;
 }
 
@@ -89,11 +98,16 @@ code {
 }
 
 @keyframes glowing {
-  0% { background-position: 0 0; }
-  50% { background-position: 400% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
-
 
 /* Toolbar */
 .toolbar {
@@ -113,7 +127,6 @@ code {
 }
 
 /* Toolbar styles end */
-
 
 /* Main panels */
 .grid {
@@ -162,17 +175,16 @@ code {
 }
 /* Main panels styles end */
 
-
 /* Modals start */
 .loginModal {
   padding: 10% 0 0 22%;
 }
 
 .logHeader {
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
 }
 
 .intModal {
@@ -180,13 +192,12 @@ code {
 }
 
 .allModals .modal-content {
-  background-image: url("assets/cover/bg-brushed-metal.jpg");
+  background-image: url('assets/cover/bg-brushed-metal.jpg');
   border-radius: 8px;
   box-shadow: inset 0 0 6px #000000;
 }
 
 /* Modals styles end */
-
 
 /* Signup */
 .signupGrid {
@@ -196,10 +207,10 @@ code {
 
 .welcome {
   padding: 12% 12%;
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
 }
 
 .signup {
@@ -217,7 +228,6 @@ code {
 
 /* Signup styles end */
 
-
 /* Profile styles */
 .profilePanels {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -227,7 +237,6 @@ code {
 }
 /* Profile styles ends */
 
-
 /* Search Artist styles */
 .searchPanel {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -236,12 +245,23 @@ code {
   margin: 12%;
   padding-bottom: 72%;
 }
-
 .searchBy {
   padding-top: 6%;
   text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
 }
+.resultCards {
+  width: 98%;
+  height: 6%;
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  margin: 6% auto;
+}
+.searchArtistTxt {
+  padding: auto;
+}
+/* Search Artist styles end */
 
+/* Search Artist styles */
 .resultCards {
   width: 98%;
   height: 6%;
@@ -255,7 +275,6 @@ code {
 }
 /* Search Artist styles end */
 
-
 /* My Collaborators Carousel */
 .friendsCarousel {
   margin: 24px 100px 36px 100px;
@@ -263,7 +282,6 @@ code {
   border-radius: 15px;
 }
 /* My Collaborators Carousel styles ends */
-
 
 /* Footer */
 .page-footer {

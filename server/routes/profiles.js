@@ -10,19 +10,18 @@ const toCamelCase = require('../utils/to-camel-case');
 // @desc    Get the current user's profile, if any, by user ID located in the token
 // @access  Private
 router.get('/me', checkToken, async (req, res) => {
-  console.log('req.user.id', req.user.id);
   try {
     const profileData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-      instruments.instrument_name, genres.genre_name, instrument_assignments.proficiency 
+      instruments.instrument_name, genres.genre_name 
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
       LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
       LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
       LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
-      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.id = $1;`,
+      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.user_id = $1;`,
       [req.user.id]
     );
 
@@ -34,7 +33,7 @@ router.get('/me', checkToken, async (req, res) => {
     res.status(200).json({
       message: 'Your profile information was successfully retrieved.',
       results: profileData.rows.length,
-      currentprofile: toCamelCase(profileData.rows),
+      profileInfo: toCamelCase(profileData.rows)[0],
     });
   } catch (err) {
     console.error(err.message);
@@ -49,7 +48,7 @@ router.get('/me', checkToken, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const profilesData = await db.query(
-      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.is_musician, profiles.first_name, profiles.last_name, 
+      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
         profiles.dob, profiles.phone, profiles.city, profiles.state, 
         profiles.country, profiles.bio, profiles.band, profiles.website, 
         profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
@@ -78,7 +77,7 @@ router.get('/:id', async (req, res) => {
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-      instruments.instrument_name, genres.genre_name, instrument_assignments.proficiency 
+      instruments.instrument_name, genres.genre_name 
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
       LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
       LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
@@ -125,13 +124,12 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 
     // save the profile to the database
     const newProfileData = await db.query(
-      `INSERT INTO profiles (user_id, is_musician, first_name, last_name, dob, phone, city, state,
+      `INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state,
          country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, 
          soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
-          $15, $16, $17, $18) RETURNING *;`,
+          $15, $16, $17) RETURNING *;`,
       [
         req.user.id,
-        req.body.isMusician,
         req.body.firstName,
         req.body.lastName,
         req.body.dob,
@@ -155,12 +153,8 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
     for (let i = 0; i < req.body.instrumentIds.length; i++) {
       const newInstrumentAssignmentData = await db.query(
         `INSERT INTO instrument_assignments 
-      (profile_id, instrument_id, proficiency) VALUES ($1, $2, $3) RETURNING *;`,
-        [
-          newProfileData.rows[0].id,
-          req.body.instrumentIds[i],
-          req.body.proficiencies[i],
-        ]
+      (profile_id, instrument_id) VALUES ($1, $2) RETURNING *;`,
+        [newProfileData.rows[0].id, req.body.instrumentIds[i]]
       );
       newInstrumentAssignmentsList.push(newInstrumentAssignmentData.rows[0]);
     }
@@ -179,6 +173,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
       message: 'A new profile was created.',
       // results: newProfileData.rows.length,
       instrumentAssignmentsList: toCamelCase(newInstrumentAssignmentsList),
+      genreAssignmentsList: toCamelCase(newGenreAssignmentsList),
       profile: toCamelCase(newProfileData.rows)[0],
     });
   } catch (err) {
@@ -192,7 +187,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 router.put('/', checkToken, checkProfileInput, async (req, res) => {
   try {
     // update the profile to the database
-    const updatedprofileData = await db.query(
+    const updatedProfileData = await db.query(
       'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, website = $10, youtube = $11, twitter = $12, facebook = $13, linkedin = $14, instagram = $15, soundcloud = $16, is_musician = $17 WHERE user_id = $18 RETURNING *;',
       [
         req.body.firstName,
@@ -215,17 +210,53 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
         req.user.id,
       ]
     );
-    // update the instrument assignments to the database
-    if (!updatedprofileData.rows[0]) {
+
+    // verify that the user's profile exists
+    if (!updatedProfileData.rows[0]) {
       return res.status(400).json({
         message: 'The profile does not exist.',
-        results: updatedprofileData.rows.length,
+        results: updatedProfileData.rows.length,
       });
     }
+
+    // update the instrument assignments to the database
+    await db.query(
+      'DELETE FROM instrument_assignments WHERE profile_id = $1;',
+      [updatedProfileData.rows[0].id]
+    );
+    const updatedInstrumentAssignmentsList = [];
+    for (let i = 0; i < req.body.instrumentIds.length; i++) {
+      const updatedInstrumentAssignmentData = await db.query(
+        `INSERT INTO instrument_assignments 
+      (profile_id, instrument_id) VALUES ($1, $2) RETURNING *;`,
+        [updatedProfileData.rows[0].id, req.body.instrumentIds[i]]
+      );
+      updatedInstrumentAssignmentsList.push(
+        updatedInstrumentAssignmentData.rows[0]
+      );
+    }
+
+    // update the genre assignments to the database
+    await db.query('DELETE FROM genre_assignments WHERE profile_id = $1;', [
+      updatedProfileData.rows[0].id,
+    ]);
+    const updatedGenreAssignmentsList = [];
+    for (let i = 0; i < req.body.genreIds.length; i++) {
+      const updatedGenreAssignmentData = await db.query(
+        `INSERT INTO genre_assignments 
+      (profile_id, genre_id) VALUES ($1, $2) RETURNING *;`,
+        [updatedProfileData.rows[0].id, req.body.genreIds[i]]
+      );
+      updatedGenreAssignmentsList.push(updatedGenreAssignmentData.rows[0]);
+    }
+
+    // send response back to client
     res.status(200).json({
       message: 'The profile was successfully updated.',
-      results: updatedprofileData.rows.length,
-      profile: toCamelCase(updatedprofileData.rows)[0],
+      // results: updatedProfileData.rows.length,
+      instrumentAssignmentsList: toCamelCase(updatedInstrumentAssignmentsList),
+      genreAssignmentsList: toCamelCase(updatedGenreAssignmentsList),
+      profile: toCamelCase(updatedProfileData.rows)[0],
     });
   } catch (err) {
     console.log(err);

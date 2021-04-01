@@ -8,7 +8,13 @@ const db = require('../db');
 // @access  Public or Private? (TO DO)
 router.get('/', async(req, res) => {
   try {
-    const posts = await db.query('SELECT * FROM posts;')
+    const posts = await db.query(
+      `SELECT * 
+       FROM posts
+       LEFT JOIN users ON (users.id = posts.user_id)
+       LEFT JOIN profiles ON (profiles.id = users.id)
+       LEFT JOIN comments ON (comments.post_id = posts.id)
+      ;`)
     res.json({
       message: 'The posts were retrieved.',
       posts: toCamelCase(posts.rows),
@@ -24,7 +30,13 @@ router.get('/', async(req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const selectedPost = await db.query(
-      'SELECT * FROM posts WHERE id = $1;',
+      `SELECT * 
+      FROM posts
+      LEFT JOIN users ON (users.id = posts.user_id)
+      LEFT JOIN profiles ON (profiles.id = users.id)
+      LEFT JOIN comments ON (comments.post_id = posts.id)
+      WHERE posts.id = $1
+     ;`,
       [req.params.id]
     );
     if (selectedPost.rows[0]) {

@@ -1,11 +1,14 @@
 // React imports
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 // Styles and Images
 import { Card, Button } from 'react-bootstrap';
+
 const ProfileGeneral = ({
   profiles: {
     profile: { profileInfo },
@@ -106,6 +109,7 @@ const ProfileGeneral = ({
             )}
           </div>
         </Card.Text>
+
         {auth.isAuthenticated &&
           auth.loading === false &&
           auth.user.id === profileInfo.userId && (
@@ -117,12 +121,16 @@ const ProfileGeneral = ({
     </Card>
   );
 };
+
 ProfileGeneral.propTypes = {
   profiles: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   profiles: state.profiles,
   auth: state.auth,
 });
+
 export default connect(mapStateToProps)(ProfileGeneral);
+

@@ -1,11 +1,14 @@
 // React imports
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 // Styles and Images
 import { ListGroup, Button } from 'react-bootstrap';
+
 const ProfileGenres = ({
   profiles: {
     profile: { profileInfo },
@@ -14,6 +17,7 @@ const ProfileGenres = ({
   return (
     <>
       <h4 style={{ padding: '3%' }}>Genres</h4>
+
       <ListGroup>
         <ListGroup.Item
           style={{
@@ -82,10 +86,14 @@ const ProfileGenres = ({
     </>
   );
 };
+
 ProfileGenres.propTypes = {
   profiles: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   profiles: state.profiles,
 });
+
 export default connect(mapStateToProps)(ProfileGenres);
+

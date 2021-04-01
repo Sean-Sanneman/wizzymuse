@@ -1,6 +1,5 @@
 -- CREATE DATABASE wizzymuse;
 
--- @TODO: validate password?
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR NOT NULL UNIQUE,
@@ -14,7 +13,6 @@ INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmai
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
-    is_musician BOOLEAN,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     first_name VARCHAR NOT NULL,
     last_name VARCHAR,
@@ -25,6 +23,7 @@ CREATE TABLE profiles (
     country VARCHAR,
     bio VARCHAR,
     band VARCHAR,
+    artist_name VARCHAR,
     website VARCHAR,
     youtube VARCHAR,
     twitter VARCHAR,
@@ -32,31 +31,35 @@ CREATE TABLE profiles (
     linkedin VARCHAR,
     instagram VARCHAR,
     soundcloud VARCHAR,
+    twitch VARCHAR,
+    tiktok VARCHAR,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO profiles (user_id, is_musician, first_name, last_name, dob, phone, city, state, country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, soundcloud) VALUES (1, '1','sean', 'cone', '06/28/93', '720-985-6588','Burbank', 'CA', 'USA', '', '', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'soundcloud.com/seanisyourdj');
+INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, soundcloud, twitch, tiktok) VALUES (1, 'sean', 'cone', '06/28/93', '720-985-6588', 'Burbank', 'CA', 'USA', 'I like parties and fun.', 'No band.', 'Sean is your DJ', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'seanisyourdj', '', '');
 
 CREATE TABLE instruments (
     id SERIAL PRIMARY KEY,
     instrument_name VARCHAR NOT NULL
 );
 
+INSERT INTO instruments (instrument_name) VALUES ('Trumpet'), ('Accordion'), ('Acoustic Guitar'), ('Bagpipes'), ('Banjo'), ('Bass'), ('Bassoon'), ('Bongo'), ('Cello'), ('Clarinet'), ('Clavichord'), ('Computer/Software'), ('Conga'), ('Cowbell'), ('Daxophone'), ('Didgeridoo'), ('Djembe'), ('Double Bass'), ('Drums'), ('Dulcimer'), ('Electric Guitar'), ('Fiddle'), ('Flute'), ('Glockenspiel'), ('Gong'), ('Guitar'), ('Hang Drum'), ('Harmonica'), ('Harmonium'), ('Harp'), ('Harpsichord'), ('Hurdy Gurdy'), ('Kalimba'), ('Kazoo'), ('Keyboard'), ('Mandolin'), ('Mbira'), ('Mouth Harp'), ('Oboe'), ('Organ'), ('Oud'), ('Percussion'), ('Piano'), ('Piccolo'), ('Recorder'), ('Saxophone'), ('Sitar'), ('Software/Computer'), ('Spoons'), ('Steel Drums'), ('Synthesizer'), ('Tabla'), ('Tambourine'), ('Trombone'), ('Trumpet'), ('Theremin'), ('Tongue Drum'), ('Tuba'), ('Turntables'), ('Ukelele'), ('Viola'), ('Violin'), ('Vocals'), ('Volca'), ('Xylophone'), ('Zither'), ('Autoharp'), ('Marimba'), ('Background Vocals'), ('Toy Piano'), ('Electric Piano'), ('Timbales');
+
 CREATE TABLE instrument_assignments (
     id SERIAL PRIMARY KEY,
     profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
     instrument_id INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
-    proficiency INTEGER CHECK(proficiency >= 1 AND proficiency <=5),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO instruments (instrument_name) VALUES ('Trumpet');
-INSERT INTO instrument_assignments (profile_id, instrument_id, proficiency) VALUES(1,1,4);
+INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
 
 CREATE TABLE genres (
     id SERIAL PRIMARY KEY,
     genre_name VARCHAR NOT NULL
 );
+
+INSERT INTO genres (genre_name) VALUES ('Dubstep'), ('Alternative'), ('Ambient'), ('Blues'), ('Bluegrass'), ('Classical'), ('Country'), ('Disco'), ('Dub'), ('Dubstep'), ('EDM'), ('Electroclash'), ('Electronic'), ('Folk'), ('Funk'), ('Goth'), ('Happy Hardcore'), ('Heavy Metal'), ('Hip Hop'), ('House'), ('Industrial'), ('Indie Rock'), ('Jazz'), ('Latin'), ('Metal'), ('Motown'), ('New Age'), ('New Wave'), ('Nu Disco'), ('Nu Metal'), ('Opera'), ('Pop'), ('Progressive'), ('Psychedelic'), ('Psytrance'), ('Punk'), ('R&B'), ('Rap'), ('Reggae'), ('Rock'), ('Rockabilly'), ('Shoegaze'), ('Soul'), ('Soundtracks'), ('Ska'), ('Synthpop'), ('Techno'), ('Tejano'), ('Trance'), ('Trip Hop'), ('World Music'), ('Background Music'), ('Italo Disco'), ('Indie Disco'), ('Hi-NRG'), ('Glam');
 
 CREATE TABLE genre_assignments (
     id SERIAL PRIMARY KEY,
@@ -65,16 +68,7 @@ CREATE TABLE genre_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO genres (genre_name) VALUES ('Dubstep');
 INSERT INTO genre_assignments (profile_id, genre_id) VALUES(1,1);
-
-SELECT profiles.first_name, instruments.instrument_name FROM instrument_assignments
-LEFT JOIN profiles ON (profiles.id = instrument_assignments.profile_id)
-LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id);
-
-SELECT profiles.first_name, genres.genre_name FROM genre_assignments
-LEFT JOIN profiles ON (profiles.id = genre_assignments.profile_id)
-LEFT JOIN genres ON (genres.id = genre_assignments.genre_id);
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
@@ -88,22 +82,18 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
-    post_text VARCHAR(2000),
+    post_text VARCHAR,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO posts (user_id, category_id, post_text) VALUES (1,4,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
+INSERT INTO posts (user_id, category_id, post_text) VALUES (1,1,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    comment_text VARCHAR,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO comments (post_id, user_id) VALUES (5,1);
-
-
-
--- SELECT profiles.first_name, instruments.instrument_name FROM instrument_assignments, profiles, instruments
--- WHERE profiles.id = instrument_assignments.profile_id AND instruments.id = instrument_assignments.instrument_id
--- ;
+INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');

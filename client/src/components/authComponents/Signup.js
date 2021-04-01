@@ -1,13 +1,16 @@
 // React imports
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+
 // Redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
+
 // Styles and Images
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 import { Container, Row, Col, Form, Nav } from 'react-bootstrap';
+
 const Signup = ({ register, auth: { isAuthenticated } }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -17,6 +20,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
   const [country, setCountry] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   const handleRegister = async (e) => {
     e.preventDefault();
     register({
@@ -30,10 +34,12 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
       password,
     });
   };
+
   // Redirect when registered
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
+
   return (
     <>
       <Container fluid className="signupGrid">
@@ -41,21 +47,25 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
           <Col sm={5} style={{ textAlign: 'center' }} className="">
             <div className="welcome">
               <h2>Welcome New Artist!</h2>
+
               <Container
                 fluid
                 className="logo-image d-flex justify-content-center"
               >
                 <img src={Stamp} width="75%" height="75%" alt="Stamp"></img>
               </Container>
+
               <h3>Your online collaborators are waiting for you!</h3>
               <h5>
                 Enter your information on the right and let's make some noise!
               </h5>
             </div>
           </Col>
+
           <Col sm={7} className="signup">
             <form>
               <h3>Sign Up</h3>
+
               <div className="form-group">
                 <label>First name</label>
                 <input
@@ -66,6 +76,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
+
               <div className="form-group">
                 <label>Last name</label>
                 <input
@@ -76,6 +87,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
+
               <div className="form-group">
                 <label>Email address</label>
                 <input
@@ -90,6 +102,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   We will never share your email address with anyone.
                 </Form.Text>
               </div>
+
               <div className="form-group">
                 <label>Location</label>
                 <div className="d-flex location">
@@ -116,6 +129,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   />
                 </div>
               </div>
+
               <div className="form-group">
                 <label>Username</label>
                 <input
@@ -126,6 +140,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
+
               <div className="form-group">
                 <label>Password</label>
                 <input
@@ -137,6 +152,7 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
                 />
               </div>
               <br></br>
+
               <Nav.Link
                 href="/"
                 type="submit"
@@ -157,12 +173,16 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
     </>
   );
 };
+
 Signup.propTypes = {
   register: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth, // we're pulling all the state that is in the auth reducer
 });
+
 export default connect(mapStateToProps, { register })(Signup);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
+

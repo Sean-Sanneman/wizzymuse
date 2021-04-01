@@ -56,6 +56,7 @@ export const register = ({
     username,
     password,
   });
+
   try {
     const res = await axios.post('/api/users/register', body, config);
     dispatch({
