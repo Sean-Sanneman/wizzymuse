@@ -17,6 +17,8 @@ import Dashboard from './components/pages/Dashboard';
 import ProfilePage from './components/pages/ProfilePage';
 import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
+import SearchPage from './components/pages/SearchPage';
+import ForumPage from './components/pages/ForumPage';
 
 // Styles and Images
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -36,7 +38,9 @@ const App = () => {
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />
+              <Route exact path="/search-artists" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/forum" component={ForumPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/profile" component={ProfilePage} />
               <PrivateRoute exact path="/project" component={ProjectPage} />

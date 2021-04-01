@@ -238,6 +238,30 @@ code {
 /* Profile styles ends */
 
 /* Search Artist styles */
+.searchPanel {
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  border-radius: 15px;
+  margin: 12%;
+  padding-bottom: 72%;
+}
+.searchBy {
+  padding-top: 6%;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+}
+.resultCards {
+  width: 98%;
+  height: 6%;
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  color: #000000;
+  margin: 6% auto;
+}
+.searchArtistTxt {
+  padding: auto;
+}
+/* Search Artist styles end */
+
+/* Search Artist styles */
 .resultCards {
   width: 90%;
   height: 12%;

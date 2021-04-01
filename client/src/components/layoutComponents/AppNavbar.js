@@ -31,14 +31,14 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         DASHBOARD
       </Nav.Link>
       <Nav.Link
-        href="#forum"
+        href="/forum"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
         FORUM
       </Nav.Link>
       <Nav.Link
-        href="#search-artists"
+        href="/search-artists"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
@@ -59,14 +59,21 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const guestLinks = (
     <Nav className="navButtons">
       <Nav.Link
-        href="#forum"
+        href="/dashboard"
+        className="myBtn text-center glow-on-hover"
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        DASHBOARD
+      </Nav.Link>
+      <Nav.Link
+        href="/forum"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
         FORUM
       </Nav.Link>
       <Nav.Link
-        href="#search-artists"
+        href="/search-artists"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
