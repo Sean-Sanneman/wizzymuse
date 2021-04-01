@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Stamp from "../../assets/images/Wizzymuse-stamp.png";
-import { Container, Row, Col, Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
-
-
+// React imports
+import React from 'react';
+// Redux imports
+// Components
+import Spinner from '../layoutComponents/Spinner';
+// Styles and Images
+import { Container, Row, Col, Button, Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
+import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 const ArtistSearch = () => {
-
     return (
-        <>
-        <Container fluid className="searchPanel">
+      <Container fluid className="searchPanel">
             <Row>
                 <Col style={{ textAlign: "center" }}>
                 <h4 className="searchBy">Search by:</h4>
@@ -15,7 +16,6 @@ const ArtistSearch = () => {
             </Row>
             <Row>
                 <Col style={{ textAlign: "center", backgroundColor: "black", margin: "3%", padding: "12% 3% 18% 3%", borderRadius: "8px" }}>
-
                 <div className="mb-4">
                     {['right'].map((direction) => (
                         <DropdownButton
@@ -70,27 +70,20 @@ const ArtistSearch = () => {
                         </DropdownButton>
                     ))}
                 </div>
-
                 </Col>
             </Row>
-
             <Row style={{ textAlign: "center", marginTop: "24%" }}>
                 <Col>
                 <div>
                 <Container fluid className="logo-image d-flex justify-content-center" style={{ padding: "0" }}>
                     <img src={Stamp} width="140px" height="140px" alt="Stamp"></img>
                 </Container>
-
                 <br />
-
                 <h5>Your online collaborators await!</h5>
                 </div>
                 </Col>
             </Row>
-                
         </Container>
-        </>
     );
-};
-
-export default ArtistSearch;
+  };
+  export default ArtistSearch;

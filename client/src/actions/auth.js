@@ -31,14 +31,31 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // Register user
-export const register = ({ username, email, password }) => async (dispatch) => {
+export const register = ({
+  firstName,
+  lastName,
+  email,
+  city,
+  state,
+  country,
+  username,
+  password,
+}) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ username, email, password });
-
+  const body = JSON.stringify({
+    firstName,
+    lastName,
+    email,
+    city,
+    state,
+    country,
+    username,
+    password,
+  });
   try {
     const res = await axios.post('/api/users/register', body, config);
     dispatch({
@@ -54,6 +71,7 @@ export const register = ({ username, email, password }) => async (dispatch) => {
     });
   }
 };
+
 
 // Login user
 export const login = ({ email, password }) => async (dispatch) => {
@@ -72,7 +90,8 @@ export const login = ({ email, password }) => async (dispatch) => {
     });
     dispatch(loadUser()); // we immediately load the user
   } catch (err) {
-    const errors = err.response.data.errors; // get the array of errors
+    console.log(err);
+    // const errors = err.response.data.errors; // get the array of errors
     // @TODO: if there are errors we'll want to dispatch an alert for each of them
     dispatch({
       type: LOGIN_FAIL, // we don't need a payload

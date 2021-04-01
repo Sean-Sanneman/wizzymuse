@@ -4,7 +4,6 @@ import { Container, Row, Col, Dropdown, DropdownButton, ButtonGroup, Form, FormC
 
 
 const ForumSearch = () => {
-
     return (
         <>
         <Container fluid className="searchPanel">
@@ -15,7 +14,6 @@ const ForumSearch = () => {
             </Row>
             <Row>
                 <Col style={{ textAlign: "center", backgroundColor: "black", margin: "3%", padding: "26% 3% 18% 3%", borderRadius: "8px" }}>
-
                 <div className="mb-4">
                     {['down'].map((direction) => (
                         <DropdownButton
@@ -34,28 +32,22 @@ const ForumSearch = () => {
                         </DropdownButton>
                     ))}
                 </div>              
-
                 </Col>
             </Row>
-
             <Row style={{ textAlign: "center", marginTop: "24%" }}>
                 <Col>
                 <div>
                 <Container fluid className="logo-image d-flex justify-content-center" style={{ padding: "0" }}>
                     <img src={Stamp} width="140px" height="140px" alt="Stamp"></img>
                 </Container>
-
                 <br />
-
                 <h5>"Knowledge is knowing the right answer.
                     Intelligence is asking the right question."</h5>
                 </div>
                 </Col>
             </Row>
-                
         </Container>
         </>
     );
 };
-
 export default ForumSearch;

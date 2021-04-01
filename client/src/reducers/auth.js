@@ -42,6 +42,7 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         loading: false,
         user: null,
+        message: 'You have been logged out',
       };
     default:
       return state;
