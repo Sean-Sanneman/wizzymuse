@@ -8,8 +8,6 @@ import ArtistSearch from '../searchComponents/ArtistSearch';
 import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-
-
 const SearchPage = () => {
   return (
     <>

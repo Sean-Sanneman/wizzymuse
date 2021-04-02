@@ -1,10 +1,8 @@
 // React imports
 import React from 'react';
-
 // Styles and Images
 import coverImage from '../../assets/cover/cover-image-studio2.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
-
 const Landing = () => {
   return (
     <Container fluid className="grid">
@@ -46,5 +44,4 @@ const Landing = () => {
     </Container>
   );
 };
-
 export default Landing;
