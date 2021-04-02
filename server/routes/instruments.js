@@ -9,10 +9,12 @@ const checkToken = require('../utils/check-token');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const instruments = await db.query('SELECT * FROM instruments;');
+    const instrumentData = await db.query(
+      'SELECT * FROM instruments ORDER BY instrument_name ASC;'
+    );
     res.json({
       message: 'The instruments were retrieved.',
-      instruments: toCamelCase(instruments.rows),
+      instrumentList: toCamelCase(instrumentData.rows),
     });
   } catch (err) {
     console.log(err);
@@ -24,14 +26,14 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/:id', async (req, res) => {
   try {
-    const selectedInstrument = await db.query(
+    const selectedInstrumentData = await db.query(
       'SELECT * FROM instruments WHERE id = $1;',
       [req.params.id]
     );
-    if (selectedInstrument.rows[0]) {
+    if (selectedInstrumentData.rows[0]) {
       res.json({
         message: 'The selected instrument was successfully retrieved.',
-        instrument: toCamelCase(selectedInstrument.rows)[0],
+        selectedInstrumentData: toCamelCase(selectedInstrumentData.rows)[0],
       });
     } else {
       res.json({
@@ -48,13 +50,13 @@ router.get('/:id', async (req, res) => {
 // @access  Private
 router.post('/', checkToken, async (req, res) => {
   try {
-    const newInstrument = await db.query(
+    const newInstrumentData = await db.query(
       'INSERT INTO instruments (instrument_name) VALUES ($1) RETURNING *;',
       [req.body.instrumentName]
     );
     res.json({
       message: 'A new instrument was created.',
-      instrument: toCamelCase(newInstrument.rows)[0],
+      newInstrumentData: toCamelCase(newInstrumentData.rows)[0],
     });
   } catch (err) {
     console.log(err);
@@ -66,14 +68,14 @@ router.post('/', checkToken, async (req, res) => {
 // @access  Private
 router.put('/:id', checkToken, async (req, res) => {
   try {
-    const updatedInstrument = await db.query(
+    const updatedInstrumentData = await db.query(
       'UPDATE instruments SET instrument_name = $1 WHERE id = $2 RETURNING *;',
       [req.body.instrumentName, req.params.id]
     );
-    if (updatedInstrument.rows[0]) {
+    if (updatedInstrumentData.rows[0]) {
       res.json({
         message: 'The instrument was successfully updated.',
-        instrument: toCamelCase(updatedInstrument.rows)[0],
+        updatedInstrumentData: toCamelCase(updatedInstrumentData.rows)[0],
       });
     } else {
       res.json({
@@ -90,14 +92,14 @@ router.put('/:id', checkToken, async (req, res) => {
 // @access  Private
 router.delete('/:id', checkToken, async (req, res) => {
   try {
-    const deletedInstrument = await db.query(
+    const deletedInstrumentData = await db.query(
       'DELETE FROM instruments WHERE id = $1 RETURNING *;',
       [req.params.id]
     );
-    if (deletedInstrument.rows[0]) {
+    if (deletedInstrumentData.rows[0]) {
       res.json({
         message: 'The selected instrument was successfully deleted.',
-        instrument: toCamelCase(deletedInstrument.rows)[0],
+        deletedInstrumentData: toCamelCase(deletedInstrumentData.rows)[0],
       });
     } else {
       res.json({
