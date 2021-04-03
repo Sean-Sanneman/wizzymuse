@@ -135,6 +135,12 @@ code {
   margin: 1% 0;
 }
 
+.welcomeText {
+  padding-top: 12%;
+  color: seashell;
+  text-align: center;
+}
+
 .leftPanel {
   border-radius: 8px;
 }
@@ -146,7 +152,7 @@ code {
 
 .LED-text {
   padding-top: 12%;
-  color: greenyellow;
+  color: skyblue;
 }
 
 .babyYoda {
@@ -267,7 +273,7 @@ code {
 }
 
 #example-collapse-text {
-  margin: 6% 0;
+  margin: 6%
 }
 /* Search Artist styles end */
 
