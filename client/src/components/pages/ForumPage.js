@@ -3,7 +3,7 @@ import React from 'react';
 // Redux imports
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../searchComponents/ArtistList';
+import ArtistList from '../artistComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
 import Forum from '../forumComponents/Forum';
 import Spinner from '../layoutComponents/Spinner';

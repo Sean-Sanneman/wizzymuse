@@ -5,7 +5,7 @@ import React from 'react';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../searchComponents/ArtistList';
+import ArtistList from '../artistComponents/ArtistList';
 import ArtistSearch from '../searchComponents/ArtistSearch';
 import Spinner from '../layoutComponents/Spinner';
 
