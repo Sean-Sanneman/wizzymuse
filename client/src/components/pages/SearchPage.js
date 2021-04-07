@@ -5,7 +5,6 @@ import React from 'react';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../searchComponents/ArtistList';
 import ArtistSearch from '../searchComponents/ArtistSearch';
 import Spinner from '../layoutComponents/Spinner';
 
@@ -21,9 +20,7 @@ const SearchPage = () => {
             <ArtistSearch />
           </Col>
           <Col xs={8} className="midPanel allPanels">
-            <Container fluid="md">
-              <ArtistList />
-            </Container>
+            <Container fluid="md"></Container>
           </Col>
           <Col className="rightPanel allPanels"></Col>
         </Row>
