@@ -135,6 +135,12 @@ code {
   margin: 1% 0;
 }
 
+.welcomeText {
+  padding-top: 12%;
+  color: seashell;
+  text-align: center;
+}
+
 .leftPanel {
   border-radius: 8px;
 }
@@ -146,7 +152,7 @@ code {
 
 .LED-text {
   padding-top: 12%;
-  color: greenyellow;
+  color: skyblue;
 }
 
 .babyYoda {
@@ -237,6 +243,7 @@ code {
 }
 /* Profile styles ends */
 
+
 /* Search Artist styles */
 .searchPanel {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -259,21 +266,17 @@ code {
 .searchArtistTxt {
   padding: auto;
 }
-/* Search Artist styles end */
 
-/* Search Artist styles */
-.resultCards {
-  width: 98%;
-  height: 6%;
-  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
-  color: #000000;
-  margin: 6% auto;
+.collapseArtistItem {
+  display: flex;
+  float: right;
 }
 
-.searchArtistTxt {
-  padding: auto;
+#example-collapse-text {
+  margin: 6%
 }
 /* Search Artist styles end */
+
 
 /* My Collaborators Carousel */
 .friendsCarousel {
