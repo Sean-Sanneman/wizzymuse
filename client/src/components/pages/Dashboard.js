@@ -1,19 +1,15 @@
 // React imports
 import React from 'react';
-
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-
 // Styles and Images
 import coverImage from '../../assets/cover/cover-image-studio3.jpg';
 import babyYoda from '../../assets/cover/baby-yoda.jpeg';
 import { Container, Row, Col } from 'react-bootstrap';
-
 const Dashboard = () => {
   return (
     <>
       <Toolbar />
-
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
@@ -48,5 +44,4 @@ const Dashboard = () => {
     </>
   );
 };
-
 export default Dashboard;

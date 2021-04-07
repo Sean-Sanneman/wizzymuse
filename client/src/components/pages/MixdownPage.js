@@ -1,13 +1,9 @@
 // React imports
 import React, { useEffect } from 'react';
-
 // Redux imports
-
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-
 // Styles and Images
-
 const MixdownPage = () => {
   return (
     <>
@@ -16,5 +12,4 @@ const MixdownPage = () => {
     </>
   );
 };
-
 export default MixdownPage;
