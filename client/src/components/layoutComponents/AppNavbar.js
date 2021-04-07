@@ -59,6 +59,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const guestLinks = (
     <Nav className="navButtons">
       <Nav.Link
+
         href="/dashboard"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
@@ -66,6 +67,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         DASHBOARD
       </Nav.Link>
       <Nav.Link
+
         href="/forum"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
@@ -153,3 +155,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, { logout })(AppNavbar);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
+

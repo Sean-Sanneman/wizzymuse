@@ -7,8 +7,6 @@ import ArtistItem from '../searchComponents/ArtistItem';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 
-
-
 const ArtistList = () => {
     // search results var redux
     // {searchResults.map((result) => (
