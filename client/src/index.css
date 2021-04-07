@@ -286,6 +286,21 @@ code {
 }
 /* My Collaborators Carousel styles ends */
 
+
+/* Forum styles start */
+.forumPanel {
+  
+}
+
+.forumCol {
+  color: white;
+  border: solid;
+}
+
+
+/* Forum styles end */
+
+
 /* Footer */
 .page-footer {
   margin-top: 1%;

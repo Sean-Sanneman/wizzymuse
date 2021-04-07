@@ -15,6 +15,7 @@ import {
   Dropdown,
   DropdownButton,
   ButtonGroup,
+  Button,
 } from 'react-bootstrap';
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 

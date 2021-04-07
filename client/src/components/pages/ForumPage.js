@@ -5,6 +5,7 @@ import React from 'react';
 import Toolbar from '../layoutComponents/Toolbar';
 import ArtistList from '../searchComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
+import Forum from '../forumComponents/Forum';
 import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -19,8 +20,10 @@ const ForumPage = () => {
               </Col>
               <Col xs={8} className="midPanel allPanels">
               <Container fluid="md">
-                  <ArtistList/>
-                </Container>
+                
+                <Forum />
+                  
+              </Container>
               </Col>
               <Col className="rightPanel allPanels"></Col>
             </Row>
