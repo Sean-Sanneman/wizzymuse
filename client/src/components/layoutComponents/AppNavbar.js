@@ -20,7 +20,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Navbar links for authenticated users
+  // Navbar links for loggedin users (authenticated)
   const authLinks = (
     <Nav className="navButtons">
       <Nav.Link
@@ -59,15 +59,6 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const guestLinks = (
     <Nav className="navButtons">
       <Nav.Link
-
-        href="/dashboard"
-        className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
-      >
-        DASHBOARD
-      </Nav.Link>
-      <Nav.Link
-
         href="/forum"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}

@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
       message: 'Missing first name',
     });
   }
-  //@TODO: implment validation logic on lastName, dob, and phone
+  //@TODO: implement validation logic on lastName, dob, and phone
 
   next();
 };

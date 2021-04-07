@@ -14,7 +14,7 @@ INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmai
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    first_name VARCHAR NOT NULL,
+    first_name VARCHAR,
     last_name VARCHAR,
     dob DATE,
     phone VARCHAR,
@@ -43,7 +43,7 @@ CREATE TABLE instruments (
     instrument_name VARCHAR NOT NULL
 );
 
-INSERT INTO instruments (instrument_name) VALUES ('Trumpet'), ('Accordion'), ('Acoustic Guitar'), ('Bagpipes'), ('Banjo'), ('Bass'), ('Bassoon'), ('Bongo'), ('Cello'), ('Clarinet'), ('Clavichord'), ('Computer/Software'), ('Conga'), ('Cowbell'), ('Daxophone'), ('Didgeridoo'), ('Djembe'), ('Double Bass'), ('Drums'), ('Dulcimer'), ('Electric Guitar'), ('Fiddle'), ('Flute'), ('Glockenspiel'), ('Gong'), ('Guitar'), ('Hang Drum'), ('Harmonica'), ('Harmonium'), ('Harp'), ('Harpsichord'), ('Hurdy Gurdy'), ('Kalimba'), ('Kazoo'), ('Keyboard'), ('Mandolin'), ('Mbira'), ('Mouth Harp'), ('Oboe'), ('Organ'), ('Oud'), ('Percussion'), ('Piano'), ('Piccolo'), ('Recorder'), ('Saxophone'), ('Sitar'), ('Software/Computer'), ('Spoons'), ('Steel Drums'), ('Synthesizer'), ('Tabla'), ('Tambourine'), ('Trombone'), ('Trumpet'), ('Theremin'), ('Tongue Drum'), ('Tuba'), ('Turntables'), ('Ukelele'), ('Viola'), ('Violin'), ('Vocals'), ('Volca'), ('Xylophone'), ('Zither'), ('Autoharp'), ('Marimba'), ('Background Vocals'), ('Toy Piano'), ('Electric Piano'), ('Timbales');
+INSERT INTO instruments (instrument_name) VALUES ('accordion'), ('acoustic_guitar'), ('bagpipes'), ('banjo'), ('bass'), ('bassoon'), ('bongo'), ('cello'), ('clarinet'), ('clavichord'), ('computer/software'), ('conga'), ('cowbell'), ('daxophone'), ('didgeridoo'), ('djembe'), ('double_bass'), ('drums'), ('dulcimer'), ('electric_guitar'), ('fiddle'), ('flute'), ('glockenspiel'), ('gong'), ('guitar'), ('hang_drum'), ('harmonica'), ('harmonium'), ('harp'), ('harpsichord'), ('hurdy_gurdy'), ('kalimba'), ('kazoo'), ('keyboard'), ('mandolin'), ('mbira'), ('mouth_harp'), ('oboe'), ('organ'), ('oud'), ('percussion'), ('piano'), ('piccolo'), ('recorder'), ('saxophone'), ('sitar'), ('software/computer'), ('spoons'), ('steel_drums'), ('synthesizer'), ('tabla'), ('tambourine'), ('trombone'), ('trumpet'), ('theremin'), ('tongue_drum'), ('tuba'), ('turntables'), ('ukelele'), ('viola'), ('violin'), ('vocals'), ('volca'), ('xylophone'), ('zither'), ('autoharp'), ('marimba'), ('background_vocals'), ('toy_piano'), ('electric_piano'), ('timbales');
 
 CREATE TABLE instrument_assignments (
     id SERIAL PRIMARY KEY,

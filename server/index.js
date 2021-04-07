@@ -2,6 +2,7 @@ require('dotenv').config(); // access variables set in the .env file via `proces
 const express = require('express');
 const cors = require('cors');
 
+// Import our routes
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const profilesRouter = require('./routes/profiles');
@@ -11,7 +12,8 @@ const categoriesRouter = require('./routes/categories');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 
-const app = express(); // Create the Express application
+// Create the Express application
+const app = express();
 
 // MIDDLEWARE - General
 app.use(cors()); // this allows http requests to servers with different domain names (we are going back and forth between localhost:3000 and localhost:5000 for our http requests)
