@@ -263,8 +263,8 @@ code {
 
 /* Search Artist styles */
 .resultCards {
-  width: 90%;
-  height: 12%;
+  width: 98%;
+  height: 6%;
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
   color: #000000;
   margin: 6% auto;

@@ -13,6 +13,7 @@ const Login = ({ login, auth: { isAuthenticated }, closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+
   // Redirect if logged in
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
@@ -71,3 +72,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, { login })(Login);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
+

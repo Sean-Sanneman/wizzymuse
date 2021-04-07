@@ -146,3 +146,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, { logout })(AppNavbar);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
+

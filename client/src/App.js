@@ -1,7 +1,6 @@
 // React imports
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 // Redux imports
 import { Provider } from 'react-redux';
 import store from './store';
@@ -29,7 +28,6 @@ import background from './assets/cover/bg-brushed-metal.jpg';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -57,5 +55,4 @@ const App = () => {
     </Provider>
   );
 };
-
 export default App;
