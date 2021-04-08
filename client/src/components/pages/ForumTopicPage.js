@@ -1,3 +1,5 @@
+// This is where the forum topics display a list of posts within a topic, for example audio production tips
+
 // React imports
 import React from 'react';
 // Redux imports
@@ -5,7 +7,7 @@ import React from 'react';
 import Toolbar from '../layoutComponents/Toolbar';
 import ArtistList from '../artistComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
-import ForumTopics from '../forumComponents/ForumTopics';
+import PostList from '../postComponents/PostList';
 import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -21,7 +23,7 @@ const ForumPage = () => {
               <Col xs={8} className="midPanel allPanels">
               <Container fluid="md">
                 
-                <ForumTopics />
+                <PostList />
                   
               </Container>
               </Col>
