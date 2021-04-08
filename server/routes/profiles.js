@@ -33,7 +33,7 @@ router.get('/me', checkToken, async (req, res) => {
     res.status(200).json({
       message: 'Your profile information was successfully retrieved.',
       results: profileData.rows.length,
-      profileInfo: toCamelCase(profileData.rows)[0],
+      profileMe: toCamelCase(profileData.rows)[0],
     });
   } catch (err) {
     console.error(err.message);
@@ -111,7 +111,7 @@ router.get('/', async (req, res) => {
     res.status(200).json({
       message: 'The profiles were successfully retrieved.',
       results: toCamelCase(profilesData.rows).length,
-      profiles: toCamelCase(profilesData.rows),
+      profileList: toCamelCase(profilesData.rows),
     });
   } catch (err) {
     console.error(err.message);

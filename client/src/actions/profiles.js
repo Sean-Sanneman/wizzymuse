@@ -12,6 +12,7 @@ import {
 
 // Get current user's profile
 export const getProfileMe = () => async (dispatch) => {
+  console.log('inside getProfileMe');
   try {
     const res = await axios.get('/api/profiles/me');
     dispatch({
@@ -28,21 +29,11 @@ export const getProfileMe = () => async (dispatch) => {
 
 // Get profiles (with or without query parameters)
 export const getProfiles = (queryObj) => async (dispatch) => {
-  console.log('queryObj', queryObj);
   dispatch({ type: CLEAR_PROFILES });
-  // Build the endpoint
-  // let endpoint = '/api/profiles';
-  // if (queryObj) {
-  //   console.log('there is a query object, so we edit the endpoint');
-  //   endpoint += `?instruments=${queryObj.instruments}&genres=${queryObj.genres}`;
-  //   console.log('inside switch endpoint', endpoint);
-  // }
-  // console.log('endpoint', endpoint);
   try {
     const res = await axios.get(
       `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}`
     );
-    console.log('res.data', res.data);
     dispatch({
       type: GET_PROFILES,
       payload: res.data,

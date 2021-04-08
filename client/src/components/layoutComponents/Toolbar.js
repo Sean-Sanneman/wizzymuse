@@ -14,7 +14,7 @@ const Toolbar = () => {
       >
         <Row style={{ height: '3em' }} className="align-content-center">
           <Col className="toolBtns">
-            <Link to="/profile">
+            <Link to="/my-profile">
               <Button variant="outline-success btn mr-3">MY PROFILE</Button>
             </Link>
             <Link to="/project">
@@ -34,5 +34,3 @@ const Toolbar = () => {
 };
 
 export default Toolbar;
-
-
