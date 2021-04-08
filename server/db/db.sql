@@ -59,7 +59,7 @@ CREATE TABLE genres (
     genre_name VARCHAR NOT NULL
 );
 
-INSERT INTO genres (genre_name) VALUES ('Dubstep'), ('Alternative'), ('Ambient'), ('Blues'), ('Bluegrass'), ('Classical'), ('Country'), ('Disco'), ('Dub'), ('Dubstep'), ('EDM'), ('Electroclash'), ('Electronic'), ('Folk'), ('Funk'), ('Goth'), ('Happy Hardcore'), ('Heavy Metal'), ('Hip Hop'), ('House'), ('Industrial'), ('Indie Rock'), ('Jazz'), ('Latin'), ('Metal'), ('Motown'), ('New Age'), ('New Wave'), ('Nu Disco'), ('Nu Metal'), ('Opera'), ('Pop'), ('Progressive'), ('Psychedelic'), ('Psytrance'), ('Punk'), ('R&B'), ('Rap'), ('Reggae'), ('Rock'), ('Rockabilly'), ('Shoegaze'), ('Soul'), ('Soundtracks'), ('Ska'), ('Synthpop'), ('Techno'), ('Tejano'), ('Trance'), ('Trip Hop'), ('World Music'), ('Background Music'), ('Italo Disco'), ('Indie Disco'), ('Hi-NRG'), ('Glam');
+INSERT INTO genres (genre_name) VALUES ('Alternative'), ('Ambient'), ('Blues'), ('Bluegrass'), ('Classical'), ('Country'), ('Disco'), ('Dub'), ('Dubstep'), ('EDM'), ('Electroclash'), ('Electronic'), ('Folk'), ('Funk'), ('Goth'), ('Happy Hardcore'), ('Heavy Metal'), ('Hip Hop'), ('House'), ('Industrial'), ('Indie Rock'), ('Jazz'), ('Latin'), ('Metal'), ('Motown'), ('New Age'), ('New Wave'), ('Nu Disco'), ('Nu Metal'), ('Opera'), ('Pop'), ('Progressive'), ('Psychedelic'), ('Psytrance'), ('Punk'), ('R&B'), ('Rap'), ('Reggae'), ('Rock'), ('Rockabilly'), ('Shoegaze'), ('Soul'), ('Soundtracks'), ('Ska'), ('Synthpop'), ('Techno'), ('Tejano'), ('Trance'), ('Trip Hop'), ('World Music'), ('Background Music'), ('Italo Disco'), ('Indie Disco'), ('Hi-NRG'), ('Glam');
 
 CREATE TABLE genre_assignments (
     id SERIAL PRIMARY KEY,
