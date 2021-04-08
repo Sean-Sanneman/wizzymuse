@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 // Styles and Images
 import { Card, Button } from 'react-bootstrap';
 
-const ProfileGeneral = ({
+const ProfileCardGeneral = ({
   profiles: {
     profile: { profileInfo },
   },
@@ -122,7 +122,7 @@ const ProfileGeneral = ({
   );
 };
 
-ProfileGeneral.propTypes = {
+ProfileCardGeneral.propTypes = {
   profiles: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
@@ -132,5 +132,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(ProfileGeneral);
-
+export default connect(mapStateToProps)(ProfileCardGeneral);

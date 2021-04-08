@@ -8,19 +8,19 @@ import { getGenres } from '../../actions/genres';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
-import ArtistItem from './ArtistItem';
+import ProfileCardCollapsible from '../profileComponents/ProfileCardCollapsible';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 
-const ArtistList = () => {
+const SearchProfileResults = () => {
   // search results var redux
   // {searchResults.map((result) => (
-  //     <ArtistItem key={result.id} result={result} />
+  //     <ProfileCardCollapsible key={result.id} result={result} />
   //   ))}
   return (
     <>
-      <ArtistItem />
+      <ProfileCardCollapsible />
     </>
   );
 };
-export default ArtistList;
+export default SearchProfileResults;

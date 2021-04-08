@@ -40,7 +40,7 @@ const App = () => {
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />
-              <Route exact path="/search-artists" component={SearchPage} />
+              <Route exact path="/search-profiles" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forum" component={ForumPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />

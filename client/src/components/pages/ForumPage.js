@@ -3,7 +3,7 @@ import React from 'react';
 // Redux imports
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../artistComponents/ArtistList';
+import ProfileCardCollapsible from '../profileComponents/ProfileCardCollapsible';
 import ForumSearch from '../forumComponents/ForumSearch';
 import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
@@ -19,7 +19,7 @@ const ForumPage = () => {
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container fluid="md">
-              <ArtistList />
+              <ProfileCardCollapsible />
             </Container>
           </Col>
           <Col className="rightPanel allPanels"></Col>

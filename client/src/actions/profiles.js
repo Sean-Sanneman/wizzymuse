@@ -3,6 +3,8 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   UPDATE_PROFILE,
+  SEARCH_PROFILES,
+  CLEAR_PROFILE,
   CLEAR_PROFILES,
   PROFILE_ERROR,
   ACCOUNT_DELETED,
@@ -24,11 +26,23 @@ export const getProfileMe = () => async (dispatch) => {
   }
 };
 
-// Get all profiles
-export const getProfiles = () => async (dispatch) => {
+// Get profiles (with or without query parameters)
+export const getProfiles = (queryObj) => async (dispatch) => {
+  console.log('queryObj', queryObj);
   dispatch({ type: CLEAR_PROFILES });
+  // Build the endpoint
+  // let endpoint = '/api/profiles';
+  // if (queryObj) {
+  //   console.log('there is a query object, so we edit the endpoint');
+  //   endpoint += `?instruments=${queryObj.instruments}&genres=${queryObj.genres}`;
+  //   console.log('inside switch endpoint', endpoint);
+  // }
+  // console.log('endpoint', endpoint);
   try {
-    const res = await axios.get('/api/profiles');
+    const res = await axios.get(
+      `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}`
+    );
+    console.log('res.data', res.data);
     dispatch({
       type: GET_PROFILES,
       payload: res.data,

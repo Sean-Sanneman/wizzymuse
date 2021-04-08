@@ -22,6 +22,7 @@ const GenreList = ({
     allGenres: { genreList },
     loading,
   },
+  setGenreSelection,
 }) => {
   const [genreOptions, setGenreOptions] = useState([]);
   useEffect(() => {
@@ -30,7 +31,7 @@ const GenreList = ({
       setGenreOptions(
         genreList.map((genre) => {
           return {
-            value: genre.genreName,
+            value: genre.id,
             label: capitalizeName(underscoreToBlank(genre.genreName)),
           };
         })
@@ -40,6 +41,9 @@ const GenreList = ({
 
   const animatedComponents = makeAnimated();
 
+  const handleGenreSelection = (selection) => {
+    setGenreSelection(selection);
+  };
   return (
     <>
       {loading ? (
@@ -47,9 +51,11 @@ const GenreList = ({
       ) : (
         <Select
           isMulti
+          placeholder={'Genres...'}
           name="genres"
           options={genreOptions}
           components={animatedComponents}
+          onChange={handleGenreSelection}
         />
       )}
     </>

@@ -5,8 +5,8 @@ import React from 'react';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../artistComponents/ArtistList';
-import ArtistSearch from '../searchComponents/ArtistSearch';
+import SearchProfiles from '../searchComponents/SearchProfiles';
+import SearchProfileResults from '../searchComponents/SearchProfileResults';
 import Spinner from '../layoutComponents/Spinner';
 
 // Styles and Images
@@ -18,11 +18,11 @@ const SearchPage = () => {
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            <ArtistSearch />
+            <SearchProfiles />
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container fluid="md">
-              <ArtistList />
+              <SearchProfileResults />
             </Container>
           </Col>
           <Col className="rightPanel allPanels"></Col>

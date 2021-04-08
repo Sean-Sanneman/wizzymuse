@@ -42,22 +42,54 @@ router.get('/me', checkToken, async (req, res) => {
 });
 
 // @route   GET api/profiles
-// @desc    Get all profiles
+// @desc    Get profiles - will return all profiles or filter by query parameters if there are any
 // @access  Public
 // @TODO    JOIN instruments and genres tables, ORDER BY?
 router.get('/', async (req, res) => {
+  console.log('req.query', req.query);
+  let filters;
+  let instrumentsFilterArr;
+  let genresFilterArr;
+  if (req.query.instruments !== 'undefined') {
+    instrumentsFilterArr = req.query.instruments.split(',');
+    filters = 'instruments';
+    if (req.query.genres !== 'undefined') {
+      genresFilterArr = req.query.genres.split(',');
+      filters = 'instruments+genres';
+    }
+  } else if (req.query.genres !== 'undefined') {
+    genresFilterArr = req.query.genres.split(',');
+    filters = 'genres';
+  } else {
+    filters = 'none';
+  }
+
   try {
-    const profilesData = await db.query(
-      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
-        profiles.dob, profiles.phone, profiles.city, profiles.state, 
-        profiles.country, profiles.bio, profiles.band, profiles.website, 
-        profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
-        profiles.instagram, profiles.soundcloud, 
-        profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id);`
-    );
+    let profilesData;
+    switch (filters) {
+      case 'instruments+genres':
+        console.log('filter by instruments and genres');
+        console.log('instrumentsFilterArr', instrumentsFilterArr);
+        console.log('genresFilterArr', genresFilterArr);
+        matchingInstrumentProfileIDs = await db.query(
+          `SELECT profile_id FROM instrument_assignments WHERE ${instrumentsFilterArr} && ARRAY[];`
+        );
+        break;
+      default:
+        console.log('retrieve all profiles');
+        profilesData = await db.query(
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
+            profiles.dob, profiles.phone, profiles.city, profiles.state, 
+            profiles.country, profiles.bio, profiles.band, profiles.website, 
+            profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
+            profiles.instagram, profiles.soundcloud, 
+            profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) ORDER BY users.username;`
+        );
+        console.log('profiles retrieved', profilesData.rows);
+    }
     res.status(200).json({
       message: 'The profiles were successfully retrieved.',
-      results: profilesData.rows.length,
+      results: toCamelCase(profilesData.rows).length,
       profiles: toCamelCase(profilesData.rows),
     });
   } catch (err) {
@@ -289,5 +321,3 @@ router.delete('/', checkToken, async (req, res) => {
 });
 
 module.exports = router;
-
-//
