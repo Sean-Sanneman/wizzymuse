@@ -1,5 +1,5 @@
 // React imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Redux imports
@@ -10,8 +10,8 @@ import { getProfileMe } from '../../actions/profiles';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
+
 // Styles and Images
-import coverImage from '../../assets/cover/cover-image-studio3.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Dashboard = ({
@@ -20,9 +20,19 @@ const Dashboard = ({
   userMe,
   profiles: { loading, profile },
 }) => {
+  const [infoMissing, setInfoMissing] = useState(null);
   useEffect(() => {
     loadUser();
     getProfileMe();
+    if (!Object.keys(profile.profileMe).includes('myInstruments')) {
+      if (!Object.keys(profile.profileMe).includes('myGenres')) {
+        setInfoMissing('instruments and music genres');
+      } else {
+        setInfoMissing('instruments');
+      }
+    } else if (!Object.keys(profile.profileMe).includes('myGenres')) {
+      setInfoMissing('genres');
+    }
   }, [loadUser, getProfileMe]);
 
   return (
@@ -31,25 +41,58 @@ const Dashboard = ({
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            1 of 3
-            <Container fluid="sm" className="leftLED">
-              <Row></Row>
+            <Container fluid="sm">
+              <Row>
+                <Col className="welcomeText">
+                  <h4>Welcome to</h4>
+                  <h2>WizzyMuse</h2>
+                  <br></br>
+                  <h4>Your online collaborators await!</h4>
+                </Col>
+              </Row>
             </Container>
           </Col>
           <Col xs={8} className="midPanel allPanels">
-            2 of 3 (wider)
             <Container>
               <Row>
                 <Col className="profilePanels">
                   <Container fluid>
-                    <Row></Row>
+                    <Row className="welcomeText">
+                      {userMe && <p>Hello {userMe.userInfo.username}!</p>}
+                      {infoMissing !== null && (
+                        <>
+                          <p>
+                            Your profile is incomplete. Please add {infoMissing}{' '}
+                            if you would like to be discovered and asked to
+                            collaborate on projects.
+                          </p>
+                          <Link
+                            to="/edit-profile"
+                            className="btn btn-info my-1"
+                          >
+                            Edit Profile
+                          </Link>
+                        </>
+                      )}
+                    </Row>
                   </Container>
                 </Col>
               </Row>
             </Container>
           </Col>
 
-          <Col className="rightPanel allPanels">3 of 3</Col>
+          <Col className="rightPanel allPanels">
+            <Container fluid="sm">
+              <Row>
+                <Col className="LED-text">
+                  <p>Advertisement 1</p>
+                  <p>Advertisement 2</p>
+                  <p>Advertisement 3</p>
+                  <p>...</p>
+                </Col>
+              </Row>
+            </Container>
+          </Col>
         </Row>
       </Container>
     </>

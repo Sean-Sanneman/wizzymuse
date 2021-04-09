@@ -11,7 +11,8 @@ const toCamelCase = require('../utils/to-camel-case');
 // @access  Private
 router.get('/me', checkToken, async (req, res) => {
   try {
-    const profileData = await db.query(
+    // retrieve the user's profile information
+    const profileMeData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
@@ -25,15 +26,38 @@ router.get('/me', checkToken, async (req, res) => {
       [req.user.id]
     );
 
-    if (!profileData.rows[0]) {
+    if (!profileMeData.rows[0]) {
       return res
         .status(400)
         .json({ message: 'There is no profile for this user' });
     }
+
+    console.log('profileMeData.rows[0]', profileMeData.rows[0]);
+
+    // retrieve the user's instruments
+    const instrumentsMeData = await db.query(
+      `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1`,
+      [profileMeData.rows[0].id]
+    );
+    console.log('instrumentsMeData.rows[0]', instrumentsMeData.rows[0]);
+
+    // retrieve the user's genres
+    const genresMeData = await db.query(
+      `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1`,
+      [profileMeData.rows[0].id]
+    );
+    console.log('genresMeData.rows[0]', genresMeData.rows[0]);
+
+    // build the profileMeObj to return
+    const profileMeObj = {
+      myInfo: toCamelCase(profileMeData.rows)[0],
+      myInstruments: toCamelCase(instrumentsMeData.rows)[0],
+      myGenres: toCamelCase(genresMeData.rows)[0],
+    };
     res.status(200).json({
       message: 'Your profile information was successfully retrieved.',
-      results: profileData.rows.length,
-      profileMe: toCamelCase(profileData.rows)[0],
+      results: profileMeData.rows.length,
+      profileMe: profileMeObj,
     });
   } catch (err) {
     console.error(err.message);

@@ -65,14 +65,12 @@ export const register = ({
     });
     dispatch(loadUser()); // we immediately load the user
   } catch (err) {
-    const errors = err.response.data.errors; // get the array of errors
-    // @TODO: if there are errors we'll want to dispatch an alert for each of them
+    console.log(err);
     dispatch({
       type: REGISTER_FAIL, // we don't need a payload
     });
   }
 };
-
 
 // Login user
 export const login = ({ email, password }) => async (dispatch) => {
