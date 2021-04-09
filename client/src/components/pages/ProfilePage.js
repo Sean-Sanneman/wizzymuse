@@ -7,7 +7,7 @@ import { getProfileById, getProfileMe } from '../../actions/profiles';
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
 import Spinner from '../layoutComponents/Spinner';
-import ProfileGeneral from '../profileComponents/ProfileGeneral';
+import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileInstruments from '../profileComponents/ProfileInstruments';
 import ProfileGenres from '../profileComponents/ProfileGenres';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
@@ -27,9 +27,10 @@ const ProfilePage = ({
       getProfileMe();
     }
   }, [match.params.id, getProfileById, getProfileMe]);
+
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="profilePageTB" />
       {profile === null || loading ? (
         <Spinner />
       ) : (
@@ -59,7 +60,7 @@ const ProfilePage = ({
                       <Container fluid>
                         <Row>
                           <Col>
-                            <ProfileGeneral />
+                            <ProfileCardGeneral />
                           </Col>
                         </Row>
                       </Container>

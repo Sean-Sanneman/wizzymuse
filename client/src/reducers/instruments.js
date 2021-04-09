@@ -1,14 +1,11 @@
 import {
-  GET_PROFILE,
-  GET_PROFILES,
-  UPDATE_PROFILE,
-  CLEAR_PROFILE,
-  PROFILE_ERROR,
+  GET_INSTRUMENTS,
+  CLEAR_INSTRUMENTS,
+  INSTRUMENT_ERROR,
 } from '../actions/types';
 
 const initialState = {
-  profile: null,
-  profiles: [],
+  allInstruments: [],
   loading: true,
   error: {},
 };
@@ -16,16 +13,10 @@ const initialState = {
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case GET_PROFILE:
+    case GET_INSTRUMENTS:
       return {
         ...state,
-        profile: payload,
-        loading: false,
-      };
-    case GET_PROFILES:
-      return {
-        ...state,
-        profiles: payload,
+        allInstruments: payload,
         loading: false,
       };
     default:

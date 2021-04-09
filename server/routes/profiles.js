@@ -33,7 +33,7 @@ router.get('/me', checkToken, async (req, res) => {
     res.status(200).json({
       message: 'Your profile information was successfully retrieved.',
       results: profileData.rows.length,
-      profileInfo: toCamelCase(profileData.rows)[0],
+      profileMe: toCamelCase(profileData.rows)[0],
     });
   } catch (err) {
     console.error(err.message);
@@ -42,23 +42,75 @@ router.get('/me', checkToken, async (req, res) => {
 });
 
 // @route   GET api/profiles
-// @desc    Get all profiles
+// @desc    Get profiles - will return all profiles or filter by query parameters if there are any
 // @access  Public
-// @TODO    JOIN instruments and genres tables, ORDER BY?
 router.get('/', async (req, res) => {
+  let filters;
+  let instrumentsFilterArr;
+  let genresFilterArr;
+  if (req.query.instruments !== 'undefined') {
+    instrumentsFilterArr = req.query.instruments
+      .split(',')
+      .map((id) => parseInt(id));
+    filters = 'instruments';
+    if (req.query.genres !== 'undefined') {
+      genresFilterArr = req.query.genres.split(',').map((id) => parseInt(id));
+      filters = 'instruments+genres';
+    }
+  } else if (req.query.genres !== 'undefined') {
+    genresFilterArr = req.query.genres.split(',').map((id) => parseInt(id));
+    filters = 'genres';
+  } else {
+    filters = 'none';
+  }
+
   try {
-    const profilesData = await db.query(
-      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
-        profiles.dob, profiles.phone, profiles.city, profiles.state, 
-        profiles.country, profiles.bio, profiles.band, profiles.website, 
-        profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
-        profiles.instagram, profiles.soundcloud, 
-        profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id);`
-    );
+    let profilesData;
+    switch (filters) {
+      case 'instruments+genres':
+        profilesData = await db.query(
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+          profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
+          profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
+          instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
+          [instrumentsFilterArr, genresFilterArr]
+        );
+        break;
+      case 'instruments':
+        profilesData = await db.query(
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+          profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
+          profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
+          instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
+          [instrumentsFilterArr]
+        );
+        break;
+      case 'genres':
+        profilesData = await db.query(
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+          profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
+          profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
+          instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
+          [genresFilterArr]
+        );
+        break;
+      default:
+        profilesData = await db.query(
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
+            profiles.dob, profiles.phone, profiles.city, profiles.state, 
+            profiles.country, profiles.bio, profiles.band, profiles.website, 
+            profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
+            profiles.instagram, profiles.soundcloud, 
+            profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) ORDER BY users.username;`
+        );
+    }
     res.status(200).json({
       message: 'The profiles were successfully retrieved.',
-      results: profilesData.rows.length,
-      profiles: toCamelCase(profilesData.rows),
+      results: toCamelCase(profilesData.rows).length,
+      profileList: toCamelCase(profilesData.rows),
     });
   } catch (err) {
     console.error(err.message);
@@ -289,5 +341,3 @@ router.delete('/', checkToken, async (req, res) => {
 });
 
 module.exports = router;
-
-//
