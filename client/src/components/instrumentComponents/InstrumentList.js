@@ -22,6 +22,7 @@ const InstrumentList = ({
     allInstruments: { instrumentList },
     loading,
   },
+  setInstrumentSelection,
 }) => {
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   useEffect(() => {
@@ -30,7 +31,7 @@ const InstrumentList = ({
       setInstrumentOptions(
         instrumentList.map((instrument) => {
           return {
-            value: instrument.instrumentName,
+            value: instrument.id,
             label: capitalizeName(underscoreToBlank(instrument.instrumentName)),
           };
         })
@@ -40,6 +41,10 @@ const InstrumentList = ({
 
   const animatedComponents = makeAnimated();
 
+  const handleInstrumentSelection = (selection) => {
+    setInstrumentSelection(selection);
+  };
+
   return (
     <>
       {loading ? (
@@ -47,9 +52,11 @@ const InstrumentList = ({
       ) : (
         <Select
           isMulti
+          placeholder={'Instruments...'}
           name="instruments"
           options={instrumentOptions}
           components={animatedComponents}
+          onChange={handleInstrumentSelection}
         />
       )}
     </>

@@ -9,10 +9,12 @@ const checkToken = require('../utils/check-token');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const genres = await db.query('SELECT * FROM genres;');
+    const genreData = await db.query(
+      'SELECT * FROM genres ORDER BY genre_name ASC;'
+    );
     res.json({
       message: 'The genres were retrieved.',
-      genres: toCamelCase(genres.rows),
+      genreList: toCamelCase(genreData.rows),
     });
   } catch (err) {
     console.log(err);

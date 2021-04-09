@@ -15,6 +15,7 @@ import Signup from './components/authComponents/Signup';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import ProfilePage from './components/pages/ProfilePage';
+import EditProfilePage from './components/pages/EditProfilePage';
 import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
 import SearchPage from './components/pages/SearchPage';
@@ -40,12 +41,17 @@ const App = () => {
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />
-              <Route exact path="/search-artists" component={SearchPage} />
+              <Route exact path="/search-profiles" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forum" component={ForumPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/profile" component={ProfilePage} />
-              <PrivateRoute exact path="/project" component={ProjectPage} />
+              <PrivateRoute exact path="/my-profile" component={ProfilePage} />
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfilePage}
+              />
+              <PrivateRoute exact path="/new-project" component={ProjectPage} />
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />
             </Switch>
           </main>

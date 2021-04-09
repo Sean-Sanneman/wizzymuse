@@ -13,7 +13,7 @@ const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   loading: true,
-  user: null,
+  userMe: null,
 };
 
 export default function (state = initialState, action) {
@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload, // the payload with have the user's email, username, avatar, and createdAt
+        userMe: payload, // the payload with have the user's email, username, avatar, and createdAt
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
@@ -41,7 +41,7 @@ export default function (state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
-        user: null,
+        userMe: null,
         message: 'You have been logged out',
       };
     default:
