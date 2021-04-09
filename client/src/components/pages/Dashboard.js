@@ -14,23 +14,18 @@ import Toolbar from '../layoutComponents/Toolbar';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Dashboard = ({
-  loadUser,
-  getProfileMe,
-  userMe,
-  profiles: { loading, profile },
-}) => {
+const Dashboard = ({ loadUser, getProfileMe, userMe, profileMe }) => {
   const [infoMissing, setInfoMissing] = useState(null);
   useEffect(() => {
     loadUser();
     getProfileMe();
-    if (!Object.keys(profile.profileMe).includes('myInstruments')) {
-      if (!Object.keys(profile.profileMe).includes('myGenres')) {
+    if (!Object.keys(profileMe).includes('myInstruments')) {
+      if (!Object.keys(profileMe).includes('myGenres')) {
         setInfoMissing('instruments and music genres');
       } else {
         setInfoMissing('instruments');
       }
-    } else if (!Object.keys(profile.profileMe).includes('myGenres')) {
+    } else if (!Object.keys(profileMe).includes('myGenres')) {
       setInfoMissing('genres');
     }
   }, [loadUser, getProfileMe]);
@@ -102,12 +97,12 @@ Dashboard.propTypes = {
   loadUser: PropTypes.func.isRequired,
   getProfileMe: PropTypes.func.isRequired,
   userMe: PropTypes.object.isRequired,
-  profiles: PropTypes.object.isRequired,
+  profileMe: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userMe: state.auth.userMe,
-  profiles: state.profiles,
+  profileMe: state.profiles.profile.profileMe,
 });
 
 export default connect(mapStateToProps, { loadUser, getProfileMe })(Dashboard);

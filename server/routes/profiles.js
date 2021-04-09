@@ -18,11 +18,7 @@ router.get('/me', checkToken, async (req, res) => {
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
       instruments.instrument_name, genres.genre_name 
-      FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
-      LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
-      LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
-      LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
-      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.user_id = $1;`,
+      FROM profiles LEFT JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = $1;`,
       [req.user.id]
     );
 

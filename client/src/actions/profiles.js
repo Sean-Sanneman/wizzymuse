@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  GET_PROFILE_ME,
   GET_PROFILE,
   GET_PROFILES,
   UPDATE_PROFILE,
@@ -12,11 +13,10 @@ import {
 
 // Get current user's profile
 export const getProfileMe = () => async (dispatch) => {
-  console.log('inside getProfileMe');
   try {
     const res = await axios.get('/api/profiles/me');
     dispatch({
-      type: GET_PROFILE,
+      type: GET_PROFILE_ME,
       payload: res.data,
     });
   } catch (err) {

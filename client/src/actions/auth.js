@@ -7,9 +7,12 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT,
+  CLEAR_PROFILE_ME,
   CLEAR_PROFILE,
+  CLEAR_PROFILES,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import { getProfileMe } from './profiles';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -64,6 +67,7 @@ export const register = ({
       payload: res.data, // we get the token back
     });
     dispatch(loadUser()); // we immediately load the user
+    dispatch(getProfileMe()); // we immediately load the user's profile
   } catch (err) {
     console.log(err);
     dispatch({
@@ -88,6 +92,7 @@ export const login = ({ email, password }) => async (dispatch) => {
       payload: res.data, // we get the token back
     });
     dispatch(loadUser()); // we immediately load the user
+    dispatch(getProfileMe()); // we immediately load the user's profile
   } catch (err) {
     console.log(err);
     // const errors = err.response.data.errors; // get the array of errors
@@ -104,6 +109,12 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   });
   dispatch({
+    type: CLEAR_PROFILE_ME,
+  });
+  dispatch({
     type: CLEAR_PROFILE,
+  });
+  dispatch({
+    type: CLEAR_PROFILES,
   });
 };
