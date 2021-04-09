@@ -34,7 +34,7 @@ const ProfilePage = ({
 
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="profilePageTB" />
       {profile === null || loading ? (
         <Spinner />
       ) : (

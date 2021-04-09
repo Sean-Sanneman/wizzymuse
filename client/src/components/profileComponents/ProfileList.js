@@ -9,7 +9,9 @@ import { connect } from 'react-redux';
 import Spinner from '../layoutComponents/Spinner';
 import ProfileCardCollapsible from './ProfileCardCollapsible';
 
-// Styles and Images
+// Utils
+import { pluralizeNoun } from '../../utils/stringUtilFunctions';
+import { pluralizeVerb } from '../../utils/stringUtilFunctions';
 
 const ProfileList = ({
   profiles: {
@@ -23,7 +25,10 @@ const ProfileList = ({
         <h1>Loading...</h1>
       ) : (
         <>
-          <p>{results} profile(s) match your search:</p>
+          <p>
+            {results} {pluralizeNoun(results, 'profile')}{' '}
+            {pluralizeVerb(results, 'match')} your search:
+          </p>
           {profileList.length > 0 ? (
             profileList.map((profile) => (
               <ProfileCardCollapsible key={profile.id} profile={profile} />

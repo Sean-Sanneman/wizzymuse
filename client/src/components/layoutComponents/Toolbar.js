@@ -1,11 +1,86 @@
 // React imports
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+// Redux imports
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Styles and Images
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-const Toolbar = () => {
+// Toolbar links
+const toolbarOptions = [
+  {
+    type: 'dashboardTB',
+    buttons: [
+      {
+        link: '/my-profile',
+        style: 'success',
+        text: 'MY PROFILE',
+      },
+      {
+        link: '/my-connections',
+        style: 'primary',
+        text: 'MY CONNECTIONS',
+      },
+      {
+        link: '/my-projects',
+        style: 'info',
+        text: 'MY PROJECTS',
+      },
+      {
+        link: '/new-project',
+        style: 'warning',
+        text: 'CREATE',
+      },
+    ],
+  },
+  {
+    type: 'profilePageTB',
+    buttons: [
+      {
+        link: '/my-connections',
+        style: 'success',
+        text: 'MY CONNECTIONS',
+      },
+      {
+        link: '/my-projects',
+        style: 'primary',
+        text: 'MY PROJECTS',
+      },
+      {
+        link: '/new-project',
+        style: 'info',
+        text: 'CREATE',
+      },
+      {
+        link: '/mixdown',
+        style: 'warning',
+        text: 'MIXDOWN',
+      },
+    ],
+  },
+];
+
+const Toolbar = ({ toolbarType, auth: { isAuthenticated, loading } }) => {
+  const [toolbarSelected, setToolbarSelected] = useState(null);
+  useEffect(() => {
+    const toolbarWanted = toolbarOptions.filter(
+      (option) => option.type === toolbarType
+    );
+    const toolbarButtons = toolbarWanted[0].buttons.map((button, idx) => {
+      return (
+        <Link to={button.link} key={idx}>
+          <Button variant={`outline-${button.style} btn mr-3`}>
+            {button.text}
+          </Button>
+        </Link>
+      );
+    });
+    setToolbarSelected(toolbarButtons);
+  }, [toolbarType]);
+
   return (
     <>
       <Container
@@ -14,18 +89,11 @@ const Toolbar = () => {
       >
         <Row style={{ height: '3em' }} className="align-content-center">
           <Col className="toolBtns">
-            <Link to="/my-profile">
-              <Button variant="outline-success btn mr-3">MY PROFILE</Button>
-            </Link>
-            <Link to="/project">
-              <Button variant="outline-primary btn mr-3">NEW PROJECT</Button>
-            </Link>
-            <Link to="/#openproject">
-              <Button variant="outline-info btn mr-3">OPEN PROJECT(?)</Button>
-            </Link>
-            <Link to="/mixdown">
-              <Button variant="outline-warning btn mr-3">MIXDOWN</Button>
-            </Link>
+            {!loading && isAuthenticated && toolbarSelected ? (
+              toolbarSelected
+            ) : (
+              <h1>LOADING ...</h1>
+            )}
           </Col>
         </Row>
       </Container>
@@ -33,4 +101,12 @@ const Toolbar = () => {
   );
 };
 
-export default Toolbar;
+Toolbar.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Toolbar);

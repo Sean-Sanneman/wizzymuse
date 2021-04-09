@@ -1,8 +1,6 @@
 // React imports
 import React from 'react';
 
-// Redux imports
-
 // Components
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
@@ -11,6 +9,7 @@ import ProfileList from '../profileComponents/ProfileList';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
+
 const SearchPage = () => {
   return (
     <>
