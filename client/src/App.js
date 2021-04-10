@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
-import { getProfileMe } from './actions/profiles';
+import { getProfileMe, getProfiles } from './actions/profiles';
 
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -34,6 +34,7 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(getProfileMe());
+    store.dispatch(getProfiles());
   }, []);
   return (
     <Provider store={store}>

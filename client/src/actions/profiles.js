@@ -56,7 +56,7 @@ export const getProfileMe = () => async (dispatch) => {
 
 // Get profiles (with or without query parameters)
 export const getProfiles = (queryObj) => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILES });
+  // dispatch({ type: CLEAR_PROFILES });
   try {
     const res = await axios.get(
       `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}`

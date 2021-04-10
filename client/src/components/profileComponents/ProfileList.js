@@ -1,5 +1,5 @@
 // React imports
-import React, { useState } from 'react';
+import React from 'react';
 
 // Redux imports
 import PropTypes from 'prop-types';
