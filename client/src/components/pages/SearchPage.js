@@ -13,7 +13,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 const SearchPage = () => {
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="profilePageTB" />
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">

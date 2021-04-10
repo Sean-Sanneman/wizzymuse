@@ -240,7 +240,8 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
       profile: toCamelCase(newProfileData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
@@ -322,7 +323,8 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
       profile: toCamelCase(updatedProfileData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
@@ -347,7 +349,8 @@ router.delete('/', checkToken, async (req, res) => {
       deletedprofile: toCamelCase(deletedprofileData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
