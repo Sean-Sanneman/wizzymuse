@@ -1,7 +1,10 @@
 // React imports
-import React from 'react';
+import React, { useState } from 'react';
 
 // Redux imports
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getProfiles } from '../../actions/profiles';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
@@ -20,7 +23,25 @@ import {
 } from 'react-bootstrap';
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 
-const ArtistSearch = () => {
+const SearchProfiles = ({ getProfiles }) => {
+  const [instrumentSelection, setInstrumentSelection] = useState([]);
+  const [genreSelection, setGenreSelection] = useState([]);
+  const searchProfileObj = {};
+
+  const onSubmitSearch = (e) => {
+    if (instrumentSelection.length > 0) {
+      const selectedInstruments = instrumentSelection.map(
+        (selection) => selection.value
+      );
+      searchProfileObj.instruments = selectedInstruments;
+    }
+    if (genreSelection.length > 0) {
+      const selectedGenres = genreSelection.map((selection) => selection.value);
+      searchProfileObj.genres = selectedGenres;
+    }
+    getProfiles(searchProfileObj);
+  };
+
   return (
     <Container fluid className="searchPanel">
       <Row>
@@ -39,15 +60,19 @@ const ArtistSearch = () => {
           }}
         >
           <div className="mb-4">
-            <div style={{ color: '#FFF' }}>Instruments</div>
-            <InstrumentList />
+            <InstrumentList setInstrumentSelection={setInstrumentSelection} />
           </div>
           <div className="mb-4">
-            <div style={{ color: '#FFF' }}>Genres</div>
-            <GenreList />
+            <GenreList setGenreSelection={setGenreSelection} />
           </div>
           <div className="mb-4">
-            <Button variant="outline-success">SUBMIT</Button>{' '}
+            <Button
+              variant="outline-success"
+              type="submit"
+              onClick={(e) => onSubmitSearch(e)}
+            >
+              SUBMIT
+            </Button>
           </div>
 
           <div>
@@ -92,4 +117,9 @@ const ArtistSearch = () => {
     </Container>
   );
 };
-export default ArtistSearch;
+
+SearchProfiles.propTypes = {
+  getProfiles: PropTypes.func.isRequired,
+};
+
+export default connect(null, { getProfiles })(SearchProfiles);

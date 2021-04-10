@@ -15,7 +15,7 @@ import {
 } from 'react-bootstrap';
 import avatar1 from '../../assets/images/stock-avatar-1.jpeg';
 
-const ArtistItem = () => {
+const ProfileCardCollapsible = ({ profile: { avatar, username, bio } }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -25,20 +25,21 @@ const ArtistItem = () => {
           <Col md={2} lg={2}>
             <Card.Img
               className="d-block w-100"
-              src={avatar1}
+              src={avatar}
               className=""
               style={{ width: '100%', padding: '18px' }}
-              alt="Stock Avatar 1"
+              alt="avatar"
             />
           </Col>
           <Col>
             <Card.Body className="searchArtistTxt" style={{ padding: '1%' }}>
-              <Card.Title>Avatar 1</Card.Title>
+              <Card.Title>{username}</Card.Title>
               <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                {bio
+                  ? bio
+                  : 'We need some default text in case this profile is empty.'}
               </Card.Text>
-              <Button variant="success">Add to my network</Button>
+              <Button variant="success">COLLABORATE</Button>
 
               {/* Collapse toggle button */}
               <Button
@@ -51,20 +52,7 @@ const ArtistItem = () => {
                 Artist Details
               </Button>
               <Collapse in={open}>
-                <div id="example-collapse-text">
-                  <p>
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. Nihil anim keffiyeh
-                    helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident.
-                  </p>
-                  <h4>
-                    The more artists' information that we add, graphics,
-                    whatever, the collapsible "box" expands to allow it to fit.
-                    This may be useful, so that the initial artist "card" can be
-                    smaller, then the profile opens up when you toggle.
-                  </h4>
-                </div>
+                <div id="example-collapse-text"></div>
               </Collapse>
             </Card.Body>
           </Col>
@@ -74,4 +62,4 @@ const ArtistItem = () => {
   );
 };
 
-export default ArtistItem;
+export default ProfileCardCollapsible;
