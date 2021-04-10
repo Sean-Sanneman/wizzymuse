@@ -45,7 +45,8 @@ const ForumTopics = () => {
         <Row className="forumRow">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
-            These will self repilicate as we add new forum topics.</Col>
+            {/* wrap this in link to forum/id endpoint */}
+            Audio production and mixing tips</Col>
             <Col xs={1}className="forumCol">3 of 5</Col>
             <Col xs={1} className="forumCol">4 of 5</Col>
             <Col xs={3} className="forumCol">5 of 5</Col>
@@ -56,7 +57,7 @@ const ForumTopics = () => {
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
                 {/* wrap this in link to forum/id endpoint */}
-            Audio production and mixing tips</Col>
+            Microphones, placement, and recording tips</Col>
             <Col xs={1}className="forumCol">3 of 5</Col>
             <Col xs={1} className="forumCol">4 of 5</Col>
             <Col xs={3} className="forumCol">5 of 5</Col>
