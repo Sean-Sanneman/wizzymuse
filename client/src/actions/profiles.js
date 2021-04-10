@@ -1,25 +1,52 @@
 import axios from 'axios';
 import {
+  GET_PROFILE_ME,
   GET_PROFILE,
   GET_PROFILES,
   UPDATE_PROFILE,
-  SEARCH_PROFILES,
+  CLEAR_PROFILE_ME,
   CLEAR_PROFILE,
   CLEAR_PROFILES,
   PROFILE_ERROR,
   ACCOUNT_DELETED,
 } from './types';
+import setAuthToken from '../utils/setAuthToken';
+import { loadUser } from './auth';
 
 // Get current user's profile
 export const getProfileMe = () => async (dispatch) => {
-  console.log('inside getProfileMe');
+  console.log('inside getProfileMe action');
+  // dispatch({ type: CLEAR_PROFILE_ME });
+  // console.log(
+  //   'inside getProfileMe action, immediately after dispatch clearprofileme'
+  // );
+  // check localStorage for a token and set the global headers with it if there is one
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
   try {
+    console.log(
+      'inside getProfileMe action, immediately before making request to server'
+    );
     const res = await axios.get('/api/profiles/me');
+    console.log(
+      'inside getProfileMe action, immediately after making request to server'
+    );
+    console.log('res from server after calling /api/profiles/me', res);
     dispatch({
-      type: GET_PROFILE,
+      type: GET_PROFILE_ME,
       payload: res.data,
     });
+    console.log(
+      'inside getProfileMe action, immediately before calling loadUser'
+    );
+    dispatch(loadUser()); // we immediately load the user
+    console.log(
+      'inside getProfileMe action, immediately after calling loadUser'
+    );
   } catch (err) {
+    console.log('inside getProfileMe action, got error');
+    console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
       payload: 'Server error',
@@ -39,6 +66,7 @@ export const getProfiles = (queryObj) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
       payload: 'Server error',
@@ -48,6 +76,7 @@ export const getProfiles = (queryObj) => async (dispatch) => {
 
 // Get a profile by profile ID
 export const getProfileById = (profileId) => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get(`/api/profiles/${profileId}`);
 
@@ -56,6 +85,7 @@ export const getProfileById = (profileId) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
       payload: 'Server error',
@@ -64,9 +94,7 @@ export const getProfileById = (profileId) => async (dispatch) => {
 };
 
 // Create or update a profile - note: the 'history' object has a push method within
-export const editProfile = (profileData, history, edit = false) => async (
-  dispatch
-) => {
+export const editProfile = (profileData) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -75,14 +103,11 @@ export const editProfile = (profileData, history, edit = false) => async (
     };
     const res = await axios.post('/api/profiles', profileData, config);
     dispatch({
-      type: GET_PROFILE,
+      type: GET_PROFILE_ME,
       payload: res.data,
     });
-    // if we updated an existing profile, then stay on the page, otherwise redirect
-    if (!edit) {
-      history.push('/dashboard'); // redirecting in an action is different - we cannot use the Redirect -  we have to use the push method within the history object
-    }
   } catch (err) {
+    console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
       payload: 'Server error',
