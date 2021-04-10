@@ -24,7 +24,7 @@ const ForumTopics = () => {
   return (
     <>
     {/* Forum Headings */}
-    <Container className="forumPanel">
+    <Container className="">
         <Row className="forumRow">
             <Col xs={7} className="forumCol">
                 <h5>Forum Topics</h5>
@@ -42,7 +42,7 @@ const ForumTopics = () => {
     </Container>
 
     {/* Forum Table */}
-    <Container className="forumPanel">
+    <Container className="">
         <Row className="forumRow">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
@@ -51,10 +51,10 @@ const ForumTopics = () => {
             </Col>
             <Col xs={1}className="forumCol">3 of 5</Col>
             <Col xs={1} className="forumCol">4 of 5</Col>
-            <Col xs={3} className="forumCol">5 of 5</Col>
+            <Col xs={3} className="forumCol">How to make my singer wiggle</Col>
         </Row>
     </Container>
-    <Container className="forumPanel">
+    <Container className="">
         <Row className="forumRow">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
@@ -66,7 +66,7 @@ const ForumTopics = () => {
             <Col xs={3} className="forumCol">5 of 5</Col>
         </Row>
     </Container>
-    <Container className="forumPanel">
+    <Container className="">
         <Row className="forumRow">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">

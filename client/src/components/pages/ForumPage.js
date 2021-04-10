@@ -9,6 +9,7 @@ import ForumTopics from '../forumComponents/ForumTopics';
 import Spinner from '../layoutComponents/Spinner';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
+import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
 
 const ForumPage = () => {
   return (
@@ -19,8 +20,9 @@ const ForumPage = () => {
               <Col className="leftPanel allPanels">
                   <ForumSearch/>
               </Col>
-              <Col xs={8} className="midPanel allPanels">
-              <Container fluid="md">
+              <Col xs={8} className="midPanel allPanels" style={{ backgroundImage: `url(${backgroundImage})`, }}>
+           
+              <Container fluid="md" className="forumPanel">
                 
                 <ForumTopics />
                   
