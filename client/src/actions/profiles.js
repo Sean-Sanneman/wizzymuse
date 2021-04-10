@@ -11,7 +11,7 @@ import {
   ACCOUNT_DELETED,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
-import { loadUser } from './auth';
+// import { loadUser } from './auth';
 
 // Get current user's profile
 export const getProfileMe = () => async (dispatch) => {
@@ -37,13 +37,13 @@ export const getProfileMe = () => async (dispatch) => {
       type: GET_PROFILE_ME,
       payload: res.data,
     });
-    console.log(
-      'inside getProfileMe action, immediately before calling loadUser'
-    );
-    dispatch(loadUser()); // we immediately load the user
-    console.log(
-      'inside getProfileMe action, immediately after calling loadUser'
-    );
+    // console.log(
+    //   'inside getProfileMe action, immediately before calling loadUser'
+    // );
+    // dispatch(loadUser()); // we immediately load the user
+    // console.log(
+    //   'inside getProfileMe action, immediately after calling loadUser'
+    // );
   } catch (err) {
     console.log('inside getProfileMe action, got error');
     console.log(err.message);
