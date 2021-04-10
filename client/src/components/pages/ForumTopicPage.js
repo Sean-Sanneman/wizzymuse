@@ -9,9 +9,10 @@ import ArtistList from '../artistComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
 import PostList from '../postComponents/PostList';
 import Spinner from '../layoutComponents/Spinner';
+
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-const ForumPage = () => {
+const ForumTopicPage = () => {
   return (
     <>
       <Toolbar />
@@ -33,4 +34,5 @@ const ForumPage = () => {
         </>
   );
 };
-export default ForumPage;
+
+export default ForumTopicPage;

@@ -1,5 +1,6 @@
 // React imports
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Redux imports
 
@@ -29,10 +30,10 @@ const ForumTopics = () => {
                 <h5>Forum Topics</h5>
             </Col>
             <Col xs={1}className="forumCol">
-                <h7>Posts</h7>
+                <h5>Posts</h5>
             </Col>
             <Col xs={1} className="forumCol">
-                <h7>Replies</h7>
+                <h5>Replies</h5>
             </Col>
             <Col xs={3} className="forumCol">
                 <h5>Last Post</h5>
@@ -46,7 +47,8 @@ const ForumTopics = () => {
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
             {/* wrap this in link to forum/id endpoint */}
-            Audio production and mixing tips</Col>
+            <Link to="/forum-topics">Audio production and mixing tips</Link>
+            </Col>
             <Col xs={1}className="forumCol">3 of 5</Col>
             <Col xs={1} className="forumCol">4 of 5</Col>
             <Col xs={3} className="forumCol">5 of 5</Col>
@@ -57,7 +59,8 @@ const ForumTopics = () => {
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
                 {/* wrap this in link to forum/id endpoint */}
-            Microphones, placement, and recording tips</Col>
+                Microphones, placement, and recording tips.
+            </Col>
             <Col xs={1}className="forumCol">3 of 5</Col>
             <Col xs={1} className="forumCol">4 of 5</Col>
             <Col xs={3} className="forumCol">5 of 5</Col>
@@ -67,14 +70,14 @@ const ForumTopics = () => {
         <Row className="forumRow">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
-            These will self repilicate as we add new forum topics.</Col>
+            These will self repilicate as we add new forum topics.
+            </Col>
             <Col xs={1}className="forumCol">3 of 5</Col>
             <Col xs={1} className="forumCol">4 of 5</Col>
             <Col xs={3} className="forumCol">5 of 5</Col>
         </Row>
     </Container>
     
-
     </>
     );
   };

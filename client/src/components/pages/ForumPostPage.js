@@ -1,3 +1,5 @@
+// This is where the user postings display
+
 // React imports
 import React from 'react';
 // Redux imports
@@ -5,12 +7,12 @@ import React from 'react';
 import Toolbar from '../layoutComponents/Toolbar';
 import ArtistList from '../artistComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
-import ForumTopics from '../forumComponents/ForumTopics';
+import PostItem from '../postComponents/PostItem';
 import Spinner from '../layoutComponents/Spinner';
+
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-
-const ForumPage = () => {
+const ForumPostPage = () => {
   return (
     <>
       <Toolbar />
@@ -22,7 +24,7 @@ const ForumPage = () => {
               <Col xs={8} className="midPanel allPanels">
               <Container fluid="md">
                 
-                <ForumTopics />
+                <PostItem />
                   
               </Container>
               </Col>
@@ -32,4 +34,5 @@ const ForumPage = () => {
         </>
   );
 };
-export default ForumPage;
+
+export default ForumPostPage;

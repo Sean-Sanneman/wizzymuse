@@ -20,6 +20,7 @@ import MixdownPage from './components/pages/MixdownPage';
 import SearchPage from './components/pages/SearchPage';
 import ForumPage from './components/pages/ForumPage';
 import ForumTopicPage from './components/pages/ForumTopicPage';
+import ForumPostPage from './components/pages/ForumPostPage';
 
 // Styles and Images
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -44,7 +45,8 @@ const App = () => {
               <Route exact path="/search-artists" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forum" component={ForumPage} />
-              <Route exact path="/forum/:id" component={ForumTopicPage} />
+              <Route exact path="/forum-topics" component={ForumTopicPage} />
+              <Route exact path="/post-item" component={ForumPostPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/profile" component={ProfilePage} />
               <PrivateRoute exact path="/project" component={ProjectPage} />
