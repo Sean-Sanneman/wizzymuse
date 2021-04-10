@@ -16,17 +16,28 @@ import { getProfileMe } from './profiles';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
+  console.log('inside loadUser action');
   // check localStorage for a token and set the global headers with it if there is one
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
     const res = await axios.get('/api/auth');
+    console.log('res from server after calling /api/auth', res);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
+    console.log(
+      'inside loadUser action, immediately before calling getProfileMe'
+    );
+    dispatch(getProfileMe()); // we immediately load the user's profile
+    console.log(
+      'inside loadUser action, immediately after calling getProfileMe'
+    );
   } catch (err) {
+    console.log('inside loadUser action, got error');
+    console.log(err.message);
     dispatch({
       type: AUTH_ERROR,
     });
@@ -67,7 +78,6 @@ export const register = ({
       payload: res.data, // we get the token back
     });
     dispatch(loadUser()); // we immediately load the user
-    dispatch(getProfileMe()); // we immediately load the user's profile
   } catch (err) {
     console.log(err);
     dispatch({
@@ -92,11 +102,8 @@ export const login = ({ email, password }) => async (dispatch) => {
       payload: res.data, // we get the token back
     });
     dispatch(loadUser()); // we immediately load the user
-    dispatch(getProfileMe()); // we immediately load the user's profile
   } catch (err) {
     console.log(err);
-    // const errors = err.response.data.errors; // get the array of errors
-    // @TODO: if there are errors we'll want to dispatch an alert for each of them
     dispatch({
       type: LOGIN_FAIL, // we don't need a payload
     });

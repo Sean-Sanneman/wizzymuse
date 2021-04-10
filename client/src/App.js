@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
+import { getProfileMe } from './actions/profiles';
 
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -26,13 +27,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/cover/bg-brushed-metal.jpg';
 
 // check localStorage for a token and set the global headers with it if there is one there
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
+// if (localStorage.token) {
+//   setAuthToken(localStorage.token);
+// }
 const App = () => {
-  useEffect(() => {
-    store.dispatch(loadUser());
-  }, []);
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  //   store.dispatch(getProfileMe());
+  // }, []);
   return (
     <Provider store={store}>
       <Router>

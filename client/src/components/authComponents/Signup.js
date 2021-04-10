@@ -11,7 +11,7 @@ import { register } from '../../actions/auth';
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 import { Container, Row, Col, Form, Nav } from 'react-bootstrap';
 
-const Signup = ({ register, auth: { isAuthenticated } }) => {
+const Signup = ({ register, isAuthenticated }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,6 +20,11 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
   const [country, setCountry] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  // Redirect when registered
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -34,11 +39,6 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
       password,
     });
   };
-
-  // Redirect when registered
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <>
@@ -176,13 +176,12 @@ const Signup = ({ register, auth: { isAuthenticated } }) => {
 
 Signup.propTypes = {
   register: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth, // we're pulling all the state that is in the auth reducer
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { register })(Signup);
 // connect takes in two things: (1) any state that we want to map (if none, then 'null'), and (2) an object with any actions we want to use
-

@@ -16,8 +16,7 @@ router.get('/me', checkToken, async (req, res) => {
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-      instruments.instrument_name, genres.genre_name 
+      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = $1;`,
       [req.user.id]
     );
@@ -28,21 +27,17 @@ router.get('/me', checkToken, async (req, res) => {
         .json({ message: 'There is no profile for this user' });
     }
 
-    console.log('profileMeData.rows[0]', profileMeData.rows[0]);
-
     // retrieve the user's instruments
     const instrumentsMeData = await db.query(
       `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1`,
       [profileMeData.rows[0].id]
     );
-    console.log('instrumentsMeData.rows[0]', instrumentsMeData.rows[0]);
 
     // retrieve the user's genres
     const genresMeData = await db.query(
       `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1`,
       [profileMeData.rows[0].id]
     );
-    console.log('genresMeData.rows[0]', genresMeData.rows[0]);
 
     // build the profileMeObj to return
     const profileMeObj = {
@@ -50,11 +45,7 @@ router.get('/me', checkToken, async (req, res) => {
       myInstruments: toCamelCase(instrumentsMeData.rows)[0],
       myGenres: toCamelCase(genresMeData.rows)[0],
     };
-    res.status(200).json({
-      message: 'Your profile information was successfully retrieved.',
-      results: profileMeData.rows.length,
-      profileMe: profileMeObj,
-    });
+    res.status(200).json(profileMeObj);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
