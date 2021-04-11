@@ -13,7 +13,7 @@ const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   loading: true,
-  user: null,
+  userMe: null,
 };
 
 export default function (state = initialState, action) {
@@ -21,14 +21,19 @@ export default function (state = initialState, action) {
   switch (type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload.token);
-      return { ...state, ...payload, isAuthenticated: true, loading: false };
+      localStorage.setItem('token', payload);
+      return {
+        ...state,
+        token: payload,
+        isAuthenticated: true,
+        loading: false,
+      };
     case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload, // the payload with have the user's email, username, avatar, and createdAt
+        userMe: payload, // the payload will have the user's email, username, avatar, and createdAt
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
@@ -41,8 +46,7 @@ export default function (state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
-        user: null,
-        message: 'You have been logged out',
+        userMe: null,
       };
     default:
       return state;

@@ -1,145 +1,107 @@
 // React imports
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+// Redux imports
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-// Styles and Images
-import coverImage from '../../assets/cover/cover-image-studio3.jpg';
-import babyYoda from '../../assets/cover/baby-yoda.jpeg';
-import { Container, Row, Col, ListGroup, Card, Button, Carousel } from 'react-bootstrap';
-import avatar1 from "../../assets/images/stock-avatar-1.jpeg";
-import avatar2 from "../../assets/images/stock-avatar-2.jpeg";
-import avatar3 from "../../assets/images/stock-avatar-3.jpeg";
-import avatar4 from "../../assets/images/stock-avatar-4.png";
 
-const Dashboard = () => {
-  return (
+// Styles and Images
+import { Container, Row, Col } from 'react-bootstrap';
+
+const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
+  const [infoMissing, setInfoMissing] = useState(null);
+
+  useEffect(() => {
+    if (profileMe !== null) {
+      if (!Object.keys(profileMe).includes('myInstruments')) {
+        if (!Object.keys(profileMe).includes('myGenres')) {
+          setInfoMissing('instruments and music genres');
+        } else {
+          setInfoMissing('instruments');
+        }
+      } else if (!profileMe && !Object.keys(profileMe).includes('myGenres')) {
+        setInfoMissing('genres');
+      }
+    }
+  }, [profileMe]);
+
+  return loading && profileMe === null ? (
+    <h1>Loading...</h1>
+  ) : (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="dashboardTB" />
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            1 of 3
-            <Container fluid="sm" className="leftLED">
+            <Container fluid="sm">
               <Row>
-                <Col className="LED-text">
-                  <h6>Artist Name</h6>
-                  <img
-                    src={babyYoda}
-                    className="babyYoda"
-                    style={{ width: '100%' }}
-                    alt="Baby Yoda"
-                  />
-                  Instruments played: Guitar, Pan Flute
+                <Col className="welcomeText">
+                  <h4>Welcome to</h4>
+                  <h2>WizzyMuse</h2>
+                  <br></br>
+                  <h4>Your online collaborators await!</h4>
                 </Col>
               </Row>
             </Container>
           </Col>
           <Col xs={8} className="midPanel allPanels">
-            2 of 3 (wider)
             <Container>
-            <Row>
+              <Row>
                 <Col className="profilePanels">
-                
-                <Container fluid>
-                    <Row>
-                        <Col>
-                            <Card style={{ width: '18rem', color:'#000000', backgroundColor: "transparent", border: "none" }}>
-                            <img src={babyYoda} className="babyYoda" style={{ width: "100%" }} alt="Baby Yoda" />
-                            <Card.Body>
-                                <Card.Title>Baby Yoda</Card.Title>
-                                    <Card.Text>
-                                    Artist's bio, something about themselves
-                                    </Card.Text>
-                                    <Button variant="success">Edit Profile</Button>
-                            </Card.Body>
-                            </Card>
-                        </Col>
+                  <Container fluid>
+                    <Row className="welcomeText">
+                      {userMe && <p>Hello {userMe.username}!</p>}
+                      {infoMissing !== null && (
+                        <>
+                          <p>
+                            Your profile is incomplete. Please add {infoMissing}{' '}
+                            if you would like to be discovered and asked to
+                            collaborate on projects.
+                          </p>
+                          <Link
+                            to="/edit-profile"
+                            className="btn btn-info my-1"
+                          >
+                            Edit Profile
+                          </Link>
+                        </>
+                      )}
                     </Row>
-                </Container>
-
+                  </Container>
                 </Col>
-
-                <Col className="profilePanels">
-                <h4 style={{ padding: "3%" }}>Instruments</h4>
-
-                <ListGroup>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Kloo Horn</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Pan Flute</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Blissl</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                </ListGroup>
-
-                </Col>
-
-                <Col className="profilePanels">
-                <h4 style={{ padding: "3%" }}>Genres</h4>
-
-                <ListGroup>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Shownar Lullaby</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Sparkle-bop</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Droid music</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>Herglic rage-metal</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: "transparent", borderLeft: "none", borderRight: "none" }}>***</ListGroup.Item>
-                </ListGroup>
-
-                </Col>
-            </Row>
-        </Container>
-        <h3 style={{ margin: "15px", color: "seashell", textAlign: "center" }}>My Artists Network</h3>
-
-<Carousel className="friendsCarousel">
-  <Carousel.Item>
-    <img
-      className="d-block w-100" 
-      src={avatar1} className="" style={{ width: "18%", padding: "2%" }} alt="Stock Avatar 1"/>
-    <Carousel.Caption>
-      <h4>Avatar 1</h4>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src={avatar2} className="" style={{ width: "18%", padding: "2%" }} alt="Stock Avatar 2"/>
-    <Carousel.Caption>
-      <h4>Avatar 2</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src={avatar3} className="" style={{ width: "18%", padding: "2%" }} alt="Stock Avatar 3"/>
-    <Carousel.Caption>
-      <h4>Avatar 3</h4>
-      <p>Praesent commodo cursus magna, vel scelerisque.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src={avatar4} className="" style={{ width: "18%", padding: "2%" }} alt="Stock Avatar 4"/>
-    <Carousel.Caption>
-      <h4>Avatar 4</h4>
-      <p>Praesent commodo cursus magna, vel scelerisque.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-</Carousel>
+              </Row>
+            </Container>
           </Col>
 
-          <Col className="rightPanel allPanels">3 of 3</Col>
-
+          <Col className="rightPanel allPanels">
+            <Container fluid="sm">
+              <Row>
+                <Col className="LED-text">
+                  <p>Advertisement 1</p>
+                  <p>Advertisement 2</p>
+                  <p>Advertisement 3</p>
+                  <p>...</p>
+                </Col>
+              </Row>
+            </Container>
+          </Col>
         </Row>
       </Container>
     </>
   );
 };
-export default Dashboard;
+Dashboard.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profiles: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profiles: state.profiles,
+});
+
+export default connect(mapStateToProps)(Dashboard);

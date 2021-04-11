@@ -1,18 +1,22 @@
 // React imports
 import React, { useEffect } from 'react';
+
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfileById, getProfileMe } from '../../actions/profiles';
+
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
 import Spinner from '../layoutComponents/Spinner';
-import ProfileGeneral from '../profileComponents/ProfileGeneral';
+import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileInstruments from '../profileComponents/ProfileInstruments';
 import ProfileGenres from '../profileComponents/ProfileGenres';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
+
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
+
 const ProfilePage = ({
   match,
   getProfileById,
@@ -27,9 +31,10 @@ const ProfilePage = ({
       getProfileMe();
     }
   }, [match.params.id, getProfileById, getProfileMe]);
+
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="profilePageTB" />
       {profile === null || loading ? (
         <Spinner />
       ) : (
@@ -59,7 +64,7 @@ const ProfilePage = ({
                       <Container fluid>
                         <Row>
                           <Col>
-                            <ProfileGeneral />
+                            <ProfileCardGeneral />
                           </Col>
                         </Row>
                       </Container>
@@ -82,16 +87,19 @@ const ProfilePage = ({
     </>
   );
 };
+
 ProfilePage.propTypes = {
   getProfileById: PropTypes.func.isRequired,
   getProfileMe: PropTypes.func.isRequired,
   profiles: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   profiles: state.profiles,
   auth: state.auth,
 });
+
 export default connect(mapStateToProps, { getProfileById, getProfileMe })(
   ProfilePage
 );

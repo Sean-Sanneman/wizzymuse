@@ -3,7 +3,7 @@ import React from 'react';
 // Redux imports
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../artistComponents/ArtistList';
+import ProfileCardCollapsible from '../profileComponents/ProfileCardCollapsible';
 import ForumSearch from '../forumComponents/ForumSearch';
 import ForumTopics from '../forumComponents/ForumTopics';
 import Spinner from '../layoutComponents/Spinner';
@@ -15,6 +15,7 @@ const ForumPage = () => {
   return (
     <>
       <Toolbar />
+
           <Container fluid className="grid">
             <Row className="mainGrid">
               <Col className="leftPanel allPanels">
@@ -32,6 +33,7 @@ const ForumPage = () => {
             </Row>
           </Container>
         </>
+
   );
 };
 export default ForumPage;
