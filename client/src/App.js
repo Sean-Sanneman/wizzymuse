@@ -1,6 +1,8 @@
 // React imports
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import ReactDOM from 'react-dom';
+
 // Redux imports
 import { Provider } from 'react-redux';
 import store from './store';
@@ -23,7 +25,6 @@ import SearchPage from './components/pages/SearchPage';
 import ForumPage from './components/pages/ForumPage';
 
 // Styles and Images
-import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/cover/bg-brushed-metal.jpg';
 
 // check localStorage for a token and set the global headers with it if there is one there

@@ -15,37 +15,17 @@ import setAuthToken from '../utils/setAuthToken';
 
 // Get current user's profile
 export const getProfileMe = () => async (dispatch) => {
-  console.log('inside getProfileMe action');
-  // dispatch({ type: CLEAR_PROFILE_ME });
-  // console.log(
-  //   'inside getProfileMe action, immediately after dispatch clearprofileme'
-  // );
   // check localStorage for a token and set the global headers with it if there is one
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
-    console.log(
-      'inside getProfileMe action, immediately before making request to server'
-    );
     const res = await axios.get('/api/profiles/me');
-    console.log(
-      'inside getProfileMe action, immediately after making request to server'
-    );
-    console.log('res from server after calling /api/profiles/me', res);
     dispatch({
       type: GET_PROFILE_ME,
       payload: res.data,
     });
-    // console.log(
-    //   'inside getProfileMe action, immediately before calling loadUser'
-    // );
-    // dispatch(loadUser()); // we immediately load the user
-    // console.log(
-    //   'inside getProfileMe action, immediately after calling loadUser'
-    // );
   } catch (err) {
-    console.log('inside getProfileMe action, got error');
     console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
@@ -56,7 +36,6 @@ export const getProfileMe = () => async (dispatch) => {
 
 // Get profiles (with or without query parameters)
 export const getProfiles = (queryObj) => async (dispatch) => {
-  // dispatch({ type: CLEAR_PROFILES });
   try {
     const res = await axios.get(
       `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}`
@@ -101,11 +80,8 @@ export const editProfile = (profileData) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post('/api/profiles', profileData, config);
-    dispatch({
-      type: GET_PROFILE_ME,
-      payload: res.data,
-    });
+    const res = await axios.put('/api/profiles', profileData, config);
+    getProfileMe();
   } catch (err) {
     console.log(err.message);
     dispatch({
