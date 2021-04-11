@@ -1,31 +1,30 @@
+// This is where the user postings display
+
 // React imports
 import React from 'react';
 // Redux imports
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ProfileCardCollapsible from '../profileComponents/ProfileCardCollapsible';
+import ArtistList from '../artistComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
-import ForumTopics from '../forumComponents/ForumTopics';
+import PostItem from '../postComponents/PostItem';
 import Spinner from '../layoutComponents/Spinner';
+
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
-
-const ForumPage = () => {
+const ForumPostPage = () => {
   return (
     <>
       <Toolbar />
-
           <Container fluid className="grid">
             <Row className="mainGrid">
               <Col className="leftPanel allPanels">
                   <ForumSearch/>
               </Col>
-              <Col xs={8} className="midPanel allPanels" style={{ backgroundImage: `url(${backgroundImage})`, }}>
-           
-              <Container fluid="md" className="forumPanel">
+              <Col xs={8} className="midPanel allPanels">
+              <Container fluid="md">
                 
-                <ForumTopics />
+                <PostItem />
                   
               </Container>
               </Col>
@@ -33,7 +32,7 @@ const ForumPage = () => {
             </Row>
           </Container>
         </>
-
   );
 };
-export default ForumPage;
+
+export default ForumPostPage;

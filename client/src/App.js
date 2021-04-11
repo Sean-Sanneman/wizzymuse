@@ -23,6 +23,8 @@ import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
 import SearchPage from './components/pages/SearchPage';
 import ForumPage from './components/pages/ForumPage';
+import ForumTopicPage from './components/pages/ForumTopicPage';
+import ForumPostPage from './components/pages/ForumPostPage';
 
 // Styles and Images
 import background from './assets/cover/bg-brushed-metal.jpg';
@@ -48,6 +50,8 @@ const App = () => {
               <Route exact path="/search-profiles" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forum" component={ForumPage} />
+              <Route exact path="/forum-topics" component={ForumTopicPage} />
+              <Route exact path="/post-item" component={ForumPostPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/my-profile" component={ProfilePage} />
               <PrivateRoute
