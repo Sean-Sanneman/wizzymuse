@@ -65,10 +65,7 @@ router.post('/register', checkUserInput, async (req, res) => {
       { expiresIn: process.env.JWTEXPIRATION },
       (err, token) => {
         if (err) throw err;
-        res.status(200).json({
-          message: 'You have been successfully registered.',
-          token,
-        }); // send token back to client
+        res.status(200).json(token); // send token back to client
       }
     );
   } catch (err) {

@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadUser } from '../../actions/auth';
-import { getProfileMe } from '../../actions/profiles';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
@@ -14,28 +12,26 @@ import Toolbar from '../layoutComponents/Toolbar';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Dashboard = ({
-  loadUser,
-  getProfileMe,
-  userMe,
-  profiles: { loading, profile },
-}) => {
+const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
   const [infoMissing, setInfoMissing] = useState(null);
-  useEffect(() => {
-    loadUser();
-    getProfileMe();
-    if (!Object.keys(profile.profileMe).includes('myInstruments')) {
-      if (!Object.keys(profile.profileMe).includes('myGenres')) {
-        setInfoMissing('instruments and music genres');
-      } else {
-        setInfoMissing('instruments');
-      }
-    } else if (!Object.keys(profile.profileMe).includes('myGenres')) {
-      setInfoMissing('genres');
-    }
-  }, [loadUser, getProfileMe]);
 
-  return (
+  useEffect(() => {
+    if (profileMe !== null) {
+      if (!Object.keys(profileMe).includes('myInstruments')) {
+        if (!Object.keys(profileMe).includes('myGenres')) {
+          setInfoMissing('instruments and music genres');
+        } else {
+          setInfoMissing('instruments');
+        }
+      } else if (!profileMe && !Object.keys(profileMe).includes('myGenres')) {
+        setInfoMissing('genres');
+      }
+    }
+  }, [profileMe]);
+
+  return loading && profileMe === null ? (
+    <h1>Loading...</h1>
+  ) : (
     <>
       <Toolbar toolbarType="dashboardTB" />
       <Container fluid className="grid">
@@ -58,7 +54,7 @@ const Dashboard = ({
                 <Col className="profilePanels">
                   <Container fluid>
                     <Row className="welcomeText">
-                      {userMe && <p>Hello {userMe.userInfo.username}!</p>}
+                      {userMe && <p>Hello {userMe.username}!</p>}
                       {infoMissing !== null && (
                         <>
                           <p>
@@ -99,15 +95,13 @@ const Dashboard = ({
   );
 };
 Dashboard.propTypes = {
-  loadUser: PropTypes.func.isRequired,
-  getProfileMe: PropTypes.func.isRequired,
-  userMe: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   profiles: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  userMe: state.auth.userMe,
+  auth: state.auth,
   profiles: state.profiles,
 });
 
-export default connect(mapStateToProps, { loadUser, getProfileMe })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

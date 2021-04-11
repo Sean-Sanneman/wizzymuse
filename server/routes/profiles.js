@@ -15,14 +15,9 @@ router.get('/me', checkToken, async (req, res) => {
     const profileMeData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
-      profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-      instruments.instrument_name, genres.genre_name 
-      FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
-      LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
-      LEFT JOIN genre_assignments ON (profiles.id = genre_assignments.profile_id)
-      LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id)
-      LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE profiles.user_id = $1;`,
+      profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at
+      FROM profiles LEFT JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = $1;`,
       [req.user.id]
     );
 
@@ -32,33 +27,25 @@ router.get('/me', checkToken, async (req, res) => {
         .json({ message: 'There is no profile for this user' });
     }
 
-    console.log('profileMeData.rows[0]', profileMeData.rows[0]);
-
     // retrieve the user's instruments
     const instrumentsMeData = await db.query(
       `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1`,
       [profileMeData.rows[0].id]
     );
-    console.log('instrumentsMeData.rows[0]', instrumentsMeData.rows[0]);
 
     // retrieve the user's genres
     const genresMeData = await db.query(
       `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1`,
       [profileMeData.rows[0].id]
     );
-    console.log('genresMeData.rows[0]', genresMeData.rows[0]);
 
     // build the profileMeObj to return
     const profileMeObj = {
       myInfo: toCamelCase(profileMeData.rows)[0],
-      myInstruments: toCamelCase(instrumentsMeData.rows)[0],
-      myGenres: toCamelCase(genresMeData.rows)[0],
+      myInstruments: toCamelCase(instrumentsMeData.rows),
+      myGenres: toCamelCase(genresMeData.rows),
     };
-    res.status(200).json({
-      message: 'Your profile information was successfully retrieved.',
-      results: profileMeData.rows.length,
-      profileMe: profileMeObj,
-    });
+    res.status(200).json(profileMeObj);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -95,7 +82,7 @@ router.get('/', async (req, res) => {
         profilesData = await db.query(
           `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
-          profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+          profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
           instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
           [instrumentsFilterArr, genresFilterArr]
@@ -105,7 +92,7 @@ router.get('/', async (req, res) => {
         profilesData = await db.query(
           `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
-          profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+          profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
           instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
           [instrumentsFilterArr]
@@ -115,7 +102,7 @@ router.get('/', async (req, res) => {
         profilesData = await db.query(
           `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
-          profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+          profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
           instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
           [genresFilterArr]
@@ -125,7 +112,7 @@ router.get('/', async (req, res) => {
         profilesData = await db.query(
           `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
             profiles.dob, profiles.phone, profiles.city, profiles.state, 
-            profiles.country, profiles.bio, profiles.band, profiles.website, 
+            profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
             profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
             profiles.instagram, profiles.soundcloud, 
             profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) ORDER BY users.username;`
@@ -151,7 +138,7 @@ router.get('/:id', async (req, res) => {
     const selectedprofileData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
-      profiles.bio, profiles.band, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
+      profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
       instruments.instrument_name, genres.genre_name 
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
@@ -194,16 +181,15 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
     if (profileData.rows[0]) {
       return res.status(400).json({
         message: 'A profile already exists for this user',
-        results: profileData.rows.length,
       });
     }
 
     // save the profile to the database
     const newProfileData = await db.query(
       `INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state,
-         country, bio, band, website, youtube, twitter, facebook, linkedin, instagram, 
+         country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, 
          soundcloud) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
-          $15, $16, $17) RETURNING *;`,
+          $15, $16, $17, $18) RETURNING *;`,
       [
         req.user.id,
         req.body.firstName,
@@ -215,6 +201,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
         req.body.country,
         req.body.bio,
         req.body.band,
+        req.body.artistName,
         req.body.website,
         req.body.youtube,
         req.body.twitter,
@@ -253,18 +240,20 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
       profile: toCamelCase(newProfileData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
 // @route   PUT api/profiles
-// @desc    Update a profile
+// @desc    Update a user's profile
 // @access  Private (only the logged in user can update his/her own profile)
+// @TODO    Develop validations in checkProfileInput
 router.put('/', checkToken, checkProfileInput, async (req, res) => {
   try {
     // update the profile to the database
     const updatedProfileData = await db.query(
-      'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, website = $10, youtube = $11, twitter = $12, facebook = $13, linkedin = $14, instagram = $15, soundcloud = $16, is_musician = $17 WHERE user_id = $18 RETURNING *;',
+      'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, artist_name = $10, website = $11, youtube = $12, twitter = $13, facebook = $14, linkedin = $15, instagram = $16, soundcloud = $17, twitch = $18, tiktok = $19 WHERE user_id = $20 RETURNING *;',
       [
         req.body.firstName,
         req.body.lastName,
@@ -275,6 +264,7 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
         req.body.country,
         req.body.bio,
         req.body.band,
+        req.body.artistName,
         req.body.website,
         req.body.youtube,
         req.body.twitter,
@@ -282,7 +272,8 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
         req.body.linkedin,
         req.body.instagram,
         req.body.soundcloud,
-        req.body.isMusician,
+        req.body.twitch,
+        req.body.tiktok,
         req.user.id,
       ]
     );
@@ -291,7 +282,6 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
     if (!updatedProfileData.rows[0]) {
       return res.status(400).json({
         message: 'The profile does not exist.',
-        results: updatedProfileData.rows.length,
       });
     }
 
@@ -300,15 +290,11 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
       'DELETE FROM instrument_assignments WHERE profile_id = $1;',
       [updatedProfileData.rows[0].id]
     );
-    const updatedInstrumentAssignmentsList = [];
     for (let i = 0; i < req.body.instrumentIds.length; i++) {
-      const updatedInstrumentAssignmentData = await db.query(
+      await db.query(
         `INSERT INTO instrument_assignments 
-      (profile_id, instrument_id) VALUES ($1, $2) RETURNING *;`,
+      (profile_id, instrument_id) VALUES ($1, $2);`,
         [updatedProfileData.rows[0].id, req.body.instrumentIds[i]]
-      );
-      updatedInstrumentAssignmentsList.push(
-        updatedInstrumentAssignmentData.rows[0]
       );
     }
 
@@ -316,26 +302,21 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
     await db.query('DELETE FROM genre_assignments WHERE profile_id = $1;', [
       updatedProfileData.rows[0].id,
     ]);
-    const updatedGenreAssignmentsList = [];
     for (let i = 0; i < req.body.genreIds.length; i++) {
-      const updatedGenreAssignmentData = await db.query(
+      await db.query(
         `INSERT INTO genre_assignments 
-      (profile_id, genre_id) VALUES ($1, $2) RETURNING *;`,
+      (profile_id, genre_id) VALUES ($1, $2);`,
         [updatedProfileData.rows[0].id, req.body.genreIds[i]]
       );
-      updatedGenreAssignmentsList.push(updatedGenreAssignmentData.rows[0]);
     }
 
     // send response back to client
     res.status(200).json({
-      message: 'The profile was successfully updated.',
-      // results: updatedProfileData.rows.length,
-      instrumentAssignmentsList: toCamelCase(updatedInstrumentAssignmentsList),
-      genreAssignmentsList: toCamelCase(updatedGenreAssignmentsList),
-      profile: toCamelCase(updatedProfileData.rows)[0],
+      message: 'Your profile was successfully updated.',
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
@@ -351,16 +332,15 @@ router.delete('/', checkToken, async (req, res) => {
     if (!deletedprofileData.rows[0]) {
       return res.status(400).json({
         message: 'The profile does not exist.',
-        results: deletedprofileData.rows.length,
       });
     }
     res.status(200).json({
       message: 'Your profile was successfully deleted.',
-      results: deletedprofileData.rows.length,
       deletedprofile: toCamelCase(deletedprofileData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 

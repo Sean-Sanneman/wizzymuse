@@ -21,14 +21,19 @@ export default function (state = initialState, action) {
   switch (type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload.token);
-      return { ...state, ...payload, isAuthenticated: true, loading: false };
+      localStorage.setItem('token', payload);
+      return {
+        ...state,
+        token: payload,
+        isAuthenticated: true,
+        loading: false,
+      };
     case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        userMe: payload, // the payload with have the user's email, username, avatar, and createdAt
+        userMe: payload, // the payload will have the user's email, username, avatar, and createdAt
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
@@ -42,7 +47,6 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         loading: false,
         userMe: null,
-        message: 'You have been logged out',
       };
     default:
       return state;
