@@ -1,9 +1,21 @@
 // React imports
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+
+// Redux imports
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 // Styles and Images
 import coverImage from '../../assets/cover/cover-image-studio2.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
-const Landing = () => {
+
+const Landing = ({ isAuthenticated }) => {
+  // Redirect when logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <Container fluid className="grid">
       <Row className="mainGrid">
@@ -16,9 +28,7 @@ const Landing = () => {
                 <br></br>
                 <h4>Your online collaborators await!</h4>
                 <br></br>
-                <h5>
-                  Please login or register to continue.
-                </h5>
+                <h5>Please login or register to continue.</h5>
               </Col>
             </Row>
           </Container>
@@ -47,4 +57,13 @@ const Landing = () => {
     </Container>
   );
 };
-export default Landing;
+
+Landing.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Landing);

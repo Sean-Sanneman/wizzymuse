@@ -1,6 +1,10 @@
 // React imports
 import React from 'react';
 
+// Redux imports
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 // Components
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
@@ -13,7 +17,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 const SearchPage = () => {
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="profilePageTB" />
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
@@ -30,4 +34,5 @@ const SearchPage = () => {
     </>
   );
 };
+
 export default SearchPage;

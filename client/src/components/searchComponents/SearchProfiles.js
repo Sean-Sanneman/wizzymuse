@@ -1,5 +1,5 @@
 // React imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Redux imports
 import PropTypes from 'prop-types';
@@ -27,6 +27,10 @@ const SearchProfiles = ({ getProfiles }) => {
   const [instrumentSelection, setInstrumentSelection] = useState([]);
   const [genreSelection, setGenreSelection] = useState([]);
   const searchProfileObj = {};
+
+  useEffect(() => {
+    getProfiles();
+  }, []);
 
   const onSubmitSearch = (e) => {
     if (instrumentSelection.length > 0) {
