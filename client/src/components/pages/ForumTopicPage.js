@@ -5,7 +5,6 @@ import React from 'react';
 // Redux imports
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ArtistList from '../artistComponents/ArtistList';
 import ForumSearch from '../forumComponents/ForumSearch';
 import PostList from '../postComponents/PostList';
 import Spinner from '../layoutComponents/Spinner';
@@ -16,22 +15,20 @@ const ForumTopicPage = () => {
   return (
     <>
       <Toolbar />
-          <Container fluid className="grid">
-            <Row className="mainGrid">
-              <Col className="leftPanel allPanels">
-                  <ForumSearch/>
-              </Col>
-              <Col xs={8} className="midPanel allPanels">
-              <Container fluid="md">
-                
-                <PostList />
-                  
-              </Container>
-              </Col>
-              <Col className="rightPanel allPanels"></Col>
-            </Row>
-          </Container>
-        </>
+      <Container fluid className="grid">
+        <Row className="mainGrid">
+          <Col className="leftPanel allPanels">
+            <ForumSearch />
+          </Col>
+          <Col xs={8} className="midPanel allPanels">
+            <Container fluid="md">
+              <PostList />
+            </Container>
+          </Col>
+          <Col className="rightPanel allPanels"></Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 
