@@ -8,11 +8,9 @@ import { connect } from 'react-redux';
 
 // Styles and Images
 import { Card, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ProfileCardGeneral = ({
-  profile: { profileMe },
-  auth: { loading, isAuthenticated, userMe },
-}) => {
+const ProfileCardGeneral = ({ profiles: { profileMe } }) => {
   return (
     <Card
       style={{
@@ -23,111 +21,53 @@ const ProfileCardGeneral = ({
       }}
     >
       <img
-        src={profileMe.avatar}
+        src={profileMe.myInfo.avatar}
         className="babyYoda"
         style={{ width: '100%' }}
-        alt="Avatar of artist currently being viewed"
+        alt="my avatar"
       />
       <Card.Body>
-        <Card.Title>{profileMe.username}</Card.Title>
+        <Card.Title>{profileMe.myInfo.username}</Card.Title>
         <Card.Text>
-          {profileMe.bio && <p>{profileMe.bio}</p>}
+          {profileMe.bio && <p>{profileMe.myInfo.bio}</p>}
           <div>
-            {profileMe.email && (
+            <a
+              href={profileMe.myInfo.email}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon
+                icon={['fas', 'at']}
+                transform="down-4 grow-2.5"
+              />
+              {profileMe.myInfo.email}
+            </a>
+            {profileMe.myInfo.website && (
               <a
-                href={profileMe.email}
+                href={profileMe.myInfo.website}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i className="fas fa-at fa-2x"></i>
-              </a>
-            )}
-            {profileMe.website && (
-              <a
-                href={profileMe.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-globe fa-2x"></i>
-              </a>
-            )}
-            {profileMe.youtube && (
-              <a
-                href={profileMe.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-youtube fa-2x"></i>
-              </a>
-            )}
-            {profileMe.twitter && (
-              <a
-                href={profileMe.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-twitter fa-2x"></i>
-              </a>
-            )}
-            {profileMe.facebook && (
-              <a
-                href={profileMe.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-facebook fa-2x"></i>
-              </a>
-            )}
-            {profileMe.instagram && (
-              <a
-                href={profileMe.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-instagram fa-2x"></i>
-              </a>
-            )}
-            {profileMe.linkedin && (
-              <a
-                href={profileMe.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-linkedin fa-2x"></i>
-              </a>
-            )}
-            {profileMe.soundcloud && (
-              <a
-                href={profileMe.soundcloud}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-soundcloud fa-2x"></i>
+                <FontAwesomeIcon icon={['fas', 'globe']} transform="grow-2.5" />
+                {profileMe.myInfo.website}
               </a>
             )}
           </div>
         </Card.Text>
-
-        {isAuthenticated &&
-          loading === false &&
-          userMe.id === profileMe.userId && (
-            <Link to="/#edit-profile">
-              <Button variant="success">Edit Profile</Button>
-            </Link>
-          )}
+        <Link to="/edit-profile">
+          <Button variant="success">Edit Profile</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
 };
 
 ProfileCardGeneral.propTypes = {
-  profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
+  profiles: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profiles.profile,
-  auth: state.auth,
+  profiles: state.profiles,
 });
 
 export default connect(mapStateToProps)(ProfileCardGeneral);

@@ -17,13 +17,13 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
 
   useEffect(() => {
     if (profileMe !== null) {
-      if (!Object.keys(profileMe).includes('myInstruments')) {
-        if (!Object.keys(profileMe).includes('myGenres')) {
+      if (profileMe.instruments.length === 0) {
+        if (profileMe.genres.length === 0) {
           setInfoMissing('instruments and music genres');
         } else {
           setInfoMissing('instruments');
         }
-      } else if (!profileMe && !Object.keys(profileMe).includes('myGenres')) {
+      } else if (profileMe.genres.length === 0) {
         setInfoMissing('genres');
       }
     }

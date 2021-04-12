@@ -6,36 +6,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getInstruments } from '../../actions/instruments';
 
+// Utils
+import { getDefaultInstrumentValues } from '../../utils/listUtilFunctions';
+
 // Styles and Images
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-// Util functions
-import {
-  capitalizeName,
-  underscoreToBlank,
-} from '../../utils/stringUtilFunctions';
-
 const InstrumentList = ({
   getInstruments,
-  instruments: {
-    allInstruments: { instrumentList },
-    loading,
-  },
+  initialInstrumentSelection,
+  instruments: { instrumentList, loading },
   setInstrumentSelection,
 }) => {
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   useEffect(() => {
     getInstruments();
     if (!loading) {
-      setInstrumentOptions(
-        instrumentList.map((instrument) => {
-          return {
-            value: instrument.id,
-            label: capitalizeName(underscoreToBlank(instrument.instrumentName)),
-          };
-        })
-      );
+      setInstrumentOptions(getDefaultInstrumentValues(instrumentList));
     }
   }, [getInstruments, loading]);
 
@@ -48,7 +36,16 @@ const InstrumentList = ({
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
+        <div>Loading...</div>
+      ) : initialInstrumentSelection.length > 0 ? (
+        <Select
+          isMulti
+          name="instruments"
+          options={instrumentOptions}
+          defaultValue={getDefaultInstrumentValues(initialInstrumentSelection)}
+          components={animatedComponents}
+          onChange={handleInstrumentSelection}
+        />
       ) : (
         <Select
           isMulti
