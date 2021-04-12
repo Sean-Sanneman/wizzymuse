@@ -52,7 +52,7 @@ CREATE TABLE instrument_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
+-- INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
 
 CREATE TABLE genres (
     id SERIAL PRIMARY KEY,
