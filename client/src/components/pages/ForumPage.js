@@ -14,7 +14,7 @@ import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
 const ForumPage = () => {
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="forumTB" />
 
           <Container fluid className="grid">
             <Row className="mainGrid">

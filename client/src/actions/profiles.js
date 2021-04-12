@@ -40,6 +40,7 @@ export const getProfiles = (queryObj) => async (dispatch) => {
     const res = await axios.get(
       `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}`
     );
+    console.log('res', res);
     dispatch({
       type: GET_PROFILES,
       payload: res.data,
