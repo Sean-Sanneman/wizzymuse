@@ -14,7 +14,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 const ForumTopicPage = () => {
   return (
     <>
-      <Toolbar />
+      <Toolbar toolbarType="forumTB" />
+      
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
