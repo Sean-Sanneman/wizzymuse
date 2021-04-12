@@ -17,7 +17,13 @@ import {
   faTwitter,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import { fas, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  fas,
+  faAt,
+  faAngleDoubleDown,
+  faAngleDoubleUp,
+  faGlobe,
+} from '@fortawesome/free-solid-svg-icons';
 library.add(
   fab,
   fas,
@@ -29,7 +35,10 @@ library.add(
   faSoundcloud,
   faTwitch,
   faTiktok,
-  faChevronRight
+  faAt,
+  faAngleDoubleDown,
+  faAngleDoubleUp,
+  faGlobe
 );
 
 ReactDOM.render(

@@ -1,57 +1,47 @@
 // React imports
 import React, { useEffect } from 'react';
+
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProfileById, getProfileMe } from '../../actions/profiles';
+import { getProfileMe } from '../../actions/profiles';
+
 // Components
-import Toolbar from '../layoutComponents/Toolbar';
 import Spinner from '../layoutComponents/Spinner';
+import Toolbar from '../layoutComponents/Toolbar';
 import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileInstruments from '../profileComponents/ProfileInstruments';
 import ProfileGenres from '../profileComponents/ProfileGenres';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
+
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-const ProfilePage = ({
-  match,
-  getProfileById,
-  getProfileMe,
-  profiles: { profile, loading },
-  auth,
-}) => {
+
+const ProfileMePage = ({ getProfileMe, profiles: { profileMe, loading } }) => {
   useEffect(() => {
-    if (match.params.id) {
-      getProfileById(match.params.id); // match the id in the url
-    } else {
-      getProfileMe();
-    }
-  }, [match.params.id, getProfileById, getProfileMe]);
+    getProfileMe();
+  }, [getProfileMe, loading]);
 
   return (
     <>
       <Toolbar toolbarType="profilePageTB" />
-      {profile === null || loading ? (
+      {profileMe === null || loading ? (
         <Spinner />
       ) : (
         <>
           <Container fluid className="grid">
             <Row className="mainGrid">
               <Col className="leftPanel allPanels">
-                {/* <Container fluid="sm" className="leftLED">
+                <Container fluid="sm">
                   <Row>
-                    <Col className="LED-text">
-                      <h6>Artist Name</h6>
-                      <img
-                        src={babyYoda}
-                        className="babyYoda"
-                        style={{ width: '100%' }}
-                        alt="Baby Yoda"
-                      />
-                      Instruments played: Guitar, Pan Flute
+                    <Col className="welcomeText">
+                      <h4>Welcome to</h4>
+                      <h2>WizzyMuse</h2>
+                      <br></br>
+                      <h4>Your online collaborators await!</h4>
                     </Col>
                   </Row>
-                </Container> */}
+                </Container>
               </Col>
               <Col xs={8} className="midPanel allPanels">
                 <Container>
@@ -65,17 +55,26 @@ const ProfilePage = ({
                         </Row>
                       </Container>
                     </Col>
-                    <Col className="profilePanels">
-                      <ProfileInstruments />
-                    </Col>
-                    <Col className="profilePanels">
-                      <ProfileGenres />
-                    </Col>
+
+                    {/* <ProfileInstruments /> */}
+
+                    {/* <ProfileGenres /> */}
                   </Row>
                 </Container>
                 <ProfileCarousel />
               </Col>
-              <Col className="rightPanel allPanels"></Col>
+              <Col className="rightPanel allPanels">
+                <Container fluid="sm">
+                  <Row>
+                    <Col className="LED-text">
+                      <p>Advertisement 1</p>
+                      <p>Advertisement 2</p>
+                      <p>Advertisement 3</p>
+                      <p>...</p>
+                    </Col>
+                  </Row>
+                </Container>
+              </Col>
             </Row>
           </Container>
         </>
@@ -83,16 +82,14 @@ const ProfilePage = ({
     </>
   );
 };
-ProfilePage.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
+
+ProfileMePage.propTypes = {
   getProfileMe: PropTypes.func.isRequired,
   profiles: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   profiles: state.profiles,
-  auth: state.auth,
 });
-export default connect(mapStateToProps, { getProfileById, getProfileMe })(
-  ProfilePage
-);
+
+export default connect(mapStateToProps, { getProfileMe })(ProfileMePage);

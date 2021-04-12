@@ -73,7 +73,7 @@ export const getProfileById = (profileId) => async (dispatch) => {
 };
 
 // Create or update a profile - note: the 'history' object has a push method within
-export const editProfile = (profileData) => async (dispatch) => {
+export const editProfile = (profileData, history) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -81,6 +81,11 @@ export const editProfile = (profileData) => async (dispatch) => {
       },
     };
     const res = await axios.put('/api/profiles', profileData, config);
+    history.push('/dashboard'); // redirecting in an action is different - we cannot use the Redirect -  we have to use the push method within the history object
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
     getProfileMe();
   } catch (err) {
     console.log(err.message);

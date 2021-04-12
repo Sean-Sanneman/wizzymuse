@@ -27,24 +27,27 @@ router.get('/me', checkToken, async (req, res) => {
         .json({ message: 'There is no profile for this user' });
     }
 
+    // build the profileMeObj to return
+    const profileMeObj = toCamelCase(profileMeData.rows)[0];
+
     // retrieve the user's instruments
     const instrumentsMeData = await db.query(
       `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1`,
       [profileMeData.rows[0].id]
     );
+    instrumentsMeData.rows
+      ? (profileMeObj.instruments = toCamelCase(instrumentsMeData.rows))
+      : (profileMeObj.instruments = []);
 
     // retrieve the user's genres
     const genresMeData = await db.query(
       `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1`,
       [profileMeData.rows[0].id]
     );
+    genresMeData.rows
+      ? (profileMeObj.genres = toCamelCase(genresMeData.rows))
+      : (profileMeObj.genres = []);
 
-    // build the profileMeObj to return
-    const profileMeObj = {
-      myInfo: toCamelCase(profileMeData.rows)[0],
-      myInstruments: toCamelCase(instrumentsMeData.rows),
-      myGenres: toCamelCase(genresMeData.rows),
-    };
     res.status(200).json(profileMeObj);
   } catch (err) {
     console.error(err.message);
@@ -249,7 +252,7 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 // @desc    Update a user's profile
 // @access  Private (only the logged in user can update his/her own profile)
 // @TODO    Develop validations in checkProfileInput
-router.put('/', checkToken, checkProfileInput, async (req, res) => {
+router.put('/', checkToken, async (req, res) => {
   try {
     // update the profile to the database
     const updatedProfileData = await db.query(
@@ -290,11 +293,11 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
       'DELETE FROM instrument_assignments WHERE profile_id = $1;',
       [updatedProfileData.rows[0].id]
     );
-    for (let i = 0; i < req.body.instrumentIds.length; i++) {
+    for (let i = 0; i < req.body.instruments.length; i++) {
       await db.query(
         `INSERT INTO instrument_assignments 
       (profile_id, instrument_id) VALUES ($1, $2);`,
-        [updatedProfileData.rows[0].id, req.body.instrumentIds[i]]
+        [updatedProfileData.rows[0].id, parseInt(req.body.instruments[i])]
       );
     }
 
@@ -302,11 +305,12 @@ router.put('/', checkToken, checkProfileInput, async (req, res) => {
     await db.query('DELETE FROM genre_assignments WHERE profile_id = $1;', [
       updatedProfileData.rows[0].id,
     ]);
-    for (let i = 0; i < req.body.genreIds.length; i++) {
+
+    for (let i = 0; i < req.body.genres.length; i++) {
       await db.query(
         `INSERT INTO genre_assignments 
       (profile_id, genre_id) VALUES ($1, $2);`,
-        [updatedProfileData.rows[0].id, req.body.genreIds[i]]
+        [updatedProfileData.rows[0].id, req.body.genres[i]]
       );
     }
 
