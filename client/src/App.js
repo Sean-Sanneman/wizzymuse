@@ -17,7 +17,7 @@ import Footer from './components/layoutComponents/Footer';
 import Signup from './components/authComponents/Signup';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
-import ProfilePage from './components/pages/ProfilePage';
+import ProfileMePage from './components/pages/ProfileMePage';
 import EditProfilePage from './components/pages/EditProfilePage';
 import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
@@ -53,7 +53,11 @@ const App = () => {
               <Route exact path="/forum-topics" component={ForumTopicPage} />
               <Route exact path="/post-item" component={ForumPostPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/my-profile" component={ProfilePage} />
+              <PrivateRoute
+                exact
+                path="/my-profile"
+                component={ProfileMePage}
+              />
               <PrivateRoute
                 exact
                 path="/edit-profile"

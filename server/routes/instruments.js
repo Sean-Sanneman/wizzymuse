@@ -7,15 +7,13 @@ const checkToken = require('../utils/check-token');
 // @route   GET api/instruments
 // @desc    Get all instruments
 // @access  Public
+// @status  checked, in use
 router.get('/', async (req, res) => {
   try {
     const instrumentData = await db.query(
       'SELECT * FROM instruments ORDER BY instrument_name ASC;'
     );
-    res.json({
-      message: 'The instruments were retrieved.',
-      instrumentList: toCamelCase(instrumentData.rows),
-    });
+    res.json(toCamelCase(instrumentData.rows));
   } catch (err) {
     console.log(err);
   }

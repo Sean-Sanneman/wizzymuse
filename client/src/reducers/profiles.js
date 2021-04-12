@@ -14,7 +14,7 @@ const initialState = {
   profile: null,
   profiles: [],
   loading: true,
-  error: {},
+  message: null,
 };
 
 export default function (state = initialState, action) {
@@ -37,6 +37,11 @@ export default function (state = initialState, action) {
         ...state,
         profiles: payload,
         loading: false,
+      };
+    case UPDATE_PROFILE:
+      return {
+        ...state,
+        message: payload.message,
       };
     case CLEAR_PROFILE_ME:
       return {
