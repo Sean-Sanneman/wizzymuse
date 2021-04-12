@@ -9,7 +9,7 @@ CREATE TABLE users (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmail.com', 'seanc0ne', 'ilyatroisstylos', '');
+-- INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmail.com', 'seanc0ne', 'ilyatroisstylos', '');
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
@@ -36,7 +36,7 @@ CREATE TABLE profiles (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, soundcloud, twitch, tiktok) VALUES (1, 'sean', 'cone', '06/28/93', '720-985-6588', 'Burbank', 'CA', 'USA', 'I like parties and fun.', 'No band.', 'Sean is your DJ', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'seanisyourdj', '', '');
+-- INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, soundcloud, twitch, tiktok) VALUES (1, 'sean', 'cone', '06/28/93', '720-985-6588', 'Burbank', 'CA', 'USA', 'I like parties and fun.', 'No band.', 'Sean is your DJ', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'seanisyourdj', '', '');
 
 CREATE TABLE instruments (
     id SERIAL PRIMARY KEY,
@@ -52,7 +52,7 @@ CREATE TABLE instrument_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
+-- INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
 
 CREATE TABLE genres (
     id SERIAL PRIMARY KEY,
@@ -68,7 +68,7 @@ CREATE TABLE genre_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO genre_assignments (profile_id, genre_id) VALUES(1,1);
+-- INSERT INTO genre_assignments (profile_id, genre_id) VALUES(1,1);
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
@@ -76,7 +76,7 @@ CREATE TABLE categories (
     description VARCHAR(500)
 );
 
-INSERT INTO categories (title, description) VALUES ('Judy Collins Wannabes', 'They took it all from her!');
+-- INSERT INTO categories (title, description) VALUES ('Judy Collins Wannabes', 'They took it all from her!');
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
@@ -86,7 +86,7 @@ CREATE TABLE posts (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO posts (user_id, category_id, post_text) VALUES (1,1,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
+-- INSERT INTO posts (user_id, category_id, post_text) VALUES (1,1,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
@@ -96,4 +96,4 @@ CREATE TABLE comments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');
+-- INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');
