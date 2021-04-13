@@ -59,25 +59,33 @@ router.get('/me', checkToken, async (req, res) => {
 // @desc    Get profiles - will return all profiles or filter by query parameters if there are any
 // @access  Public
 router.get('/', async (req, res) => {
+  console.log('req.query', req.query);
+  console.log('typeof req.query', typeof req.query);
+  console.log('req.body', req.body);
+  // extract the query filters
   let filters;
   let instrumentsFilterArr;
   let genresFilterArr;
-  if (req.query.instruments !== 'undefined') {
+  if (req.query.instruments !== '') {
     instrumentsFilterArr = req.query.instruments
       .split(',')
       .map((id) => parseInt(id));
     filters = 'instruments';
-    if (req.query.genres !== 'undefined') {
+    if (req.query.genres !== '') {
       genresFilterArr = req.query.genres.split(',').map((id) => parseInt(id));
       filters = 'instruments+genres';
     }
-  } else if (req.query.genres !== 'undefined') {
+  } else if (req.query.genres !== '') {
     genresFilterArr = req.query.genres.split(',').map((id) => parseInt(id));
     filters = 'genres';
   } else {
     filters = 'none';
   }
+  console.log('filters', filters);
+  console.log('instrumentsFilterArr', instrumentsFilterArr);
+  console.log('genresFilterArr', genresFilterArr);
 
+  // get profiles depending on filters
   try {
     let profilesData;
     switch (filters) {
@@ -86,8 +94,7 @@ router.get('/', async (req, res) => {
           `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-          instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
           [instrumentsFilterArr, genresFilterArr]
         );
         break;
@@ -96,8 +103,7 @@ router.get('/', async (req, res) => {
           `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-          instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
           [instrumentsFilterArr]
         );
         break;
@@ -106,8 +112,7 @@ router.get('/', async (req, res) => {
           `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at, 
-          instruments.instrument_name, genres.genre_name FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
           [genresFilterArr]
         );
         break;
@@ -121,9 +126,10 @@ router.get('/', async (req, res) => {
             profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) ORDER BY users.username;`
         );
     }
+    console.log('profilesData.rows', profilesData.rows);
     res.status(200).json({
       message: 'The profiles were successfully retrieved.',
-      results: toCamelCase(profilesData.rows).length,
+      results: profilesData.rows.length,
       profileList: toCamelCase(profilesData.rows),
     });
   } catch (err) {

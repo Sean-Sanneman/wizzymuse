@@ -22,15 +22,15 @@ const ProfileList = ({
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
+        <Spinner />
       ) : profileList && profileList.length > 0 ? (
         <>
           <p>
             {results} {pluralizeNoun(results, 'profile')}{' '}
             {pluralizeVerb(results, 'match')} your search:
           </p>
-          {profileList.map((profile) => (
-            <ProfileCardCollapsible key={profile.id} profile={profile} />
+          {profileList.map((profile, idx) => (
+            <ProfileCardCollapsible key={idx} profile={profile} />
           ))}
         </>
       ) : (

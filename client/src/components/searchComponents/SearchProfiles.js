@@ -30,7 +30,7 @@ const SearchProfiles = ({ getProfiles }) => {
 
   useEffect(() => {
     getProfiles();
-  }, []);
+  }, [getProfiles]);
 
   const onSubmitSearch = (e) => {
     if (instrumentSelection.length > 0) {
@@ -38,11 +38,16 @@ const SearchProfiles = ({ getProfiles }) => {
         (selection) => selection.value
       );
       searchProfileObj.instruments = selectedInstruments;
+    } else {
+      searchProfileObj.instruments = '';
     }
     if (genreSelection.length > 0) {
       const selectedGenres = genreSelection.map((selection) => selection.value);
       searchProfileObj.genres = selectedGenres;
+    } else {
+      searchProfileObj.genres = '';
     }
+    console.log('searchProfileObj', searchProfileObj);
     getProfiles(searchProfileObj);
   };
 
@@ -64,10 +69,16 @@ const SearchProfiles = ({ getProfiles }) => {
           }}
         >
           <div className="mb-4">
-            <InstrumentList setInstrumentSelection={setInstrumentSelection} />
+            <InstrumentList
+              initialInstrumentSelection={[]}
+              setInstrumentSelection={setInstrumentSelection}
+            />
           </div>
           <div className="mb-4">
-            <GenreList setGenreSelection={setGenreSelection} />
+            <GenreList
+              initialGenreSelection={[]}
+              setGenreSelection={setGenreSelection}
+            />
           </div>
           <div className="mb-4">
             <Button

@@ -22,18 +22,24 @@ const Dashboard = ({
 
   useEffect(() => {
     getProfileMe();
-    if (profileMe !== null) {
-      if (profileMe.instruments.length === 0) {
-        if (profileMe.genres.length === 0) {
-          setInfoMissing('instruments and music genres');
-        } else {
-          setInfoMissing('instruments');
-        }
-      } else if (profileMe.genres.length === 0) {
-        setInfoMissing('genres');
-      }
-    }
-  }, [getProfileMe]);
+    setInfoMissing(
+      loading || profileMe === null
+        ? null
+        : () => {
+            if (profileMe.instruments.length === 0) {
+              if (profileMe.genres.length === 0) {
+                return 'instruments and music genres';
+              } else {
+                return 'instruments';
+              }
+            } else if (profileMe.genres.length === 0) {
+              return 'genres';
+            } else {
+              return null;
+            }
+          }
+    );
+  }, [getProfileMe, loading]);
 
   return loading && profileMe === null ? (
     <h1>Loading...</h1>
@@ -56,28 +62,21 @@ const Dashboard = ({
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container>
-              <Row>
+              <Row className="my-3">
                 <Col className="profilePanels">
-                  <Container fluid>
-                    <Row className="welcomeText">
-                      {userMe && <p>Hello {userMe.username}!</p>}
-                      {infoMissing !== null && (
-                        <>
-                          <p>
-                            Your profile is incomplete. Please add {infoMissing}{' '}
-                            if you would like to be discovered and asked to
-                            collaborate on projects.
-                          </p>
-                          <Link
-                            to="/edit-profile"
-                            className="btn btn-info my-1"
-                          >
-                            Edit Profile
-                          </Link>
-                        </>
-                      )}
-                    </Row>
-                  </Container>
+                  {userMe && <p className="m-3">Hello {userMe.username}!</p>}
+                  {infoMissing !== null && (
+                    <>
+                      <p className="m-3">
+                        Your profile is incomplete. Please add {infoMissing} if
+                        you would like to be discovered and asked to collaborate
+                        on projects.
+                      </p>
+                      <Link to="/edit-profile" className="btn btn-info m-3">
+                        Edit Profile
+                      </Link>
+                    </>
+                  )}
                 </Col>
               </Row>
             </Container>
