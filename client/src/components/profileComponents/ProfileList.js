@@ -10,26 +10,26 @@ import Spinner from '../layoutComponents/Spinner';
 import ProfileCardCollapsible from './ProfileCardCollapsible';
 
 // Utils
-import { pluralizeNoun } from '../../utils/stringUtilFunctions';
-import { pluralizeVerb } from '../../utils/stringUtilFunctions';
+import {
+  capitalizeName,
+  letterizeDigit,
+  pluralizeNoun,
+  pluralizeVerb,
+} from '../../utils/stringUtilFunctions';
 
-const ProfileList = ({
-  profiles: {
-    loading,
-    profiles: { results, profileList },
-  },
-}) => {
+const ProfileList = ({ profiles: { loading, profiles } }) => {
   return (
     <>
       {loading ? (
         <Spinner />
-      ) : profileList && profileList.length > 0 ? (
+      ) : profiles && profiles.length > 0 ? (
         <>
-          <p>
-            {results} {pluralizeNoun(results, 'profile')}{' '}
-            {pluralizeVerb(results, 'match')} your search:
+          <p className="mt-5 mx-3">
+            {capitalizeName(letterizeDigit(profiles.length))}{' '}
+            {pluralizeNoun(profiles.length, 'profile')}{' '}
+            {pluralizeVerb(profiles.length, 'was')} found.
           </p>
-          {profileList.map((profile, idx) => (
+          {profiles.map((profile, idx) => (
             <ProfileCardCollapsible key={idx} profile={profile} />
           ))}
         </>

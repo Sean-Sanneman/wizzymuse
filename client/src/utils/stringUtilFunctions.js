@@ -12,10 +12,45 @@ export const pluralizeNoun = (nb, noun) => {
 
 export const pluralizeVerb = (nb, verb) => {
   if (nb > 1) {
-    return verb;
+    switch (verb) {
+      case 'was':
+        return 'were';
+      default:
+        return verb;
+    }
+  } else {
+    switch (verb) {
+      case 'was':
+        return 'was';
+      default:
+        return verb + 's';
+    }
   }
-  if (verb === 'match') {
-    return 'matches';
+};
+
+export const letterizeDigit = (nb) => {
+  switch (nb) {
+    case 0:
+      return 'zero';
+    case 1:
+      return 'one';
+    case 2:
+      return 'two';
+    case 3:
+      return 'three';
+    case 4:
+      return 'four';
+    case 5:
+      return 'five';
+    case 6:
+      return 'six';
+    case 7:
+      return 'seven';
+    case 8:
+      return 'eight';
+    case 9:
+      return 'nine';
+    default:
+      return nb;
   }
-  return verb + 's';
 };
