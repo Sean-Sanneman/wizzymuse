@@ -16,18 +16,21 @@ import { getProfileMe } from './profiles';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
+  console.log('loadUser action called');
   // check localStorage for a token and set the global headers with it if there is one
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
     const res = await axios.get('/api/auth');
+    console.log('res from loadUser in actions', res.data);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
     dispatch(getProfileMe()); // we immediately load the user's profile
   } catch (err) {
+    console.log('error from loadUser action');
     console.log(err.message);
     dispatch({
       type: AUTH_ERROR,

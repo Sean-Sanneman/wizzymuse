@@ -1,10 +1,6 @@
 // React imports
 import React from 'react';
 
-// Redux imports
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
 // Components
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';

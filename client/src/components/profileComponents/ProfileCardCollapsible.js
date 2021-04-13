@@ -1,22 +1,60 @@
 // React imports
 import React, { useEffect, useState } from 'react';
-// Redux imports
-// Components
-import Spinner from '../layoutComponents/Spinner';
-// Styles and Images
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  setOpen,
-  Collapse,
-} from 'react-bootstrap';
-import avatar1 from '../../assets/images/stock-avatar-1.jpeg';
 
-const ProfileCardCollapsible = ({ profile: { avatar, username, bio } }) => {
+// Utils
+import { capitalizeName } from '../../utils/stringUtilFunctions';
+
+// Styles and Images
+import { Alert, Row, Col, Card, Button, Collapse } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const ProfileCardCollapsible = ({
+  profile: {
+    avatar,
+    username,
+    bio,
+    firstName,
+    lastName,
+    city,
+    state,
+    country,
+    band,
+    artistName,
+    website,
+    instagram,
+    facebook,
+    twitter,
+    linkedin,
+    youtube,
+    soundcloud,
+    twitch,
+    tiktok,
+    instruments,
+    genres,
+  },
+}) => {
   const [open, setOpen] = useState(false);
+
+  const TemporaryCollaborateButton = () => {
+    const [show, setShow] = useState(false);
+
+    if (show) {
+      return (
+        <Alert variant="danger" onClose={() => setShow(!show)} dismissible>
+          <Alert.Heading>Coming up soon ...</Alert.Heading>
+          <p>
+            You want to send a collaborate request to this artist. This
+            functionality is not in place yet.
+          </p>
+        </Alert>
+      );
+    }
+    return (
+      <Button variant="success" onClick={() => setShow(true)}>
+        COLLABORATE
+      </Button>
+    );
+  };
 
   return (
     <>
@@ -32,14 +70,17 @@ const ProfileCardCollapsible = ({ profile: { avatar, username, bio } }) => {
             />
           </Col>
           <Col>
-            <Card.Body className="searchArtistTxt" style={{ padding: '1%' }}>
+            <Card.Body
+              className="searchArtistTxt my-3"
+              style={{ padding: '1%' }}
+            >
               <Card.Title>{username}</Card.Title>
               <Card.Text>
                 {bio
                   ? bio
                   : 'We need some default text in case this profile is empty.'}
               </Card.Text>
-              <Button variant="success">COLLABORATE</Button>
+              <TemporaryCollaborateButton />
 
               {/* Collapse toggle button */}
               <Button
@@ -49,10 +90,73 @@ const ProfileCardCollapsible = ({ profile: { avatar, username, bio } }) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={open}
               >
-                Artist Details
+                Artist Details{' '}
+                <span className="ml-1">
+                  {open ? (
+                    <FontAwesomeIcon
+                      icon={['fas', 'angle-double-up']}
+                      className="ml-2"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={['fas', 'angle-double-down']}
+                      className="ml-2"
+                    />
+                  )}
+                </span>
               </Button>
               <Collapse in={open}>
-                <div id="example-collapse-text"></div>
+                <div id="example-collapse-text">
+                  {(firstName || lastName) && (
+                    <p>
+                      {firstName} {lastName}
+                    </p>
+                  )}
+                  {city || state || country ? (
+                    <p>
+                      {city && <span>{city}</span>}
+                      {city && state && <span>{', '}</span>}
+                      {state && <span>{state}</span>}
+                      {(city && country) || (state && country) ? (
+                        <span>{', '}</span>
+                      ) : (
+                        ''
+                      )}
+                      {country && <span>{country}</span>}
+                    </p>
+                  ) : (
+                    <br />
+                  )}
+                  {band && <p>Band name: {band}</p>}
+                  {artistName && <p>Artist name: {artistName}</p>}
+                  {instruments.length > 0 && (
+                    <p>
+                      Instrument played:{' '}
+                      {instruments
+                        .map((instrument) =>
+                          capitalizeName(instrument.instrumentName)
+                        )
+                        .join(', ')}
+                    </p>
+                  )}
+                  {genres.length > 0 && (
+                    <p>
+                      Music genres:{' '}
+                      {genres
+                        .map((genre) => capitalizeName(genre.genreName))
+                        .join(', ')}
+                    </p>
+                  )}
+                  {website && <p>Website: {website}</p>}
+                  {instagram && <p>Instagram: {instagram}</p>}
+                  {facebook && <p>Facebook: {facebook}</p>}
+                  {twitter && <p>Twitter: {twitter}</p>}
+                  {linkedin && <p>Linkedin: {linkedin}</p>}
+                  {youtube && <p>YouTube: {youtube}</p>}
+                  {soundcloud && <p>Soundcloud: {soundcloud}</p>}
+                  {twitch && <p>Twitch: {twitch}</p>}
+                  {tiktok && <p>TikTok: {tiktok}</p>}
+                </div>
               </Collapse>
             </Card.Body>
           </Col>

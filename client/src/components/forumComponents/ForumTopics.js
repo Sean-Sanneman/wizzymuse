@@ -77,6 +77,30 @@ const ForumTopics = () => {
             <Col xs={3} className="forumCol">5 of 5</Col>
         </Row>
     </Container>
+
+    <Container className="">
+        <Row className="forumRow">
+            <Col xs={1} className="forumCol">1 of 5</Col>
+            <Col xs={6} className="forumCol">
+            These will self repilicate as we add new forum topics.
+            </Col>
+            <Col xs={1}className="forumCol">3 of 5</Col>
+            <Col xs={1} className="forumCol">4 of 5</Col>
+            <Col xs={3} className="forumCol">5 of 5</Col>
+        </Row>
+    </Container>
+
+    <Container className="">
+        <Row className="forumRow">
+            <Col xs={1} className="forumCol">1 of 5</Col>
+            <Col xs={6} className="forumCol">
+            These will self repilicate as we add new forum topics.
+            </Col>
+            <Col xs={1}className="forumCol">3 of 5</Col>
+            <Col xs={1} className="forumCol">4 of 5</Col>
+            <Col xs={3} className="forumCol">5 of 5</Col>
+        </Row>
+    </Container>
     
     </>
     );
