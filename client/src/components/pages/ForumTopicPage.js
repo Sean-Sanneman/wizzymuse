@@ -1,27 +1,29 @@
+// This is where the forum topics display a list of posts within a topic, for example audio production tips
+
 // React imports
 import React from 'react';
-
+// Redux imports
 // Components
-import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
-import SearchProfiles from '../searchComponents/SearchProfiles';
-import ProfileList from '../profileComponents/ProfileList';
+import ForumSearch from '../forumComponents/ForumSearch';
+import PostList from '../postComponents/PostList';
+import Spinner from '../layoutComponents/Spinner';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-
-const SearchPage = () => {
+const ForumTopicPage = () => {
   return (
     <>
-      <Toolbar toolbarType="profilePageTB" />
+      <Toolbar toolbarType="forumTB" />
+      
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            <SearchProfiles />
+            <ForumSearch />
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container fluid="md">
-              <ProfileList />
+              <PostList />
             </Container>
           </Col>
           <Col className="rightPanel allPanels"></Col>
@@ -31,4 +33,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default ForumTopicPage;

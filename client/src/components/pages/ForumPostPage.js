@@ -1,27 +1,28 @@
+// This is where the user postings display
+
 // React imports
 import React from 'react';
-
+// Redux imports
 // Components
-import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
-import SearchProfiles from '../searchComponents/SearchProfiles';
-import ProfileList from '../profileComponents/ProfileList';
+import ForumSearch from '../forumComponents/ForumSearch';
+import PostItem from '../postComponents/PostItem';
+import Spinner from '../layoutComponents/Spinner';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
-
-const SearchPage = () => {
+const ForumPostPage = () => {
   return (
     <>
-      <Toolbar toolbarType="profilePageTB" />
+      <Toolbar />
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            <SearchProfiles />
+            <ForumSearch />
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container fluid="md">
-              <ProfileList />
+              <PostItem />
             </Container>
           </Col>
           <Col className="rightPanel allPanels"></Col>
@@ -31,4 +32,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default ForumPostPage;

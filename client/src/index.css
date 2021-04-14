@@ -4,24 +4,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 /* Navbar styles */
-
 .color-nav {
   background-color: #000000;
 }
-
 .navButtons {
   margin: auto;
 }
-
 .myBtn {
   border: solid;
   border-width: 2px;
@@ -32,7 +25,6 @@ code {
   margin: 5% 2%;
   font-size: small;
 }
-
 .glow-on-hover {
   border: none;
   outline: none;
@@ -43,7 +35,6 @@ code {
   z-index: 0;
   border-radius: 10px;
 }
-
 .glow-on-hover:before {
   content: '';
   background: linear-gradient(
@@ -71,19 +62,15 @@ code {
   transition: opacity 0.3s ease-in-out;
   border-radius: 10px;
 }
-
 .glow-on-hover:active {
   color: seashell;
 }
-
 .glow-on-hover:active:after {
   background: transparent;
 }
-
 .glow-on-hover:hover:before {
   opacity: 1;
 }
-
 .glow-on-hover:after {
   z-index: -1;
   content: '';
@@ -96,7 +83,6 @@ code {
   top: 0;
   border-radius: 10px;
 }
-
 @keyframes glowing {
   0% {
     background-position: 0 0;
@@ -112,70 +98,58 @@ code {
 /* Toolbar */
 .toolbar {
   background-image: linear-gradient(to right, #202020, #343434);
-  max-width: 97%;
-  margin: 1%;
+  max-width: 98%;
+  margin: 1% auto;
   border-radius: 8px;
   padding: 1%;
 }
-
 .toolBtns {
   margin: auto;
 }
-
 .btn {
   min-width: 10em;
 }
-
 /* Toolbar styles end */
 
 /* Main panels */
 .grid {
-  max-width: 97%;
+  max-width: 98%;
   color: #ffffff;
-  margin: 1% 0;
+  margin: 1% auto;
 }
-
 .welcomeText {
   padding-top: 12%;
   color: seashell;
   text-align: center;
 }
-
 .leftPanel {
   border-radius: 8px;
 }
-
 .leftLED {
   background-color: #000000;
   height: 84%;
 }
-
 .LED-text {
   padding-top: 12%;
   color: skyblue;
 }
-
 .babyYoda {
   padding: 8%;
 }
-
 .midPanel {
   border-radius: 8px;
   min-height: 650px;
   margin: 0 1%;
 }
-
 .rightPanel {
   border-radius: 8px;
 }
-
 .allPanels {
   border: solid;
   border-color: #000000;
   background-image: linear-gradient(to right, #202020, #343434);
   box-shadow: inset -5px -5px 5px #252525;
 }
-
 .mainPic {
   padding: 1% 0;
 }
@@ -185,24 +159,20 @@ code {
 .loginModal {
   padding: 10% 0 0 22%;
 }
-
 .logHeader {
   text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
 }
-
 .intModal {
   padding: 6% 6%;
 }
-
 .allModals .modal-content {
   background-image: url('assets/cover/bg-brushed-metal.jpg');
   border-radius: 8px;
   box-shadow: inset 0 0 6px #000000;
 }
-
 /* Modals styles end */
 
 /* Signup */
@@ -210,7 +180,6 @@ code {
   max-width: 96%;
   margin: 2% 2% 4% 2%;
 }
-
 .welcome {
   padding: 12% 12%;
   text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
@@ -218,7 +187,6 @@ code {
   -moz-background-clip: text;
   background-clip: text;
 }
-
 .signup {
   border: solid;
   border-radius: 8px;
@@ -226,12 +194,10 @@ code {
   background-color: lightgray;
   box-shadow: 5px 5px 15px;
 }
-
 .location {
   display: inline-block;
   align-content: space-between;
 }
-
 /* Signup styles end */
 
 /* Profile styles */
@@ -243,18 +209,17 @@ code {
 }
 /* Profile styles ends */
 
-
 /* Search Artist styles */
 .searchPanel {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
   color: #000000;
   border-radius: 15px;
-  margin: 12%;
+  margin: 12% auto;
   padding-bottom: 72%;
 }
 .searchBy {
   padding-top: 6%;
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
 }
 .resultCards {
   width: 98%;
@@ -266,17 +231,14 @@ code {
 .searchArtistTxt {
   padding: auto;
 }
-
 .collapseArtistItem {
   display: flex;
   float: right;
 }
-
 #example-collapse-text {
-  margin: 6%
+  margin: 6%;
 }
 /* Search Artist styles end */
-
 
 /* My Collaborators Carousel */
 .friendsCarousel {
@@ -286,6 +248,24 @@ code {
 }
 /* My Collaborators Carousel styles ends */
 
+/* Forum styles start */
+.forumPanel {
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-top: 2%;
+  padding: 2% 0 2% 0;
+}
+
+.forumCol {
+  /* color: black;
+  border: solid; */
+}
+/* Forum styles end */
+
 /* Footer */
 .page-footer {
   margin-top: 1%;
@@ -293,7 +273,6 @@ code {
   color: #ccc;
   padding: 20px 0 7px 0;
 }
-
 .footer-copyright {
   padding: 6px 0;
 }

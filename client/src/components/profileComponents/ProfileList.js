@@ -1,5 +1,5 @@
 // React imports
-import React, { useState } from 'react';
+import React from 'react';
 
 // Redux imports
 import PropTypes from 'prop-types';
@@ -10,33 +10,31 @@ import Spinner from '../layoutComponents/Spinner';
 import ProfileCardCollapsible from './ProfileCardCollapsible';
 
 // Utils
-import { pluralizeNoun } from '../../utils/stringUtilFunctions';
-import { pluralizeVerb } from '../../utils/stringUtilFunctions';
+import {
+  capitalizeName,
+  letterizeDigit,
+  pluralizeNoun,
+  pluralizeVerb,
+} from '../../utils/stringUtilFunctions';
 
-const ProfileList = ({
-  profiles: {
-    loading,
-    profiles: { results, profileList },
-  },
-}) => {
+const ProfileList = ({ profiles: { loading, profiles } }) => {
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
-      ) : (
+        <Spinner />
+      ) : profiles && profiles.length > 0 ? (
         <>
-          <p>
-            {results} {pluralizeNoun(results, 'profile')}{' '}
-            {pluralizeVerb(results, 'match')} your search:
+          <p className="mt-5 mx-3">
+            {capitalizeName(letterizeDigit(profiles.length))}{' '}
+            {pluralizeNoun(profiles.length, 'profile')}{' '}
+            {pluralizeVerb(profiles.length, 'was')} found.
           </p>
-          {profileList.length > 0 ? (
-            profileList.map((profile) => (
-              <ProfileCardCollapsible key={profile.id} profile={profile} />
-            ))
-          ) : (
-            <h4>No profiles found...</h4>
-          )}
+          {profiles.map((profile, idx) => (
+            <ProfileCardCollapsible key={idx} profile={profile} />
+          ))}
         </>
+      ) : (
+        <h4>No profiles found...</h4>
       )}
     </>
   );

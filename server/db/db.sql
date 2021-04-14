@@ -9,7 +9,7 @@ CREATE TABLE users (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmail.com', 'seanc0ne', 'ilyatroisstylos', '');
+-- INSERT INTO users (email, username, password, avatar) VALUES ('seanisyourdj@gmail.com', 'seanc0ne', 'ilyatroisstylos', '');
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
@@ -36,14 +36,14 @@ CREATE TABLE profiles (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, soundcloud, twitch, tiktok) VALUES (1, 'sean', 'cone', '06/28/93', '720-985-6588', 'Burbank', 'CA', 'USA', 'I like parties and fun.', 'No band.', 'Sean is your DJ', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'seanisyourdj', '', '');
+-- INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state, country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, soundcloud, twitch, tiktok) VALUES (1, 'sean', 'cone', '06/28/93', '720-985-6588', 'Burbank', 'CA', 'USA', 'I like parties and fun.', 'No band.', 'Sean is your DJ', 'soundcloud.com/seanisyourdj', '', '', '', 'linkedin.com/seanc0ne', 'seanisyourdj', 'seanisyourdj', '', '');
 
 CREATE TABLE instruments (
     id SERIAL PRIMARY KEY,
     instrument_name VARCHAR NOT NULL
 );
 
-INSERT INTO instruments (instrument_name) VALUES ('accordion'), ('acoustic_guitar'), ('bagpipes'), ('banjo'), ('bass'), ('bassoon'), ('bongo'), ('cello'), ('clarinet'), ('clavichord'), ('computer/software'), ('conga'), ('cowbell'), ('daxophone'), ('didgeridoo'), ('djembe'), ('double_bass'), ('drums'), ('dulcimer'), ('electric_guitar'), ('fiddle'), ('flute'), ('glockenspiel'), ('gong'), ('guitar'), ('hang_drum'), ('harmonica'), ('harmonium'), ('harp'), ('harpsichord'), ('hurdy_gurdy'), ('kalimba'), ('kazoo'), ('keyboard'), ('mandolin'), ('mbira'), ('mouth_harp'), ('oboe'), ('organ'), ('oud'), ('percussion'), ('piano'), ('piccolo'), ('recorder'), ('saxophone'), ('sitar'), ('software/computer'), ('spoons'), ('steel_drums'), ('synthesizer'), ('tabla'), ('tambourine'), ('trombone'), ('trumpet'), ('theremin'), ('tongue_drum'), ('tuba'), ('turntables'), ('ukelele'), ('viola'), ('violin'), ('vocals'), ('volca'), ('xylophone'), ('zither'), ('autoharp'), ('marimba'), ('background_vocals'), ('toy_piano'), ('electric_piano'), ('timbales');
+INSERT INTO instruments (instrument_name) VALUES ('Accordion'), ('Acoustic Guitar'), ('Bagpipes'), ('Banjo'), ('Bass'), ('Bassoon'), ('Bongo'), ('Cello'), ('Clarinet'), ('Clavichord'), ('Computer/Software'), ('Conga'), ('Cowbell'), ('Daxophone'), ('Didgeridoo'), ('Djembe'), ('Double Bass'), ('Drums'), ('Dulcimer'), ('Electric Guitar'), ('Fiddle'), ('Flute'), ('Glockenspiel'), ('Gong'), ('Guitar'), ('Hang Drum'), ('Harmonica'), ('Harmonium'), ('Harp'), ('Harpsichord'), ('Hurdy Gurdy'), ('Kalimba'), ('Kazoo'), ('Keyboard'), ('Mandolin'), ('Mbira'), ('Mouth Harp'), ('Oboe'), ('Organ'), ('Oud'), ('Percussion'), ('Piano'), ('Piccolo'), ('Recorder'), ('Saxophone'), ('Sitar'), ('Software/Computer'), ('Spoons'), ('Steel Drums'), ('Synthesizer'), ('Tabla'), ('Tambourine'), ('Trombone'), ('Trumpet'), ('Theremin'), ('Tongue Drum'), ('Tuba'), ('Turntables'), ('Ukelele'), ('Viola'), ('Violin'), ('Vocals'), ('Volca'), ('Xylophone'), ('Zither'), ('Autoharp'), ('Marimba'), ('Background Vocals'), ('Toy Piano'), ('Electric Piano'), ('Timbales');
 
 CREATE TABLE instrument_assignments (
     id SERIAL PRIMARY KEY,
@@ -52,7 +52,7 @@ CREATE TABLE instrument_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
+-- INSERT INTO instrument_assignments (profile_id, instrument_id) VALUES(1,1);
 
 CREATE TABLE genres (
     id SERIAL PRIMARY KEY,
@@ -68,7 +68,7 @@ CREATE TABLE genre_assignments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO genre_assignments (profile_id, genre_id) VALUES(1,1);
+-- INSERT INTO genre_assignments (profile_id, genre_id) VALUES(1,1);
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
@@ -76,7 +76,7 @@ CREATE TABLE categories (
     description VARCHAR(500)
 );
 
-INSERT INTO categories (title, description) VALUES ('Judy Collins Wannabes', 'They took it all from her!');
+-- INSERT INTO categories (title, description) VALUES ('Judy Collins Wannabes', 'They took it all from her!');
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
@@ -86,7 +86,7 @@ CREATE TABLE posts (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO posts (user_id, category_id, post_text) VALUES (1,1,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
+-- INSERT INTO posts (user_id, category_id, post_text) VALUES (1,1,'The Carpenters were more punk than the Ramones. Daft Punk are rendered completely inessential if you listen to enough Giorgio Moroder.');
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
@@ -96,7 +96,7 @@ CREATE TABLE comments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');
+-- INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');
 
 CREATE TABLE artist_network (
     id SERIAL PRIMARY KEY,
@@ -107,4 +107,4 @@ CREATE TABLE artist_network (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO artist_network (requester_id, target_id, connection_status, created_at) VALUES(1,2,'Pending','2021-04-05 18:39:29.653953-07'), (2,3,'Saved', '2021-04-02 18:39:29.653953-07'), (1,2,'Saved','2021-04-01 18:39:29.653953-07'), (3,2,'Accepted','2021-04-05 18:39:29.653953-07')
+-- INSERT INTO artist_network (requester_id, target_id, connection_status, created_at) VALUES(1,2,'Pending','2021-04-05 18:39:29.653953-07'), (2,3,'Saved', '2021-04-02 18:39:29.653953-07'), (1,2,'Saved','2021-04-01 18:39:29.653953-07'), (3,2,'Accepted','2021-04-05 18:39:29.653953-07');

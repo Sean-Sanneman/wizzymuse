@@ -1,7 +1,7 @@
 import { GET_GENRES, CLEAR_GENRES, GENRE_ERROR } from '../actions/types';
 
 const initialState = {
-  allGenres: [],
+  genres: [],
   loading: true,
   error: {},
 };
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
     case GET_GENRES:
       return {
         ...state,
-        allGenres: payload,
+        genres: payload,
         loading: false,
       };
     default:

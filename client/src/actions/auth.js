@@ -7,23 +7,31 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT,
+  CLEAR_PROFILE_ME,
   CLEAR_PROFILE,
+  CLEAR_PROFILES,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import { getProfileMe } from './profiles';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
+  console.log('loadUser action called');
   // check localStorage for a token and set the global headers with it if there is one
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
     const res = await axios.get('/api/auth');
+    console.log('res from loadUser in actions', res.data);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
+    dispatch(getProfileMe()); // we immediately load the user's profile
   } catch (err) {
+    console.log('error from loadUser action');
+    console.log(err.message);
     dispatch({
       type: AUTH_ERROR,
     });
@@ -65,14 +73,12 @@ export const register = ({
     });
     dispatch(loadUser()); // we immediately load the user
   } catch (err) {
-    const errors = err.response.data.errors; // get the array of errors
-    // @TODO: if there are errors we'll want to dispatch an alert for each of them
+    console.log(err);
     dispatch({
       type: REGISTER_FAIL, // we don't need a payload
     });
   }
 };
-
 
 // Login user
 export const login = ({ email, password }) => async (dispatch) => {
@@ -92,8 +98,6 @@ export const login = ({ email, password }) => async (dispatch) => {
     dispatch(loadUser()); // we immediately load the user
   } catch (err) {
     console.log(err);
-    // const errors = err.response.data.errors; // get the array of errors
-    // @TODO: if there are errors we'll want to dispatch an alert for each of them
     dispatch({
       type: LOGIN_FAIL, // we don't need a payload
     });
@@ -106,6 +110,12 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   });
   dispatch({
+    type: CLEAR_PROFILE_ME,
+  });
+  dispatch({
     type: CLEAR_PROFILE,
+  });
+  dispatch({
+    type: CLEAR_PROFILES,
   });
 };

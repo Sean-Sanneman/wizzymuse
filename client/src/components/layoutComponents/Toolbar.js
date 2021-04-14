@@ -61,6 +61,31 @@ const toolbarOptions = [
       },
     ],
   },
+  {
+    type: 'forumTB',
+    buttons: [
+      {
+        link: '/forum-topics',
+        style: 'success',
+        text: 'FORUM TOPICS',
+      },
+      {
+        link: '/my-posts',
+        style: 'primary',
+        text: 'MY POSTS',
+      },
+      {
+        link: '/my-projects',
+        style: 'info',
+        text: 'MY PROJECTS',
+      },
+      {
+        link: '/my-connections',
+        style: 'warning',
+        text: 'MY CONNECTIONS',
+      },
+    ],
+  },
 ];
 
 const Toolbar = ({ toolbarType, auth: { isAuthenticated, loading } }) => {

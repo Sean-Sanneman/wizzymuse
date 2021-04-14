@@ -6,36 +6,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getGenres } from '../../actions/genres';
 
+// Utils
+import { getDefaultGenreValues } from '../../utils/listUtilFunctions';
+
 // Styles and Images
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-// Util functions
-import {
-  capitalizeName,
-  underscoreToBlank,
-} from '../../utils/stringUtilFunctions';
-
 const GenreList = ({
   getGenres,
-  genres: {
-    allGenres: { genreList },
-    loading,
-  },
+  genres: { genres, loading },
+  initialGenreSelection,
   setGenreSelection,
 }) => {
   const [genreOptions, setGenreOptions] = useState([]);
   useEffect(() => {
     getGenres();
     if (!loading) {
-      setGenreOptions(
-        genreList.map((genre) => {
-          return {
-            value: genre.id,
-            label: capitalizeName(underscoreToBlank(genre.genreName)),
-          };
-        })
-      );
+      setGenreOptions(getDefaultGenreValues(genres));
     }
   }, [getGenres, loading]);
 
@@ -44,10 +32,20 @@ const GenreList = ({
   const handleGenreSelection = (selection) => {
     setGenreSelection(selection);
   };
+
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
+        <div>Loading...</div>
+      ) : initialGenreSelection.length > 0 ? (
+        <Select
+          isMulti
+          name="genres"
+          options={genreOptions}
+          defaultValue={getDefaultGenreValues(initialGenreSelection)}
+          components={animatedComponents}
+          onChange={handleGenreSelection}
+        />
       ) : (
         <Select
           isMulti

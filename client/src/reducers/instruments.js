@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  allInstruments: [],
+  instruments: [],
   loading: true,
   error: {},
 };
@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
     case GET_INSTRUMENTS:
       return {
         ...state,
-        allInstruments: payload,
+        instruments: payload,
         loading: false,
       };
     default:
