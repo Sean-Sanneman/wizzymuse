@@ -9,6 +9,7 @@ import { getProfileMe, editProfile } from '../../actions/profiles';
 
 // Utils
 import moment from 'moment';
+import { formatInstruments, formatGenres } from '../../utils/listUtilFunctions';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
@@ -92,23 +93,21 @@ const EditProfilePage = ({
 
   const onSaveProfile = (e) => {
     e.preventDefault();
-    if (instrumentSelection.length === 0) {
-      profileData.instruments = profileMe.instruments.map(
-        (instrument) => instrument.id
-      );
-    } else {
-      const selectedInstruments = instrumentSelection.map(
-        (selection) => selection.value
-      );
-      profileData.instruments = selectedInstruments;
-    }
-    if (genreSelection.length === 0) {
-      profileData.genres = profileMe.genres.map((genre) => genre.id);
-    } else {
-      const selectedGenres = genreSelection.map((selection) => selection.value);
-      profileData.genres = selectedGenres;
-    }
-    editProfile(profileData, history);
+
+    instrumentSelection.length === 0
+      ? setInstrumentSelection(profileMe.instruments)
+      : setInstrumentSelection(instrumentSelection);
+
+    genreSelection.length === 0
+      ? setGenreSelection(profileMe.genres)
+      : setGenreSelection(genreSelection);
+
+    editProfile(
+      profileData,
+      formatInstruments(instrumentSelection),
+      formatGenres(genreSelection),
+      history
+    );
   };
 
   return (

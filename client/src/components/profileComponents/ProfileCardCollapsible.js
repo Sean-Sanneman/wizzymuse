@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 // Utils
-import { capitalizeName } from '../../utils/stringUtilFunctions';
+import { capitalizeName, pluralizeNoun } from '../../utils/stringUtilFunctions';
 
 // Styles and Images
 import { Alert, Row, Col, Card, Button, Collapse } from 'react-bootstrap';
@@ -131,7 +131,7 @@ const ProfileCardCollapsible = ({
                   {artistName && <p>Artist name: {artistName}</p>}
                   {instruments.length > 0 && (
                     <p>
-                      Instrument played:{' '}
+                      {pluralizeNoun(instruments.length, 'Instrument')} played:{' '}
                       {instruments
                         .map((instrument) =>
                           capitalizeName(instrument.instrumentName)
@@ -141,7 +141,7 @@ const ProfileCardCollapsible = ({
                   )}
                   {genres.length > 0 && (
                     <p>
-                      Music genres:{' '}
+                      Music {pluralizeNoun(genres.length, 'genre')}:{' '}
                       {genres
                         .map((genre) => capitalizeName(genre.genreName))
                         .join(', ')}

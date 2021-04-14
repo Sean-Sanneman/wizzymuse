@@ -23,6 +23,7 @@ import {
   faAngleDoubleDown,
   faAngleDoubleUp,
   faGlobe,
+  faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 library.add(
   fab,
@@ -38,7 +39,8 @@ library.add(
   faAt,
   faAngleDoubleDown,
   faAngleDoubleUp,
-  faGlobe
+  faGlobe,
+  faPhone
 );
 
 ReactDOM.render(
