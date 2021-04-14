@@ -15,10 +15,7 @@ import makeAnimated from 'react-select/animated';
 
 const GenreList = ({
   getGenres,
-  genres: {
-    allGenres: { genreList },
-    loading,
-  },
+  genres: { genres, loading },
   initialGenreSelection,
   setGenreSelection,
 }) => {
@@ -26,7 +23,7 @@ const GenreList = ({
   useEffect(() => {
     getGenres();
     if (!loading) {
-      setGenreOptions(getDefaultGenreValues(genreList));
+      setGenreOptions(getDefaultGenreValues(genres));
     }
   }, [getGenres, loading]);
 

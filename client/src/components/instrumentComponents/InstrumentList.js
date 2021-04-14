@@ -15,15 +15,15 @@ import makeAnimated from 'react-select/animated';
 
 const InstrumentList = ({
   getInstruments,
+  instruments: { instruments, loading },
   initialInstrumentSelection,
-  instruments: { instrumentList, loading },
   setInstrumentSelection,
 }) => {
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   useEffect(() => {
     getInstruments();
     if (!loading) {
-      setInstrumentOptions(getDefaultInstrumentValues(instrumentList));
+      setInstrumentOptions(getDefaultInstrumentValues(instruments));
     }
   }, [getInstruments, loading]);
 

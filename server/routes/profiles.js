@@ -317,7 +317,7 @@ router.put('/', checkToken, async (req, res) => {
       await db.query(
         `INSERT INTO instrument_assignments 
       (profile_id, instrument_id) VALUES ($1, $2);`,
-        [updatedProfileData.rows[0].id, parseInt(req.body.instruments[i])]
+        [updatedProfileData.rows[0].id, parseInt(req.body.instruments[i].id)]
       );
     }
 
@@ -330,7 +330,7 @@ router.put('/', checkToken, async (req, res) => {
       await db.query(
         `INSERT INTO genre_assignments 
       (profile_id, genre_id) VALUES ($1, $2);`,
-        [updatedProfileData.rows[0].id, req.body.genres[i]]
+        [updatedProfileData.rows[0].id, req.body.genres[i].id]
       );
     }
 
