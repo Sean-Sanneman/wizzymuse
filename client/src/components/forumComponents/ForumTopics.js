@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 // Components
 import Spinner from '../layoutComponents/Spinner';
 
-
 // Styles and Images
 import {
   Container,
@@ -25,9 +24,9 @@ const ForumTopics = () => {
     <>
     {/* Forum Headings */}
     <Container className="">
-        <Row className="forumRow">
+        <Row className="forumHeadings">
             <Col xs={7} className="forumCol">
-                <h5>Forum Topics</h5>
+                <h4>Forum Topics</h4>
             </Col>
             <Col xs={1}className="forumCol">
                 <h5>Posts</h5>
@@ -42,8 +41,8 @@ const ForumTopics = () => {
     </Container>
 
     {/* Forum Table */}
-    <Container className="">
-        <Row className="forumRow">
+    <Container>
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
             {/* wrap this in link to forum/id endpoint */}
@@ -55,7 +54,7 @@ const ForumTopics = () => {
         </Row>
     </Container>
     <Container className="">
-        <Row className="forumRow">
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
                 {/* wrap this in link to forum/id endpoint */}
@@ -67,7 +66,7 @@ const ForumTopics = () => {
         </Row>
     </Container>
     <Container className="">
-        <Row className="forumRow">
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
             These will self repilicate as we add new forum topics.
@@ -79,7 +78,7 @@ const ForumTopics = () => {
     </Container>
 
     <Container className="">
-        <Row className="forumRow">
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
             These will self repilicate as we add new forum topics.
@@ -91,7 +90,7 @@ const ForumTopics = () => {
     </Container>
 
     <Container className="">
-        <Row className="forumRow">
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">1 of 5</Col>
             <Col xs={6} className="forumCol">
             These will self repilicate as we add new forum topics.
