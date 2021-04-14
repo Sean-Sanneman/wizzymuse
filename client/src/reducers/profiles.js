@@ -23,7 +23,33 @@ export default function (state = initialState, action) {
     case GET_PROFILE_ME:
       return {
         ...state,
-        profileMe: payload,
+        profileMe:
+          state.profileMe !== null
+            ? {
+                ...state.profileMe,
+                artistName: payload.artistName,
+                band: payload.band,
+                bio: payload.bio,
+                city: payload.city,
+                country: payload.country,
+                dob: payload.dob,
+                facebook: payload.facebook,
+                firstName: payload.firstName,
+                genres: payload.genres,
+                instagram: payload.instagram,
+                instruments: payload.instruments,
+                lastName: payload.lastName,
+                linkedin: payload.linkedin,
+                phone: payload.phone,
+                soundcloud: payload.soundcloud,
+                state: payload.state,
+                tiktok: payload.tiktok,
+                twitch: payload.twitch,
+                twitter: payload.twitter,
+                website: payload.website,
+                youtube: payload.youtube,
+              }
+            : payload,
         loading: false,
       };
     case GET_PROFILE:

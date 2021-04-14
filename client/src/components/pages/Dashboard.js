@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProfileMe } from '../../actions/profiles';
+// import { getProfileMe } from '../../actions/profiles';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
@@ -13,15 +13,10 @@ import Toolbar from '../layoutComponents/Toolbar';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Dashboard = ({
-  getProfileMe,
-  auth: { userMe },
-  profiles: { profileMe, loading },
-}) => {
+const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
   const [infoMissing, setInfoMissing] = useState(null);
 
   useEffect(() => {
-    getProfileMe();
     setInfoMissing(
       loading || profileMe === null
         ? null
@@ -39,7 +34,7 @@ const Dashboard = ({
             }
           }
     );
-  }, [getProfileMe, loading]);
+  }, [loading]);
 
   return loading && profileMe === null ? (
     <h1>Loading...</h1>
@@ -100,7 +95,6 @@ const Dashboard = ({
   );
 };
 Dashboard.propTypes = {
-  getProfileMe: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profiles: PropTypes.object.isRequired,
 };
@@ -110,4 +104,4 @@ const mapStateToProps = (state) => ({
   profiles: state.profiles,
 });
 
-export default connect(mapStateToProps, { getProfileMe })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

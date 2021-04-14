@@ -7,15 +7,13 @@ const checkToken = require('../utils/check-token');
 // @route   GET api/genres
 // @desc    Get all genres
 // @access  Public
+// @status  checked, in use
 router.get('/', async (req, res) => {
   try {
     const genreData = await db.query(
       'SELECT * FROM genres ORDER BY genre_name ASC;'
     );
-    res.json({
-      message: 'The genres were retrieved.',
-      genreList: toCamelCase(genreData.rows),
-    });
+    res.json(toCamelCase(genreData.rows));
   } catch (err) {
     console.log(err);
   }
