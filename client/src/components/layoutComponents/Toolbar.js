@@ -47,12 +47,12 @@ const toolbarOptions = [
       {
         link: '/my-projects',
         style: 'primary',
-        text: 'MY PROJECTS',
+        text: 'OPEN PROJECT',
       },
       {
         link: '/new-project',
         style: 'info',
-        text: 'CREATE',
+        text: 'NEW PROJECT',
       },
       {
         link: '/mixdown',
@@ -117,7 +117,7 @@ const Toolbar = ({ toolbarType, auth: { isAuthenticated, loading } }) => {
             {!loading && isAuthenticated && toolbarSelected ? (
               toolbarSelected
             ) : (
-              <h1>LOADING ...</h1>
+              <h1 style={{ color: "gray" }}>LOADING ...</h1>
             )}
           </Col>
         </Row>
