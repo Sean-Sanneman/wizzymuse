@@ -249,6 +249,15 @@ code {
 /* Search Artist styles end */
 
 
+/* Artist Profile styles start */
+.input-group-text {
+  padding-top: 2px;
+  background-color: transparent;
+  border: none;
+}
+/* Artist Profile styles end */
+
+
 /* My Collaborators Carousel */
 .friendsCarousel {
   margin: 24px 100px 36px 100px;
