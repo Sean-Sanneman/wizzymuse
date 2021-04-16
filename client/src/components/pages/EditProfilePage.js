@@ -1,6 +1,6 @@
 // React imports
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // Redux imports
 import PropTypes from 'prop-types';

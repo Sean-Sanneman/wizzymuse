@@ -9,6 +9,7 @@ const toCamelCase = require('../utils/to-camel-case');
 // @route   GET api/profiles/me
 // @desc    Get the current user's profile, if any, by user ID located in the token
 // @access  Private
+// @status  checked, in use
 router.get('/me', checkToken, async (req, res) => {
   try {
     // retrieve the user's profile information
@@ -32,7 +33,7 @@ router.get('/me', checkToken, async (req, res) => {
 
     // retrieve the user's instruments
     const instrumentsMeData = await db.query(
-      `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1`,
+      `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1;`,
       [profileMeData.rows[0].id]
     );
     instrumentsMeData.rows
@@ -41,7 +42,7 @@ router.get('/me', checkToken, async (req, res) => {
 
     // retrieve the user's genres
     const genresMeData = await db.query(
-      `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1`,
+      `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1;`,
       [profileMeData.rows[0].id]
     );
     genresMeData.rows
@@ -58,6 +59,7 @@ router.get('/me', checkToken, async (req, res) => {
 // @route   GET api/profiles
 // @desc    Get profiles - will return all profiles or filter by query parameters if there are any
 // @access  Public
+// @status  checked, in use
 router.get('/', async (req, res) => {
   // extract the query filters
   let filters;
@@ -85,7 +87,7 @@ router.get('/', async (req, res) => {
     switch (filters) {
       case 'instruments+genres':
         profilesData = await db.query(
-          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
@@ -94,7 +96,7 @@ router.get('/', async (req, res) => {
         break;
       case 'instruments':
         profilesData = await db.query(
-          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
@@ -103,7 +105,7 @@ router.get('/', async (req, res) => {
         break;
       case 'genres':
         profilesData = await db.query(
-          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
@@ -112,7 +114,7 @@ router.get('/', async (req, res) => {
         break;
       default:
         profilesData = await db.query(
-          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, profiles.last_name, 
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, profiles.last_name, 
             profiles.dob, profiles.phone, profiles.city, profiles.state, 
             profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
             profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
@@ -127,7 +129,7 @@ router.get('/', async (req, res) => {
     // retrieve the instruments and the genres for each profile
     for (let i = 0; i < profileListObj.length; i++) {
       const instrumentsData = await db.query(
-        `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1`,
+        `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1;`,
         [profileListObj[i].id]
       );
       instrumentsData.rows
@@ -135,7 +137,7 @@ router.get('/', async (req, res) => {
         : (profileListObj[i].instruments = []);
 
       const genresData = await db.query(
-        `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1`,
+        `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1;`,
         [profileListObj[i].id]
       );
       genresData.rows
@@ -153,11 +155,10 @@ router.get('/', async (req, res) => {
 // @route   GET api/profiles/:id
 // @desc    Get one profile by profile ID
 // @access  Public
-// @TODO    JOIN instruments and genres tables
 router.get('/:id', async (req, res) => {
   try {
     const selectedprofileData = await db.query(
-      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
       profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at, 
