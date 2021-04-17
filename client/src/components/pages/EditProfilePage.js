@@ -504,7 +504,7 @@ const EditProfilePage = ({
                         )}
 
                         <Form.Row className="my-4 mx-1">
-                        <h6>Make profile public?</h6>
+                        <h6>Make profile private?</h6>
                           <span class="input-group-text">
                             <InputGroup.Checkbox />
                           </span>
