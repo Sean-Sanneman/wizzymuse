@@ -7,8 +7,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Styles and Images
-import coverImage from '../../assets/cover/cover-image-studio2.jpg';
-import { Container, Row, Col } from 'react-bootstrap';
+import coverImage1 from '../../assets/cover/landing-image-1.jpg';
+import coverImage2 from '../../assets/cover/landing-image-2.jpg';
+import coverImage3 from '../../assets/cover/landing-image-3.jpg';
+import coverImage4 from '../../assets/cover/landing-image-4.jpg';
+import { Container, Row, Col, Carousel } from 'react-bootstrap';
 
 const Landing = ({ isAuthenticated }) => {
   // Redirect when logged in
@@ -34,12 +37,54 @@ const Landing = ({ isAuthenticated }) => {
           </Container>
         </Col>
         <Col xs={8} className="midPanel allPanels">
-          <img
-            src={coverImage}
-            className="mainPic"
-            style={{ width: '100%' }}
-            alt="cover"
-          />
+
+          <Carousel fade>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={coverImage1}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={coverImage2}
+                alt="Second slide"
+              />
+              <Carousel.Caption>
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={coverImage3}
+                alt="Third slide"
+              />
+              <Carousel.Caption>
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={coverImage4}
+                alt="Fourth slide"
+              />
+              <Carousel.Caption>
+                <h3>Fourth slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+
         </Col>
         <Col className="rightPanel allPanels">
           <Container fluid="sm">
