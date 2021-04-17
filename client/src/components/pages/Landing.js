@@ -53,7 +53,7 @@ const Landing = ({ isAuthenticated }) => {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={coverImage2}
+                src={coverImage4}
                 alt="Second slide"
               />
               <Carousel.Caption>
@@ -75,7 +75,7 @@ const Landing = ({ isAuthenticated }) => {
           <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={coverImage4}
+                src={coverImage1}
                 alt="Fourth slide"
               />
               <Carousel.Caption>
