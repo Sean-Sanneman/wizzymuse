@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { getProfileMe } from '../../actions/profiles';
 
 // Components
+import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
+import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
+import ProfileCarousel from '../profileComponents/ProfileCarousel';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -40,7 +42,8 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
     <h1>Loading...</h1>
   ) : (
     <>
-      <Toolbar toolbarType="dashboardTB" />
+      <Toolbar toolbarType="profilePageTB" />
+
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
@@ -59,7 +62,7 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
             <Container>
               <Row className="my-3">
                 <Col className="profilePanels">
-                  {userMe && <p className="m-3">Hello {userMe.username}!</p>}
+                  {/* {userMe && <p className="m-3">Hello {userMe.username}!</p>} */}
                   {infoMissing !== null && (
                     <>
                       <p className="m-3">
@@ -67,14 +70,26 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
                         you would like to be discovered and asked to collaborate
                         on projects.
                       </p>
-                      <Link to="/edit-profile" className="btn btn-info m-3">
+                      {/* <Link to="/edit-profile" className="btn btn-info m-3">
                         Edit Profile
-                      </Link>
+                      </Link> */}
                     </>
                   )}
+                  <Container fluid>
+                    <Row>
+                      <Col>
+                        {loading && profileMe === null ? (
+                          <Spinner />
+                        ) : (
+                          <ProfileCardGeneral profile={profileMe} />
+                        )}
+                      </Col>
+                    </Row>
+                  </Container>
                 </Col>
               </Row>
             </Container>
+            <ProfileCarousel />
           </Col>
 
           <Col className="rightPanel allPanels">
