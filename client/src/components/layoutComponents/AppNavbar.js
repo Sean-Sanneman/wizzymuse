@@ -22,7 +22,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
 
   // Navbar links for loggedin users (authenticated)
   const authLinks = (
-    <Nav className="navButtons">
+    <Nav className="navButtonsAuth">
       <Nav.Link
         href="/dashboard"
         className="myBtn text-center glow-on-hover"

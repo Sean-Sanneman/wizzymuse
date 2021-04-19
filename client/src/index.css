@@ -14,9 +14,17 @@ code {
 .color-nav {
   background-color: #000000;
 }
+
 .navButtons {
-  margin: auto;
+  /* this controls positioning of nav buttons */
+  margin: auto 52% auto 48%;
 }
+
+.navButtonsAuth {
+  /* this controls positioning of nav buttons */
+  margin: auto 60% auto 30%;
+}
+
 .myBtn {
   border: solid;
   border-width: 2px;
