@@ -31,6 +31,13 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         DASHBOARD
       </Nav.Link>
       <Nav.Link
+        href="/project"
+        className="myBtn text-center glow-on-hover"
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        PROJECTS
+      </Nav.Link>
+      <Nav.Link
         href="/forum"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
