@@ -22,13 +22,20 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
 
   // Navbar links for loggedin users (authenticated)
   const authLinks = (
-    <Nav className="navButtons">
+    <Nav className="navButtonsAuth">
       <Nav.Link
-        href="/dashboard"
+        href="/my-profile"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
         DASHBOARD
+      </Nav.Link>
+      <Nav.Link
+        href="/project"
+        className="myBtn text-center glow-on-hover"
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        PROJECTS
       </Nav.Link>
       <Nav.Link
         href="/forum"

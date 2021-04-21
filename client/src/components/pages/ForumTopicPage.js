@@ -11,6 +11,8 @@ import Spinner from '../layoutComponents/Spinner';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
+import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
+
 const ForumTopicPage = () => {
   return (
     <>
@@ -21,8 +23,9 @@ const ForumTopicPage = () => {
           <Col className="leftPanel allPanels">
             <ForumSearch />
           </Col>
-          <Col xs={8} className="midPanel allPanels">
-            <Container fluid="md">
+          <Col xs={8} className="midPanel allPanels" style={{ backgroundImage: `url(${backgroundImage})`, 
+              backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+            <Container fluid="md" className="forumPanel">
               <PostList />
             </Container>
           </Col>

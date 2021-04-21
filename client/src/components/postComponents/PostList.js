@@ -23,10 +23,10 @@ const PostList = () => {
   return (
     <>
     {/* Forum Postings */}
-    <Container className="forumPanel">
-        <Row className="forumRow">
+    <Container>
+        <Row className="forumHeadings">
             <Col xs={7} className="forumCol">
-                <h5>Audio, production and mixing tips</h5>
+                <h4>Audio, production and mixing tips</h4>
             </Col>
             <Col xs={1}className="forumCol">
                 <h5>Replies</h5>
@@ -40,8 +40,8 @@ const PostList = () => {
         </Row>
     </Container>
 
-    <Container className="forumPanel">
-        <Row className="forumRow">
+    <Container>
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">new/old</Col>
             <Col xs={6} className="forumCol">
                 {/* this will link to an individual post item */}
@@ -52,8 +52,8 @@ const PostList = () => {
             <Col xs={3} className="forumCol">date-by-user</Col>
         </Row>
     </Container>
-    <Container className="forumPanel">
-        <Row className="forumRow">
+    <Container>
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">new/old</Col>
             <Col xs={6} className="forumCol">
                 {/* this will link to an individual post item */}
@@ -64,8 +64,8 @@ const PostList = () => {
             <Col xs={3} className="forumCol">date-by-user</Col>
         </Row>
     </Container>
-    <Container className="forumPanel">
-        <Row className="forumRow">
+    <Container>
+        <Row className="forumTopics">
             <Col xs={1} className="forumCol">new/old</Col>
             <Col xs={6} className="forumCol">
                 {/* this will link to an individual post item */}

@@ -21,12 +21,10 @@ const ForumPage = () => {
               <Col className="leftPanel allPanels">
                   <ForumSearch/>
               </Col>
-              <Col xs={8} className="midPanel allPanels" style={{ backgroundImage: `url(${backgroundImage})`, }}>
-           
-              <Container fluid="md" className="forumPanel">
-                
-                <ForumTopics />
-                  
+              <Col xs={8} className="midPanel allPanels" style={{ backgroundImage: `url(${backgroundImage})`, 
+              backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>         
+              <Container fluid="md" className="forumPanel">       
+                <ForumTopics />               
               </Container>
               </Col>
               <Col className="rightPanel allPanels"></Col>
