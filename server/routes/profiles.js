@@ -65,6 +65,7 @@ router.get('/', async (req, res) => {
   let filters;
   let instrumentsFilterArr;
   let genresFilterArr;
+  let profileIdsFilterArr;
   if (req.query.instruments !== '') {
     instrumentsFilterArr = req.query.instruments
       .split(',')
@@ -77,6 +78,11 @@ router.get('/', async (req, res) => {
   } else if (req.query.genres !== '') {
     genresFilterArr = req.query.genres.split(',').map((id) => parseInt(id));
     filters = 'genres';
+  } else if (req.query.profileIds !== '') {
+    profileIdsFilterArr = req.query.profileIds
+      .split(',')
+      .map((id) => parseInt(id));
+    filters = 'profileIds';
   } else {
     filters = 'none';
   }
@@ -110,6 +116,17 @@ router.get('/', async (req, res) => {
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
           profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
           [genresFilterArr]
+        );
+        break;
+      case 'profileIds':
+        profilesData = await db.query(
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, profiles.last_name, 
+          profiles.dob, profiles.phone, profiles.city, profiles.state, 
+          profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
+          profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
+          profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, 
+          profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.id = ANY ($1) ORDER BY users.username;`,
+          [profileIdsFilterArr]
         );
         break;
       default:

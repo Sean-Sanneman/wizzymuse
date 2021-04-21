@@ -13,7 +13,7 @@ import { getDefaultGenreValues } from '../../utils/listUtilFunctions';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-const GenreList = ({
+const GenreSelectList = ({
   getGenres,
   genres: { genres, loading },
   initialGenreSelection,
@@ -60,7 +60,7 @@ const GenreList = ({
   );
 };
 
-GenreList.propTypes = {
+GenreSelectList.propTypes = {
   getGenres: PropTypes.func.isRequired,
   genres: PropTypes.object.isRequired,
 };
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => ({
   genres: state.genres,
 });
 
-export default connect(mapStateToProps, { getGenres })(GenreList);
+export default connect(mapStateToProps, { getGenres })(GenreSelectList);

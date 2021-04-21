@@ -14,8 +14,8 @@ import { formatInstruments, formatGenres } from '../../utils/listUtilFunctions';
 // Components
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
-import InstrumentList from '../instrumentComponents/InstrumentList';
-import GenreList from '../genreComponents/GenreList';
+import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
+import GenreSelectList from '../genreComponents/GenreSelectList';
 
 // Styles and Images
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
@@ -314,7 +314,7 @@ const EditProfilePage = ({
                             Select all instruments you play:
                           </Form.Label>
                           <Col sm={6}>
-                            <InstrumentList
+                            <InstrumentSelectList
                               id="profileFormInputInstruments"
                               initialInstrumentSelection={
                                 profileData.instruments
@@ -332,7 +332,7 @@ const EditProfilePage = ({
                             Select all music genres you like:
                           </Form.Label>
                           <Col sm={6}>
-                            <GenreList
+                            <GenreSelectList
                               id="profileFormInputGenres"
                               initialGenreSelection={profileData.genres}
                               setGenreSelection={setGenreSelection}
