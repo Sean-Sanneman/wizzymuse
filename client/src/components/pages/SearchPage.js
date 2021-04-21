@@ -1,5 +1,9 @@
 // React imports
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// Redux imports
+import { connect } from 'react-redux';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
@@ -10,10 +14,10 @@ import ProfileList from '../profileComponents/ProfileList';
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 
-const SearchPage = () => {
+const SearchPage = ({ isAuthenticated }) => {
   return (
     <>
-      <Toolbar toolbarType="profilePageTB" />
+      {isAuthenticated && <Toolbar toolbarType="profilePageTB" />}
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
@@ -31,4 +35,12 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+SearchPage.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(SearchPage);

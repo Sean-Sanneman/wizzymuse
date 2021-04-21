@@ -1,9 +1,9 @@
 // React imports
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Redux imports
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Styles and Images
@@ -37,7 +37,6 @@ const Landing = ({ isAuthenticated }) => {
           </Container>
         </Col>
         <Col xs={8} className="midPanel allPanels">
-
           <Carousel fade>
             <Carousel.Item>
               <img
@@ -47,7 +46,9 @@ const Landing = ({ isAuthenticated }) => {
               />
               <Carousel.Caption>
                 <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <p>
+                  Nulla vitae elit libero, a pharetra augue mollis interdum.
+                </p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -69,10 +70,13 @@ const Landing = ({ isAuthenticated }) => {
               />
               <Carousel.Caption>
                 <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <p>
+                  Praesent commodo cursus magna, vel scelerisque nisl
+                  consectetur.
+                </p>
               </Carousel.Caption>
             </Carousel.Item>
-          <Carousel.Item>
+            <Carousel.Item>
               <img
                 className="d-block w-100"
                 src={coverImage2}
@@ -80,11 +84,13 @@ const Landing = ({ isAuthenticated }) => {
               />
               <Carousel.Caption>
                 <h3>Fourth slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <p>
+                  Praesent commodo cursus magna, vel scelerisque nisl
+                  consectetur.
+                </p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
-
         </Col>
         <Col className="rightPanel allPanels">
           <Container fluid="sm">
