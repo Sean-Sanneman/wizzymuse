@@ -11,15 +11,15 @@ const checkToken = require('../utils/check-token');
 router.get('/', async (req, res) => {
   try {
     const artistNetworkData = await db.query(
-    `SELECT profiles.first_name
+    `SELECT profiles.first_name, profiles.user_id
     FROM artist_network
-    LEFT JOIN users ON (users.id = connections.requester_id)
-    LEFT JOIN profiles ON (connections.target_id = profiles.user_id) WHERE connections.requester_id = $1
+    LEFT JOIN users ON (users.id = artist_network.requester_id)
+    LEFT JOIN profiles ON (artist_network.requester_id = profiles.user_id) WHERE artist_network.target_id = $1
     UNION
-    SELECT profiles.first_name
+    SELECT profiles.first_name, users.id
     FROM artist_network
-    LEFT JOIN users ON (users.id = connections.target_id)
-    LEFT JOIN profiles ON (connections.requester_id = profiles.user_id) WHERE connections.target_id = $1`,
+    LEFT JOIN users ON (users.id = artist_network.target_id)
+    LEFT JOIN profiles ON (artist_network.target_id = profiles.user_id) WHERE artist_network.requester_id = $1`,
     [req.user.id]
   );
   
@@ -42,22 +42,67 @@ router.get('/', async (req, res) => {
 // @route   POST api/connections
 // @desc    Log a new connection
 // @access  Private
+// @status  checked
 router.post('/', checkToken, async(req, res) => {
   try {
     const newConnectionData = await db.query(
-      'INSERT INTO artist_network (requester_id, target_id, connection_status, created_at) VALUES ($1, $2. $3, $4) RETURNING *',
+      `INSERT INTO artist_network (requester_id, target_id, connection_status, created_at) 
+            VALUES ($1, $2. $3, $4) RETURNING *`,
       [
         req.user.id,
         req.body.targetId,
         req.body.connectionStatus,
-        req.body.createdAt
+        req.body.createdAt // put system date instead of req.body.createdAt
+      ]
+    );
+    res.json(toCamelCase(newConnectionData.rows)[0]);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// @route   PUT api/connections
+// @desc    Update the connection from pending
+// @access  Private
+router.put('/', checkToken, async(req, res) => {
+  try {
+    const newConnectionData = await db.query(
+      `UPDATE artist_network 
+      SET connection_status=$3 
+      WHERE target_id=$1 AND requester_id=$2`,
+      [
+        req.user.id,
+        req.body.requesterId,
+        req.body.connectionStatus,
       ]
     );
     res.json({
-      message: 'A new artist was added to your network.',
+      message: 'The artist was added into your network!',
       newConnectionData = toCamelCase(newConnectionData.rows)[0],
     });
   } catch (err) {
     console.log(err);
   }
 });
+
+router.delete('/', checkToken, async(req, res) => {
+  try {
+    const newConnectionData = await db.query(
+      `DELETE FROM artist_network 
+      WHERE (target_id=$1 AND requester_id=$2)
+      OR (requester_id=$1 AND target_id=$2);`,
+      [
+        req.user.id,
+        req.body.userId,
+        req.body.connectionStatus,
+      ]
+    );
+    res.json({
+      message: 'The artist was removed from your network!',
+      newConnectionData = toCamelCase(newConnectionData.rows)[0],
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+

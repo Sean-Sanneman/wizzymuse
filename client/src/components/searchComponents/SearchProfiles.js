@@ -8,8 +8,9 @@ import { getProfiles } from '../../actions/profiles';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
-import InstrumentList from '../instrumentComponents/InstrumentList';
-import GenreList from '../genreComponents/GenreList';
+import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
+import GenreSelectList from '../genreComponents/GenreSelectList';
+import ProfileSelectList from '../profileComponents/ProfileSelectList';
 
 // Styles and Images
 import {
@@ -26,13 +27,14 @@ import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 const SearchProfiles = ({ getProfiles }) => {
   const [instrumentSelection, setInstrumentSelection] = useState([]);
   const [genreSelection, setGenreSelection] = useState([]);
+  const [nameSelection, setNameSelection] = useState([]);
   const searchProfileObj = {};
 
-  useEffect(() => {
-    getProfiles();
-  }, [getProfiles]);
+  // useEffect(() => {
+  //   getProfiles();
+  // }, [getProfiles]);
 
-  const onSubmitSearch = (e) => {
+  const onSubmitInstrumentsGenres = (e) => {
     if (instrumentSelection.length > 0) {
       const selectedInstruments = instrumentSelection.map(
         (selection) => selection.value
@@ -47,7 +49,18 @@ const SearchProfiles = ({ getProfiles }) => {
     } else {
       searchProfileObj.genres = '';
     }
-    console.log('searchProfileObj', searchProfileObj);
+    getProfiles(searchProfileObj);
+  };
+
+  const onSubmitNames = (e) => {
+    if (nameSelection.length > 0) {
+      const selectedProfileIds = nameSelection.map(
+        (selection) => selection.value
+      );
+      searchProfileObj.profileIds = selectedProfileIds;
+    } else {
+      searchProfileObj.profileIds = '';
+    }
     getProfiles(searchProfileObj);
   };
 
@@ -69,13 +82,13 @@ const SearchProfiles = ({ getProfiles }) => {
           }}
         >
           <div className="mb-4">
-            <InstrumentList
+            <InstrumentSelectList
               initialInstrumentSelection={[]}
               setInstrumentSelection={setInstrumentSelection}
             />
           </div>
           <div className="mb-4">
-            <GenreList
+            <GenreSelectList
               initialGenreSelection={[]}
               setGenreSelection={setGenreSelection}
             />
@@ -84,7 +97,7 @@ const SearchProfiles = ({ getProfiles }) => {
             <Button
               variant="outline-success"
               type="submit"
-              onClick={(e) => onSubmitSearch(e)}
+              onClick={(e) => onSubmitInstrumentsGenres(e)}
             >
               SUBMIT
             </Button>
@@ -94,23 +107,21 @@ const SearchProfiles = ({ getProfiles }) => {
             <h4 style={{ color: 'aqua' }}>OR...</h4>
           </div>
           <div className="mb-4">
-            {['right'].map((direction) => (
-              <DropdownButton
-                as={ButtonGroup}
-                key={direction}
-                id={`dropdown-button-drop-${direction}`}
-                drop={direction}
-                size="md"
-                variant="info"
-                title={'ARTIST NAME'}
+            <div className="mb-4">
+              <ProfileSelectList
+                initialNameSelection={[]}
+                setNameSelection={setNameSelection}
+              />
+            </div>
+            <div className="mb-4">
+              <Button
+                variant="outline-info"
+                type="submit"
+                onClick={(e) => onSubmitNames(e)}
               >
-                <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-              </DropdownButton>
-            ))}
+                FIND
+              </Button>
+            </div>
           </div>
         </Col>
       </Row>

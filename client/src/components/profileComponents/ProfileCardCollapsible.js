@@ -1,6 +1,11 @@
 // React imports
 import React, { useEffect, useState } from 'react';
 
+// Redux imports
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { editConnection } from '../../actions/auth';
+
 // Utils
 import { capitalizeName, pluralizeNoun } from '../../utils/stringUtilFunctions';
 
@@ -9,10 +14,13 @@ import { Alert, Row, Col, Card, Button, Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProfileCardCollapsible = ({
+  editConnection,
   profile: {
+    userId,
     avatar,
     username,
     bio,
+    id,
     firstName,
     lastName,
     city,
@@ -38,19 +46,25 @@ const ProfileCardCollapsible = ({
   const TemporaryCollaborateButton = () => {
     const [show, setShow] = useState(false);
 
+    const handleCollaborate = () => {
+      setShow(true);
+      editConnection(userId);
+    };
+
     if (show) {
       return (
         <Alert variant="danger" onClose={() => setShow(!show)} dismissible>
           <Alert.Heading>Coming up soon ...</Alert.Heading>
           <p>
             You want to send a collaborate request to this artist. This
-            functionality is not in place yet.
+            functionality is not in place yet. However, your request to
+            collaborate has been saved.
           </p>
         </Alert>
       );
     }
     return (
-      <Button variant="success" onClick={() => setShow(true)}>
+      <Button variant="success" onClick={handleCollaborate}>
         COLLABORATE
       </Button>
     );
@@ -80,6 +94,7 @@ const ProfileCardCollapsible = ({
                   ? bio
                   : 'We need some default text in case this profile is empty.'}
               </Card.Text>
+
               <TemporaryCollaborateButton />
 
               {/* Collapse toggle button */}
@@ -166,4 +181,8 @@ const ProfileCardCollapsible = ({
   );
 };
 
-export default ProfileCardCollapsible;
+ProfileCardCollapsible.propTypes = {
+  editConnection: PropTypes.func.isRequired,
+};
+
+export default connect(null, { editConnection })(ProfileCardCollapsible);

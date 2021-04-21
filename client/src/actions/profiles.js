@@ -35,9 +35,16 @@ export const getProfileMe = () => async (dispatch) => {
 
 // Get profiles (with or without query parameters)
 export const getProfiles = (queryObj) => async (dispatch) => {
-  const endpoint = queryObj
-    ? `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}`
-    : '/api/profiles?instruments=&genres=';
+  // build the endpoint
+  let endpoint;
+  if (queryObj) {
+    endpoint = queryObj.hasOwnProperty('profileIds')
+      ? `/api/profiles?instruments=&genres=&profileIds=${queryObj.profileIds}`
+      : `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}&profileIds=`;
+  } else {
+    endpoint = '/api/profiles?instruments=&genres=&profileIds=';
+  }
+
   try {
     const res = await axios.get(endpoint);
     dispatch({

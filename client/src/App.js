@@ -1,7 +1,6 @@
 // React imports
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import ReactDOM from 'react-dom';
 
 // Redux imports
 import { Provider } from 'react-redux';
@@ -29,15 +28,17 @@ import ForumPostPage from './components/pages/ForumPostPage';
 // Styles and Images
 import background from './assets/cover/bg-brushed-metal.jpg';
 
-// check localStorage for a token and set the global headers with it if there is one there
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser());
-    store.dispatch(getProfileMe());
-    store.dispatch(getProfiles());
+    // load all profiles
+    // store.dispatch(getProfiles());
+
+    // check localStorage for a token and set the global headers with it if there is one there
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+      store.dispatch(loadUser());
+      store.dispatch(getProfileMe());
+    }
   }, []);
   return (
     <Provider store={store}>

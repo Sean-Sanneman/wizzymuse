@@ -17,7 +17,7 @@ export const getInstruments = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: INSTRUMENT_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: 'Server error',
     });
   }
 };

@@ -1,6 +1,6 @@
 // React imports
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // Redux imports
 import PropTypes from 'prop-types';
@@ -14,11 +14,11 @@ import { formatInstruments, formatGenres } from '../../utils/listUtilFunctions';
 // Components
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
-import InstrumentList from '../instrumentComponents/InstrumentList';
-import GenreList from '../genreComponents/GenreList';
+import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
+import GenreSelectList from '../genreComponents/GenreSelectList';
 
 // Styles and Images
-import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, FormControl, InputGroup, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EditProfilePage = ({
@@ -237,7 +237,7 @@ const EditProfilePage = ({
                                 rows={3}
                                 id="profileFormInputBio"
                                 type="text"
-                                placeholder="A short bio of yourself ..."
+                                placeholder="Tell us about yourself..."
                                 name="bio"
                                 value={profileData.bio}
                                 onChange={(e) => onProfileChange(e)}
@@ -249,7 +249,7 @@ const EditProfilePage = ({
                           <InputGroup className="m-1">
                             <Form.Group className="mx-1">
                               <Form.Label htmlFor="profileFormInputPhone">
-                                Phone
+                                Phone (optional)
                               </Form.Label>
                               <Form.Control
                                 id="profileFormInputPhone"
@@ -262,7 +262,7 @@ const EditProfilePage = ({
                             </Form.Group>
                             <Form.Group className="mx-1">
                               <Form.Label htmlFor="profileFormInputWebsite">
-                                Website
+                                Website (optional)
                               </Form.Label>
                               <Form.Control
                                 id="profileFormInputWebsite"
@@ -279,7 +279,7 @@ const EditProfilePage = ({
                           <InputGroup className="m-1">
                             <Form.Group className="mx-1">
                               <Form.Label htmlFor="profileFormInputBand">
-                                Band
+                                Band (optional)
                               </Form.Label>
                               <Form.Control
                                 id="profileFormInputBand"
@@ -314,7 +314,7 @@ const EditProfilePage = ({
                             Select all instruments you play:
                           </Form.Label>
                           <Col sm={6}>
-                            <InstrumentList
+                            <InstrumentSelectList
                               id="profileFormInputInstruments"
                               initialInstrumentSelection={
                                 profileData.instruments
@@ -332,7 +332,7 @@ const EditProfilePage = ({
                             Select all music genres you like:
                           </Form.Label>
                           <Col sm={6}>
-                            <GenreList
+                            <GenreSelectList
                               id="profileFormInputGenres"
                               initialGenreSelection={profileData.genres}
                               setGenreSelection={setGenreSelection}
@@ -502,8 +502,16 @@ const EditProfilePage = ({
                             </Form.Row>
                           </>
                         )}
-                        <Form.Row className="my-2">
-                          <Col sm={12}>
+
+                        <Form.Row className="my-4 mx-1">
+                        <h6>Make profile private?</h6>
+                          <span class="input-group-text">
+                            <InputGroup.Checkbox />
+                          </span>
+                        </Form.Row>
+
+                        <Form.Row className="my-3" style={{ justifyContent: "center" }}>
+                          <Col sm={3}>
                             <Button
                               type="submit"
                               className="btn btn-info w-100 my-3"

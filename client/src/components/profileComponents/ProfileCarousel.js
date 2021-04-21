@@ -12,7 +12,7 @@ const ProfileCarousel = () => {
   return (
     <>
       <h3 style={{ margin: '15px', color: 'seashell', textAlign: 'center' }}>
-        My Artists Network
+        Trending Posts
       </h3>
       <Carousel className="friendsCarousel">
         <Carousel.Item>

@@ -39,3 +39,30 @@ export const formatInstruments = (list) => {
   });
   return newList;
 };
+
+export const getDefaultNameValues = (list) => {
+  const newList = [];
+  list.forEach((profile) => {
+    newList.push({
+      value: profile.id,
+      label: profile.username,
+    });
+    if (profile.artistName) {
+      newList.push({
+        value: profile.id,
+        label: profile.artistName,
+      });
+    }
+  });
+  return newList;
+};
+
+export const formatNames = (list) => {
+  const newList = list.map((profile) => {
+    return {
+      id: profile.value,
+      profileName: profile.label,
+    };
+  });
+  return newList;
+};

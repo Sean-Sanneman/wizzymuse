@@ -8,13 +8,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
 /* Navbar styles */
 .color-nav {
   background-color: #000000;
 }
+
 .navButtons {
-  margin: auto;
+  /* this controls positioning of nav buttons */
+  margin: auto 52% auto 48%;
 }
+
+.navButtonsAuth {
+  /* this controls positioning of nav buttons */
+  margin: auto 90% auto 10%;
+}
+
 .myBtn {
   border: solid;
   border-width: 2px;
@@ -95,6 +105,7 @@ code {
   }
 }
 
+
 /* Toolbar */
 .toolbar {
   background-image: linear-gradient(to right, #202020, #343434);
@@ -110,6 +121,7 @@ code {
   min-width: 10em;
 }
 /* Toolbar styles end */
+
 
 /* Main panels */
 .grid {
@@ -155,6 +167,7 @@ code {
 }
 /* Main panels styles end */
 
+
 /* Modals start */
 .loginModal {
   padding: 10% 0 0 22%;
@@ -174,6 +187,7 @@ code {
   box-shadow: inset 0 0 6px #000000;
 }
 /* Modals styles end */
+
 
 /* Signup */
 .signupGrid {
@@ -200,6 +214,7 @@ code {
 }
 /* Signup styles end */
 
+
 /* Profile styles */
 .profilePanels {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -208,6 +223,7 @@ code {
   margin: 2%;
 }
 /* Profile styles ends */
+
 
 /* Search Artist styles */
 .searchPanel {
@@ -240,6 +256,16 @@ code {
 }
 /* Search Artist styles end */
 
+
+/* Artist Profile styles start */
+.input-group-text {
+  padding-top: 2px;
+  background-color: transparent;
+  border: none;
+}
+/* Artist Profile styles end */
+
+
 /* My Collaborators Carousel */
 .friendsCarousel {
   margin: 24px 100px 36px 100px;
@@ -247,6 +273,7 @@ code {
   border-radius: 15px;
 }
 /* My Collaborators Carousel styles ends */
+
 
 /* Forum styles start */
 .forumPanel {
@@ -256,8 +283,23 @@ code {
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-top: 1%;
+  padding: 2% 0 6% 0;
+}
+
+.forumHeadings {
+  padding: 2% 0 3% 0;
+  border-bottom: solid;
+  border-bottom-style: groove;
+  border-color: #c0c0c0;
+}
+
+.forumTopics {
   margin-top: 2%;
-  padding: 2% 0 2% 0;
+}
+
+.forumRow {
+
 }
 
 .forumCol {
@@ -265,6 +307,7 @@ code {
   border: solid; */
 }
 /* Forum styles end */
+
 
 /* Footer */
 .page-footer {
