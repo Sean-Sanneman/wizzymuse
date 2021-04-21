@@ -42,6 +42,7 @@ router.get('/', async (req, res) => {
 // @route   POST api/connections
 // @desc    Log a new connection
 // @access  Private
+// @status  checked
 router.post('/', checkToken, async(req, res) => {
   try {
     const newConnectionData = await db.query(
@@ -51,13 +52,10 @@ router.post('/', checkToken, async(req, res) => {
         req.user.id,
         req.body.targetId,
         req.body.connectionStatus,
-        req.body.createdAt
+        req.body.createdAt // put system date instead of req.body.createdAt
       ]
     );
-    res.json({
-      message: 'The artist was sent a connection request!',
-      newConnectionData = toCamelCase(newConnectionData.rows)[0],
-    });
+    res.json(toCamelCase(newConnectionData.rows)[0]);
   } catch (err) {
     console.log(err);
   }

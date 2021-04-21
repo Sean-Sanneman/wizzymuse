@@ -13,13 +13,14 @@ import { getDefaultInstrumentValues } from '../../utils/listUtilFunctions';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-const InstrumentList = ({
+const InstrumentSelectList = ({
   getInstruments,
   instruments: { instruments, loading },
   initialInstrumentSelection,
   setInstrumentSelection,
 }) => {
   const [instrumentOptions, setInstrumentOptions] = useState([]);
+
   useEffect(() => {
     getInstruments();
     if (!loading) {
@@ -60,7 +61,7 @@ const InstrumentList = ({
   );
 };
 
-InstrumentList.propTypes = {
+InstrumentSelectList.propTypes = {
   getInstruments: PropTypes.func.isRequired,
   instruments: PropTypes.object.isRequired,
 };
@@ -69,4 +70,6 @@ const mapStateToProps = (state) => ({
   instruments: state.instruments,
 });
 
-export default connect(mapStateToProps, { getInstruments })(InstrumentList);
+export default connect(mapStateToProps, { getInstruments })(
+  InstrumentSelectList
+);
