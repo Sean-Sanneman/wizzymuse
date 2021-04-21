@@ -24,7 +24,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const authLinks = (
     <Nav className="navButtonsAuth">
       <Nav.Link
-        href="/dashboard"
+        href="/my-profile"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
