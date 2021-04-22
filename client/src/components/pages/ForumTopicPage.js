@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux imports
+import { connect } from 'react-redux';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
@@ -47,4 +48,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default ForumTopicPage;
+export default connect(mapStateToProps)(ForumTopicPage);
