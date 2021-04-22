@@ -173,7 +173,8 @@ code {
 /* Landing page left panel styles start */
 .landingLeftPanel {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
-  color: rgb(220, 61, 220);
+  /* color: rgb(220, 61, 220); */
+  color: #000000;
   border-radius: 15px;
   margin: 6% auto;
   padding-bottom: 66%;
