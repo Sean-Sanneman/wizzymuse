@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 // Redux imports
 import { connect } from 'react-redux';
 
+// Components
+import LandingLeftPanel from '../landingComponents/LandingLeftPanel';
+
 // Styles and Images
 import coverImage1 from '../../assets/cover/landing-image-1.jpg';
 import coverImage2 from '../../assets/cover/landing-image-2.jpg';
@@ -23,18 +26,7 @@ const Landing = ({ isAuthenticated }) => {
     <Container fluid className="grid">
       <Row className="mainGrid">
         <Col className="leftPanel allPanels">
-          <Container fluid="sm">
-            <Row>
-              <Col className="welcomeText">
-                <h4>Welcome to</h4>
-                <h2>WizzyMuse</h2>
-                <br></br>
-                <h4>Your online collaborators await!</h4>
-                <br></br>
-                <h5>Please login or register to continue.</h5>
-              </Col>
-            </Row>
-          </Container>
+          <LandingLeftPanel />
         </Col>
         <Col xs={8} className="midPanel allPanels">
           <Carousel fade>
