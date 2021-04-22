@@ -194,6 +194,14 @@ code {
 /* Landing page left panel styles end */
 
 
+/* Landing page main panel styles start */
+.welcomeStory {
+  color: #fff;
+  text-shadow: 2px 2px #03254c;
+}
+/* Landing page main panel styles end */
+
+
 /* Modals start */
 .loginModal {
   padding: 10% 0 0 22%;
