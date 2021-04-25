@@ -10,9 +10,9 @@ const LandingLeftPanel = () => {
         <Container fluid className="landingLeftPanel">
             <Row>
               <Col className="welcomeText">
-                <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
+                <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
                 <br></br>
-                <h5 style={{ color: "darkblue" }}><b>Your online collaborators await!</b></h5>
+                <h4 style={{ color: "darkblue" }}><b>Your online collaborators await!</b></h4>
                 <br></br>
                 <h5><b>Please login or register to continue.</b></h5>
               </Col>
