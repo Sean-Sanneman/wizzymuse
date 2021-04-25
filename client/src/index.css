@@ -129,25 +129,25 @@ code {
   color: #ffffff;
   margin: 1% auto;
 }
-.welcomeText {
-  padding-top: 12%;
-  color: seashell;
-  text-align: center;
-}
+
 .leftPanel {
   border-radius: 8px;
 }
+
 .leftLED {
   background-color: #000000;
   height: 84%;
 }
+
 .LED-text {
   padding-top: 12%;
   color: skyblue;
 }
+
 .babyYoda {
   padding: 8%;
 }
+
 .midPanel {
   border-radius: 8px;
   min-height: 650px;
@@ -156,16 +156,51 @@ code {
 .rightPanel {
   border-radius: 8px;
 }
+
 .allPanels {
   border: solid;
   border-color: #000000;
   background-image: linear-gradient(to right, #202020, #343434);
   box-shadow: inset -5px -5px 5px #252525;
 }
+
 .mainPic {
   padding: 1% 0;
 }
 /* Main panels styles end */
+
+
+/* Landing page left panel styles start */
+.landingLeftPanel {
+  background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
+  /* color: rgb(220, 61, 220); */
+  color: #000000;
+  border-radius: 15px;
+  margin: 6% auto;
+  padding-bottom: 66%;
+}
+
+.welcomeText {
+  margin-top: 6%;
+  padding-top: 6%;
+  text-align: center;
+  line-height: 1.2;
+  color: darkblue;
+
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+}
+/* Landing page left panel styles end */
+
+
+/* Landing page main panel styles start */
+.welcomeStory {
+  color: #fff;
+  text-shadow: 2px 2px #03254c;
+}
+/* Landing page main panel styles end */
 
 
 /* Modals start */

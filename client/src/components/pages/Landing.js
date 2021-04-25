@@ -6,11 +6,20 @@ import PropTypes from 'prop-types';
 // Redux imports
 import { connect } from 'react-redux';
 
+// Components
+import LandingLeftPanel from '../landingComponents/LandingLeftPanel';
+
 // Styles and Images
 import coverImage1 from '../../assets/cover/landing-image-1.jpg';
 import coverImage2 from '../../assets/cover/landing-image-2.jpg';
 import coverImage3 from '../../assets/cover/landing-image-3.jpg';
 import coverImage4 from '../../assets/cover/landing-image-4.jpg';
+import fakeAd1 from '../../assets/ads/fake-ad-1.jpg';
+import fakeAd2 from '../../assets/ads/fake-ad-2.jpg';
+import fakeAd3 from '../../assets/ads/fake-ad-3.jpg';
+import fakeAd4 from '../../assets/ads/fake-ad-4.jpg';
+import fakeAd5 from '../../assets/ads/fake-ad-5.jpg';
+
 import { Container, Row, Col, Carousel } from 'react-bootstrap';
 
 const Landing = ({ isAuthenticated }) => {
@@ -23,21 +32,10 @@ const Landing = ({ isAuthenticated }) => {
     <Container fluid className="grid">
       <Row className="mainGrid">
         <Col className="leftPanel allPanels">
-          <Container fluid="sm">
-            <Row>
-              <Col className="welcomeText">
-                <h4>Welcome to</h4>
-                <h2>WizzyMuse</h2>
-                <br></br>
-                <h4>Your online collaborators await!</h4>
-                <br></br>
-                <h5>Please login or register to continue.</h5>
-              </Col>
-            </Row>
-          </Container>
+          <LandingLeftPanel />
         </Col>
         <Col xs={8} className="midPanel allPanels">
-          <Carousel fade>
+          <Carousel fade className="welcomeStory">
             <Carousel.Item>
               <img
                 className="d-block w-100"
@@ -45,10 +43,8 @@ const Landing = ({ isAuthenticated }) => {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
+              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
+                <p>Your online collaborators await!</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -58,8 +54,8 @@ const Landing = ({ isAuthenticated }) => {
                 alt="Second slide"
               />
               <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
+                <p>Your online collaborators await!</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -69,11 +65,8 @@ const Landing = ({ isAuthenticated }) => {
                 alt="Third slide"
               />
               <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
+              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
+                <p>Your online collaborators await!</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -83,25 +76,64 @@ const Landing = ({ isAuthenticated }) => {
                 alt="Fourth slide"
               />
               <Carousel.Caption>
-                <h3>Fourth slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
+              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
+                <p>Your online collaborators await!</p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </Col>
         <Col className="rightPanel allPanels">
-          <Container fluid="sm">
+          <Container fluid="sm" className="ads">
             <Row>
-              <Col className="LED-text">
-                <p>Advertisement 1</p>
-                <p>Advertisement 2</p>
-                <p>Advertisement 3</p>
-                <p>...</p>
-              </Col>
+              <Col> 
+                example ad              
+                <img
+                className="d-block w-100"
+                src={fakeAd1}
+                alt="fake ad 1"
+                />
+                </Col>
             </Row>
+            <Row>
+              <Col>
+                example ad               
+                <img
+                className="d-block w-100"
+                src={fakeAd4}
+                alt="fake ad 4"
+                />
+                </Col>
+            </Row>
+            {/* <Row>
+              <Col>
+                example ad             
+                <img
+                className="d-block w-100"
+                src={fakeAd5}
+                alt="fake ad 5"
+                />
+                </Col>
+            </Row> */}
+            <Row>
+              <Col>
+                example ad               
+                <img
+                className="d-block w-100"
+                src={fakeAd3}
+                alt="fake ad 3"
+                />
+                </Col>
+            </Row>
+            {/* <Row>
+              <Col>
+                example ad              
+                <img
+                className="d-block w-100"
+                src={fakeAd2}
+                alt="fake ad 2"
+                />
+                </Col>
+            </Row> */}
           </Container>
         </Col>
       </Row>

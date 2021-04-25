@@ -45,14 +45,14 @@ const toolbarOptions = [
         text: 'MY CONNECTIONS',
       },
       {
-        link: '/my-projects',
-        style: 'primary',
-        text: 'OPEN PROJECT',
-      },
-      {
         link: '/new-project',
         style: 'info',
         text: 'NEW PROJECT',
+      },
+      {
+        link: '/my-projects',
+        style: 'primary',
+        text: 'OPEN PROJECT',
       },
       {
         link: '/mixdown',
