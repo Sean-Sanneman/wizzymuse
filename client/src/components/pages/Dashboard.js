@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
+import DashboardLeftPanel from '../dashboardComponents/DashboardLeftPanel';
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
 import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
@@ -47,16 +48,7 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            <Container fluid="sm">
-              <Row>
-                <Col className="welcomeText">
-                  <h4>Welcome to</h4>
-                  <h2>WizzyMuse</h2>
-                  <br></br>
-                  <h4>Your online collaborators await!</h4>
-                </Col>
-              </Row>
-            </Container>
+            <DashboardLeftPanel />
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container>
