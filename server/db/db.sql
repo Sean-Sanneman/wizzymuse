@@ -98,13 +98,13 @@ CREATE TABLE comments (
 
 -- INSERT INTO comments (post_id, user_id, comment_text) VALUES (1,1,'hi baby poster kins');
 
-CREATE TABLE artist_network (
+CREATE TABLE connections (
     id SERIAL PRIMARY KEY,
     requester_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     target_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     connection_status VARCHAR,
-    created_at  TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- INSERT INTO artist_network (requester_id, target_id, connection_status, created_at) VALUES(1,2,'Pending','2021-04-05 18:39:29.653953-07'), (2,3,'Saved', '2021-04-02 18:39:29.653953-07'), (1,2,'Saved','2021-04-01 18:39:29.653953-07'), (3,2,'Accepted','2021-04-05 18:39:29.653953-07');
+-- INSERT INTO connections (requester_id, target_id, connection_status, created_at) VALUES(1,2,'Pending','2021-04-05 18:39:29.653953-07'), (2,3,'Saved', '2021-04-02 18:39:29.653953-07'), (1,2,'Saved','2021-04-01 18:39:29.653953-07'), (3,2,'Accepted','2021-04-05 18:39:29.653953-07');

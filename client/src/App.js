@@ -18,6 +18,7 @@ import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import ProfileMePage from './components/pages/ProfileMePage';
 import EditProfilePage from './components/pages/EditProfilePage';
+import ConnectionPage from './components/pages/ConnectionPage';
 import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
 import SearchPage from './components/pages/SearchPage';
@@ -63,6 +64,11 @@ const App = () => {
                 exact
                 path="/edit-profile"
                 component={EditProfilePage}
+              />
+              <PrivateRoute
+                exact
+                path="/my-connections"
+                component={ConnectionPage}
               />
               <PrivateRoute exact path="/new-project" component={ProjectPage} />
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />

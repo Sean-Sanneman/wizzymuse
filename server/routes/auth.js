@@ -79,13 +79,12 @@ router.get('/', checkToken, async (req, res) => {
 
     // retrieve the user's connections
     const connectionsMeData = await db.query(
-      'SELECT target_id AS connection_id FROM artist_network WHERE requester_id = $1 UNION SELECT requester_id AS connection_id FROM artist_network WHERE target_id = $1;',
+      'SELECT target_id AS connection_id FROM connections WHERE requester_id = $1 UNION SELECT requester_id AS connection_id FROM connections WHERE target_id = $1;',
       [req.user.id]
     );
     connectionsMeData.rows
       ? (userMeObj.connections = connectionsMeData.rows)
       : (userMeObj.connections = []);
-    console.log('userMeObj', userMeObj);
     res.status(200).json(userMeObj);
   } catch (err) {
     console.log(err.message);

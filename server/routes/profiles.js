@@ -12,7 +12,7 @@ const toCamelCase = require('../utils/to-camel-case');
 // @status  checked, in use
 router.get('/me', checkToken, async (req, res) => {
   try {
-    // retrieve the user's profile information
+    // retrieve the current user's profile information
     const profileMeData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 

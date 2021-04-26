@@ -116,8 +116,3 @@ export const logout = () => (dispatch) => {
     type: CLEAR_PROFILES,
   });
 };
-
-// Create or edit a connection
-export const editConnection = (targetId) => (dispatch) => {
-  console.log('Create or edit a connection with', targetId);
-};

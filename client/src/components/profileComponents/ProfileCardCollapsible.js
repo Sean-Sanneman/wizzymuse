@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { editConnection } from '../../actions/auth';
+import { createConnection } from '../../actions/connections';
 
 // Utils
 import { capitalizeName, pluralizeNoun } from '../../utils/stringUtilFunctions';
@@ -14,7 +14,7 @@ import { Alert, Row, Col, Card, Button, Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProfileCardCollapsible = ({
-  editConnection,
+  createConnection,
   profile: {
     userId,
     avatar,
@@ -48,7 +48,7 @@ const ProfileCardCollapsible = ({
 
     const handleCollaborate = () => {
       setShow(true);
-      editConnection(userId);
+      createConnection(userId, 'pending');
     };
 
     if (show) {
@@ -182,7 +182,7 @@ const ProfileCardCollapsible = ({
 };
 
 ProfileCardCollapsible.propTypes = {
-  editConnection: PropTypes.func.isRequired,
+  createConnection: PropTypes.func.isRequired,
 };
 
-export default connect(null, { editConnection })(ProfileCardCollapsible);
+export default connect(null, { createConnection })(ProfileCardCollapsible);
