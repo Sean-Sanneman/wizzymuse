@@ -32,8 +32,27 @@ router.get('/', async (req, res) => {
       connectionsInfo: toCamelCase(connectionsData.rows)[0],
     });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
+  }
+});
+
+// @route   GET api/connections/me
+// @desc    Get the current user's connections, if any, by user ID located in the token
+// @access  Private
+// @status  checked, in use
+router.get('/me', checkToken, async (req, res) => {
+  try {
+    // retrieve the current user's connections
+    const connectionsMeData = await db.query(
+      'SELECT target_id AS user_id, connection_status, created_at FROM connections WHERE requester_id = $1 UNION SELECT requester_id AS user_id, connection_status, created_at FROM connections WHERE target_id = $1;',
+      [req.user.id]
+    );
+
+    res.json(toCamelCase(connectionsMeData.rows));
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -56,7 +75,7 @@ router.post('/', checkToken, async (req, res) => {
     res.json(toCamelCase(newConnectionData.rows)[0]);
   } catch (err) {
     console.log(err);
-    res.status(500).send('Server error');
+    res.status(500).send(err.message);
   }
 });
 
@@ -76,8 +95,8 @@ router.put('/', checkToken, async (req, res) => {
       newConnectionData: toCamelCase(newConnectionData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -97,8 +116,8 @@ router.delete('/', checkToken, async (req, res) => {
       newConnectionData: toCamelCase(newConnectionData.rows)[0],
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 

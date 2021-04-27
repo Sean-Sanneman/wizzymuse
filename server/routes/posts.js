@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const toCamelCase = require('../utils/to-camel-case')
+const toCamelCase = require('../utils/to-camel-case');
 const db = require('../db');
 
 // @route   GET api/posts
 // @desc    Get all posts
 // @access  Public or Private? (TO DO)
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
   try {
     const posts = await db.query(
       `SELECT * 
@@ -14,13 +14,15 @@ router.get('/', async(req, res) => {
        LEFT JOIN users ON (users.id = posts.user_id)
        LEFT JOIN profiles ON (profiles.id = users.id)
        LEFT JOIN comments ON (comments.post_id = posts.id)
-      ;`)
+      ;`
+    );
     res.json({
       message: 'The posts were retrieved.',
       posts: toCamelCase(posts.rows),
     });
-  } catch(err) {
-    console.log(err);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -50,7 +52,8 @@ router.get('/:id', async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -61,34 +64,26 @@ router.post('/', async (req, res) => {
   try {
     const newPost = await db.query(
       'INSERT INTO posts (user_id, category_id, post_text) VALUES ($1, $2, $3) RETURNING *;',
-      [
-        req.body.userId,
-        req.body.categoryId,
-        req.body.postText
-      ]
+      [req.body.userId, req.body.categoryId, req.body.postText]
     );
     res.json({
       message: 'A new post was created.',
       post: toCamelCase(newPost.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
 // @route   PUT api/posts/:id
 // @desc    Update a post
 // @access  Private (TO DO)
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const updatedPost = await db.query(
       'UPDATE posts SET user_id = $1, category_id = $2, post_text = $3 WHERE id = $4 RETURNING *;',
-      [
-        req.body.userId,
-        req.body.categoryId,
-        req.body.postText,
-        req.params.id,
-      ]
+      [req.body.userId, req.body.categoryId, req.body.postText, req.params.id]
     );
     if (updatedPost.rows[0]) {
       res.json({
@@ -101,7 +96,8 @@ router.put('/:id', async(req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -124,10 +120,10 @@ router.delete('/:id', async (req, res) => {
         message: 'The post does not exist.',
       });
     }
-  }  catch (err) {
-    console.log(err);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
-
 
 module.exports = router;

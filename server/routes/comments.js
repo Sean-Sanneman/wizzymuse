@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const toCamelCase = require('../utils/to-camel-case')
+const toCamelCase = require('../utils/to-camel-case');
 const db = require('../db');
 
 // @route   GET api/comments
 // @desc    Get all comments
 // @access  Public or Private? (TO DO)
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const comments = await db.query('SELECT * FROM comments;')
+    const comments = await db.query('SELECT * FROM comments;');
     res.json({
       message: 'The comments were retrieved.',
       comments: toCamelCase(comments.rows),
     });
-  } catch(err) {
-    console.log(err);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -38,7 +39,8 @@ router.get('/:id', async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -49,32 +51,26 @@ router.post('/', async (req, res) => {
   try {
     const newComment = await db.query(
       'INSERT INTO comments (post_id, user_id) VALUES ($1, $2) RETURNING *;',
-      [
-        req.body.postId,
-        req.body.userId
-      ]
+      [req.body.postId, req.body.userId]
     );
     res.json({
       message: 'A new comment was created.',
       comment: toCamelCase(newComment.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
 // @route   PUT api/comments/:id
 // @desc    Update a comment
 // @access  Private (TO DO)
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const updatedComment = await db.query(
       'UPDATE comments SET post_id = $1, user_id = $2 WHERE id = $3 RETURNING *;',
-      [
-        req.body.postId,
-        req.body.userId,
-        req.params.id,
-      ]
+      [req.body.postId, req.body.userId, req.params.id]
     );
     if (updatedComment.rows[0]) {
       res.json({
@@ -87,7 +83,8 @@ router.put('/:id', async(req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -110,10 +107,10 @@ router.delete('/:id', async (req, res) => {
         message: 'The comment does not exist.',
       });
     }
-  }  catch (err) {
-    console.log(err);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
-
 
 module.exports = router;

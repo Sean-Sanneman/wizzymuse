@@ -1,8 +1,8 @@
 // React imports
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 // Redux imports
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createConnection } from '../../actions/connections';
 
@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProfileCardCollapsible = ({
   createConnection,
+  connections: { connectionsMe, loading },
   profile: {
     userId,
     avatar,
@@ -41,33 +42,50 @@ const ProfileCardCollapsible = ({
     genres,
   },
 }) => {
-  const [open, setOpen] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
+  const [showAlertCollaborate, setShowAlertCollaborate] = useState(false);
+  const [showAlertPending, setShowAlertPending] = useState(false);
+  const [showAlertMessage, setShowAlertMessage] = useState(false);
+  const [showAlertNotAvailable, setShowAlertNotAvailable] = useState(false);
+  const [connectionStatusText, setConnectionStatusText] = useState(
+    'collaborate'
+  );
 
-  const TemporaryCollaborateButton = () => {
-    const [show, setShow] = useState(false);
-
-    const handleCollaborate = () => {
-      setShow(true);
-      createConnection(userId, 'pending');
-    };
-
-    if (show) {
-      return (
-        <Alert variant="danger" onClose={() => setShow(!show)} dismissible>
-          <Alert.Heading>Coming up soon ...</Alert.Heading>
-          <p>
-            You want to send a collaborate request to this artist. This
-            functionality is not in place yet. However, your request to
-            collaborate has been saved.
-          </p>
-        </Alert>
-      );
-    }
-    return (
-      <Button variant="success" onClick={handleCollaborate}>
-        COLLABORATE
-      </Button>
+  useEffect(() => {
+    setConnectionStatusText(
+      loading
+        ? 'loading...'
+        : () => {
+            let matchingText = 'collaborate';
+            connectionsMe.forEach((connection) => {
+              if (connection.userId === userId) {
+                return (matchingText = connection.connectionStatus);
+              }
+            });
+            return matchingText;
+          }
     );
+  }, [loading]);
+
+  const handleCollaborate = () => {
+    switch (connectionStatusText) {
+      case 'collaborate':
+        setShowAlertCollaborate(true);
+        createConnection(userId, 'pending');
+        setConnectionStatusText('pending');
+        break;
+      case 'pending':
+        setShowAlertPending(true);
+        break;
+      case 'message':
+        setShowAlertMessage(true);
+        break;
+      case 'not available':
+        setShowAlertNotAvailable(true);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -94,20 +112,83 @@ const ProfileCardCollapsible = ({
                   ? bio
                   : 'We need some default text in case this profile is empty.'}
               </Card.Text>
-
-              <TemporaryCollaborateButton />
+              {showAlertCollaborate && (
+                <Alert
+                  variant="info"
+                  onClose={() => setShowAlertCollaborate(!showAlertCollaborate)}
+                  dismissible
+                >
+                  <Alert.Heading>Coming up soon ...</Alert.Heading>
+                  <p>
+                    You want to send a collaborate request to this artist. This
+                    functionality is not in place yet. However, your request to
+                    collaborate has been saved.
+                  </p>
+                </Alert>
+              )}
+              {showAlertPending && (
+                <Alert
+                  variant="warning"
+                  onClose={() => setShowAlertPending(!showAlertPending)}
+                  dismissible
+                >
+                  <Alert.Heading>Pending ...</Alert.Heading>
+                  <p>
+                    This artist has not responded to your request to collaborate
+                    yet. The functionality to cancel a request will be
+                    implemented in the future.
+                  </p>
+                </Alert>
+              )}
+              {showAlertMessage && (
+                <Alert
+                  variant="success"
+                  onClose={() => setShowAlertMessage(!showAlertMessage)}
+                  dismissible
+                >
+                  <Alert.Heading>Coming up soon ...</Alert.Heading>
+                  <p>
+                    This artist is already in your network and you want to send
+                    a message. This functionality is not in place yet.
+                  </p>
+                </Alert>
+              )}
+              {showAlertNotAvailable && (
+                <Alert
+                  variant="danger"
+                  onClose={() =>
+                    setShowAlertNotAvailable(!showAlertNotAvailable)
+                  }
+                  dismissible
+                >
+                  <Alert.Heading>Not available ...</Alert.Heading>
+                  <p>
+                    This artist has declined your request to collaborate. The
+                    functionality to be able to resend a collaborate request
+                    after a set amount of time will be implemented in the
+                    future.
+                  </p>
+                </Alert>
+              )}
+              <Button
+                variant="success"
+                style={{ textTransform: 'uppercase' }}
+                onClick={handleCollaborate}
+              >
+                {loading ? 'loading...' : connectionStatusText}
+              </Button>
 
               {/* Collapse toggle button */}
               <Button
                 className="collapseArtistItem"
                 style={{ marginRight: '4%' }}
-                onClick={() => setOpen(!open)}
+                onClick={() => setOpenDetails(!openDetails)}
                 aria-controls="example-collapse-text"
-                aria-expanded={open}
+                aria-expanded={openDetails}
               >
                 Artist Details{' '}
                 <span className="ml-1">
-                  {open ? (
+                  {openDetails ? (
                     <FontAwesomeIcon
                       icon={['fas', 'angle-double-up']}
                       className="ml-2"
@@ -120,7 +201,7 @@ const ProfileCardCollapsible = ({
                   )}
                 </span>
               </Button>
-              <Collapse in={open}>
+              <Collapse in={openDetails}>
                 <div id="example-collapse-text">
                   {(firstName || lastName) && (
                     <p>
@@ -183,6 +264,13 @@ const ProfileCardCollapsible = ({
 
 ProfileCardCollapsible.propTypes = {
   createConnection: PropTypes.func.isRequired,
+  connections: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createConnection })(ProfileCardCollapsible);
+const mapStateToProps = (state) => ({
+  connections: state.connections,
+});
+
+export default connect(mapStateToProps, { createConnection })(
+  ProfileCardCollapsible
+);

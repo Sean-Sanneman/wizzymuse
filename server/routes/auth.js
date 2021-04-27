@@ -54,7 +54,7 @@ router.post('/login', checkUserInput, async (req, res) => {
     );
   } catch (err) {
     console.log(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send(err.message);
   }
 });
 
@@ -66,7 +66,7 @@ router.get('/', checkToken, async (req, res) => {
   try {
     // retrieve the user's information
     const userData = await db.query(
-      'SELECT email, username, avatar, created_at FROM users WHERE id = $1',
+      'SELECT id, email, username, avatar, created_at FROM users WHERE id = $1',
       [req.user.id]
     );
 
@@ -74,21 +74,10 @@ router.get('/', checkToken, async (req, res) => {
       return res.status(400).json({ message: 'This user was not found' });
     }
 
-    // build the userMeObj to return
-    const userMeObj = toCamelCase(userData.rows)[0];
-
-    // retrieve the user's connections
-    const connectionsMeData = await db.query(
-      'SELECT target_id AS connection_id FROM connections WHERE requester_id = $1 UNION SELECT requester_id AS connection_id FROM connections WHERE target_id = $1;',
-      [req.user.id]
-    );
-    connectionsMeData.rows
-      ? (userMeObj.connections = connectionsMeData.rows)
-      : (userMeObj.connections = []);
-    res.status(200).json(userMeObj);
+    res.status(200).json(toCamelCase(userData.rows)[0]);
   } catch (err) {
     console.log(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send(err.message);
   }
 });
 

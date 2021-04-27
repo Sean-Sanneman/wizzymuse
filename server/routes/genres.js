@@ -15,7 +15,8 @@ router.get('/', async (req, res) => {
     );
     res.json(toCamelCase(genreData.rows));
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -39,7 +40,8 @@ router.get('/:id', async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -57,7 +59,8 @@ router.post('/', checkToken, async (req, res) => {
       genre: toCamelCase(newGenre.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -81,7 +84,8 @@ router.put('/:id', checkToken, async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -105,7 +109,8 @@ router.delete('/:id', checkToken, async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
