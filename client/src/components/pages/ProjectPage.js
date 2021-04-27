@@ -1,8 +1,11 @@
 // React imports
 import React, { useEffect } from 'react';
+
 // Redux imports
+
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
+
 // Styles and Images
 
 
@@ -10,8 +13,9 @@ import Toolbar from '../layoutComponents/Toolbar';
 const ProjectPage = () => {
   return (
     <>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <div>ProjectPage</div>
+      <h1>This is just a test.</h1>
     </>
   );
 };

@@ -6,11 +6,20 @@ import PropTypes from 'prop-types';
 // Redux imports
 import { connect } from 'react-redux';
 
+// Components
+import LandingLeftPanel from '../landingComponents/LandingLeftPanel';
+
 // Styles and Images
 import coverImage1 from '../../assets/cover/landing-image-1.jpg';
 import coverImage2 from '../../assets/cover/landing-image-2.jpg';
 import coverImage3 from '../../assets/cover/landing-image-3.jpg';
 import coverImage4 from '../../assets/cover/landing-image-4.jpg';
+import fakeAd1 from '../../assets/ads/fake-ad-1.jpg';
+import fakeAd2 from '../../assets/ads/fake-ad-2.jpg';
+import fakeAd3 from '../../assets/ads/fake-ad-3.jpg';
+import fakeAd4 from '../../assets/ads/fake-ad-4.jpg';
+import fakeAd5 from '../../assets/ads/fake-ad-5.jpg';
+
 import { Container, Row, Col, Carousel } from 'react-bootstrap';
 
 const Landing = ({ isAuthenticated }) => {
@@ -23,32 +32,29 @@ const Landing = ({ isAuthenticated }) => {
     <Container fluid className="grid">
       <Row className="mainGrid">
         <Col className="leftPanel allPanels">
-          <Container fluid="sm">
-            <Row>
-              <Col className="welcomeText">
-                <h4>Welcome to</h4>
-                <h2>WizzyMuse</h2>
-                <br></br>
-                <h4>Your online collaborators await!</h4>
-                <br></br>
-                <h5>Please login or register to continue.</h5>
-              </Col>
-            </Row>
-          </Container>
+          <LandingLeftPanel />
         </Col>
         <Col xs={8} className="midPanel allPanels">
-          <Carousel fade>
+          <Carousel fade className="welcomeStory">
             <Carousel.Item>
               <img
                 className="d-block w-100"
                 src={coverImage1}
                 alt="First slide"
               />
-              <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technological issues. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -57,9 +63,19 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage4}
                 alt="Second slide"
               />
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technological issues. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -68,12 +84,19 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage3}
                 alt="Third slide"
               />
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technological issues. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -82,26 +105,75 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage2}
                 alt="Fourth slide"
               />
-              <Carousel.Caption>
-                <h3>Fourth slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technological issues. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </Col>
         <Col className="rightPanel allPanels">
-          <Container fluid="sm">
+          <Container className="ads">
             <Row>
-              <Col className="LED-text">
-                <p>Advertisement 1</p>
-                <p>Advertisement 2</p>
-                <p>Advertisement 3</p>
-                <p>...</p>
-              </Col>
+              <Col> 
+                example ad              
+                <img
+                className="d-block w-100"
+                src={fakeAd1}
+                alt="fake ad 1"
+                />
+                </Col>
             </Row>
+            <Row>
+              <Col>
+                example ad               
+                <img
+                className="d-block w-100"
+                src={fakeAd4}
+                alt="fake ad 4"
+                />
+                </Col>
+            </Row>
+            {/* <Row>
+              <Col>
+                example ad             
+                <img
+                className="d-block w-100"
+                src={fakeAd5}
+                alt="fake ad 5"
+                />
+                </Col>
+            </Row> */}
+            <Row>
+              <Col>
+                example ad               
+                <img
+                className="d-block w-100"
+                src={fakeAd3}
+                alt="fake ad 3"
+                />
+                </Col>
+            </Row>
+            {/* <Row>
+              <Col>
+                example ad              
+                <img
+                className="d-block w-100"
+                src={fakeAd2}
+                alt="fake ad 2"
+                />
+                </Col>
+            </Row> */}
           </Container>
         </Col>
       </Row>
