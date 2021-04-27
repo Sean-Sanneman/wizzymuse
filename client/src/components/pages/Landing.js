@@ -42,9 +42,19 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage1}
                 alt="First slide"
               />
-              <Carousel.Caption>
-              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
-                <p>Your online collaborators await!</p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technology that's not quite up to snuff. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -53,9 +63,19 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage4}
                 alt="Second slide"
               />
-              <Carousel.Caption>
-              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
-                <p>Your online collaborators await!</p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technology that's not quite up to snuff. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -64,9 +84,19 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage3}
                 alt="Third slide"
               />
-              <Carousel.Caption>
-              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
-                <p>Your online collaborators await!</p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technology that's not quite up to snuff. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -75,15 +105,25 @@ const Landing = ({ isAuthenticated }) => {
                 src={coverImage2}
                 alt="Fourth slide"
               />
-              <Carousel.Caption>
-              <h3>Welcome to <strong><em>Wizzy</em>Muse!</strong></h3>
-                <p>Your online collaborators await!</p>
+              <Carousel.Caption className= 'welcomePanel'>
+              <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
+              <br></br>
+                <h5>WizzyMuse is an online collaborative community. 
+                  <br></br>
+                  <br></br>
+                  We believe that you can't put a price tag on the creative process, which is why our site will always be free to use for people looking to collaborate with others. 
+                  <br></br>
+                  <br></br>
+                Your projects belong to you from the moment of inception. We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated. Use whatever technology you're used to, and simply drop your tracks into your project page. Your collaborators will be able to drop their own tracks into your project, and drag them into place.
+                <br></br>
+                <br></br>
+                Our space allows you to put your collaboration together without worrying about technology that's not quite up to snuff. We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h5>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </Col>
         <Col className="rightPanel allPanels">
-          <Container fluid="sm" className="ads">
+          <Container className="ads">
             <Row>
               <Col> 
                 example ad              
