@@ -35,14 +35,20 @@ export const getProfileMe = () => async (dispatch) => {
 
 // Get profiles (with or without query parameters)
 export const getProfiles = (queryObj) => async (dispatch) => {
+  console.log('queryObj', queryObj);
   // build the endpoint
   let endpoint;
   if (queryObj) {
-    endpoint = queryObj.hasOwnProperty('profileIds')
-      ? `/api/profiles?instruments=&genres=&profileIds=${queryObj.profileIds}`
-      : `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}&profileIds=`;
+    if (queryObj.hasOwnProperty('connectionUserIds')) {
+      endpoint = `/api/profiles?instruments=&genres=&profileIds=&connectionUserIds=${queryObj.connectionUserIds}`;
+    } else if (queryObj.hasOwnProperty('profileIds')) {
+      endpoint = `/api/profiles?instruments=&genres=&profileIds=${queryObj.profileIds}&connectionUserIds=`;
+    } else {
+      endpoint = `/api/profiles?instruments=${queryObj.instruments}&genres=${queryObj.genres}&profileIds=&connectionUserIds=`;
+    }
   } else {
-    endpoint = '/api/profiles?instruments=&genres=&profileIds=';
+    endpoint =
+      '/api/profiles?instruments=&genres=&profileIds=&connectionUserIds=`';
   }
 
   try {
