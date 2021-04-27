@@ -66,6 +66,7 @@ router.get('/', async (req, res) => {
   let instrumentsFilterArr;
   let genresFilterArr;
   let profileIdsFilterArr;
+  let connectionUserIdsFilterArr;
   if (req.query.instruments !== '') {
     instrumentsFilterArr = req.query.instruments
       .split(',')
@@ -83,6 +84,11 @@ router.get('/', async (req, res) => {
       .split(',')
       .map((id) => parseInt(id));
     filters = 'profileIds';
+  } else if (req.query.connectionUserIds !== '') {
+    connectionUserIdsFilterArr = req.query.connectionUserIds
+      .split(',')
+      .map((id) => parseInt(id));
+    filters = 'connectionUserIds';
   } else {
     filters = 'none';
   }
@@ -127,6 +133,17 @@ router.get('/', async (req, res) => {
           profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, 
           profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.id = ANY ($1) ORDER BY users.username;`,
           [profileIdsFilterArr]
+        );
+        break;
+      case 'connectionUserIds':
+        profilesData = await db.query(
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, profiles.last_name, 
+          profiles.dob, profiles.phone, profiles.city, profiles.state, 
+          profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
+          profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
+          profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, 
+          profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = ANY ($1) ORDER BY users.username;`,
+          [connectionUserIdsFilterArr]
         );
         break;
       default:

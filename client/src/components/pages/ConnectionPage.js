@@ -1,12 +1,7 @@
 // React imports
 import React from 'react';
-import PropTypes from 'prop-types';
-
-// Redux imports
-import { connect } from 'react-redux';
 
 // Components
-import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
 import ConnectionList from '../connectionComponents/ConnectionList';
 
@@ -34,4 +29,4 @@ const ConnectionPage = () => {
   );
 };
 
-export default connect()(ConnectionPage);
+export default ConnectionPage;

@@ -1,13 +1,12 @@
 // React imports
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 // Redux imports
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiles } from '../../actions/profiles';
 
 // Components
-import Spinner from '../layoutComponents/Spinner';
 import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
 import GenreSelectList from '../genreComponents/GenreSelectList';
 import ProfileSelectList from '../profileComponents/ProfileSelectList';
@@ -29,10 +28,6 @@ const SearchProfiles = ({ getProfiles }) => {
   const [genreSelection, setGenreSelection] = useState([]);
   const [nameSelection, setNameSelection] = useState([]);
   const searchProfileObj = {};
-
-  // useEffect(() => {
-  //   getProfiles();
-  // }, [getProfiles]);
 
   const onSubmitInstrumentsGenres = (e) => {
     if (instrumentSelection.length > 0) {
