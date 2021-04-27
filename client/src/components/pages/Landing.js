@@ -83,7 +83,7 @@ const Landing = ({ isAuthenticated }) => {
           </Carousel>
         </Col>
         <Col className="rightPanel allPanels">
-          <Container fluid="sm" className="ads">
+          <Container className="ads">
             <Row>
               <Col> 
                 example ad              
