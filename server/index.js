@@ -6,6 +6,7 @@ const cors = require('cors');
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const profilesRouter = require('./routes/profiles');
+const connectionsRouter = require('./routes/connections');
 const instrumentsRouter = require('./routes/instruments');
 const genresRouter = require('./routes/genres');
 const categoriesRouter = require('./routes/categories');
@@ -23,6 +24,7 @@ app.use(express.json()); // this allows us to access req.body
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/profiles', profilesRouter);
+app.use('/api/connections', connectionsRouter);
 app.use('/api/instruments', instrumentsRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/categories', categoriesRouter);

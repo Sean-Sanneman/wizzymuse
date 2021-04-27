@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
-import { loadUser } from './actions/auth';
-import { getProfileMe, getProfiles } from './actions/profiles';
+import { getUserMe } from './actions/auth';
+import { getProfileMe } from './actions/profiles';
+import { getConnectionsMe } from './actions/connections';
 
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -18,6 +19,7 @@ import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import ProfileMePage from './components/pages/ProfileMePage';
 import EditProfilePage from './components/pages/EditProfilePage';
+import ConnectionPage from './components/pages/ConnectionPage';
 import ProjectPage from './components/pages/ProjectPage';
 import MixdownPage from './components/pages/MixdownPage';
 import SearchPage from './components/pages/SearchPage';
@@ -30,14 +32,12 @@ import background from './assets/cover/bg-brushed-metal.jpg';
 
 const App = () => {
   useEffect(() => {
-    // load all profiles
-    // store.dispatch(getProfiles());
-
     // check localStorage for a token and set the global headers with it if there is one there
     if (localStorage.token) {
       setAuthToken(localStorage.token);
-      store.dispatch(loadUser());
+      store.dispatch(getUserMe());
       store.dispatch(getProfileMe());
+      store.dispatch(getConnectionsMe());
     }
   }, []);
   return (
@@ -63,6 +63,11 @@ const App = () => {
                 exact
                 path="/edit-profile"
                 component={EditProfilePage}
+              />
+              <PrivateRoute
+                exact
+                path="/my-connections"
+                component={ConnectionPage}
               />
               <PrivateRoute exact path="/new-project" component={ProjectPage} />
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />

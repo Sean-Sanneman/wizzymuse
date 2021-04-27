@@ -12,7 +12,7 @@ const toCamelCase = require('../utils/to-camel-case');
 // @status  checked, in use
 router.get('/me', checkToken, async (req, res) => {
   try {
-    // retrieve the user's profile information
+    // retrieve the current user's profile information
     const profileMeData = await db.query(
       `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
@@ -51,8 +51,8 @@ router.get('/me', checkToken, async (req, res) => {
 
     res.status(200).json(profileMeObj);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -164,8 +164,8 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(profileListObj);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -200,8 +200,8 @@ router.get('/:id', async (req, res) => {
       profile: toCamelCase(selectedprofileData.rows),
     });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -281,8 +281,8 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
       profile: toCamelCase(newProfileData.rows)[0],
     });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -357,8 +357,8 @@ router.put('/', checkToken, async (req, res) => {
       message: 'Your profile was successfully updated.',
     });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -381,8 +381,8 @@ router.delete('/', checkToken, async (req, res) => {
       deletedprofile: toCamelCase(deletedprofileData.rows)[0],
     });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 

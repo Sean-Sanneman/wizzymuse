@@ -1,8 +1,8 @@
 // React imports
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Redux imports
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
@@ -17,19 +17,23 @@ import {
   pluralizeVerb,
 } from '../../utils/stringUtilFunctions';
 
-const ProfileList = ({ profiles: { loading, profiles } }) => {
+const ProfileList = ({ auth: { userMe }, profiles: { loading, profiles } }) => {
+  // Filter out the current user's profile in the search results
+  const checkForSelf = (profilesArr) =>
+    profilesArr.filter((profile) => profile.userId !== userMe.id);
+
   return (
     <>
       {loading ? (
         <Spinner />
-      ) : profiles && profiles.length > 0 ? (
+      ) : profiles && checkForSelf(profiles).length > 0 ? (
         <>
           <p className="mt-5 mx-3">
-            {capitalizeName(letterizeDigit(profiles.length))}{' '}
-            {pluralizeNoun(profiles.length, 'profile')}{' '}
-            {pluralizeVerb(profiles.length, 'was')} found.
+            {capitalizeName(letterizeDigit(checkForSelf(profiles).length))}{' '}
+            {pluralizeNoun(checkForSelf(profiles).length, 'profile')}{' '}
+            {pluralizeVerb(checkForSelf(profiles).length, 'was')} found.
           </p>
-          {profiles.map((profile, idx) => (
+          {checkForSelf(profiles).map((profile, idx) => (
             <ProfileCardCollapsible key={idx} profile={profile} />
           ))}
         </>
@@ -41,10 +45,12 @@ const ProfileList = ({ profiles: { loading, profiles } }) => {
 };
 
 ProfileList.propTypes = {
+  auth: PropTypes.object.isRequired,
   profiles: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   profiles: state.profiles,
 });
 

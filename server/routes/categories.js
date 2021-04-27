@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const toCamelCase = require('../utils/to-camel-case')
+const toCamelCase = require('../utils/to-camel-case');
 const db = require('../db');
 
 // @route   GET api/categories
 // @desc    Get all categories
 // @access  Public or Private? (TO DO)
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const categories = await db.query('SELECT * FROM categories;')
+    const categories = await db.query('SELECT * FROM categories;');
     res.json({
       message: 'The categories were retrieved.',
       categories: toCamelCase(categories.rows),
     });
-  } catch(err) {
-    console.log(err);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -38,7 +39,8 @@ router.get('/:id', async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -49,32 +51,26 @@ router.post('/', async (req, res) => {
   try {
     const newCategory = await db.query(
       'INSERT INTO categories (title, description) VALUES ($1, $2) RETURNING *;',
-      [
-        req.body.title,
-        req.body.description
-      ]
+      [req.body.title, req.body.description]
     );
     res.json({
       message: 'A new category was created.',
       category: toCamelCase(newCategory.rows)[0],
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
 // @route   PUT api/categories/:id
 // @desc    Update a category
 // @access  Private (TO DO)
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const updatedCategory = await db.query(
       'UPDATE categories SET title = $1, description = $2 WHERE id = $3 RETURNING *;',
-      [
-        req.body.title,
-        req.body.description,
-        req.params.id,
-      ]
+      [req.body.title, req.body.description, req.params.id]
     );
     if (updatedCategory.rows[0]) {
       res.json({
@@ -87,7 +83,8 @@ router.put('/:id', async(req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -110,10 +107,10 @@ router.delete('/:id', async (req, res) => {
         message: 'The category does not exist.',
       });
     }
-  }  catch (err) {
-    console.log(err);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
-
 
 module.exports = router;

@@ -28,7 +28,7 @@ export const getProfileMe = () => async (dispatch) => {
     console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
-      payload: 'Server error',
+      payload: err.message,
     });
   }
 };
@@ -55,7 +55,7 @@ export const getProfiles = (queryObj) => async (dispatch) => {
     console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
-      payload: 'Server error',
+      payload: err.message,
     });
   }
 };
@@ -74,7 +74,7 @@ export const getProfileById = (profileId) => async (dispatch) => {
     console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
-      payload: 'Server error',
+      payload: err.message,
     });
   }
 };
@@ -98,14 +98,14 @@ export const editProfile = (
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.put('/api/profiles', profileInput, config);
+    await axios.put('/api/profiles', profileInput, config);
     dispatch(getProfileMe());
     history.push('/dashboard'); // redirecting in an action is different - we cannot use the Redirect -  we have to use the push method within the history object
   } catch (err) {
     console.log(err.message);
     dispatch({
       type: PROFILE_ERROR,
-      payload: 'Server error',
+      payload: err.message,
     });
   }
 };
