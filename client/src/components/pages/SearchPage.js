@@ -10,6 +10,7 @@ import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
 import SearchProfiles from '../searchComponents/SearchProfiles';
 import ProfileList from '../profileComponents/ProfileList';
+import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -28,7 +29,9 @@ const SearchPage = ({ isAuthenticated }) => {
               <ProfileList />
             </Container>
           </Col>
-          <Col className="rightPanel allPanels"></Col>
+          <Col className="rightPanel allPanels">
+            <Sponsors />
+          </Col>
         </Row>
       </Container>
     </>

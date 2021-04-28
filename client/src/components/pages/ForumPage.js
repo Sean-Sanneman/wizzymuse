@@ -11,6 +11,7 @@ import ProfileCardCollapsible from '../profileComponents/ProfileCardCollapsible'
 import ForumSearch from '../forumComponents/ForumSearch';
 import ForumTopics from '../forumComponents/ForumTopics';
 import Spinner from '../layoutComponents/Spinner';
+import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
 import fakeAd1 from '../../assets/ads/fake-ad-1.jpg';
@@ -46,58 +47,7 @@ const ForumPage = ({ isAuthenticated }) => {
             </Container>
           </Col>
           <Col className="rightPanel allPanels">
-          <Container className="ads">
-            <Row>
-              <Col> 
-                example ad              
-                <img
-                className="d-block w-100"
-                src={fakeAd1}
-                alt="fake ad 1"
-                />
-                </Col>
-            </Row>
-            <Row>
-              <Col>
-                example ad               
-                <img
-                className="d-block w-100"
-                src={fakeAd4}
-                alt="fake ad 4"
-                />
-                </Col>
-            </Row>
-            {/* <Row>
-              <Col>
-                example ad             
-                <img
-                className="d-block w-100"
-                src={fakeAd5}
-                alt="fake ad 5"
-                />
-                </Col>
-            </Row> */}
-            <Row>
-              <Col>
-                example ad               
-                <img
-                className="d-block w-100"
-                src={fakeAd3}
-                alt="fake ad 3"
-                />
-                </Col>
-            </Row>
-            {/* <Row>
-              <Col>
-                example ad              
-                <img
-                className="d-block w-100"
-                src={fakeAd2}
-                alt="fake ad 2"
-                />
-                </Col>
-            </Row> */}
-          </Container>
+            <Sponsors />
           </Col>
         </Row>
       </Container>
