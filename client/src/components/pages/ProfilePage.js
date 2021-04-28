@@ -1,9 +1,11 @@
 // React imports
 import React, { useEffect } from 'react';
+
 // Redux imports
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfileById, getProfileMe } from '../../actions/profiles';
+
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
 import Spinner from '../layoutComponents/Spinner';
@@ -11,6 +13,8 @@ import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileInstruments from '../profileComponents/ProfileInstruments';
 import ProfileGenres from '../profileComponents/ProfileGenres';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
+import Sponsors from '../layoutComponents/Sponsors';
+
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
 const ProfilePage = ({
@@ -75,7 +79,9 @@ const ProfilePage = ({
                 </Container>
                 <ProfileCarousel />
               </Col>
-              <Col className="rightPanel allPanels"></Col>
+              <Col className="rightPanel allPanels">
+                <Sponsors />
+              </Col>
             </Row>
           </Container>
         </>
