@@ -40,7 +40,13 @@ const Landing = ({ isAuthenticated }) => {
                 alt="First slide"
               />
               <Carousel.Caption className= 'welcomePanel'>
-              <WelText/>
+              <h1>
+                  WizzyMuse is an online collaborative community.
+                </h1>
+                <br></br>
+                <h4>We believe that you can't put a price tag on the creative process, 
+                  which is why our site will always be free to use for people looking to collaborate with others.
+                </h4>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -50,7 +56,11 @@ const Landing = ({ isAuthenticated }) => {
                 alt="Second slide"
               />
               <Carousel.Caption className= 'welcomePanel'>
-              <WelText/>
+              <h1>Your projects belong to you from the moment of inception.
+              </h1>
+              <br></br>
+                   <h4>We utilize blockchain technology to ensure you feel confident that when you're ready to take your projects to the next level, everyone will know where your projects originated.
+                </h4>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -60,7 +70,9 @@ const Landing = ({ isAuthenticated }) => {
                 alt="Third slide"
               />
               <Carousel.Caption className= 'welcomePanel'>
-              <WelText/>
+              <h1>Use whatever technology you're used to, and simply drop your audio tracks into your project.</h1>
+              <br></br>
+                     <h4>Your collaborators will be able to drop their own tracks into your project, and drag them into place.</h4>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -70,7 +82,9 @@ const Landing = ({ isAuthenticated }) => {
                 alt="Fourth slide"
               />
               <Carousel.Caption className= 'welcomePanel'>
-              <WelText/>
+              <h1>Our space allows you to put your projects together without worrying about technological headaches.</h1>
+              <br></br>
+              <h4>We all have our own ways we like to work, but that shouldn't stop us from putting the pieces together. Our community is about simplifying the process of collaborating remotely.</h4>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>

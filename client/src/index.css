@@ -209,13 +209,13 @@ code {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   /* padding: 5% 1% 12% 1%; */
-  padding: 1% 2% 1% 2%;
+  padding: 1% 2% 2% 2%;
 }
 
 .welcomePanel, carousel-caption, h4, h3 {
   left: 24px;
   right: 24px;
-  bottom: 2px;
+  bottom: 3%;
   line-height: 1.1;
 }
 /* Landing page main panel styles end */
