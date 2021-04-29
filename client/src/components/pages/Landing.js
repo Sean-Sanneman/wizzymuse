@@ -33,7 +33,7 @@ const Landing = ({ isAuthenticated }) => {
         </Col>
         <Col xs={8} className="midPanel allPanels">
           <Carousel fade className="welcomeStory">
-            <Carousel.Item>
+            <Carousel.Item interval={7000}>
               <img
                 className="d-block w-100"
                 src={coverImage1}
@@ -49,7 +49,7 @@ const Landing = ({ isAuthenticated }) => {
                 </h4>
               </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={7000}>
               <img
                 className="d-block w-100"
                 src={coverImage4}
@@ -63,19 +63,19 @@ const Landing = ({ isAuthenticated }) => {
                 </h4>
               </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={7000}>
               <img
                 className="d-block w-100"
                 src={coverImage3}
                 alt="Third slide"
               />
               <Carousel.Caption className= 'welcomePanel'>
-              <h1>Use whatever technology you're used to, and simply drop your audio tracks into your project.</h1>
+              <h1>Use whatever technology you're used to using for recording and creating audio.</h1>
               <br></br>
-                     <h4>Your collaborators will be able to drop their own tracks into your project, and drag them into place.</h4>
+                     <h4>Then simply import and drop your audio files into your project. Your collaborators will be able to drop their own tracks into your project as well, and drag them into place.</h4>
               </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={7000}>
               <img
                 className="d-block w-100"
                 src={coverImage2}
