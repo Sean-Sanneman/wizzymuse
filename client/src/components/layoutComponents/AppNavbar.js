@@ -26,35 +26,35 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/my-profile"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         DASHBOARD
       </Nav.Link>
       <Nav.Link
         href="/project"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         PROJECTS
       </Nav.Link>
       <Nav.Link
         href="/forum"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         FORUM
       </Nav.Link>
       <Nav.Link
         href="/search-profiles"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         SEARCH ARTISTS
       </Nav.Link>
       <Nav.Link
         href="/"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
         onClick={logout}
       >
         LOGOUT
@@ -68,14 +68,14 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/forum"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         FORUM
       </Nav.Link>
       <Nav.Link
         href="/search-profiles"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         SEARCH ARTISTS
       </Nav.Link>
@@ -83,7 +83,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         onClick={handleShow}
         href="#login-register"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         LOGIN/REGISTER
       </Nav.Link>
