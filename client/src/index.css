@@ -17,28 +17,22 @@ code {
 
 .navButtons {
   /* this controls positioning of nav buttons */
-  margin: auto 52% auto 48%;
+  margin: auto 57% auto 43%;
 }
 
 .navButtonsAuth {
   /* this controls positioning of nav buttons */
-  margin: auto 90% auto 10%;
+  margin: auto 96% auto 4%;
 }
 
 .myBtn {
-  border: solid;
-  border-width: 2px;
-  color: #fff;
   border-radius: 18px;
-  box-shadow: inset 0 0 12px #000000;
   min-width: 10em;
-  margin: 5% 2%;
-  font-size: small;
+  margin: 5% 1%;
 }
 .glow-on-hover {
   border: none;
-  outline: none;
-  color: #fff;
+  outline: none; 
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -72,7 +66,7 @@ code {
   border-radius: 10px;
 }
 .glow-on-hover:active {
-  color: #fff;
+  
 }
 .glow-on-hover:active:after {
   background: transparent;
@@ -86,8 +80,7 @@ code {
   position: absolute;
   width: 100%;
   height: 100%;
-  color: #fff;
-  box-shadow: inset 0 0 12px #000000;
+  background-color: #000000;
   left: 0;
   top: 0;
   border-radius: 10px;
