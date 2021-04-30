@@ -92,10 +92,10 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
 
   return (
     <>
-      <Navbar className="color-nav" variant="dark" sticky="top">
+      <Navbar className="main-navbar" variant="dark" sticky="top">
         <Navbar.Brand href="/">
           <Container fluid className="logo-image d-flex justify-content-left">
-            <img src={logo} width="75%" height="75%" alt="Logo"></img>
+            <img src={logo} width="60%" height="60%" alt="Logo"></img>
           </Container>
         </Navbar.Brand>
         <Container fluid className="d-flex justify-content-right">

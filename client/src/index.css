@@ -11,8 +11,9 @@ code {
 
 
 /* Navbar styles */
-.color-nav {
+.main-navbar {
   background-color: #000000;
+  max-height: 82px;
 }
 
 .navButtons {
