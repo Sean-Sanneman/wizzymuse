@@ -37,8 +37,18 @@ code {
   margin-bottom: auto;
 }
 
+.dropdown-toggle::after {
+  margin-left: 0;
+  border-top: none;
+}
+
 .projectMenu {
   background-image: linear-gradient(to right, rgb(149, 184, 222), lightgray);
+}
+
+.projectItem:hover {
+  background: #000000;
+  color: #ffffff;
 }
 
 .glow-on-hover {

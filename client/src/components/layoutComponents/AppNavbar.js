@@ -30,8 +30,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         DASHBOARD
       </Nav.Link>
 
-
-
+      {/* Projects dropdown */}
       <div className="projectDropdown">
       <Dropdown>
       <Dropdown.Toggle variant="" id="dropdown-basic"
@@ -40,13 +39,12 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         PROJECTS    
       </Dropdown.Toggle>
       <Dropdown.Menu className="projectMenu">
-        <Dropdown.Item href="#/action-1">New Project</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Open Projects</Dropdown.Item>
+        <Dropdown.Item href="#/action-1" className="projectItem">New Project</Dropdown.Item>
+        <Dropdown.Item href="#/action-2" className="projectItem">Open Projects</Dropdown.Item>
       </Dropdown.Menu>
       </Dropdown>
       </div>
-
-      
+      {/* Projects dropdown end */}
 
       <Nav.Link
         href="/forum"
