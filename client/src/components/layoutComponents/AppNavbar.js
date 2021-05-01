@@ -12,7 +12,7 @@ import Login from '../authComponents/Login';
 
 // Styles and Images
 import logo from '../../assets/cover/wizzymuse-logo.png';
-import { Button, Container, Form, Modal, Navbar, Nav } from 'react-bootstrap';
+import { Button, Container, Form, Modal, Navbar, Nav, Dropdown } from 'react-bootstrap';
 
 const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   // modal code
@@ -26,22 +26,32 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/my-profile"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'white', textDecoration: 'none' }}
-      >
+        style={{ color: 'white', textDecoration: 'none' }}>
         DASHBOARD
       </Nav.Link>
-      <Nav.Link
-        href="/project"
+
+
+
+      <div className="projectDropdown">
+      <Dropdown>
+      <Dropdown.Toggle variant="" id="dropdown-basic"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'white', textDecoration: 'none' }}
-      >
-        PROJECTS
-      </Nav.Link>
+        style={{ color: 'white', textDecoration: 'none' }}>     
+        PROJECTS    
+      </Dropdown.Toggle>
+      <Dropdown.Menu className="projectMenu">
+        <Dropdown.Item href="#/action-1">New Project</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Open Projects</Dropdown.Item>
+      </Dropdown.Menu>
+      </Dropdown>
+      </div>
+
+      
+
       <Nav.Link
         href="/forum"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'white', textDecoration: 'none' }}
-      >
+        style={{ color: 'white', textDecoration: 'none' }}>
         FORUM
       </Nav.Link>
       <Nav.Link
@@ -55,8 +65,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         href="/"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'white', textDecoration: 'none' }}
-        onClick={logout}
-      >
+        onClick={logout}>
         LOGOUT
       </Nav.Link>
     </Nav>
@@ -68,23 +77,20 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/forum"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'white', textDecoration: 'none' }}
-      >
+        style={{ color: 'white', textDecoration: 'none' }}>
         FORUM
       </Nav.Link>
       <Nav.Link
         href="/search-profiles"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'white', textDecoration: 'none' }}
-      >
+        style={{ color: 'white', textDecoration: 'none' }}>
         SEARCH ARTISTS
       </Nav.Link>
       <Nav.Link
         onClick={handleShow}
         href="#login-register"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'white', textDecoration: 'none' }}
-      >
+        style={{ color: 'white', textDecoration: 'none' }}>
         LOGIN/REGISTER
       </Nav.Link>
     </Nav>

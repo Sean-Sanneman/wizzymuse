@@ -21,7 +21,7 @@ code {
   margin: auto 57% auto 43%;
 }
 
-.navButtonsAuth {
+.navButtonsAuth .navbar-nav {
   /* this controls positioning of nav buttons */
   margin: auto 96% auto 4%;
 }
@@ -31,6 +31,16 @@ code {
   min-width: 10em;
   margin: 5% 1%;
 }
+
+.projectDropdown {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.projectMenu {
+  background-image: linear-gradient(to right, rgb(149, 184, 222), lightgray);
+}
+
 .glow-on-hover {
   border: none;
   outline: none; 
