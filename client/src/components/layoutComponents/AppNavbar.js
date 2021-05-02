@@ -1,5 +1,6 @@
 // React imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from "react-dom";
 import { Link } from 'react-router-dom';
 
 // Redux imports
@@ -9,16 +10,23 @@ import { logout } from '../../actions/auth';
 
 // Components
 import Login from '../authComponents/Login';
+import Portal from '../pages/Portal';
 
 // Styles and Images
 import logo from '../../assets/cover/wizzymuse-logo.png';
 import { Button, Container, Form, Modal, Navbar, Nav, Dropdown } from 'react-bootstrap';
+// import { menuPortalCSS } from 'react-select/src/components/Menu';
+
 
 const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   // modal code
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // portal code
+  const [isOpen, setIsOpen] = useState(false)
+
 
   // Navbar links for loggedin users (authenticated)
   const authLinks = (
@@ -39,8 +47,18 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         PROJECTS    
       </Dropdown.Toggle>
       <Dropdown.Menu className="projectMenu">
-        <Dropdown.Item href="#/action-1" className="projectItem">New Project</Dropdown.Item>
-        <Dropdown.Item href="#/action-2" className="projectItem">Open Projects</Dropdown.Item>
+        <Dropdown.Item onClick={() => setIsOpen(true)} href="#/action-1" className="projectItem">
+          New Project
+
+        <Portal open={isOpen} onClose={() => setIsOpen(false)}>
+          This is a Portal
+        </Portal>
+
+
+        </Dropdown.Item>
+        <Dropdown.Item href="#/action-2" className="projectItem">
+          Open Projects
+        </Dropdown.Item>
       </Dropdown.Menu>
       </Dropdown>
       </div>
