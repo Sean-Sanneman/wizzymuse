@@ -54,7 +54,6 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
           This is a Portal
         </Portal>
 
-
         </Dropdown.Item>
         <Dropdown.Item href="#/action-2" className="projectItem">
           Open Projects
