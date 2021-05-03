@@ -47,7 +47,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         PROJECTS    
       </Dropdown.Toggle>
       <Dropdown.Menu className="projectMenu">
-        
+
       <div onClick={() => console.log('clicked')}>
         <Dropdown.Item onClick={() => setIsOpen(true)} className="projectItem">
           New Project
@@ -55,8 +55,9 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         <Portal open={isOpen} onClose={() => setIsOpen(false)}>
           This is a Portal
         </Portal>
-
         </Dropdown.Item>
+        </div>
+        
         <Dropdown.Item href="#/action-2" className="projectItem">
           Open Projects
         </Dropdown.Item>
