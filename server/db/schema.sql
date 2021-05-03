@@ -1,55 +1,15 @@
-CREATE TABLE users
-(
-    id SERIAL PRIMARY KEY,
-    email VARCHAR NOT NULL UNIQUE,
-    username VARCHAR NOT NULL,
-    password VARCHAR NOT NULL,
-    avatar VARCHAR,
-    created_at TIMESTAMP WITH TIME ZONE
-);
+DROP DATABASE IF EXISTS wizzymuse;
+CREATE DATABASE wizzymuse;
 
-CREATE TABLE connections (
-    id SERIAL PRIMARY KEY,
-    requester_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    target_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    connection_status VARCHAR,
-    created_at TIMESTAMP WITH TIME ZONE,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+-- Move into the db
+\c wizzymuse
 
-CREATE TABLE profiles
-(
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    public_profile BOOLEAN DEFAULT TRUE,
-    first_name VARCHAR,
-    last_name VARCHAR,
-    dob DATE,
-    phone VARCHAR,
-    city VARCHAR,
-    state VARCHAR,
-    country VARCHAR,
-    bio VARCHAR,
-    band VARCHAR,
-    artist_name VARCHAR,
-    website VARCHAR,
-    youtube VARCHAR,
-    twitter VARCHAR,
-    facebook VARCHAR,
-    linkedin VARCHAR,
-    instagram VARCHAR,
-    soundcloud VARCHAR,
-    twitch VARCHAR,
-    tiktok VARCHAR,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
+-- Create table INSTRUMENTS and insert values (71)
 CREATE TABLE instruments
 (
     id SERIAL PRIMARY KEY,
     instrument_name VARCHAR NOT NULL
 );
-
 INSERT INTO instruments
     (instrument_name)
 VALUES
@@ -125,14 +85,7 @@ VALUES
     ('Electric Piano'),
     ('Timbales');
 
-CREATE TABLE instrument_assignments
-(
-    id SERIAL PRIMARY KEY,
-    profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
-    instrument_id INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
+-- Create table GENRES and insert values (55)
 CREATE TABLE genres
 (
     id SERIAL PRIMARY KEY,
@@ -198,6 +151,55 @@ VALUES
     ('Hi-NRG'),
     ('Glam');
 
+-- Create table USERS
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR NOT NULL UNIQUE,
+    username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    avatar VARCHAR,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create table PROFILES
+CREATE TABLE profiles
+(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    public_profile BOOLEAN DEFAULT TRUE,
+    first_name VARCHAR,
+    last_name VARCHAR,
+    dob DATE,
+    phone VARCHAR,
+    city VARCHAR,
+    state VARCHAR,
+    country VARCHAR,
+    bio VARCHAR,
+    band VARCHAR,
+    artist_name VARCHAR,
+    website VARCHAR,
+    youtube VARCHAR,
+    twitter VARCHAR,
+    facebook VARCHAR,
+    linkedin VARCHAR,
+    instagram VARCHAR,
+    soundcloud VARCHAR,
+    twitch VARCHAR,
+    tiktok VARCHAR,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create table INSTRUMENT_ASSIGNMENTS
+CREATE TABLE instrument_assignments
+(
+    id SERIAL PRIMARY KEY,
+    profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+    instrument_id INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create table GENRE_ASSIGNMENTS
 CREATE TABLE genre_assignments
 (
     id SERIAL PRIMARY KEY,
@@ -206,6 +208,7 @@ CREATE TABLE genre_assignments
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create table FORUM_TOPICS
 CREATE TABLE forum_topics
 (
     id SERIAL PRIMARY KEY,
@@ -213,6 +216,7 @@ CREATE TABLE forum_topics
     topic_description VARCHAR
 );
 
+-- Create table POSTS
 CREATE TABLE posts
 (
     id SERIAL PRIMARY KEY,
@@ -224,12 +228,13 @@ CREATE TABLE posts
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create table REPLIES
 CREATE TABLE replies
 (
     id SERIAL PRIMARY KEY,
     post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     reply_text VARCHAR,
-    updated_at TIMESTAMP,
+    created_at TIMESTAMP WITH TIME ZONE,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

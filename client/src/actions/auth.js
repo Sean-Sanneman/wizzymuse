@@ -45,12 +45,14 @@ export const register = ({
   country,
   username,
   password,
+  publicProfile,
 }) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
+  const createdAt = new Date();
   const body = JSON.stringify({
     firstName,
     lastName,
@@ -60,8 +62,10 @@ export const register = ({
     country,
     username,
     password,
+    publicProfile,
+    createdAt,
   });
-
+  console.log('body', body);
   try {
     const res = await axios.post('/api/users/register', body, config);
     dispatch({
