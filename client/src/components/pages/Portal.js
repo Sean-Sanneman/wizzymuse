@@ -1,5 +1,7 @@
+// React imports
 import React from 'react';
 import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
 
 const PORTAL_STYLES = {
     position: 'fixed',
@@ -21,7 +23,7 @@ const OVERLAY_STYLES = {
     zIndex: 1000
 }
 
-export default function Portal({ open, children, onClose }) {
+const Portal = ({open, children, onClose}) => {
     if (!open) return null
 
     return ReactDom.createPortal(
@@ -34,4 +36,7 @@ export default function Portal({ open, children, onClose }) {
         </>,
         document.getElementById('portal')
     )
-}
+};
+
+export default Portal;
+
