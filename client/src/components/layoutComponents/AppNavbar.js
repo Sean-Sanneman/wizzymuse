@@ -12,13 +12,26 @@ import Login from '../authComponents/Login';
 
 // Styles and Images
 import logo from '../../assets/cover/wizzymuse-logo.png';
-import { Button, Container, Form, Modal, Navbar, Nav } from 'react-bootstrap';
+import {
+  Button,
+  Container,
+  Form,
+  Modal,
+  Navbar,
+  Nav,
+  Dropdown,
+} from 'react-bootstrap';
 
 const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   // modal code
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // Open new project window
+  const openNewProjectWindow = () => {
+    window.open('/new-project', 'project-workspace');
+  };
 
   // Navbar links for loggedin users (authenticated)
   const authLinks = (
@@ -30,13 +43,15 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       >
         DASHBOARD
       </Nav.Link>
+
       <Nav.Link
-        href="/project"
+        href="#!"
         className="myBtn text-center glow-on-hover"
         style={{ color: 'black', textDecoration: 'none' }}
       >
-        PROJECTS
+        <div onClick={openNewProjectWindow}>PROJECTS</div>
       </Nav.Link>
+
       <Nav.Link
         href="/forum"
         className="myBtn text-center glow-on-hover"
@@ -44,6 +59,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       >
         FORUM
       </Nav.Link>
+
       <Nav.Link
         href="/search-profiles"
         className="myBtn text-center glow-on-hover"
