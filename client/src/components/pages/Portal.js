@@ -26,15 +26,19 @@ const OVERLAY_STYLES = {
 const Portal = ({open, children, onClose}) => {
     if (!open) return null
 
-    return ReactDom.createPortal(
+    var win = window.open(null, 'location=no');
+    win.location.reload();
+
+    return (
         <>
         <div style={OVERLAY_STYLES} />
         <div style={PORTAL_STYLES}>
-            <button onClick={onClose}>Close Portal</button>
+        <button onClick={onClose}>Close Portal</button>
+            {/* <button onClick={onClose}>Close Portal</button> */}
             {children}
         </div>
         </>,
-        document.getElementById('portal')
+        win.document.getElementById('portal')
     )
 };
 
