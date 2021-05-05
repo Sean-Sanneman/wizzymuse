@@ -48,7 +48,7 @@ export const getProfiles = (queryObj) => async (dispatch) => {
     }
   } else {
     endpoint =
-      '/api/profiles?instruments=&genres=&profileIds=&connectionUserIds=`';
+      '/api/profiles?instruments=&genres=&profileIds=&connectionUserIds=';
   }
 
   try {

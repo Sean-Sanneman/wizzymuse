@@ -1,5 +1,10 @@
-export const capitalizeName = (name) =>
-  name.replace(/\b(\w)/g, (s) => s.toUpperCase());
+export const capitalizeName = (name) => {
+  if (typeof name === 'string') {
+    return name.replace(/\b(\w)/g, (s) => s.toUpperCase());
+  } else {
+    return name;
+  }
+};
 
 export const underscoreToBlank = (name) => name.replace(/_/g, ' ');
 

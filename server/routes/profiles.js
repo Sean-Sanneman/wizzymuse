@@ -61,6 +61,7 @@ router.get('/me', checkToken, async (req, res) => {
 // @access  Public
 // @status  checked, in use
 router.get('/', async (req, res) => {
+  console.log('req.query', req.query);
   // extract the query filters
   let filters;
   let instrumentsFilterArr;
