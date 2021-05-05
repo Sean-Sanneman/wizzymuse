@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { getProfiles } from '../../actions/profiles';
 
 // Components
-import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
 import SearchProfiles from '../searchComponents/SearchProfiles';
 import ProfileList from '../profileComponents/ProfileList';

@@ -5,11 +5,11 @@ const cors = require('cors');
 // Import our routes
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
-const profilesRouter = require('./routes/profiles');
 const connectionsRouter = require('./routes/connections');
+const profilesRouter = require('./routes/profiles');
 const instrumentsRouter = require('./routes/instruments');
 const genresRouter = require('./routes/genres');
-const categoriesRouter = require('./routes/categories');
+const forumsRouter = require('./routes/forums');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 
@@ -23,11 +23,11 @@ app.use(express.json()); // this allows us to access req.body
 // MIDDLEWARE - Routes
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/profiles', profilesRouter);
 app.use('/api/connections', connectionsRouter);
+app.use('/api/profiles', profilesRouter);
 app.use('/api/instruments', instrumentsRouter);
 app.use('/api/genres', genresRouter);
-app.use('/api/categories', categoriesRouter);
+app.use('/api/forums', forumsRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/comments', commentsRouter);
 app.get('/', (req, res) => {

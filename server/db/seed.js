@@ -6,13 +6,12 @@ const faker = require('faker');
 const saveToUsersTable = async (fakeUserObj) => {
   try {
     const newFakeUserData = await db.query(
-      'INSERT INTO users (email, username, password, avatar, created_at) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
+      'INSERT INTO users (email, username, password, avatar) VALUES ($1, $2, $3, $4) RETURNING *;',
       [
         fakeUserObj.email,
         fakeUserObj.username,
         fakeUserObj.password,
         fakeUserObj.avatar,
-        fakeUserObj.createdAt,
       ]
     );
     return newFakeUserData.rows[0].id;
@@ -67,6 +66,25 @@ const saveToInstrumentAssignmentsTable = async (
 // Function to save a fake profile's instruments
 
 async function seed() {
+  // create 10 fake forums
+  for (let i = 0; i < 10; i++) {
+    const fakeForumObj = {
+      topic: faker.lorem.words(Math.floor(Math.random() * 10)),
+      description: faker.lorem.sentences(Math.floor(Math.random() * 5)),
+    };
+    async (fakeForumObj) => {
+      try {
+        await db.query(
+          'INSERT INTO forums (topic, description) VALUES ($1, $2)',
+          [fakeForumObj.topic, fakeForumObj.description]
+        );
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+  }
+
+  // create 100 fake users
   for (let i = 0; i < 100; i++) {
     try {
       // Create a new fake user object

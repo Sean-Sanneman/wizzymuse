@@ -3,16 +3,16 @@ const router = express.Router();
 const toCamelCase = require('../utils/to-camel-case');
 const db = require('../db');
 
-// @route   GET api/categories
-// @desc    Get all categories
-// @access  Public or Private? (TO DO)
+// @route   GET api/forums
+// @desc    Get all forums
+// @access  Public
+// @status  checked, in use
 router.get('/', async (req, res) => {
   try {
-    const categories = await db.query('SELECT * FROM categories;');
-    res.json({
-      message: 'The categories were retrieved.',
-      categories: toCamelCase(categories.rows),
-    });
+    const forumData = await db.query(
+      'SELECT * FROM forums ORDER BY created_at ASC;'
+    );
+    res.json(toCamelCase(forumData.rows));
   } catch (err) {
     console.log(err.message);
     res.status(500).send(err.message);

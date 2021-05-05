@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProfileCardCollapsible = ({
   createConnection,
+  auth: { isAuthenticated },
   connections: { connectionsMe, loading },
   profile: {
     userId,
@@ -170,13 +171,15 @@ const ProfileCardCollapsible = ({
                   </p>
                 </Alert>
               )}
-              <Button
-                variant="success"
-                style={{ textTransform: 'uppercase' }}
-                onClick={handleCollaborate}
-              >
-                {loading ? 'loading...' : connectionStatusText}
-              </Button>
+              {isAuthenticated && (
+                <Button
+                  variant="success"
+                  style={{ textTransform: 'uppercase' }}
+                  onClick={handleCollaborate}
+                >
+                  {loading ? 'loading...' : connectionStatusText}
+                </Button>
+              )}
 
               {/* Collapse toggle button */}
               <Button
@@ -264,10 +267,12 @@ const ProfileCardCollapsible = ({
 
 ProfileCardCollapsible.propTypes = {
   createConnection: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
   connections: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   connections: state.connections,
 });
 

@@ -218,12 +218,13 @@ CREATE TABLE genre_assignments
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create table FORUM_TOPICS
-CREATE TABLE forum_topics
+-- Create table FORUMS
+CREATE TABLE forums
 (
     id SERIAL PRIMARY KEY,
-    topic_title VARCHAR NOT NULL,
-    topic_description VARCHAR
+    topic VARCHAR NOT NULL,
+    description VARCHAR,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create table POSTS
@@ -231,7 +232,7 @@ CREATE TABLE posts
 (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    topic_id INTEGER NOT NULL REFERENCES forum_topics(id) ON DELETE CASCADE,
+    topic_id INTEGER NOT NULL REFERENCES forums(id) ON DELETE CASCADE,
     post_text VARCHAR,
     nb_views INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMP WITH TIME ZONE,

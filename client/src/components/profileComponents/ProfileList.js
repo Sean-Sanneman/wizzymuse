@@ -19,8 +19,13 @@ import {
 
 const ProfileList = ({ auth: { userMe }, profiles: { loading, profiles } }) => {
   // Filter out the current user's profile in the search results
-  const checkForSelf = (profilesArr) =>
-    profilesArr.filter((profile) => profile.userId !== userMe.id);
+  const checkForSelf = (profilesArr) => {
+    if (userMe) {
+      return profilesArr.filter((profile) => profile.userId !== userMe.id);
+    } else {
+      return profilesArr;
+    }
+  };
 
   return (
     <>
