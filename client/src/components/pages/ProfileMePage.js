@@ -10,6 +10,7 @@ import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
 import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
+import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -54,16 +55,7 @@ const ProfileMePage = ({ profiles: { profileMe, loading } }) => {
             <ProfileCarousel />
           </Col>
           <Col className="rightPanel allPanels">
-            <Container fluid="sm">
-              <Row>
-                <Col className="LED-text">
-                  <p>Advertisement 1</p>
-                  <p>Advertisement 2</p>
-                  <p>Advertisement 3</p>
-                  <p>...</p>
-                </Col>
-              </Row>
-            </Container>
+            <Sponsors />
           </Col>
         </Row>
       </Container>

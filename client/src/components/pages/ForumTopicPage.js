@@ -12,6 +12,7 @@ import Toolbar from '../layoutComponents/Toolbar';
 import ForumSearch from '../forumComponents/ForumSearch';
 import PostList from '../postComponents/PostList';
 import Spinner from '../layoutComponents/Spinner';
+import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
 import { Container, Row, Col } from 'react-bootstrap';
@@ -33,7 +34,9 @@ const ForumTopicPage = ({ isAuthenticated }) => {
               <PostList />
             </Container>
           </Col>
-          <Col className="rightPanel allPanels"></Col>
+          <Col className="rightPanel allPanels">
+            <Sponsors />
+          </Col>
         </Row>
       </Container>
     </>

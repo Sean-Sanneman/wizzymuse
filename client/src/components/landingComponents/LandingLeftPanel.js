@@ -12,7 +12,7 @@ const LandingLeftPanel = () => {
               <Col className="welcomeText">
                 <h2>Welcome to <strong><em>Wizzy</em>Muse!</strong></h2>
                 <br></br>
-                <h4 style={{ color: "darkblue" }}><b>Your online collaborators await!</b></h4>
+                <h4><b>Your online collaborators await!</b></h4>
                 <br></br>
                 <h5><b>Please login or register to continue.</b></h5>
               </Col>

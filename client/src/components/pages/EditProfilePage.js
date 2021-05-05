@@ -16,6 +16,7 @@ import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
 import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
 import GenreSelectList from '../genreComponents/GenreSelectList';
+import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
 import { Container, Row, Col, Form, FormControl, InputGroup, Button } from 'react-bootstrap';
@@ -527,16 +528,7 @@ const EditProfilePage = ({
                 </Container>
               </Col>
               <Col className="rightPanel allPanels">
-                <Container fluid="sm">
-                  <Row>
-                    <Col className="LED-text">
-                      <p>Advertisement 1</p>
-                      <p>Advertisement 2</p>
-                      <p>Advertisement 3</p>
-                      <p>...</p>
-                    </Col>
-                  </Row>
-                </Container>
+                <Sponsors />
               </Col>
             </Row>
           </Container>
