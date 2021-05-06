@@ -19,9 +19,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// @route   GET api/categories/:id
-// @desc    Get one category
-// @access  Private (TO DO)
+// @route   GET api/forums/:id
+// @desc    Get one forum
+// @access  Public
+// @status  c
 router.get('/:id', async (req, res) => {
   try {
     const selectedCategory = await db.query(

@@ -35,26 +35,13 @@ const ForumTopics = ({ forums: { loading, forums } }) => {
       </Container>
 
       {/* Forum Table */}
-      <Container>
-        <Row className="forumTopics">
-          <Col xs={1} className="forumCol">
-            1 of 5
-          </Col>
-          <Col xs={6} className="forumCol">
-            {/* wrap this in link to forum/id endpoint */}
-            <Link to="/forum-topics">Audio production and mixing tips</Link>
-          </Col>
-          <Col xs={1} className="forumCol">
-            3 of 5
-          </Col>
-          <Col xs={1} className="forumCol">
-            4 of 5
-          </Col>
-          <Col xs={3} className="forumCol">
-            How to make my singer wiggle
-          </Col>
-        </Row>
-      </Container>
+      {loading ? (
+        <Spinner />
+      ) : forums && forums.length > 0 ? (
+        forums.map((forum, idx) => <ForumItem key={idx} forum={forum} />)
+      ) : (
+        <h4>No forums found...</h4>
+      )}
     </>
   );
 };

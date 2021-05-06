@@ -58,30 +58,26 @@ const saveToProfilesTable = async (fakeProfileObj) => {
   }
 };
 
-// Function to save a fake profile's instruments
-const saveToInstrumentAssignmentsTable = async (
-  fakeProfileInstrumentsObj
-) => {};
-
-// Function to save a fake profile's instruments
+// Function to save a fake forum
+const saveToForumsTable = async (fakeForumObj) => {
+  try {
+    await db.query('INSERT INTO forums (topic, description) VALUES ($1, $2)', [
+      fakeForumObj.topic,
+      fakeForumObj.description,
+    ]);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 async function seed() {
   // create 10 fake forums
   for (let i = 0; i < 10; i++) {
     const fakeForumObj = {
-      topic: faker.lorem.words(Math.floor(Math.random() * 10)),
-      description: faker.lorem.sentences(Math.floor(Math.random() * 5)),
+      topic: faker.lorem.words(Math.floor(Math.random() * 10 + 1)),
+      description: faker.lorem.sentences(Math.floor(Math.random() * 5 + 1)),
     };
-    async (fakeForumObj) => {
-      try {
-        await db.query(
-          'INSERT INTO forums (topic, description) VALUES ($1, $2)',
-          [fakeForumObj.topic, fakeForumObj.description]
-        );
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
+    await saveToForumsTable(fakeForumObj);
   }
 
   // create 100 fake users
