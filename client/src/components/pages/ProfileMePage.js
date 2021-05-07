@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 // Components
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
+import DashboardLeftPanel from '../dashboardComponents/DashboardLeftPanel';
 import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
 import Sponsors from '../layoutComponents/Sponsors';
@@ -23,16 +24,7 @@ const ProfileMePage = ({ profiles: { profileMe, loading } }) => {
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">
-            <Container fluid="sm">
-              <Row>
-                <Col className="welcomeText">
-                  <h4>Welcome to</h4>
-                  <h2>WizzyMuse</h2>
-                  <br></br>
-                  <h4>Your online collaborators await!</h4>
-                </Col>
-              </Row>
-            </Container>
+            <DashboardLeftPanel />
           </Col>
           <Col xs={8} className="midPanel allPanels">
             <Container>

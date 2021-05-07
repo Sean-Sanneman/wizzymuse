@@ -26,6 +26,7 @@ import SearchPage from './components/pages/SearchPage';
 import ForumPage from './components/pages/ForumPage';
 import ForumTopicPage from './components/pages/ForumTopicPage';
 import ForumPostPage from './components/pages/ForumPostPage';
+import ProjectInit from './components/projectComponents/ProjectInit';
 
 // Styles and Images
 import background from './assets/cover/bg-brushed-metal.jpg';
@@ -69,6 +70,7 @@ const App = () => {
                 path="/my-connections"
                 component={ConnectionPage}
               />
+              <PrivateRoute exact path="/init" component={ProjectInit} />
               <PrivateRoute exact path="/new-project" component={ProjectPage} />
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />
             </Switch>

@@ -1,5 +1,6 @@
 // React imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 // Redux imports
@@ -9,6 +10,7 @@ import { logout } from '../../actions/auth';
 
 // Components
 import Login from '../authComponents/Login';
+import Portal from '../projectComponents/ProjectInit';
 
 // Styles and Images
 import logo from '../../assets/cover/wizzymuse-logo.png';
@@ -21,6 +23,7 @@ import {
   Nav,
   Dropdown,
 } from 'react-bootstrap';
+// import { menuPortalCSS } from 'react-select/src/components/Menu';
 
 const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   // modal code
@@ -28,10 +31,8 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Open new project window
-  const openNewProjectWindow = () => {
-    window.open('/new-project', 'project-workspace');
-  };
+  // portal code
+  const [isOpen, setIsOpen] = useState(false);
 
   // Navbar links for loggedin users (authenticated)
   const authLinks = (
@@ -39,23 +40,48 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/my-profile"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         DASHBOARD
       </Nav.Link>
 
-      <Nav.Link
-        href="#!"
-        className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
-      >
-        <div onClick={openNewProjectWindow}>PROJECTS</div>
-      </Nav.Link>
+      {/* Projects dropdown */}
+      <div className="projectDropdown">
+        <Dropdown>
+          <Dropdown.Toggle
+            variant=""
+            id="dropdown-basic"
+            className="myBtn text-center glow-on-hover"
+            style={{ color: 'white', textDecoration: 'none' }}
+          >
+            PROJECTS
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="projectMenu">
+            <div onClick={() => console.log('clicked')}>
+              <Dropdown.Item
+                onClick={() => setIsOpen(true)}
+                className="projectItem"
+              >
+                <Link to="/init">New Project</Link>
+
+                {/* <Portal open={isOpen} onClose={() => setIsOpen(false)}>
+          This is a Portal
+        </Portal> */}
+              </Dropdown.Item>
+            </div>
+
+            <Dropdown.Item href="#/action-2" className="projectItem">
+              Open Projects
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+      {/* Projects dropdown end */}
 
       <Nav.Link
         href="/forums"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         FORUM
       </Nav.Link>
@@ -63,14 +89,14 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/search-profiles"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         SEARCH ARTISTS
       </Nav.Link>
       <Nav.Link
         href="/"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
         onClick={logout}
       >
         LOGOUT
@@ -84,14 +110,14 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
       <Nav.Link
         href="/forums"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         FORUM
       </Nav.Link>
       <Nav.Link
         href="/search-profiles"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         SEARCH ARTISTS
       </Nav.Link>
@@ -99,7 +125,7 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
         onClick={handleShow}
         href="#login-register"
         className="myBtn text-center glow-on-hover"
-        style={{ color: 'black', textDecoration: 'none' }}
+        style={{ color: 'white', textDecoration: 'none' }}
       >
         LOGIN/REGISTER
       </Nav.Link>
@@ -108,10 +134,10 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
 
   return (
     <>
-      <Navbar className="color-nav" variant="dark" sticky="top">
+      <Navbar className="main-navbar" variant="dark" sticky="top">
         <Navbar.Brand href="/">
           <Container fluid className="logo-image d-flex justify-content-left">
-            <img src={logo} width="75%" height="75%" alt="Logo"></img>
+            <img src={logo} width="60%" height="60%" alt="Logo"></img>
           </Container>
         </Navbar.Brand>
         <Container fluid className="d-flex justify-content-right">
@@ -148,11 +174,6 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
           </Modal>
           {/* modal code ends */}
         </Container>
-
-        {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">SEARCH</Button>
-        </Form> */}
       </Navbar>
     </>
   );
