@@ -34,7 +34,6 @@ const Portal = ({open, children, onClose}) => {
         <div style={OVERLAY_STYLES} />
         <div style={PORTAL_STYLES}>
         <button onClick={onClose}>Close Portal</button>
-            {/* <button onClick={onClose}>Close Portal</button> */}
             {children}
         </div>
         </>,

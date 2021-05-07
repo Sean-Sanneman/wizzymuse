@@ -10,7 +10,7 @@ import { logout } from '../../actions/auth';
 
 // Components
 import Login from '../authComponents/Login';
-import Portal from '../pages/Portal';
+import Portal from '../projectComponents/ProjectInit';
 
 // Styles and Images
 import logo from '../../assets/cover/wizzymuse-logo.png';
@@ -50,11 +50,14 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
 
       <div onClick={() => console.log('clicked')}>
         <Dropdown.Item onClick={() => setIsOpen(true)} className="projectItem">
+        <Link to="/init">
           New Project
+        </Link>
 
-        <Portal open={isOpen} onClose={() => setIsOpen(false)}>
+        {/* <Portal open={isOpen} onClose={() => setIsOpen(false)}>
           This is a Portal
-        </Portal>
+        </Portal> */}
+
         </Dropdown.Item>
         </div>
         
@@ -157,10 +160,6 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
           {/* modal code ends */}
         </Container>
 
-        {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">SEARCH</Button>
-        </Form> */}
       </Navbar>
     </>
   );
