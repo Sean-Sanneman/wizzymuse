@@ -38,7 +38,9 @@ const ForumTopics = ({ forums: { loading, forums } }) => {
       {loading ? (
         <Spinner />
       ) : forums && forums.length > 0 ? (
-        forums.map((forum, idx) => <ForumItem key={idx} forum={forum} />)
+        forums.map((forum, idx) => (
+          <ForumItem key={forum.id} forum={forum} index={idx + 1} />
+        ))
       ) : (
         <h4>No forums found...</h4>
       )}

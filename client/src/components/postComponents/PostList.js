@@ -1,63 +1,52 @@
 // React imports
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 // Redux imports
 import { connect } from 'react-redux';
-import { getPosts } from '../../actions/posts';
 
 // Components
 import PostItem from './PostItem';
 
 // Styles and Images
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
-const PostList = ({ getPosts, posts: { posts, loading } }) => {
-  useEffect(() => {
-    getPosts();
-  }, [getPosts]);
-  return loading ? (
-    <p>LOADING...</p>
-  ) : (
-    <>
-      {/* Forum Postings */}
-
-      <Container>
-        <Row className="forumTopics">
-          {posts && posts.length > 0 ? (
-            posts.map((post) => <PostItem key={post.id} post={post} />)
-          ) : (
-            <h4>No posts found...</h4>
-          )}
-          {/* <Col xs={1} className="forumCol">
-            new/old
-          </Col>
-          <Col xs={6} className="forumCol"> */}
-          {/* this will link to an individual post item */}
-          {/* <Link to="/post-item">How do I record Hypolliope?</Link>
-          </Col>
-          <Col xs={1} className="forumCol">
-            27
-          </Col>
-          <Col xs={1} className="forumCol">
-            4345
-          </Col>
-          <Col xs={3} className="forumCol">
-            date-by-user
-          </Col> */}
-        </Row>
-      </Container>
-    </>
+const PostList = ({ forumPosts }) => {
+  return (
+    <Container>
+      <Row className="forumTopics">
+        {forumPosts && forumPosts.length > 0 ? (
+          forumPosts.map((post) => (
+            <>
+              <Col xs={1} className="forumCol">
+                new/old
+              </Col>
+              <Col xs={6} className="forumCol">
+                <Link to={`/posts/${post.id}`}>{post.postTitle}</Link>
+              </Col>
+              <Col xs={1} className="forumCol">
+                {post.replies.length}
+              </Col>
+              <Col xs={1} className="forumCol">
+                {post.nbViews}
+              </Col>
+              <Col xs={3} className="forumCol">
+                {post.replies.length > 0 && (
+                  <Moment format="YYYY-MM-DD">
+                    {post.replies[0].createdAt}
+                  </Moment>
+                )}
+              </Col>
+            </>
+          ))
+        ) : (
+          <h4>No posts found...</h4>
+        )}
+      </Row>
+    </Container>
   );
 };
 
-PostList.propTypes = {
-  getPosts: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  posts: state.posts,
-});
-
-export default connect(mapStateToProps, { getPosts })(PostList);
+export default PostList;

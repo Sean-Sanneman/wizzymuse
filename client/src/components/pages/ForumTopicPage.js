@@ -65,7 +65,11 @@ const ForumTopicPage = ({
                     <h5>Last Replied</h5>
                   </Col>
                 </Row>
-                <PostList />
+                {forum === null || loading ? (
+                  'loading...'
+                ) : (
+                  <PostList forumPosts={forum.posts} />
+                )}
               </Container>
             </Container>
           </Col>

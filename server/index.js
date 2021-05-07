@@ -11,7 +11,7 @@ const instrumentsRouter = require('./routes/instruments');
 const genresRouter = require('./routes/genres');
 const forumsRouter = require('./routes/forums');
 const postsRouter = require('./routes/posts');
-const commentsRouter = require('./routes/comments');
+// const repliesRouter = require('./routes/replies');
 
 // Create the Express application
 const app = express();
@@ -29,7 +29,7 @@ app.use('/api/instruments', instrumentsRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/forums', forumsRouter);
 app.use('/api/posts', postsRouter);
-app.use('/api/comments', commentsRouter);
+// app.use('/api/replies', repliesRouter);
 app.get('/', (req, res) => {
   res.send("WELCOME TO WIZZYMUSE' SERVER SIDE!");
 });

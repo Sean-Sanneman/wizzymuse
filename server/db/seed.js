@@ -1,16 +1,21 @@
 require('dotenv').config();
 const db = require('./index');
 const faker = require('faker');
+const bcrypt = require('bcrypt');
 
 // Function to save a fake user
 const saveToUsersTable = async (fakeUserObj) => {
   try {
+    // encrypt the password provided
+    const salt = await bcrypt.genSalt(10);
+    const bcryptPassword = await bcrypt.hash(fakeUserObj.password, salt);
+    // save to db
     const newFakeUserData = await db.query(
       'INSERT INTO users (email, username, password, avatar) VALUES ($1, $2, $3, $4) RETURNING *;',
       [
         fakeUserObj.email,
         fakeUserObj.username,
-        fakeUserObj.password,
+        bcryptPassword,
         fakeUserObj.avatar,
       ]
     );

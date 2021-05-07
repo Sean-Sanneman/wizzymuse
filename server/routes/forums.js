@@ -12,7 +12,44 @@ router.get('/', async (req, res) => {
     const forumData = await db.query(
       'SELECT * FROM forums ORDER BY created_at ASC;'
     );
-    res.json(toCamelCase(forumData.rows));
+
+    // build the forumListArr to return
+    const forumListArr = toCamelCase(forumData.rows);
+
+    // for each forum:
+    for (let i = 0; i < forumListArr.length; i++) {
+      // retrieve the number of posts
+      const nbPostsData = await db.query(
+        'SELECT count(*) FROM posts WHERE topic_id = $1;',
+        [forumListArr[i].id]
+      );
+      nbPostsData.rows
+        ? (forumListArr[i].nbPosts = parseInt(nbPostsData.rows[0].count))
+        : (forumListArr[i].nbPosts = 0);
+
+      // retrieve the most recent post
+      const mostRecentPostData = await db.query(
+        'SELECT * FROM posts WHERE created_at = (SELECT MAX(created_at) FROM posts WHERE topic_id = $1);',
+        [forumListArr[i].id]
+      );
+      mostRecentPostData.rows
+        ? (forumListArr[i].mostRecentPost = toCamelCase(
+            mostRecentPostData.rows
+          )[0])
+        : (forumListArr[i].mostRecentPost = null);
+
+      // retrieve the total number of replies for this forum
+      const nbForumRepliesData = await db.query(
+        'SELECT count(*) FROM replies LEFT JOIN posts ON posts.id = replies.post_id WHERE posts.topic_id = $1;',
+        [forumListArr[i].id]
+      );
+      nbForumRepliesData.rows
+        ? (forumListArr[i].nbForumReplies = parseInt(
+            nbForumRepliesData.rows[0].count
+          ))
+        : (forumListArr[i].nbForumReplies = 0);
+    }
+    res.status(200).json(forumListArr);
   } catch (err) {
     console.log(err.message);
     res.status(500).send(err.message);
@@ -39,13 +76,13 @@ router.get('/:id', async (req, res) => {
     // retrieve the posts associated with this particular forum
     const selectedForumPostsData = await db.query(
       'SELECT * from posts WHERE topic_id = $1;',
-      [req.params.is]
+      [req.params.id]
     );
     const forumPostsArr = toCamelCase(selectedForumPostsData.rows);
     // retrieve the replies for each post
     for (let i = 0; i < forumPostsArr.length; i++) {
       const repliesData = await db.query(
-        'SELECT * from replies WHERE post_id = $1',
+        'SELECT * from replies WHERE post_id = $1 ORDER BY created_at DESC',
         [forumPostsArr[i].id]
       );
       repliesData.rows

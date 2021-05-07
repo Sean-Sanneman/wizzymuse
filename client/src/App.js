@@ -52,7 +52,7 @@ const App = () => {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forums" component={ForumPage} />
               <Route exact path="/forums/:id" component={ForumTopicPage} />
-              <Route exact path="/post-item" component={ForumPostPage} />
+              <Route exact path="/posts/:id" component={ForumPostPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute
                 exact

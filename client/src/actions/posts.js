@@ -24,3 +24,20 @@ export const getPosts = () => async (dispatch) => {
     });
   }
 };
+
+// Get post by post ID
+export const getPostById = (postId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/posts/${postId}`);
+    dispatch({
+      type: GET_POST,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.message);
+    dispatch({
+      type: POST_ERROR,
+      payload: err.message,
+    });
+  }
+};

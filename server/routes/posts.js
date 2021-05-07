@@ -28,29 +28,38 @@ router.get('/', async (req, res) => {
 
 // @route   GET api/posts/:id
 // @desc    Get one post
-// @access  Private (TO DO)
+// @access  Public
+// @status  checked, in use
 router.get('/:id', async (req, res) => {
   try {
-    const selectedPost = await db.query(
+    const selectedPostData = await db.query(
       `SELECT * 
       FROM posts
       LEFT JOIN users ON (users.id = posts.user_id)
-      LEFT JOIN profiles ON (profiles.id = users.id)
-      LEFT JOIN comments ON (comments.post_id = posts.id)
       WHERE posts.id = $1
      ;`,
       [req.params.id]
     );
-    if (selectedPost.rows[0]) {
-      res.json({
-        message: 'The selected post was successfully retrieved.',
-        category: toCamelCase(selectedPost.rows)[0],
-      });
-    } else {
-      res.json({
-        message: 'The post does not exist.',
+    if (!selectedPostData.rows[0]) {
+      return res.status(400).json({
+        message: 'This post was not found.',
       });
     }
+
+    // retrieve the replies associated with this particular post
+    const repliesData = await db.query(
+      'SELECT replies.id AS id, post_id, user_id, reply_text, replies.created_at AS created_at, replies.updated_at AS updated_at, username, email, avatar from replies LEFT JOIN users ON users.id = replies.user_id WHERE post_id = $1 ORDER BY replies.updated_at DESC, replies.created_at DESC;',
+      [req.params.id]
+    );
+
+    // return result
+    const selectedPostObj = toCamelCase(selectedPostData.rows)[0];
+    delete selectedPostObj.password; // remove password from object ot be returned
+    repliesData.rows
+      ? (selectedPostObj.replies = toCamelCase(repliesData.rows))
+      : (selectedPostObj.replies = []);
+
+    res.status(200).json(selectedPostObj);
   } catch (err) {
     console.log(err.message);
     res.status(500).send(err.message);

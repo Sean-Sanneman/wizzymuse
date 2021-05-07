@@ -97,7 +97,6 @@ const ProfileCardCollapsible = ({
             <Card.Img
               className="d-block w-100"
               src={avatar}
-              className=""
               style={{ width: '100%', padding: '18px' }}
               alt="avatar"
             />
