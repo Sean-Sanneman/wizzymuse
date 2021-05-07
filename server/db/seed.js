@@ -70,6 +70,42 @@ const saveToForumsTable = async (fakeForumObj) => {
   }
 };
 
+// Function to save a fake post
+const saveToPostsTable = async (fakePostObj) => {
+  try {
+    await db.query(
+      'INSERT INTO posts (user_id, topic_id, post_title, post_text, nb_views, created_at) VALUES ($1, $2, $3, $4, $5, $6)',
+      [
+        fakePostObj.userId,
+        fakePostObj.topicId,
+        fakePostObj.postTitle,
+        fakePostObj.postText,
+        fakePostObj.nbViews,
+        fakePostObj.createdAt,
+      ]
+    );
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Function to save a fake reply
+const saveToRepliesTable = async (fakeReplyObj) => {
+  try {
+    await db.query(
+      'INSERT INTO replies (post_id, user_id, reply_text, created_at) VALUES ($1, $2, $3, $4)',
+      [
+        fakeReplyObj.postId,
+        fakeReplyObj.userId,
+        fakeReplyObj.replyText,
+        fakeReplyObj.createdAt,
+      ]
+    );
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 async function seed() {
   // create 10 fake forums
   for (let i = 0; i < 10; i++) {
@@ -139,8 +175,41 @@ async function seed() {
           [fakeProfileId, genreIds[i]]
         );
       }
+
+      // Create a random number of posts from 0 to 2 for this user
+      const nbPosts = Math.floor(Math.random() * 3);
+      for (let i = 0; i <= nbPosts; i++) {
+        const fakePostObj = {
+          userId: fakeUserId,
+          topicId: Math.floor(Math.random() * 10 + 1),
+          postTitle: faker.lorem.words(Math.floor(Math.random() * 10 + 1)),
+          postText: faker.lorem.sentences(Math.floor(Math.random() * 10 + 1)),
+          nbViews: Math.floor(Math.random() * 500 + 1),
+          createdAt: faker.date.between(new Date('01/01/2015'), new Date()),
+        };
+        await saveToPostsTable(fakePostObj);
+      }
     } catch (err) {
       console.log(err.message);
+    }
+  }
+
+  // create fake replies to posts
+  const postsArr = await postsList();
+  for (let i = 0; i < postsArr.length; i++) {
+    // randomly create between 0 and 20 replies
+    const nbReplies = Math.floor(Math.random() * 21);
+    for (let j = 0; j <= nbReplies; j++) {
+      const fakeReplyObj = {
+        postId: postsArr[i].id,
+        userId: Math.floor(Math.random() * 100 + 1),
+        replyText: faker.lorem.sentences(Math.floor(Math.random() * 20 + 1)),
+        createdAt: faker.date.between(
+          new Date(postsArr[i].created_at),
+          new Date()
+        ),
+      };
+      await saveToRepliesTable(fakeReplyObj);
     }
   }
 }
@@ -168,4 +237,10 @@ function genreIdsList() {
     genreIdsList.push(genreId);
   }
   return genreIdsList;
+}
+
+// Function to retrieve the list of post ids and the date created at
+async function postsList() {
+  const postsData = await db.query('SELECT id, created_at from posts;');
+  return postsData.rows;
 }

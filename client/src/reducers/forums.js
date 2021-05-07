@@ -1,4 +1,9 @@
-import { GET_FORUMS, FORUMS_ERROR } from '../actions/types';
+import {
+  GET_FORUMS,
+  GET_FORUM,
+  FORUMS_ERROR,
+  FORUM_ERROR,
+} from '../actions/types';
 
 const initialState = {
   forum: null,
@@ -16,11 +21,24 @@ export default function (state = initialState, action) {
         forums: payload,
         loading: false,
       };
+    case GET_FORUM:
+      return {
+        ...state,
+        forum: payload,
+        loading: false,
+      };
     case FORUMS_ERROR:
       return {
         ...state,
-        forums: payload,
-        loading: true,
+        forums: [],
+        loading: false,
+        message: payload,
+      };
+    case FORUM_ERROR:
+      return {
+        ...state,
+        forum: null,
+        loading: false,
         message: payload,
       };
     default:

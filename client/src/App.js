@@ -50,8 +50,8 @@ const App = () => {
               <Route exact path="/" component={Landing} />
               <Route exact path="/search-profiles" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/forum" component={ForumPage} />
-              <Route exact path="/forum-topics" component={ForumTopicPage} />
+              <Route exact path="/forums" component={ForumPage} />
+              <Route exact path="/forums/:id" component={ForumTopicPage} />
               <Route exact path="/post-item" component={ForumPostPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute

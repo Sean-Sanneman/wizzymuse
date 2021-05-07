@@ -158,29 +158,29 @@ router.get('/', async (req, res) => {
         );
     }
 
-    // build the profileListObj to return
-    const profileListObj = toCamelCase(profilesData.rows);
+    // build the profileListArr to return
+    const profileListArr = toCamelCase(profilesData.rows);
 
     // retrieve the instruments and the genres for each profile
-    for (let i = 0; i < profileListObj.length; i++) {
+    for (let i = 0; i < profileListArr.length; i++) {
       const instrumentsData = await db.query(
         `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1;`,
-        [profileListObj[i].id]
+        [profileListArr[i].id]
       );
       instrumentsData.rows
-        ? (profileListObj[i].instruments = toCamelCase(instrumentsData.rows))
-        : (profileListObj[i].instruments = []);
+        ? (profileListArr[i].instruments = toCamelCase(instrumentsData.rows))
+        : (profileListArr[i].instruments = []);
 
       const genresData = await db.query(
         `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1;`,
-        [profileListObj[i].id]
+        [profileListArr[i].id]
       );
       genresData.rows
-        ? (profileListObj[i].genres = toCamelCase(genresData.rows))
-        : (profileListObj[i].genres = []);
+        ? (profileListArr[i].genres = toCamelCase(genresData.rows))
+        : (profileListArr[i].genres = []);
     }
 
-    res.status(200).json(profileListObj);
+    res.status(200).json(profileListArr);
   } catch (err) {
     console.log(err.message);
     res.status(500).send(err.message);

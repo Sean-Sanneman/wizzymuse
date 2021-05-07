@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { GET_POSTS, POST_ERROR, ADD_REPLY, DELETE_REPLY } from './types';
+import {
+  GET_POSTS,
+  GET_POST,
+  POSTS_ERROR,
+  POST_ERROR,
+  ADD_REPLY,
+  DELETE_REPLY,
+} from './types';
 
 // Get posts
 export const getPosts = () => async (dispatch) => {
@@ -12,7 +19,7 @@ export const getPosts = () => async (dispatch) => {
   } catch (err) {
     console.log(err.message);
     dispatch({
-      type: POST_ERROR,
+      type: POSTS_ERROR,
       payload: err.message,
     });
   }

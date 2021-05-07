@@ -13,8 +13,7 @@ const ForumItem = ({ forum }) => {
           1 of 5
         </Col>
         <Col xs={6} className="forumCol">
-          {/* wrap this in link to forum/id endpoint */}
-          <Link to={`/forum-topics/${forum.id}`}>{forum.topic}</Link>
+          <Link to={`/forums/${forum.id}`}>{forum.topic}</Link>
         </Col>
         <Col xs={1} className="forumCol">
           3 of 5

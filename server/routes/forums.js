@@ -22,23 +22,41 @@ router.get('/', async (req, res) => {
 // @route   GET api/forums/:id
 // @desc    Get one forum
 // @access  Public
-// @status  c
+// @status  checked, in use
 router.get('/:id', async (req, res) => {
   try {
-    const selectedCategory = await db.query(
-      'SELECT * FROM categories WHERE id = $1;',
+    // retrieve the forum information
+    const selectedForumData = await db.query(
+      'SELECT * FROM forums WHERE id = $1;',
       [req.params.id]
     );
-    if (selectedCategory.rows[0]) {
-      res.json({
-        message: 'The selected category was successfully retrieved.',
-        category: toCamelCase(selectedCategory.rows)[0],
-      });
-    } else {
-      res.json({
-        message: 'The category does not exist.',
+    if (!selectedForumData.rows[0]) {
+      return res.status(400).json({
+        message: 'This forum was not found.',
       });
     }
+
+    // retrieve the posts associated with this particular forum
+    const selectedForumPostsData = await db.query(
+      'SELECT * from posts WHERE topic_id = $1;',
+      [req.params.is]
+    );
+    const forumPostsArr = toCamelCase(selectedForumPostsData.rows);
+    // retrieve the replies for each post
+    for (let i = 0; i < forumPostsArr.length; i++) {
+      const repliesData = await db.query(
+        'SELECT * from replies WHERE post_id = $1',
+        [forumPostsArr[i].id]
+      );
+      repliesData.rows
+        ? (forumPostsArr[i].replies = toCamelCase(repliesData.rows))
+        : (forumPostsArr[i].replies = []);
+    }
+
+    // return result
+    const selectedForumObj = toCamelCase(selectedForumData.rows)[0];
+    selectedForumObj.posts = forumPostsArr;
+    res.status(200).json(selectedForumObj);
   } catch (err) {
     console.log(err.message);
     res.status(500).send(err.message);
