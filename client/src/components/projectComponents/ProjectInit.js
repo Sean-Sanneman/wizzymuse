@@ -25,6 +25,10 @@ const ProjectInit = ({ register, isAuthenticated }) => {
 //     return <Redirect to="/dashboard" />;
 // }
 
+const openNewProjectWindow = () => {
+  window.open('/project', 'project-workspace');
+};
+
   const handleRegister = async (e) => {
     e.preventDefault();
     register({
@@ -39,9 +43,7 @@ const ProjectInit = ({ register, isAuthenticated }) => {
   };
 
 
-  const openNewProjectWindow = () => {
-    window.open('/project', 'project-workspace');
-  };
+  
 
 
   return (
@@ -149,18 +151,14 @@ const ProjectInit = ({ register, isAuthenticated }) => {
 
               <br></br>
 
-
-
               <Nav.Link
-                href="/project"
+                href="/dashboard"
                 type="submit"
                 className="btn btn-primary btn-block p-2"
                 style={{ width: '20%' }}
                 onClick={openNewProjectWindow}>
                 Press Me!
               </Nav.Link>
-
-
 
               <p className="forgot-password text-right">
                 Have an existing project? <a href="#">Open Here</a>

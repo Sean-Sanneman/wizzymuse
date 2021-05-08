@@ -13,22 +13,13 @@ import Toolbar from '../layoutComponents/Toolbar';
 
 
 
-const ProjectPage = ({open, children, onClose}) => {
-  if (!open) return null
-
-  var win = window.open(null, 'location=no');
-  win.location.reload();
+const ProjectPage = () => {
 
   return (
       <>
       <div>ProjectPage</div>
       <h1>This is just a test.</h1>
-      <div>
-      <button onClick={onClose}>Close Portal</button>
-          {children}
-      </div>
-      </>,
-      win.document.getElementById('portal')
+      </>
   )
 };
 
