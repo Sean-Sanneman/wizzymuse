@@ -51,15 +51,15 @@ router.post('/register', checkUserInput, async (req, res) => {
       [email, username, bcryptPassword, avatar, createdAt]
     );
     await db.query(
-      'INSERT INTO profiles (user_id, first_name, last_name, city, state, country, public_profile) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      'INSERT INTO profiles (user_id, public_profile, first_name, last_name, city, state, country) VALUES ($1, $2, $3, $4, $5, $6, $7)',
       [
         newUserData.rows[0].id,
+        publicProfile,
         firstName,
         lastName,
         city,
         state,
         country,
-        publicProfile,
       ]
     );
 

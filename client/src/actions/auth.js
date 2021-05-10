@@ -65,7 +65,7 @@ export const register = ({
     publicProfile,
     createdAt,
   });
-  console.log('body', body);
+
   try {
     const res = await axios.post('/api/users/register', body, config);
     dispatch({

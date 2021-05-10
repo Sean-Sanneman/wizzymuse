@@ -20,10 +20,10 @@ const ProjectInit = ({ register, isAuthenticated }) => {
   const [artists, setArtists] = useState('');
   const [description, setDescription] = useState('');
 
-  // Redirect when registered
-//   if (isAuthenticated) {
-//     return <Redirect to="/dashboard" />;
-// }
+  // Open new project window
+  const openNewProjectWindow = () => {
+    window.open('/project', 'project-workspace');
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -44,7 +44,6 @@ const ProjectInit = ({ register, isAuthenticated }) => {
         <Row>
           <Col sm={5} style={{ textAlign: 'center' }} className="">
             <div className="welcome">
-
               <Container
                 fluid
                 className="logo-image d-flex justify-content-center"
@@ -53,7 +52,8 @@ const ProjectInit = ({ register, isAuthenticated }) => {
               </Container>
 
               <h5>
-                Enter your project information on the right and let's get started!
+                Enter your project information on the right and let's get
+                started!
               </h5>
             </div>
           </Col>
@@ -87,16 +87,16 @@ const ProjectInit = ({ register, isAuthenticated }) => {
 
               <div className="form-group">
                 <label>Tempo/BPM</label>
-                  <input
-                    type="text"
-                    className="form-control localeField"
-                    placeholder="Tempo/BPM"
-                    value={tempo}
-                    onChange={(e) => setTempo(e.target.value)}
-                  />
-                </div>
+                <input
+                  type="text"
+                  className="form-control localeField"
+                  placeholder="Tempo/BPM"
+                  value={tempo}
+                  onChange={(e) => setTempo(e.target.value)}
+                />
+              </div>
 
-                <div className="form-group">
+              <div className="form-group">
                 <label>Key / Time Signature (optional)</label>
                 <div className="d-flex location">
                   <input
@@ -114,17 +114,17 @@ const ProjectInit = ({ register, isAuthenticated }) => {
                     onChange={(e) => setTimeSig(e.target.value)}
                   />
                 </div>
-                </div>
+              </div>
 
-                <div className="form-group">
+              <div className="form-group">
                 <label>Artists</label>
-                  <input
-                    type="text"
-                    className="form-control localeField"
-                    placeholder="Artists"
-                    value={artists}
-                    onChange={(e) => setArtists(e.target.value)}
-                  />
+                <input
+                  type="text"
+                  className="form-control localeField"
+                  placeholder="Artists"
+                  value={artists}
+                  onChange={(e) => setArtists(e.target.value)}
+                />
               </div>
 
               <div className="form-group">
@@ -143,10 +143,9 @@ const ProjectInit = ({ register, isAuthenticated }) => {
               <Nav.Link
                 href="/"
                 type="submit"
-                href="/"
                 className="btn btn-primary btn-block p-2"
                 style={{ width: '20%' }}
-                onClick={handleRegister}
+                onClick={openNewProjectWindow}
               >
                 Let's get started!
               </Nav.Link>

@@ -71,7 +71,7 @@ const App = () => {
                 component={ConnectionPage}
               />
               <PrivateRoute exact path="/init" component={ProjectInit} />
-              <PrivateRoute exact path="/new-project" component={ProjectPage} />
+              <PrivateRoute exact path="/project" component={ProjectPage} />
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />
             </Switch>
           </main>
