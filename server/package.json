@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "create-db": "psql -U ordinateurdesandrine < db/schema.sql",
+    "create-db": "psql -U postgres < db/schema.sql",
     "seed": "npm run create-db && node db/seed.js"
   },
   "dependencies": {
