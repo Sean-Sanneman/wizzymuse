@@ -25,10 +25,6 @@ const ProjectInit = ({ register, isAuthenticated }) => {
     window.open('/project', 'project-workspace');
   };
 
-  const openNewProjectWindow = () => {
-    window.open('/project', 'project-workspace');
-  };
-
   const handleRegister = async (e) => {
     e.preventDefault();
     register({
