@@ -14,10 +14,10 @@ router.get('/me', checkToken, async (req, res) => {
   try {
     // retrieve the current user's profile information
     const profileMeData = await db.query(
-      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.first_name, 
+      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.public_profile, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at
+      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.updated_at
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = $1;`,
       [req.user.id]
     );
@@ -61,6 +61,7 @@ router.get('/me', checkToken, async (req, res) => {
 // @access  Public
 // @status  checked, in use
 router.get('/', async (req, res) => {
+  console.log('req.query', req.query);
   // extract the query filters
   let filters;
   let instrumentsFilterArr;
@@ -99,87 +100,87 @@ router.get('/', async (req, res) => {
     switch (filters) {
       case 'instruments+genres':
         profilesData = await db.query(
-          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.public_profile, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.updated_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) AND genre_id = ANY ($2) ORDER BY users.username;`,
           [instrumentsFilterArr, genresFilterArr]
         );
         break;
       case 'instruments':
         profilesData = await db.query(
-          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.public_profile, profiles.user_id, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.updated_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE instrument_id = ANY ($1) ORDER BY users.username;`,
           [instrumentsFilterArr]
         );
         break;
       case 'genres':
         profilesData = await db.query(
-          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
+          `SELECT DISTINCT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.public_profile, profiles.first_name, 
           profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
           profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
+          profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.updated_at FROM instrument_assignments LEFT JOIN genre_assignments ON (genre_assignments.profile_id = instrument_assignments.profile_id) LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) LEFT JOIN profiles on (profiles.id = instrument_assignments.profile_id) LEFT JOIN users on (users.id = profiles.user_id) WHERE genre_id = ANY ($1) ORDER BY users.username;`,
           [genresFilterArr]
         );
         break;
       case 'profileIds':
         profilesData = await db.query(
-          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, profiles.last_name, 
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.public_profile, profiles.first_name, profiles.last_name, 
           profiles.dob, profiles.phone, profiles.city, profiles.state, 
           profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
           profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
           profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, 
-          profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.id = ANY ($1) ORDER BY users.username;`,
+          profiles.updated_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.id = ANY ($1) ORDER BY users.username;`,
           [profileIdsFilterArr]
         );
         break;
       case 'connectionUserIds':
         profilesData = await db.query(
-          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, profiles.last_name, 
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.public_profile, profiles.first_name, profiles.last_name, 
           profiles.dob, profiles.phone, profiles.city, profiles.state, 
           profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
           profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
           profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, 
-          profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = ANY ($1) ORDER BY users.username;`,
+          profiles.updated_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) WHERE profiles.user_id = ANY ($1) ORDER BY users.username;`,
           [connectionUserIdsFilterArr]
         );
         break;
       default:
         profilesData = await db.query(
-          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, profiles.last_name, 
+          `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.public_profile, profiles.first_name, profiles.last_name, 
             profiles.dob, profiles.phone, profiles.city, profiles.state, 
             profiles.country, profiles.bio, profiles.band, profiles.artist_name, profiles.website, 
             profiles.youtube, profiles.twitter, profiles.facebook, profiles.linkedin, 
             profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, 
-            profiles.created_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) ORDER BY users.username;`
+            profiles.updated_at FROM profiles INNER JOIN users ON (users.id = profiles.user_id) ORDER BY users.username;`
         );
     }
 
-    // build the profileListObj to return
-    const profileListObj = toCamelCase(profilesData.rows);
+    // build the profileListArr to return
+    const profileListArr = toCamelCase(profilesData.rows);
 
     // retrieve the instruments and the genres for each profile
-    for (let i = 0; i < profileListObj.length; i++) {
+    for (let i = 0; i < profileListArr.length; i++) {
       const instrumentsData = await db.query(
         `SELECT instruments.id, instruments.instrument_name FROM instrument_assignments LEFT JOIN instruments ON (instruments.id = instrument_assignments.instrument_id) WHERE instrument_assignments.profile_id = $1;`,
-        [profileListObj[i].id]
+        [profileListArr[i].id]
       );
       instrumentsData.rows
-        ? (profileListObj[i].instruments = toCamelCase(instrumentsData.rows))
-        : (profileListObj[i].instruments = []);
+        ? (profileListArr[i].instruments = toCamelCase(instrumentsData.rows))
+        : (profileListArr[i].instruments = []);
 
       const genresData = await db.query(
         `SELECT genres.id, genres.genre_name FROM genre_assignments LEFT JOIN genres ON (genres.id = genre_assignments.genre_id) WHERE genre_assignments.profile_id = $1;`,
-        [profileListObj[i].id]
+        [profileListArr[i].id]
       );
       genresData.rows
-        ? (profileListObj[i].genres = toCamelCase(genresData.rows))
-        : (profileListObj[i].genres = []);
+        ? (profileListArr[i].genres = toCamelCase(genresData.rows))
+        : (profileListArr[i].genres = []);
     }
 
-    res.status(200).json(profileListObj);
+    res.status(200).json(profileListArr);
   } catch (err) {
     console.log(err.message);
     res.status(500).send(err.message);
@@ -192,10 +193,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const selectedprofileData = await db.query(
-      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.first_name, 
+      `SELECT users.email, users.username, users.avatar, profiles.id, profiles.user_id, profiles.public_profile, profiles.first_name, 
       profiles.last_name, profiles.dob, profiles.phone, profiles.city, profiles.state, profiles.country, 
       profiles.bio, profiles.band, profiles.artist_name, profiles.website, profiles.youtube, profiles.twitter, profiles.facebook, 
-      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.created_at, 
+      profiles.linkedin, profiles.instagram, profiles.soundcloud, profiles.twitch, profiles.tiktok, profiles.updated_at, 
       instruments.instrument_name, genres.genre_name 
       FROM profiles LEFT JOIN users ON (users.id = profiles.user_id)
       LEFT JOIN instrument_assignments ON (profiles.id = instrument_assignments.profile_id)
@@ -242,12 +243,13 @@ router.post('/', checkToken, checkProfileInput, async (req, res) => {
 
     // save the profile to the database
     const newProfileData = await db.query(
-      `INSERT INTO profiles (user_id, first_name, last_name, dob, phone, city, state,
+      `INSERT INTO profiles (user_id, public_profile, first_name, last_name, dob, phone, city, state,
          country, bio, band, artist_name, website, youtube, twitter, facebook, linkedin, instagram, 
          soundcloud, twitch, tiktok) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 
-          $15, $16, $17, $18, $19, $20) RETURNING *;`,
+          $15, $16, $17, $18, $19, $20, $21) RETURNING *;`,
       [
         req.user.id,
+        req.body.publicProfile,
         req.body.firstName,
         req.body.lastName,
         req.body.dob,
@@ -311,8 +313,9 @@ router.put('/', checkToken, async (req, res) => {
   try {
     // update the profile to the database
     const updatedProfileData = await db.query(
-      'UPDATE profiles SET first_name = $1, last_name = $2, dob = $3, phone = $4, city = $5, state = $6, country = $7, bio = $8, band = $9, artist_name = $10, website = $11, youtube = $12, twitter = $13, facebook = $14, linkedin = $15, instagram = $16, soundcloud = $17, twitch = $18, tiktok = $19 WHERE user_id = $20 RETURNING *;',
+      'UPDATE profiles SET public_profile = $1, first_name = $2, last_name = $3, dob = $4, phone = $5, city = $6, state = $7, country = $8, bio = $9, band = $10, artist_name = $11, website = $12, youtube = $13, twitter = $14, facebook = $15, linkedin = $16, instagram = $17, soundcloud = $18, twitch = $19, tiktok = $20 WHERE user_id = $21 RETURNING *;',
       [
+        req.body.publicProfile,
         req.body.firstName,
         req.body.lastName,
         req.body.dob,

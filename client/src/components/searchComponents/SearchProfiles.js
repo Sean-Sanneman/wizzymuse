@@ -12,15 +12,7 @@ import GenreSelectList from '../genreComponents/GenreSelectList';
 import ProfileSelectList from '../profileComponents/ProfileSelectList';
 
 // Styles and Images
-import {
-  Container,
-  Row,
-  Col,
-  Dropdown,
-  DropdownButton,
-  ButtonGroup,
-  Button,
-} from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
 
 const SearchProfiles = ({ getProfiles }) => {

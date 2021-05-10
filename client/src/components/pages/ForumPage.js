@@ -1,28 +1,25 @@
 // React imports
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux imports
 import { connect } from 'react-redux';
+import { getForums } from '../../actions/forums';
 
 // Components
 import Toolbar from '../layoutComponents/Toolbar';
-import ProfileCardCollapsible from '../profileComponents/ProfileCardCollapsible';
 import ForumSearch from '../forumComponents/ForumSearch';
 import ForumTopics from '../forumComponents/ForumTopics';
-import Spinner from '../layoutComponents/Spinner';
 import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
-import fakeAd1 from '../../assets/ads/fake-ad-1.jpg';
-import fakeAd2 from '../../assets/ads/fake-ad-2.jpg';
-import fakeAd3 from '../../assets/ads/fake-ad-3.jpg';
-import fakeAd4 from '../../assets/ads/fake-ad-4.jpg';
-import fakeAd5 from '../../assets/ads/fake-ad-5.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
 
-const ForumPage = ({ isAuthenticated }) => {
+const ForumPage = ({ getForums, isAuthenticated }) => {
+  useEffect(() => {
+    getForums();
+  }, [getForums]);
   return (
     <>
       {isAuthenticated && <Toolbar toolbarType="forumTB" />}
@@ -56,6 +53,7 @@ const ForumPage = ({ isAuthenticated }) => {
 };
 
 ForumPage.propTypes = {
+  getForums: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -63,4 +61,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(ForumPage);
+export default connect(mapStateToProps, { getForums })(ForumPage);

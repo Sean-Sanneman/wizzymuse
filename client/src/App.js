@@ -26,6 +26,7 @@ import SearchPage from './components/pages/SearchPage';
 import ForumPage from './components/pages/ForumPage';
 import ForumTopicPage from './components/pages/ForumTopicPage';
 import ForumPostPage from './components/pages/ForumPostPage';
+import ProjectInit from './components/projectComponents/ProjectInit';
 
 // Styles and Images
 import background from './assets/cover/bg-brushed-metal.jpg';
@@ -50,9 +51,9 @@ const App = () => {
               <Route exact path="/" component={Landing} />
               <Route exact path="/search-profiles" component={SearchPage} />
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/forum" component={ForumPage} />
-              <Route exact path="/forum-topics" component={ForumTopicPage} />
-              <Route exact path="/post-item" component={ForumPostPage} />
+              <Route exact path="/forums" component={ForumPage} />
+              <Route exact path="/forums/:id" component={ForumTopicPage} />
+              <Route exact path="/posts/:id" component={ForumPostPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute
                 exact
@@ -69,7 +70,8 @@ const App = () => {
                 path="/my-connections"
                 component={ConnectionPage}
               />
-              <PrivateRoute exact path="/new-project" component={ProjectPage} />
+              <PrivateRoute exact path="/init" component={ProjectInit} />
+              <PrivateRoute exact path="/project" component={ProjectPage} />
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />
             </Switch>
           </main>

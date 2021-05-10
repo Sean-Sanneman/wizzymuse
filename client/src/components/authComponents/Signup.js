@@ -20,6 +20,7 @@ const Signup = ({ register, isAuthenticated }) => {
   const [country, setCountry] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [publicProfile, setPublicProfile] = useState(true);
 
   // Redirect when registered
   if (isAuthenticated) {
@@ -37,6 +38,7 @@ const Signup = ({ register, isAuthenticated }) => {
       country,
       username,
       password,
+      publicProfile,
     });
   };
 
@@ -151,6 +153,16 @@ const Signup = ({ register, isAuthenticated }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Public profile?"
+                  value={publicProfile}
+                  checked={publicProfile}
+                  onChange={(e) => setPublicProfile(!publicProfile)}
+                />
+              </Form.Group>
+
               <br></br>
 
               <Nav.Link

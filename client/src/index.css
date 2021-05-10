@@ -9,37 +9,50 @@ code {
     monospace;
 }
 
-
 /* Navbar styles */
-.color-nav {
+.main-navbar {
   background-color: #000000;
+  max-height: 82px;
 }
 
 .navButtons {
   /* this controls positioning of nav buttons */
-  margin: auto 52% auto 48%;
+  margin: auto 57% auto 43%;
 }
 
-.navButtonsAuth {
+.navButtonsAuth .navbar-nav {
   /* this controls positioning of nav buttons */
-  margin: auto 90% auto 10%;
+  margin: auto 96% auto 4%;
 }
 
 .myBtn {
-  border: solid;
-  border-width: 2px;
-  background-color: seashell;
   border-radius: 18px;
-  box-shadow: inset 0 0 12px #000000;
   min-width: 10em;
-  margin: 5% 2%;
-  font-size: small;
+  margin: 5% 1%;
 }
+
+.projectDropdown {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.dropdown-toggle::after {
+  margin-left: 0;
+  border-top: none;
+}
+
+.projectMenu {
+  background-image: linear-gradient(to right, rgb(149, 184, 222), lightgray);
+}
+
+.projectItem:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
 .glow-on-hover {
   border: none;
-  outline: none;
-  color: #fff;
-  background: seashell;
+  outline: none; 
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -73,7 +86,7 @@ code {
   border-radius: 10px;
 }
 .glow-on-hover:active {
-  color: seashell;
+  
 }
 .glow-on-hover:active:after {
   background: transparent;
@@ -87,8 +100,7 @@ code {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: seashell;
-  box-shadow: inset 0 0 12px #000000;
+  background-color: #000000;
   left: 0;
   top: 0;
   border-radius: 10px;
@@ -105,7 +117,6 @@ code {
   }
 }
 
-
 /* Toolbar */
 .toolbar {
   background-image: linear-gradient(to right, #202020, #343434);
@@ -121,7 +132,6 @@ code {
   min-width: 10em;
 }
 /* Toolbar styles end */
-
 
 /* Main panels */
 .grid {
@@ -169,7 +179,6 @@ code {
 }
 /* Main panels styles end */
 
-
 /* Landing page left panel styles start */
 .landingLeftPanel {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -187,13 +196,12 @@ code {
   line-height: 1.2;
   color: black;
 
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
 }
 /* Landing page left panel styles end */
-
 
 /* Landing page main panel styles start */
 .welcomeStory {
@@ -212,14 +220,16 @@ code {
   padding: 1% 2% 2% 2%;
 }
 
-.welcomePanel, carousel-caption, h4, h3 {
+.welcomePanel,
+carousel-caption,
+h4,
+h3 {
   left: 24px;
   right: 24px;
   bottom: 3%;
   line-height: 1.1;
 }
 /* Landing page main panel styles end */
-
 
 /* Modals start */
 .loginModal {
@@ -240,7 +250,6 @@ code {
   box-shadow: inset 0 0 6px #000000;
 }
 /* Modals styles end */
-
 
 /* Signup */
 .signupGrid {
@@ -267,7 +276,6 @@ code {
 }
 /* Signup styles end */
 
-
 /* Profile styles */
 .profilePanels {
   background-image: linear-gradient(to right, rgb(165, 180, 196), lightgray);
@@ -276,7 +284,6 @@ code {
   margin: 2%;
 }
 /* Profile styles ends */
-
 
 /* Search Artist styles */
 .searchPanel {
@@ -309,7 +316,6 @@ code {
 }
 /* Search Artist styles end */
 
-
 /* Artist Profile styles start */
 .input-group-text {
   padding-top: 2px;
@@ -318,7 +324,6 @@ code {
 }
 /* Artist Profile styles end */
 
-
 /* My Collaborators Carousel */
 .friendsCarousel {
   margin: 24px 100px 36px 100px;
@@ -326,7 +331,6 @@ code {
   border-radius: 15px;
 }
 /* My Collaborators Carousel styles ends */
-
 
 /* Forum styles start */
 .forumPanel {
@@ -352,7 +356,6 @@ code {
 }
 
 .forumRow {
-
 }
 
 .forumCol {
@@ -360,7 +363,6 @@ code {
   border: solid; */
 }
 /* Forum styles end */
-
 
 /* Footer */
 .page-footer {

@@ -45,12 +45,14 @@ export const register = ({
   country,
   username,
   password,
+  publicProfile,
 }) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
+  const createdAt = new Date();
   const body = JSON.stringify({
     firstName,
     lastName,
@@ -60,6 +62,8 @@ export const register = ({
     country,
     username,
     password,
+    publicProfile,
+    createdAt,
   });
 
   try {

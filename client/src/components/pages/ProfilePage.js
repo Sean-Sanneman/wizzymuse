@@ -42,20 +42,7 @@ const ProfilePage = ({
           <Container fluid className="grid">
             <Row className="mainGrid">
               <Col className="leftPanel allPanels">
-                {/* <Container fluid="sm" className="leftLED">
-                  <Row>
-                    <Col className="LED-text">
-                      <h6>Artist Name</h6>
-                      <img
-                        src={babyYoda}
-                        className="babyYoda"
-                        style={{ width: '100%' }}
-                        alt="Baby Yoda"
-                      />
-                      Instruments played: Guitar, Pan Flute
-                    </Col>
-                  </Row>
-                </Container> */}
+                SEAN/JASON to put some content here.
               </Col>
               <Col xs={8} className="midPanel allPanels">
                 <Container>

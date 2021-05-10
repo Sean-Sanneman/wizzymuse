@@ -20,6 +20,8 @@ router.post('/register', checkUserInput, async (req, res) => {
     country,
     username,
     password,
+    publicProfile,
+    createdAt,
   } = req.body;
   try {
     // check if user is already registered
@@ -45,12 +47,20 @@ router.post('/register', checkUserInput, async (req, res) => {
 
     // save the new user to the database (part of the incoming data goes into the users table and part goes into the profiles table)
     const newUserData = await db.query(
-      'INSERT INTO users (email, username, password, avatar) VALUES ($1, $2, $3, $4) RETURNING *;',
-      [email, username, bcryptPassword, avatar]
+      'INSERT INTO users (email, username, password, avatar, created_at) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
+      [email, username, bcryptPassword, avatar, createdAt]
     );
     await db.query(
-      'INSERT INTO profiles (user_id, first_name, last_name, city, state, country) VALUES ($1, $2, $3, $4, $5, $6)',
-      [newUserData.rows[0].id, firstName, lastName, city, state, country]
+      'INSERT INTO profiles (user_id, public_profile, first_name, last_name, city, state, country) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [
+        newUserData.rows[0].id,
+        publicProfile,
+        firstName,
+        lastName,
+        city,
+        state,
+        country,
+      ]
     );
 
     // return the token
