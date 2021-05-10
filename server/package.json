@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "create-db": "psql -U jasonahmed < db/schema.sql",
+    "create-db": "psql -U postgres < db/schema.sql",
     "seed": "npm run create-db && node db/seed.js"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "pg": "^8.5.1"
   },
   "devDependencies": {
+    "faker": "^5.5.3",
     "nodemon": "^2.0.7"
   }
 }
