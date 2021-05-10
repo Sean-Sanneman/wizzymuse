@@ -45,9 +45,9 @@ const toolbarOptions = [
         text: 'MY CONNECTIONS',
       },
       {
-        link: '/new-project',
+        link: '/project',
         style: 'info',
-        text: 'NEW PROJECT',
+        text: 'PROJECT',
       },
       {
         link: '/my-projects',

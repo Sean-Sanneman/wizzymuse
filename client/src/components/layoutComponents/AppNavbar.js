@@ -63,10 +63,6 @@ const AppNavbar = ({ logout, auth: { isAuthenticated, loading } }) => {
                 className="projectItem"
               >
                 <Link to="/init">New Project</Link>
-
-                {/* <Portal open={isOpen} onClose={() => setIsOpen(false)}>
-          This is a Portal
-        </Portal> */}
               </Dropdown.Item>
             </div>
 

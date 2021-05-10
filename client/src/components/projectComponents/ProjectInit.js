@@ -25,6 +25,10 @@ const ProjectInit = ({ register, isAuthenticated }) => {
     window.open('/project', 'project-workspace');
   };
 
+  const openNewProjectWindow = () => {
+    window.open('/project', 'project-workspace');
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     register({
@@ -51,10 +55,12 @@ const ProjectInit = ({ register, isAuthenticated }) => {
                 <img src={Stamp} width="75%" height="75%" alt="Stamp"></img>
               </Container>
 
-              <h5>
+              <br></br>
+
+              <h3>
                 Enter your project information on the right and let's get
                 started!
-              </h5>
+              </h3>
             </div>
           </Col>
 
@@ -141,16 +147,17 @@ const ProjectInit = ({ register, isAuthenticated }) => {
               <br></br>
 
               <Nav.Link
-                href="/"
+                href="/dashboard"
                 type="submit"
                 className="btn btn-primary btn-block p-2"
                 style={{ width: '20%' }}
                 onClick={openNewProjectWindow}
               >
-                Let's get started!
+                Press Me!
               </Nav.Link>
+
               <p className="forgot-password text-right">
-                Already registered <a href="#">sign in?</a>
+                Have an existing project? <a href="#">Open Here</a>
               </p>
             </form>
           </Col>
