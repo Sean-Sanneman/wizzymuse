@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { getPostById } from '../../actions/posts';
 
 // Components
+import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import ForumSearch from '../forumComponents/ForumSearch';
 import PostItem from '../postComponents/PostItem';
@@ -28,6 +29,7 @@ const ForumPostPage = ({
   }, [getPostById]);
   return (
     <>
+      <Nav />
       {isAuthenticated && <Toolbar toolbarType="forumTB" />}
       {loading || post === null ? (
         <p>Loading ...</p>

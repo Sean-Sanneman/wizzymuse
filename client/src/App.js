@@ -12,7 +12,6 @@ import { getConnectionsMe } from './actions/connections';
 
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
-import Nav from './components/layoutComponents/AppNavbar';
 import Footer from './components/layoutComponents/Footer';
 import Signup from './components/authComponents/Signup';
 import Landing from './components/pages/Landing';
@@ -45,7 +44,6 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div style={{ backgroundImage: `url(${background})` }}>
-          <Nav />
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />

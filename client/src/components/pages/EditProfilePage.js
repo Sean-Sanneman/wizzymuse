@@ -13,13 +13,22 @@ import { formatInstruments, formatGenres } from '../../utils/listUtilFunctions';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
+import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
 import GenreSelectList from '../genreComponents/GenreSelectList';
 import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
-import { Container, Row, Col, Form, FormControl, InputGroup, Button } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  FormControl,
+  InputGroup,
+  Button,
+} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EditProfilePage = ({
@@ -113,6 +122,7 @@ const EditProfilePage = ({
 
   return (
     <>
+      <Nav />
       <Toolbar toolbarType="dashboardTB" />
       {loading && profileMe === null ? (
         <Spinner />
@@ -505,13 +515,16 @@ const EditProfilePage = ({
                         )}
 
                         <Form.Row className="my-4 mx-1">
-                        <h6>Make profile private?</h6>
+                          <h6>Make profile private?</h6>
                           <span class="input-group-text">
                             <InputGroup.Checkbox />
                           </span>
                         </Form.Row>
 
-                        <Form.Row className="my-3" style={{ justifyContent: "center" }}>
+                        <Form.Row
+                          className="my-3"
+                          style={{ justifyContent: 'center' }}
+                        >
                           <Col sm={3}>
                             <Button
                               type="submit"

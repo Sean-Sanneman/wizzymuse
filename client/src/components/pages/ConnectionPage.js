@@ -2,6 +2,7 @@
 import React from 'react';
 
 // Components
+import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import ConnectionList from '../connectionComponents/ConnectionList';
 
@@ -11,6 +12,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 const ConnectionPage = () => {
   return (
     <>
+      <Nav />
       <Toolbar toolbarType="profilePageTB" />
       <Container fluid className="grid">
         <Row className="mainGrid">

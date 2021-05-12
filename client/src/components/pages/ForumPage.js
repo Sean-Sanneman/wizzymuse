@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { getForums } from '../../actions/forums';
 
 // Components
+import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import ForumSearch from '../forumComponents/ForumSearch';
 import ForumTopics from '../forumComponents/ForumTopics';
@@ -22,6 +23,7 @@ const ForumPage = ({ getForums, isAuthenticated }) => {
   }, [getForums]);
   return (
     <>
+      <Nav />
       {isAuthenticated && <Toolbar toolbarType="forumTB" />}
 
       <Container fluid className="grid">
