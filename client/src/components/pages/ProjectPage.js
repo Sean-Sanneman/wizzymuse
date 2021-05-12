@@ -4,14 +4,17 @@ import React from 'react';
 // Redux imports
 
 // Components
+import Project from '../projectComponents/Project';
 
 // Styles and Images
+import '../projectComponents/stylesheets/ProjectPage.css';
 
 const ProjectPage = () => {
   return (
     <>
-      <div>ProjectPage</div>
-      <h1>This is just a test.</h1>
+      <div className="ProjectPage">
+        <Project />
+      </div>
     </>
   );
 };
