@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
+import Nav from '../layoutComponents/AppNavbar';
+import Footer from '../layoutComponents/Footer';
 import DashboardLeftPanel from '../dashboardComponents/DashboardLeftPanel';
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
@@ -44,6 +46,7 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
     <h1>Loading...</h1>
   ) : (
     <>
+      <Nav />
       <Toolbar toolbarType="profilePageTB" />
 
       <Container fluid className="grid">
@@ -90,6 +93,7 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

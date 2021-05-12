@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
+import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import DashboardLeftPanel from '../dashboardComponents/DashboardLeftPanel';
 import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
@@ -19,6 +21,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 const ProfileMePage = ({ profiles: { profileMe, loading } }) => {
   return (
     <>
+      <Nav />
       <Toolbar toolbarType="profilePageTB" />
 
       <Container fluid className="grid">
@@ -51,6 +54,7 @@ const ProfileMePage = ({ profiles: { profileMe, loading } }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

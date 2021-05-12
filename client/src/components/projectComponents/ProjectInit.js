@@ -1,11 +1,14 @@
 // React imports
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 
 // Redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
+
+// Components
+import AppNavbar from '../layoutComponents/AppNavbar';
+import Footer from '../layoutComponents/Footer';
 
 // Styles and Images
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
@@ -40,6 +43,7 @@ const ProjectInit = ({ register, isAuthenticated }) => {
 
   return (
     <>
+      <AppNavbar />
       <Container fluid className="signupGrid">
         <Row>
           <Col sm={5} style={{ textAlign: 'center' }} className="">
@@ -159,6 +163,7 @@ const ProjectInit = ({ register, isAuthenticated }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

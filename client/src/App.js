@@ -12,8 +12,6 @@ import { getConnectionsMe } from './actions/connections';
 
 // Components
 import PrivateRoute from './components/routing/PrivateRoute';
-import Nav from './components/layoutComponents/AppNavbar';
-import Footer from './components/layoutComponents/Footer';
 import Signup from './components/authComponents/Signup';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
@@ -45,7 +43,6 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div style={{ backgroundImage: `url(${background})` }}>
-          <Nav />
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />
@@ -75,7 +72,6 @@ const App = () => {
               <PrivateRoute exact path="/mixdown" component={MixdownPage} />
             </Switch>
           </main>
-          <Footer />
         </div>
       </Router>
     </Provider>
