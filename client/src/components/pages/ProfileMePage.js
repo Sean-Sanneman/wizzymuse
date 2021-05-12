@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layoutComponents/Spinner';
 import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import DashboardLeftPanel from '../dashboardComponents/DashboardLeftPanel';
 import ProfileCardGeneral from '../profileComponents/ProfileCardGeneral';
 import ProfileCarousel from '../profileComponents/ProfileCarousel';
@@ -53,6 +54,7 @@ const ProfileMePage = ({ profiles: { profileMe, loading } }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

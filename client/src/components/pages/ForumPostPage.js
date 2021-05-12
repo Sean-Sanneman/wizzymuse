@@ -9,6 +9,7 @@ import { getPostById } from '../../actions/posts';
 // Components
 import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import ForumSearch from '../forumComponents/ForumSearch';
 import PostItem from '../postComponents/PostItem';
 import ReplyItem from '../replyComponents/ReplyItem';
@@ -66,6 +67,7 @@ const ForumPostPage = ({
           </Row>
         </Container>
       )}
+      <Footer />
     </>
   );
 };

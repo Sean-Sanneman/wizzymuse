@@ -9,6 +9,7 @@ import { getForums } from '../../actions/forums';
 // Components
 import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import ForumSearch from '../forumComponents/ForumSearch';
 import ForumTopics from '../forumComponents/ForumTopics';
 import Sponsors from '../layoutComponents/Sponsors';
@@ -50,6 +51,7 @@ const ForumPage = ({ getForums, isAuthenticated }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

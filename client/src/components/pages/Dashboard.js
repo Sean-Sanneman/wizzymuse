@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 // Components
 import Nav from '../layoutComponents/AppNavbar';
+import Footer from '../layoutComponents/Footer';
 import DashboardLeftPanel from '../dashboardComponents/DashboardLeftPanel';
 import Spinner from '../layoutComponents/Spinner';
 import Toolbar from '../layoutComponents/Toolbar';
@@ -92,6 +93,7 @@ const Dashboard = ({ auth: { userMe }, profiles: { profileMe, loading } }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

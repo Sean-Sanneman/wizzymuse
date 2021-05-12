@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 // Components
 import Nav from '../layoutComponents/AppNavbar';
+import Footer from '../layoutComponents/Footer';
 import LandingLeftPanel from '../landingComponents/LandingLeftPanel';
 import Sponsors from '../layoutComponents/Sponsors';
 import WelText from '../landingComponents/WelText';
@@ -116,6 +117,7 @@ const Landing = ({ isAuthenticated }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

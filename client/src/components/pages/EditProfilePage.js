@@ -15,6 +15,7 @@ import { formatInstruments, formatGenres } from '../../utils/listUtilFunctions';
 import Spinner from '../layoutComponents/Spinner';
 import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
 import GenreSelectList from '../genreComponents/GenreSelectList';
 import Sponsors from '../layoutComponents/Sponsors';
@@ -545,6 +546,7 @@ const EditProfilePage = ({
               </Col>
             </Row>
           </Container>
+          <Footer />
         </>
       )}
     </>

@@ -9,6 +9,7 @@ import { getProfiles } from '../../actions/profiles';
 // Components
 import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import SearchProfiles from '../searchComponents/SearchProfiles';
 import ProfileList from '../profileComponents/ProfileList';
 import Sponsors from '../layoutComponents/Sponsors';
@@ -39,6 +40,7 @@ const SearchPage = ({ getProfiles, isAuthenticated }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

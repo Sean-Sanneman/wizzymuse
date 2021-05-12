@@ -4,6 +4,7 @@ import React from 'react';
 // Components
 import Nav from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
+import Footer from '../layoutComponents/Footer';
 import ConnectionList from '../connectionComponents/ConnectionList';
 
 // Styles and Images
@@ -27,6 +28,7 @@ const ConnectionPage = () => {
           <Col className="rightPanel allPanels"></Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };
