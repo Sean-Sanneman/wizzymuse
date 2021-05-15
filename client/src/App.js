@@ -46,7 +46,10 @@ const App = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         minWidth: '100vw',
-        minHeight: '100vh' }}>
+        minHeight: '100vh',
+        marginBottom: '0',
+        paddingBottom: '2%'
+         }}>
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />

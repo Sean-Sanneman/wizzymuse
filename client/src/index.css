@@ -3,6 +3,7 @@ body {
   font-family: 'Lato', Georgia, 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -366,7 +367,9 @@ h3 {
 
 /* Footer */
 .page-footer {
-  margin-top: 1%;
+  position: absolute;
+  width: 100%;
+  margin-top: 0%;
   background-color: #000000;
   color: #ccc;
   padding: 20px 0 7px 0;
