@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getForumById } from '../../actions/forums';
 
 // Components
-import Nav from '../layoutComponents/AppNavbar';
+import AppNavbar from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import Footer from '../layoutComponents/Footer';
 import ForumSearch from '../forumComponents/ForumSearch';
@@ -15,7 +15,7 @@ import PostList from '../postComponents/PostList';
 import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Nav } from 'react-bootstrap';
 import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
 
 const ForumTopicPage = ({
@@ -32,7 +32,7 @@ const ForumTopicPage = ({
 
   return (
     <>
-      <Nav />
+      <AppNavbar />
       {isAuthenticated && <Toolbar toolbarType="forumTB" />}
 
       <Container fluid className="grid">
@@ -67,7 +67,20 @@ const ForumTopicPage = ({
                   <Col xs={3} className="forumCol">
                     <h5>Last Replied</h5>
                   </Col>
+
                 </Row>
+
+                <Nav.Item>
+                  <Nav.Link
+                  href="/new-post"
+                  className='text-left'
+                  style={{ 
+                    color: 'white', 
+                    marginTop: '1%',
+                    textDecorationLine: 'underline',
+                    }}>NEW POST</Nav.Link>
+                    </Nav.Item>
+
                 {forum === null || loading ? (
                   'loading...'
                 ) : (

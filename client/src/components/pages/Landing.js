@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
-import Nav from '../layoutComponents/AppNavbar';
+import AppNavbar from '../layoutComponents/AppNavbar';
 import Footer from '../layoutComponents/Footer';
 import LandingLeftPanel from '../landingComponents/LandingLeftPanel';
 import Sponsors from '../layoutComponents/Sponsors';
@@ -29,7 +29,7 @@ const Landing = ({ isAuthenticated }) => {
 
   return (
     <>
-      <Nav />
+      <AppNavbar />
       <Container fluid className="grid">
         <Row className="mainGrid">
           <Col className="leftPanel allPanels">

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getPostById } from '../../actions/posts';
 
 // Components
-import Nav from '../layoutComponents/AppNavbar';
+import AppNavbar from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import Footer from '../layoutComponents/Footer';
 import ForumSearch from '../forumComponents/ForumSearch';
@@ -16,7 +16,7 @@ import ReplyItem from '../replyComponents/ReplyItem';
 import Sponsors from '../layoutComponents/Sponsors';
 
 // Styles and Images
-import { Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import backgroundImage from '../../assets/cover/cover-image-studio3.jpg';
 
 const ForumPostPage = ({
@@ -30,7 +30,7 @@ const ForumPostPage = ({
   }, [getPostById]);
   return (
     <>
-      <Nav />
+      <AppNavbar />
       {isAuthenticated && <Toolbar toolbarType="forumTB" />}
       {loading || post === null ? (
         <p>Loading ...</p>
