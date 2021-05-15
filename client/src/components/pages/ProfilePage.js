@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getProfileById, getProfileMe } from '../../actions/profiles';
 
 // Components
-import Nav from '../layoutComponents/AppNavbar';
+import AppNavbar from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import Footer from '../layoutComponents/Footer';
 import Spinner from '../layoutComponents/Spinner';
@@ -36,7 +36,7 @@ const ProfilePage = ({
 
   return (
     <>
-      <Nav />
+      <AppNavbar />
       <Toolbar toolbarType="profilePageTB" />
       {profile === null || loading ? (
         <Spinner />

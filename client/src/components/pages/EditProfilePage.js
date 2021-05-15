@@ -13,7 +13,7 @@ import { formatInstruments, formatGenres } from '../../utils/listUtilFunctions';
 
 // Components
 import Spinner from '../layoutComponents/Spinner';
-import Nav from '../layoutComponents/AppNavbar';
+import AppNavbar from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import Footer from '../layoutComponents/Footer';
 import InstrumentSelectList from '../instrumentComponents/InstrumentSelectList';
@@ -123,7 +123,7 @@ const EditProfilePage = ({
 
   return (
     <>
-      <Nav />
+      <AppNavbar />
       <Toolbar toolbarType="dashboardTB" />
       {loading && profileMe === null ? (
         <Spinner />

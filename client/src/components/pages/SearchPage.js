@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getProfiles } from '../../actions/profiles';
 
 // Components
-import Nav from '../layoutComponents/AppNavbar';
+import AppNavbar from '../layoutComponents/AppNavbar';
 import Toolbar from '../layoutComponents/Toolbar';
 import Footer from '../layoutComponents/Footer';
 import SearchProfiles from '../searchComponents/SearchProfiles';
@@ -23,7 +23,7 @@ const SearchPage = ({ getProfiles, isAuthenticated }) => {
   }, [getProfiles]);
   return (
     <>
-      <Nav />
+      <AppNavbar />
       {isAuthenticated && <Toolbar toolbarType="profilePageTB" />}
       <Container fluid className="grid">
         <Row className="mainGrid">
