@@ -42,7 +42,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <div style={{ backgroundImage: `url(${background})` }}>
+        <div style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        minWidth: '100vw',
+        minHeight: '100vh' }}>
           <main>
             <Switch>
               <Route exact path="/" component={Landing} />
