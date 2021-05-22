@@ -5,6 +5,7 @@ import React from 'react';
 
 // Components
 import Arranger from '../projectComponents/Arranger';
+import Waveform from '../projectComponents/Waveform';
 
 // Styles and Images
 
@@ -13,7 +14,7 @@ const ProjectPage = () => {
     <>
       <div>ProjectPage</div>
       <h1>This is just a test.</h1>
-      <Arranger/>
+      <Waveform/>
 
     </>
   );

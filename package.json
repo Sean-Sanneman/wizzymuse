@@ -25,6 +25,7 @@
   "dependencies": {
     "@types/react-select": "^4.0.14",
     "concurrently": "^5.3.0",
+    "react-wavesurfer": "^0.8.6",
     "tone": "^14.7.77"
   }
 }
