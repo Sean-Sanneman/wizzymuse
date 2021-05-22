@@ -378,36 +378,3 @@ h3 {
   padding: 6px 0;
 }
 /* Footer styles end */
-
-
-
-/* Audio tests styles start */
-.waveformContainer {
-  display: flex;  
-  flex-direction: row;  
-  align-items: center;
-  justify-content: center;
-  height: 100px;  width: 100%;
-  background: transparent;
-}
-
-#waveform {
-  width: 100%;
-  height: 90px;
-}
-
-.playButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  background: #EFEFEF;
-  border-radius: 50%;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding-bottom: 3px;
-}
-
-/* Audio tests styles end */
