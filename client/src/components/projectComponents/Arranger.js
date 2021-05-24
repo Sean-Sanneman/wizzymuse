@@ -1,5 +1,6 @@
 // React imports
 import React, { useState, useEffect } from 'react';
+import Sound from 'react-sound';
 
 
 // Utils
@@ -12,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 // Audio
-import wasted from '../../assets/songs/wasted.mp3';
+// import wasted from '../../assets/songs/wasted.mp3';
 
 
 const Arranger = () => {
@@ -31,7 +32,7 @@ const Arranger = () => {
   // set the loop of audio tune
   useEffect(() => {
   audioTune.loop = playInLoop;
-  }, [playInLoop])
+  }, [playInLoop]);
 
   // play audio sound
   const playSound = () => {
