@@ -1,5 +1,6 @@
 // React imports
 import React, { useState, useEffect } from 'react';
+import Sound from 'react-sound';
 
 // Utils
 import moment from 'moment';
@@ -9,7 +10,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Audio
-import wasted from '../../assets/songs/wasted.mp3';
+// import wasted from '../../assets/songs/wasted.mp3';
 
 const Arranger = () => {
   // use Audio constructor to create HTMLAudioElement
