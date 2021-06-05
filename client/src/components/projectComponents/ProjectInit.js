@@ -12,7 +12,7 @@ import Footer from '../layoutComponents/Footer';
 
 // Styles and Images
 import Stamp from '../../assets/images/Wizzymuse-stamp.png';
-import { Container, Row, Col, Form, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Nav } from 'react-bootstrap';
 
 const ProjectInit = ({ register, isAuthenticated }) => {
   const [projectTitle, setProjectTitle] = useState('');
@@ -24,8 +24,14 @@ const ProjectInit = ({ register, isAuthenticated }) => {
   const [description, setDescription] = useState('');
 
   // Open new project window
+  // const openNewProjectWindow = () => {
+  //   window.open('/project', 'project-workspace');
+  // };
   const openNewProjectWindow = () => {
-    window.open('/project', 'project-workspace');
+    window.open(
+      'http://naomiaro.github.io/waveform-playlist/web-audio-editor.html',
+      'project-workspace'
+    );
   };
 
   const handleRegister = async (e) => {
